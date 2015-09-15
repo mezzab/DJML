@@ -110,12 +110,6 @@
     <Compile Include="Abm Rol\FormRolAlta.Designer.cs">
       <DependentUpon>FormRolAlta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ruta\FormRutaAlta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Ruta\FormRutaAlta.Designer.cs">
-      <DependentUpon>FormRutaAlta.cs</DependentUpon>
-    </Compile>
     <Compile Include="Canje Millas\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,10 +134,10 @@
     <Compile Include="Devolucion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Inicio Aplicacion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Inicio Aplicacion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Generacion Viaje\Form1.cs">
@@ -200,6 +194,9 @@
       <DependentUpon>FormRolAlta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inicio Aplicacion\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

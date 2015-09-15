@@ -1,8 +1,1 @@
-c:\users\matias\documents\visual studio 2012\Projects\AerolineaFrba\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
-C:\Users\Diego\Documents\Gdd Tp\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.csprojResolveAssemblyReference.cache
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.Form1.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.FormCiudad.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.Properties.Resources.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\Aplicacion Desktop\AerolineaFrba\AerolineaFrba\obj\Debug\AerolineaFrba.csproj.GenerateResource.Cache
+C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\src\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
