@@ -55,11 +55,11 @@ namespace AerolineaFrba.Abm_Ciudad
         }
 
         private void volver_Click(object sender, EventArgs e)
-        {
-            /*Form a = new Form();
+        { // solo para probar
+            Form1 a = new Form1();
             this.Hide();
             a.ShowDialog();
-            a = (Form)this.ActiveMdiChild;*/
+            a = (Form1)this.ActiveMdiChild;
         }
     }
 }
