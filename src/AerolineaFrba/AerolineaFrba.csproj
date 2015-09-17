@@ -62,11 +62,31 @@
     <Compile Include="Abm Aeronave\FormAeronaveBaja.Designer.cs">
       <DependentUpon>FormAeronaveBaja.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ciudad\FormCiudadAlta.cs">
+    <Compile Include="Abm Ciudad\FormCiudades_List.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ciudad\FormCiudadAlta.Designer.cs">
-      <DependentUpon>FormCiudadAlta.cs</DependentUpon>
+    <Compile Include="Abm Ciudad\FormCiudades_List.Designer.cs">
+      <DependentUpon>FormCiudades_List.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ciudad\FormCiudades_Modi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ciudad\FormCiudades_Modi.Designer.cs">
+      <DependentUpon>FormCiudades_Modi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ciudad\FormCiudades_Baja.cs">
+      <SubType>Form</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Abm Ciudad\FormCiudades_Baja.Designer.cs">
+      <DependentUpon>FormCiudades_Baja.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Abm Ciudad\FormCiudades_Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ciudad\FormCiudades_Alta.Designer.cs">
+      <DependentUpon>FormCiudades_Alta.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Ciudad\FormCiudades.cs">
       <SubType>Form</SubType>
@@ -172,8 +192,21 @@
     <EmbeddedResource Include="Abm Aeronave\FormAeronaveBaja.resx">
       <DependentUpon>FormAeronaveBaja.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ciudad\FormCiudades_Baja.resx">
+      <DependentUpon>FormCiudades_Baja.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Ciudad\FormCiudades.resx">
       <DependentUpon>FormCiudades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ciudad\FormCiudades_Alta.resx">
+      <DependentUpon>FormCiudades_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ciudad\FormCiudades_Modi.resx">
+      <DependentUpon>FormCiudades_Modi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ciudad\FormCiudades_List.resx">
+      <DependentUpon>FormCiudades_List.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\FormRol.resx">
       <DependentUpon>FormRol.cs</DependentUpon>

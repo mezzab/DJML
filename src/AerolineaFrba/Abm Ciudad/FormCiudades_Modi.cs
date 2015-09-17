@@ -10,20 +10,19 @@ using System.Windows.Forms;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
-    public partial class FormCiudades_Modificacion : Form
+    public partial class FormCiudades_Modi : Form
     {
-        public FormCiudades_Modificacion()
+        public FormCiudades_Modi()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void volver_Click(object sender, EventArgs e)
         {
-            FormCiudades volver = new FormCiudades();
+            FormCiudades a = new FormCiudades();
             this.Hide();
-           // this.Close();??
-            volver.ShowDialog();
-            volver = (FormCiudades)this.ActiveMdiChild;
+            a.ShowDialog();
+            a = (FormCiudades)this.ActiveMdiChild;
         }
     }
 }

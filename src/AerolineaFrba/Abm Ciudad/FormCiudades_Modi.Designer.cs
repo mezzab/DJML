@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Ciudad
 {
-    partial class FormCiudades_Modificacion
+    partial class FormCiudades_Modi
     {
         /// <summary>
         /// Required designer variable.
@@ -33,22 +33,22 @@
             // 
             // volver
             // 
-            this.volver.Location = new System.Drawing.Point(96, 226);
+            this.volver.Location = new System.Drawing.Point(102, 226);
             this.volver.Name = "volver";
             this.volver.Size = new System.Drawing.Size(75, 23);
             this.volver.TabIndex = 0;
             this.volver.Text = "Volver";
             this.volver.UseVisualStyleBackColor = true;
-            this.volver.Click += new System.EventHandler(this.button1_Click);
+            this.volver.Click += new System.EventHandler(this.volver_Click);
             // 
-            // FormCiudades_Modificacion
+            // FormCiudades_Mod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.volver);
-            this.Name = "FormCiudades_Modificacion";
-            this.Text = "Modificación de Ciudad";
+            this.Name = "FormCiudades_Mod";
+            this.Text = "Modificion de Ciudad";
             this.ResumeLayout(false);
 
         }

@@ -19,7 +19,10 @@ namespace AerolineaFrba
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            FormCiudades abmciudades =new FormCiudades();
+            this.Hide();
+            abmciudades.ShowDialog();
+            abmciudades = (FormCiudade)this.ActiveMdiChild;
         }
     }
 }
