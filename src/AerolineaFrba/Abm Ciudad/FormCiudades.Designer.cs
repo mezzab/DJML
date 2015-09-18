@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Ciudad
 {
-    partial class Form1
+    partial class FormCiudades
     {
         /// <summary>
         /// Required designer variable.
@@ -28,82 +28,86 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.alta = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.modificacion = new System.Windows.Forms.Button();
+            this.listado = new System.Windows.Forms.Button();
+            this.volver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // alta
             // 
-            this.button1.Location = new System.Drawing.Point(32, 40);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Alta";
-            this.button1.UseVisualStyleBackColor = true;
+            this.alta.Location = new System.Drawing.Point(96, 12);
+            this.alta.Name = "alta";
+            this.alta.Size = new System.Drawing.Size(75, 23);
+            this.alta.TabIndex = 0;
+            this.alta.Text = "Alta";
+            this.alta.UseVisualStyleBackColor = true;
+            this.alta.Click += new System.EventHandler(this.alta_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(175, 40);
+            this.button2.Location = new System.Drawing.Point(97, 56);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 1;
             this.button2.Text = "Baja";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // modificacion
             // 
-            this.button3.Location = new System.Drawing.Point(32, 145);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Listado";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.modificacion.Location = new System.Drawing.Point(97, 105);
+            this.modificacion.Name = "modificacion";
+            this.modificacion.Size = new System.Drawing.Size(75, 23);
+            this.modificacion.TabIndex = 2;
+            this.modificacion.Text = "Modificacion";
+            this.modificacion.UseVisualStyleBackColor = true;
+            this.modificacion.Click += new System.EventHandler(this.modificacion_Click);
             // 
-            // button4
+            // listado
             // 
-            this.button4.Location = new System.Drawing.Point(184, 144);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Modificacion";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.listado.Location = new System.Drawing.Point(96, 151);
+            this.listado.Name = "listado";
+            this.listado.Size = new System.Drawing.Size(75, 23);
+            this.listado.TabIndex = 3;
+            this.listado.Text = "Listado";
+            this.listado.UseVisualStyleBackColor = true;
+            this.listado.Click += new System.EventHandler(this.listado_Click);
             // 
-            // button5
+            // volver
             // 
-            this.button5.Location = new System.Drawing.Point(106, 203);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Volver";
-            this.button5.UseVisualStyleBackColor = true;
+            this.volver.Location = new System.Drawing.Point(97, 226);
+            this.volver.Name = "volver";
+            this.volver.Size = new System.Drawing.Size(75, 23);
+            this.volver.TabIndex = 4;
+            this.volver.Text = "Volver";
+            this.volver.UseVisualStyleBackColor = true;
+            this.volver.Click += new System.EventHandler(this.volver_Click);
             // 
-            // Form1
+            // FormCiudades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(279, 261);
+            this.Controls.Add(this.volver);
+            this.Controls.Add(this.listado);
+            this.Controls.Add(this.modificacion);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Name = "Form1";
-            this.Text = "ABM CIUDAD";
+            this.Controls.Add(this.alta);
+            this.Name = "FormCiudades";
+            this.Text = "FormCiudades";
+            this.Load += new System.EventHandler(this.FormCiudades_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button alta;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button modificacion;
+        private System.Windows.Forms.Button listado;
+        private System.Windows.Forms.Button volver;
     }
 }

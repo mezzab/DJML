@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AerolineaFrba.Abm_Ciudad;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,8 +19,11 @@ namespace AerolineaFrba
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-
+        {   //esto en realidad te va a mandar al login 
+            this.Visible = false;
+            FormCiudades frm = new FormCiudades();
+            frm.ShowDialog();
+            frm = (FormCiudades)this.ActiveMdiChild;
         }
     }
 }
