@@ -21,5 +21,10 @@ namespace AerolineaFrba.Abm_Rol
         {
 
         }
+
+        private void FormRolBaja_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -63,7 +63,7 @@
             // 
             // guardar
             // 
-            this.guardar.Location = new System.Drawing.Point(99, 124);
+            this.guardar.Location = new System.Drawing.Point(99, 97);
             this.guardar.Name = "guardar";
             this.guardar.Size = new System.Drawing.Size(75, 23);
             this.guardar.TabIndex = 3;

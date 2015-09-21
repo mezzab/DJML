@@ -36,14 +36,23 @@ namespace AerolineaFrba.Abm_Ciudad
             this.Hide();
             baja.ShowDialog();
             baja = (FormCiudades_Baja)this.ActiveMdiChild;
+            /*FormCiudades_List list = new FormCiudades_List();
+            this.Hide();
+            list.ShowDialog();
+            list = (FormCiudades_List)this.ActiveMdiChild;*/
         }
 
         private void modificacion_Click(object sender, EventArgs e)
         {
-            FormCiudades_Modi modi = new FormCiudades_Modi();
+          /*  FormCiudades_Modi modi = new FormCiudades_Modi();
             this.Hide();
             modi.ShowDialog();
-            modi = (FormCiudades_Modi)this.ActiveMdiChild;
+            modi = (FormCiudades_Modi)this.ActiveMdiChild; */
+
+            FormCiudades_List list = new FormCiudades_List();
+            this.Hide();
+            list.ShowDialog();
+            list = (FormCiudades_List)this.ActiveMdiChild;
         }
 
         private void listado_Click(object sender, EventArgs e)
@@ -56,10 +65,10 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void volver_Click(object sender, EventArgs e)
         { // solo para probar
-            Form1 a = new Form1();
+            FormCiudades_List a = new FormCiudades_List();
             this.Hide();
             a.ShowDialog();
-            a = (Form1)this.ActiveMdiChild;
+            a = (FormCiudades_List)this.ActiveMdiChild;
         }
     }
 }
