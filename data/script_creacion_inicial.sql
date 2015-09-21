@@ -168,24 +168,27 @@ BEGIN
 
 	PRINT 'SE CREO LA TABLA RUTA CORRECTAMENTE'
 	
-	---MIGRACION DATOS TABLA RUTAS---
+	
 	/*
+	---MIGRACION DATOS TABLA RUTAS---
+	
 	insert into djml.RUTAS(RUTA_CODIGO,RUTA_CIUDAD_ORIGEN,RUTA_CIUDAD_DESTINO,RUTA_SERVICIO_ID,RUTA_PRECIO_BASE_PASAJE,RUTA_PRECIO_BASE_KILO)
-	select  Ruta_Codigo, Ruta_Ciudad_Origen,Ruta_Ciudad_Destino, s.SERV_DESCRIPCION, (Ruta_Precio_BasePasaje) ,(Ruta_Precio_BaseKG) 
+	select  Ruta_Codigo, Ruta_Ciudad_Origen,Ruta_Ciudad_Destino, s.SERV_DESCRIPCION, sum(Ruta_Precio_BasePasaje) ,sum(Ruta_Precio_BaseKG) 
 	from gd_esquema.Maestra m, djml.SERVICIOS s
 	where s.SERV_DESCRIPCION = m.Tipo_Servicio
-	group by Ruta_Codigo,Ruta_Ciudad_Origen,Ruta_Ciudad_Destino, s.SERV_DESCRIPCION, Ruta_Precio_BasePasaje, Ruta_Precio_BaseKG
-	ORDER BY 1,2,3,4
+	group by Ruta_Codigo,Ruta_Ciudad_Origen,Ruta_Ciudad_Destino, s.SERV_DESCRIPCION
+	ORDER BY 1
 
 
 	select distinct  Ruta_Ciudad_Origen,Ruta_Ciudad_Destino, Tipo_Servicio
 	from gd_esquema.Maestra 
-	order by 1
+	order by 11
 	
 	select distinct AERONAVES Ruta_Codigo,Ruta_Ciudad_Destino,Ruta_Ciudad_Origen from gd_esquema.Maestra
 	order by 1
 	
 	*/
+	
 	
 END
 GO	
@@ -273,36 +276,48 @@ BEGIN
 --============================================================
 
 	CREATE TABLE DJML.BUTACAS(
-	BUTA_ID NUMERIC(4,0) NOT NULL ,
+	BUTA_PK INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	BUTA_NRO NUMERIC(4,0) NOT NULL,
 	BUTA_TIPO_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.TIPO_BUTACA(TIPO_BUTACA_ID),
 	BUTA_PISO NUMERIC(1,0) NOT NULL
-	PRIMARY KEY (BUTA_ID, BUTA_TIPO_ID),
 	)
- 
+	
 	PRINT 'SE CREO LA TABLA BUTACA CORRECTAMENTE'
 	
 	---MIGRACION DATOS TABLA BUTACAS---
 
-	insert into djml.BUTACAS (BUTA_ID, BUTA_TIPO_ID, BUTA_PISO)
+
+	insert into djml.BUTACAS(BUTA_NRO, BUTA_TIPO_ID, BUTA_PISO)
 	SELECT distinct Butaca_Nro, n.TIPO_BUTACA_ID, Butaca_Piso
 	FROM gd_esquema.Maestra m
 	JOIN djml.TIPO_BUTACA n on  m.Butaca_Tipo = n.DESCRIPCION
 	WHERE Butaca_Nro <> 0
 	order by 1
-
---	SELECT * FROM DJML.BUTACAS
-		
+	
 	
 	CREATE TABLE DJML.AERO_BUTACA(
-	AE_BUTA_ID NUMERIC(4,0) NOT NULL FOREIGN KEY REFERENCES DJML.BUTACAS(BUTA_ID),
+	AE_PK INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	AE_BUTA_PK INT NOT NULL FOREIGN KEY REFERENCES DJML.BUTACAS(BUTA_PK),
 	AE_AERO_MATRICULA NVARCHAR(7) NOT NULL FOREIGN KEY REFERENCES DJML.AERONAVES(AERO_MATRICULA),
-	AE_ESTADO BIT NOT NULL,
-	CONSTRAINT AE_PK PRIMARY KEY(AE_BUTA_ID,AE_AERO_MATRICULA))
-
+	AE_ESTADO BIT NOT NULL
+	)
+	
 	PRINT 'SE CREO LA TABLA AERO_BUTACA CORRECTAMENTE'
+
 	
 	---MIGRACION DATOS TABLA AERO_BUTACA---
 	
+	insert into djml.AERO_BUTACA(AE_BUTA_PK,AE_AERO_MATRICULA,AE_ESTADO)
+	select distinct b.BUTA_PK, a.aero_matricula, 1 from gd_esquema.Maestra m
+	join djml.AERONAVES a on m.Aeronave_Matricula = a.AERO_MATRICULA
+	join djml.TIPO_BUTACA tb on m.Butaca_Tipo = tb.DESCRIPCION 
+	join djml.BUTACAS b on tb.TIPO_BUTACA_ID = b.BUTA_TIPO_ID 
+	and b.BUTA_NRO = m.Butaca_Nro 
+	and b.BUTA_PISO = m.Butaca_Piso 
+	where m.Pasaje_Codigo <> 0
+	or m.Paquete_Codigo <> 0
+	
+	-----REVISAR MIGRACION POR LAS DUDAS
 	
 END
 GO
@@ -379,6 +394,9 @@ BEGIN
 	where ((Pasaje_Codigo <> 0) or (Paquete_Codigo <> 0))
 	AND Cli_Dni <> 23718649
 	--EXCLUIMOS AL CLIENTE CON ESE DNI YA QUE HABIA REPETIDOS EN LA TABLA MAESTRA	
+	
+	
+
 
 END
 GO
@@ -393,7 +411,10 @@ EXEC DJML.CREAR_USUARIOS
 EXEC DJML.CREAR_SERVICIOS
 EXEC DJML.CREAR_CIUDADES
 EXEC DJML.CREAR_RUTAS
+
 EXEC DJML.CREAR_AERONAVES
+
+
 EXEC DJML.CREAR_VIAJES
 EXEC DJML.CREAR_CLIENTES
 
