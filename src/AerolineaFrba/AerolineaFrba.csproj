@@ -100,6 +100,12 @@
     <Compile Include="Abm Rol\FormRol.Designer.cs">
       <DependentUpon>FormRol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Rol\FormRolAlta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\FormRolAlta.Designer.cs">
+      <DependentUpon>FormRolAlta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Rol\FormRolBaja.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,12 +129,6 @@
     </Compile>
     <Compile Include="Abm Ruta\FormRuta.Designer.cs">
       <DependentUpon>FormRuta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Rol\FormRolAlta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Rol\FormRolAlta.Designer.cs">
-      <DependentUpon>FormRolAlta.cs</DependentUpon>
     </Compile>
     <Compile Include="Canje Millas\Form1.cs">
       <SubType>Form</SubType>
@@ -166,6 +166,12 @@
     <Compile Include="Generacion Viaje\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Inicio Aplicacion\FormInicioFuncionalidades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inicio Aplicacion\FormInicioFuncionalidades.Designer.cs">
+      <DependentUpon>FormInicioFuncionalidades.cs</DependentUpon>
+    </Compile>
     <Compile Include="Listado Estadistico\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +180,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query.cs" />
     <Compile Include="Registro de Usuario\FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -223,14 +230,14 @@
     <EmbeddedResource Include="Abm Ruta\FormRuta.resx">
       <DependentUpon>FormRuta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Rol\FormRolAlta.resx">
-      <DependentUpon>FormRolAlta.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Compra\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio Aplicacion\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inicio Aplicacion\FormInicioFuncionalidades.resx">
+      <DependentUpon>FormInicioFuncionalidades.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -255,7 +262,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

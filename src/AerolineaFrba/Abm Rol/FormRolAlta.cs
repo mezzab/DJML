@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Abm_Ruta
+namespace AerolineaFrba.Abm_Rol
 {
-    public partial class FormRutaAlta : Form
+    public partial class FormRolAlta : Form
     {
-        public FormRutaAlta()
+        public FormRolAlta()
         {
             InitializeComponent();
-        }
-
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

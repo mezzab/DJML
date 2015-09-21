@@ -14,7 +14,7 @@ namespace AerolineaFrba.Abm_Aeronave
     {
         public Form1()
         {
-            InitializeComponent();
+          
         }
 
         

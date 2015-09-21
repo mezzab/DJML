@@ -73,6 +73,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.ForeColor = System.Drawing.SystemColors.Desktop;
             this.Name = "Form1";
             this.Text = "Aerolinea Frba V.0.1";
             this.ResumeLayout(false);
