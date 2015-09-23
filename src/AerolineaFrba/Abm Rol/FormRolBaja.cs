@@ -85,5 +85,7 @@ namespace AerolineaFrba.Abm_Rol
             rol.ShowDialog();
             rol = (FormRol)this.ActiveMdiChild;
         }
+
+      
     }
 }

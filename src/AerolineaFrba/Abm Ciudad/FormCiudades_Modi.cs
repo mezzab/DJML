@@ -24,5 +24,20 @@ namespace AerolineaFrba.Abm_Ciudad
             a.ShowDialog();
             a = (FormCiudades)this.ActiveMdiChild;
         }
+
+        private void label_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void darBaja_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormCiudades_Modi_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -17,18 +17,22 @@ namespace AerolineaFrba.Abm_Ciudad
             InitializeComponent();
         }
 
-        private void volver_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             FormCiudades a = new FormCiudades();
             this.Hide();
             a.ShowDialog();
             a = (FormCiudades)this.ActiveMdiChild;
-
         }
 
-        private void FormCiudad_Listado_Load(object sender, EventArgs e)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
+
+        private void modificar_Click(object sender, EventArgs e)
+        {
+
+        }
+        }
     }
-}
