@@ -148,6 +148,7 @@
     <Compile Include="Consulta Millas\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Globales.cs" />
     <Compile Include="Devolucion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,6 +218,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\FormRol.resx">
       <DependentUpon>FormRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\FormRolAlta.resx">
+      <DependentUpon>FormRolAlta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\FormRolBaja.resx">
       <DependentUpon>FormRolBaja.cs</DependentUpon>

@@ -30,14 +30,14 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.comboBoxRol = new System.Windows.Forms.ComboBox();
+            this.bnBuscar = new System.Windows.Forms.Button();
+            this.txtRol = new System.Windows.Forms.TextBox();
+            this.chkHabilitado = new System.Windows.Forms.CheckBox();
             this.Funcionalidades = new System.Windows.Forms.CheckedListBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.bnVolver = new System.Windows.Forms.Button();
+            this.bnAceptar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -58,39 +58,43 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Nombre del Rol:";
             // 
-            // comboBox1
+            // comboBoxRol
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(115, 10);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 2;
+            this.comboBoxRol.FormattingEnabled = true;
+            this.comboBoxRol.Location = new System.Drawing.Point(115, 10);
+            this.comboBoxRol.Name = "comboBoxRol";
+            this.comboBoxRol.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxRol.TabIndex = 2;
+            this.comboBoxRol.SelectedIndexChanged += new System.EventHandler(this.comboBoxRol_SelectedIndexChanged);
             // 
-            // button1
+            // bnBuscar
             // 
-            this.button1.Location = new System.Drawing.Point(161, 37);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Buscar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.bnBuscar.Location = new System.Drawing.Point(161, 37);
+            this.bnBuscar.Name = "bnBuscar";
+            this.bnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.bnBuscar.TabIndex = 3;
+            this.bnBuscar.Text = "Buscar";
+            this.bnBuscar.UseVisualStyleBackColor = true;
+            this.bnBuscar.Click += new System.EventHandler(this.bnBuscar_Click);
             // 
-            // textBox1
+            // txtRol
             // 
-            this.textBox1.Location = new System.Drawing.Point(115, 76);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 20);
-            this.textBox1.TabIndex = 4;
+            this.txtRol.Location = new System.Drawing.Point(115, 76);
+            this.txtRol.Name = "txtRol";
+            this.txtRol.Size = new System.Drawing.Size(121, 20);
+            this.txtRol.TabIndex = 4;
+            this.txtRol.TextChanged += new System.EventHandler(this.txtRol_TextChanged);
             // 
-            // checkBox1
+            // chkHabilitado
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(16, 122);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(73, 17);
-            this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "Habilitado";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkHabilitado.AutoSize = true;
+            this.chkHabilitado.Location = new System.Drawing.Point(16, 122);
+            this.chkHabilitado.Name = "chkHabilitado";
+            this.chkHabilitado.Size = new System.Drawing.Size(73, 17);
+            this.chkHabilitado.TabIndex = 5;
+            this.chkHabilitado.Text = "Habilitado";
+            this.chkHabilitado.UseVisualStyleBackColor = true;
+            this.chkHabilitado.CheckedChanged += new System.EventHandler(this.chkHabilitado_CheckedChanged);
             // 
             // Funcionalidades
             // 
@@ -99,6 +103,7 @@
             this.Funcionalidades.Name = "Funcionalidades";
             this.Funcionalidades.Size = new System.Drawing.Size(224, 94);
             this.Funcionalidades.TabIndex = 6;
+            this.Funcionalidades.SelectedIndexChanged += new System.EventHandler(this.Funcionalidades_SelectedIndexChanged);
             // 
             // button2
             // 
@@ -108,42 +113,46 @@
             this.button2.TabIndex = 7;
             this.button2.Text = "Limpiar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // bnVolver
             // 
-            this.button3.Location = new System.Drawing.Point(97, 253);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Volver";
-            this.button3.UseVisualStyleBackColor = true;
+            this.bnVolver.Location = new System.Drawing.Point(97, 253);
+            this.bnVolver.Name = "bnVolver";
+            this.bnVolver.Size = new System.Drawing.Size(75, 23);
+            this.bnVolver.TabIndex = 8;
+            this.bnVolver.Text = "Volver";
+            this.bnVolver.UseVisualStyleBackColor = true;
+            this.bnVolver.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
+            // bnAceptar
             // 
-            this.button4.Location = new System.Drawing.Point(178, 253);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "Guardar";
-            this.button4.UseVisualStyleBackColor = true;
+            this.bnAceptar.Location = new System.Drawing.Point(178, 253);
+            this.bnAceptar.Name = "bnAceptar";
+            this.bnAceptar.Size = new System.Drawing.Size(75, 23);
+            this.bnAceptar.TabIndex = 9;
+            this.bnAceptar.Text = "Aceptar";
+            this.bnAceptar.UseVisualStyleBackColor = true;
+            this.bnAceptar.Click += new System.EventHandler(this.bnAceptar_Click);
             // 
             // FormRolModificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(259, 288);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.bnAceptar);
+            this.Controls.Add(this.bnVolver);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.Funcionalidades);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.chkHabilitado);
+            this.Controls.Add(this.txtRol);
+            this.Controls.Add(this.bnBuscar);
+            this.Controls.Add(this.comboBoxRol);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormRolModificacion";
             this.Text = "FormRolModificacion";
+            this.Load += new System.EventHandler(this.FormRolModificacion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,13 +162,13 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ComboBox comboBoxRol;
+        private System.Windows.Forms.Button bnBuscar;
+        private System.Windows.Forms.TextBox txtRol;
+        private System.Windows.Forms.CheckBox chkHabilitado;
         private System.Windows.Forms.CheckedListBox Funcionalidades;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button bnVolver;
+        private System.Windows.Forms.Button bnAceptar;
     }
 }

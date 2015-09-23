@@ -36,9 +36,9 @@
             // 
             // abm_rol
             // 
-            this.abm_rol.Location = new System.Drawing.Point(45, 55);
+            this.abm_rol.Location = new System.Drawing.Point(45, 39);
             this.abm_rol.Name = "abm_rol";
-            this.abm_rol.Size = new System.Drawing.Size(75, 23);
+            this.abm_rol.Size = new System.Drawing.Size(75, 36);
             this.abm_rol.TabIndex = 0;
             this.abm_rol.Text = "ABM ROL";
             this.abm_rol.UseVisualStyleBackColor = true;
@@ -46,42 +46,42 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(173, 55);
+            this.button2.Location = new System.Drawing.Point(173, 39);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(75, 36);
             this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
+            this.button2.Text = "ABM AERONAVE";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(45, 141);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(75, 36);
             this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
+            this.button3.Text = "AMB RUTAS";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(173, 141);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(75, 36);
             this.button4.TabIndex = 3;
-            this.button4.Text = "button4";
+            this.button4.Text = "ABM CIUDAD";
             this.button4.UseVisualStyleBackColor = true;
             // 
             // FormInicioFuncionalidades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(284, 213);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.abm_rol);
             this.Name = "FormInicioFuncionalidades";
-            this.Text = "FormInicioFuncionalidades";
+            this.Text = "Funcionalidades";
             this.ResumeLayout(false);
 
         }

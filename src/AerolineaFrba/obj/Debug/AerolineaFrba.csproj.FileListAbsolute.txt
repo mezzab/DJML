@@ -25,3 +25,4 @@ C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\src\AerolineaF
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.pdb
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.FormRol.resources
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Inicio_Aplicacion.FormInicioFuncionalidades.resources
+C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.FormRolAlta.resources

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxRol = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.bnAceptar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -42,15 +42,14 @@
             this.label1.Size = new System.Drawing.Size(85, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Seleccionar Rol:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // comboBox1
+            // comboBoxRol
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(122, 34);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 1;
+            this.comboBoxRol.FormattingEnabled = true;
+            this.comboBoxRol.Location = new System.Drawing.Point(122, 34);
+            this.comboBoxRol.Name = "comboBoxRol";
+            this.comboBoxRol.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxRol.TabIndex = 1;
             // 
             // button1
             // 
@@ -60,27 +59,30 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Volver";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // bnAceptar
             // 
-            this.button2.Location = new System.Drawing.Point(168, 74);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Guardar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.bnAceptar.Location = new System.Drawing.Point(168, 74);
+            this.bnAceptar.Name = "bnAceptar";
+            this.bnAceptar.Size = new System.Drawing.Size(75, 23);
+            this.bnAceptar.TabIndex = 3;
+            this.bnAceptar.Text = "Aceptar";
+            this.bnAceptar.UseVisualStyleBackColor = true;
+            this.bnAceptar.Click += new System.EventHandler(this.bnAceptar_Click);
             // 
             // FormRolBaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(260, 119);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.bnAceptar);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxRol);
             this.Controls.Add(this.label1);
             this.Name = "FormRolBaja";
             this.Text = "FormRolBaja";
+            this.Load += new System.EventHandler(this.FormRolBaja_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -89,8 +91,8 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxRol;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button bnAceptar;
     }
 }
