@@ -44,12 +44,12 @@ namespace AerolineaFrba.Abm_Rol
         private void bnBuscar_Click(object sender, EventArgs e)
         {
             string rol = comboBoxRol.Text;
-            string qry = " SELECT f.DESCRIPCION Funcionalidad " +
+            string qry = " SELECT DISTINCT f.DESCRIPCION Funcionalidad " +
                             " FROM DJML.ROL_FUNCIONALIDAD rf, DJML.ROLES r, DJML.FUNCIONALIDAD f " +
                             " where rf.RXF_FUNC_ID = f.FUNC_ID " +
                             " and rf.RXF_ROL_ID = r.ROL_ID" +
                             " and r.ROL_DESCRIPCION = '" + rol + "' " +
-                            " and rf.RXF_ESTADO = 1 " +
+                            " and rf.RXF_HABILITADO = 1 " +
                             " order by f.DESCRIPCION";
 
             dataGrid.DataSource = new Query(qry).ObtenerDataTable();

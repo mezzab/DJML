@@ -161,11 +161,11 @@
     <Compile Include="Inicio Aplicacion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generacion Viaje\Form1.cs">
+    <Compile Include="Generacion Viaje\FormGenerarViaje.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generacion Viaje\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Generacion Viaje\FormGenerarViaje.Designer.cs">
+      <DependentUpon>FormGenerarViaje.cs</DependentUpon>
     </Compile>
     <Compile Include="Inicio Aplicacion\FormInicioFuncionalidades.cs">
       <SubType>Form</SubType>
@@ -236,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generacion Viaje\FormGenerarViaje.resx">
+      <DependentUpon>FormGenerarViaje.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio Aplicacion\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

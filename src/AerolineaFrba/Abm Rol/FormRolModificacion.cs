@@ -59,7 +59,7 @@ namespace AerolineaFrba.Abm_Rol
             
             txtRol.Text = rol;
             CargarFuncionalidadesEnLista();
-            string ConsultarFuncionalidades = " SELECT f.DESCRIPCION Funcionalidad, rf.RXF_ESTADO " +
+            string ConsultarFuncionalidades = " SELECT DISTINCT f.DESCRIPCION Funcionalidad, rf.RXF_HABILITADO " +
                                                 " FROM DJML.ROL_FUNCIONALIDAD rf" +
                                                 " JOIN DJML.ROLES r ON r.ROL_ID = rf.RXF_ROL_ID" +
                                                 " RIGHT JOIN DJML.FUNCIONALIDAD f on f.FUNC_ID = rf.RXF_FUNC_ID" +
@@ -144,7 +144,7 @@ namespace AerolineaFrba.Abm_Rol
                 if (Funcionalidades.GetItemChecked(i))
                 {
                     //INSERTA SI NO EXISTE
-                    sql = " INSERT INTO DJML.ROL_FUNCIONALIDAD (RXF_FUNC_ID, RXF_ROL_ID, RXF_ESTADO)" +
+                    sql = " INSERT INTO DJML.ROL_FUNCIONALIDAD (RXF_FUNC_ID, RXF_ROL_ID, RXF_HABILITADO)" +
                             " select distinct " + Funcionalidad + ", " + idRol + ", 1 HABILITADO" +
                             " from DJML.FUNCIONALIDAD" +
                             " where " + Funcionalidad + " not in ( select FUNC_ID from DJML.ROL_FUNCIONALIDAD where RXF_ROL_ID = " + idRol + ")";
@@ -153,7 +153,7 @@ namespace AerolineaFrba.Abm_Rol
                 {
                     // BORRAR SI ESTA DESMARCADO (no es necesario chequear si existe)
                     sql = " UPDATE  DJML.ROL_FUNCIONALIDAD" +
-                            " set RXF_ESTADO = 0 " +
+                            " set RXF_HABILITADO = 0 " +
                             " where RXF_ROL_ID = " + idRol +
                             " and RXF_FUNC_ID = " + Funcionalidad;
                 }
