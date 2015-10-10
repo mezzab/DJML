@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Abm_Rol;
 using AerolineaFrba.Generacion_Viaje;
+using AerolineaFrba.Compra;
+
 
 namespace AerolineaFrba.Inicio_Aplicacion
 {
@@ -34,6 +36,15 @@ namespace AerolineaFrba.Inicio_Aplicacion
             Form frm = new FormGenerarViaje();
             frm.ShowDialog();
             frm = (FormGenerarViaje)this.ActiveMdiChild;
+        }
+
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            FormCompra1 frm = new FormCompra1();
+            frm.ShowDialog();
+            frm = (FormCompra1)this.ActiveMdiChild;
         }
     }
 }

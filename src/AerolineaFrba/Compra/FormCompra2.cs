@@ -16,5 +16,13 @@ namespace AerolineaFrba.Compra
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormCompra1 volver = new FormCompra1();
+            this.Hide();
+            volver.ShowDialog();
+            volver = (FormCompra1)this.ActiveMdiChild;
+        }
     }
 }

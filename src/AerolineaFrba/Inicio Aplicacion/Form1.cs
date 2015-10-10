@@ -28,5 +28,10 @@ namespace AerolineaFrba
             frm.ShowDialog();
             frm = (FormInicioFuncionalidades)this.ActiveMdiChild;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
