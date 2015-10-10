@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Compra
 {
-    partial class Form1
+    partial class FormCompra
     {
         /// <summary>
         /// Required designer variable.
@@ -36,7 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Compra ";
             this.ResumeLayout(false);
 
         }
