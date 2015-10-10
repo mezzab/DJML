@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace AerolineaFrba.Compra
 {
-    public partial class FormCompra : Form
+    public partial class FormCompra1 : Form
     {
-        public FormCompra()
+        public FormCompra1()
         {
             InitializeComponent();
+        }
+
+        private void FormCompra1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
