@@ -80,6 +80,7 @@
             this.fechaLlegada.Name = "fechaLlegada";
             this.fechaLlegada.Size = new System.Drawing.Size(200, 20);
             this.fechaLlegada.TabIndex = 3;
+            this.fechaLlegada.ValueChanged += new System.EventHandler(this.fechaLlegada_ValueChanged);
             // 
             // fechaLLegadaEstimada
             // 
@@ -87,6 +88,7 @@
             this.fechaLLegadaEstimada.Name = "fechaLLegadaEstimada";
             this.fechaLLegadaEstimada.Size = new System.Drawing.Size(200, 20);
             this.fechaLLegadaEstimada.TabIndex = 4;
+            this.fechaLLegadaEstimada.ValueChanged += new System.EventHandler(this.fechaLLegadaEstimada_ValueChanged);
             // 
             // label1
             // 
@@ -131,7 +133,7 @@
             this.comboBoxAeronaves.Name = "comboBoxAeronaves";
             this.comboBoxAeronaves.Size = new System.Drawing.Size(200, 21);
             this.comboBoxAeronaves.TabIndex = 9;
-            //this.comboBoxAeronaves.SelectedIndexChanged += new System.EventHandler(this.comboBoxAeronaves_SelectedIndexChanged);
+            this.comboBoxAeronaves.SelectedIndexChanged += new System.EventHandler(this.comboBoxAeronaves_SelectedIndexChanged);
             // 
             // dataGridView1
             // 

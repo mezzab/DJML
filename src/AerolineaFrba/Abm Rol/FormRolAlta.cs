@@ -142,5 +142,10 @@ namespace AerolineaFrba.Abm_Rol
 
 
         }
+
+        private void txtRol_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

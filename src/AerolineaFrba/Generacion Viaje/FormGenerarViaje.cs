@@ -59,6 +59,21 @@ namespace AerolineaFrba.Generacion_Viaje
           */
         }
 
+        private void fechaLlegada_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fechaLLegadaEstimada_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxAeronaves_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         
     }
 }

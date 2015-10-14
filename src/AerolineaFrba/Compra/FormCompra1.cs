@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Inicio_Aplicacion;
+using System.Data.SqlClient;
+using AerolineaFrba.Properties;
 
 namespace AerolineaFrba.Compra
 {
@@ -20,6 +22,11 @@ namespace AerolineaFrba.Compra
 
         private void FormCompra1_Load(object sender, EventArgs e)
         {
+            button3.Enabled = false;
+            LlenarComboBox1();
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            LlenarComboBox2();
+            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
 
         }
 
@@ -33,9 +40,72 @@ namespace AerolineaFrba.Compra
 
         }
 
+        public void LlenarComboBox1()
+        {
+            SqlConnection conexion = new SqlConnection();
+            conexion.ConnectionString = Settings.Default.CadenaDeConexion;
+
+            DataSet ds = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter("select CIUD_DETALLE from DJML.CIUDADES", conexion);
+            da.Fill(ds, "DJML.CIUDADES");
+
+            comboBox1.DataSource = ds.Tables[0].DefaultView;
+            comboBox1.ValueMember = "CIUD_DETALLE";
+            comboBox1.SelectedItem = null;
+        }
+
+         public void LlenarComboBox2()
+        {
+            SqlConnection conexion1= new SqlConnection();
+            conexion1.ConnectionString = Settings.Default.CadenaDeConexion;
+
+            DataSet ds1 = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter("select CIUD_DETALLE from DJML.CIUDADES", conexion1);
+            da.Fill(ds1, "DJML.CIUDADES");
+
+            comboBox2.DataSource = ds1.Tables[0].DefaultView;
+            comboBox2.ValueMember = "CIUD_DETALLE";
+            comboBox2.SelectedItem = null;
+        }
+        
+        
+        
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-        
+            if ((comboBox2.Text.Trim() != "" || comboBox2.SelectedItem != null) &&
+                (comboBox1.Text.Trim() != "" || comboBox1.SelectedItem != null))
+            {
+                button3.Enabled = true;
+            }
+        }
+
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((comboBox2.Text.Trim() != "" || comboBox2.SelectedItem != null )&&
+                ( comboBox1.Text.Trim() != "" || comboBox1.SelectedItem != null))
+            {
+                button3.Enabled = true;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            comboBox1.SelectedItem = null;            
+            comboBox2.SelectedItem = null;
+
+            //    dataGrid.DataSource = null;
+            button3.Enabled = false;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
