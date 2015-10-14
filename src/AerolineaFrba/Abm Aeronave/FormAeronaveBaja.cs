@@ -22,5 +22,14 @@ namespace AerolineaFrba.Abm_Aeronave
 
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormAeronave aero = new FormAeronave();
+            this.Hide();
+            aero.ShowDialog();
+            aero = (FormAeronave)this.ActiveMdiChild;
+
+        }
     }
 }

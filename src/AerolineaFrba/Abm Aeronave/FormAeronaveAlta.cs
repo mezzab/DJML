@@ -16,5 +16,28 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormAlta_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            FormAeronave rol = new FormAeronave();
+            this.Hide();
+            rol.ShowDialog();
+            rol = (FormAeronave)this.ActiveMdiChild;
+        }
     }
 }
