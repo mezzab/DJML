@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using AerolineaFrba.Abm_Rol;
 using AerolineaFrba.Generacion_Viaje;
 using AerolineaFrba.Compra;
-
+using AerolineaFrba.Abm_Ciudad;
 
 namespace AerolineaFrba.Inicio_Aplicacion
 {
@@ -45,6 +45,15 @@ namespace AerolineaFrba.Inicio_Aplicacion
             FormCompra1 frm = new FormCompra1();
             frm.ShowDialog();
             frm = (FormCompra1)this.ActiveMdiChild;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Form frm = new FormCiudades();
+            frm.ShowDialog();
+            frm = (FormCiudades)this.ActiveMdiChild;
+        
         }
     }
 }

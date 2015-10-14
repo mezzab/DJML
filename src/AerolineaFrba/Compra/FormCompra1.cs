@@ -100,10 +100,32 @@ namespace AerolineaFrba.Compra
 
         private void button3_Click(object sender, EventArgs e)
         {
+            string origen = comboBox1.Text;
+            string destino = comboBox2.Text;
 
+            string qry = "SELECT S.SERV_DESCRIPCION TIPO_DE_SERVICIO, COUNT(DISTINCT X.BXA_ID) BUTACAS_LIBRES, A.AERO_KILOS_DISPONIBLES KILOS_DISPONIBLES" +
+    " FROM DJML.RUTAS R, DJML.VIAJES V, DJML.SERVICIOS S, DJML.BUTACA_AERO B, DJML.AERONAVES A, DJML.BUTACA_AERO X" +
+    " WHERE R.RUTA_CODIGO = V.VIAJE_RUTA_ID " +
+    " AND R.RUTA_SERVICIO_ID = S.SERV_ID" +
+    " AND B.BXA_AERO_MATRICULA = V.VIAJE_AERO_ID" +
+    " AND A.AERO_MATRICULA = V.VIAJE_AERO_ID" +
+    " AND X.BXA_AERO_MATRICULA = A.AERO_MATRICULA" +
+    " AND R.RUTA_CIUDAD_DESTINO = (select CIUD_ID from djml.CIUDADES WHERE CIUD_DETALLE = '"+origen+"')" +
+    " AND R.RUTA_CIUDAD_ORIGEN = (select CIUD_ID from djml.CIUDADES WHERE CIUD_DETALLE = '"+destino+"')" +
+    " AND X.BXA_ESTADO = 1" +
+    //" AND V.VIAJE_FECHA_SALIDA > '2017-01-01 02:00:00.000' AND V.VIAJE_FECHA_SALIDA < '2017-02-01 02:00:00.000'" +
+    " GROUP BY S.SERV_DESCRIPCION, A.AERO_KILOS_DISPONIBLES, V.VIAJE_FECHA_SALIDA";
+
+
+            dataGridView1.DataSource = new Query(qry).ObtenerDataTable();
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

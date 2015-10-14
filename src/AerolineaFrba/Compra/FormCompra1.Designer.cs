@@ -36,13 +36,10 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Tipo_de_Servicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Butacas_Libres = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.KGs_Disponibles = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.Selecciona = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -114,34 +111,12 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Seleccionar,
-            this.Tipo_de_Servicio,
-            this.Butacas_Libres,
-            this.KGs_Disponibles});
-            this.dataGridView1.Location = new System.Drawing.Point(6, 24);
+            this.Selecciona});
+            this.dataGridView1.Location = new System.Drawing.Point(7, 16);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(436, 202);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
-            // 
-            // Tipo_de_Servicio
-            // 
-            this.Tipo_de_Servicio.HeaderText = "Tipo_de_Servicio";
-            this.Tipo_de_Servicio.Name = "Tipo_de_Servicio";
-            // 
-            // Butacas_Libres
-            // 
-            this.Butacas_Libres.HeaderText = "Butacas_Libres";
-            this.Butacas_Libres.Name = "Butacas_Libres";
-            // 
-            // KGs_Disponibles
-            // 
-            this.KGs_Disponibles.HeaderText = "KGs_Disponibles";
-            this.KGs_Disponibles.Name = "KGs_Disponibles";
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // button1
             // 
@@ -172,6 +147,12 @@
             this.button3.Text = "Buscar";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // Selecciona
+            // 
+            this.Selecciona.HeaderText = "Selecciona";
+            this.Selecciona.Name = "Selecciona";
+            this.Selecciona.Visible = false;
             // 
             // FormCompra1
             // 
@@ -209,11 +190,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo_de_Servicio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Butacas_Libres;
-        private System.Windows.Forms.DataGridViewTextBoxColumn KGs_Disponibles;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DataGridViewButtonColumn Selecciona;
     }
 }

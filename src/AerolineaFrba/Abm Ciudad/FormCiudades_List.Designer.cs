@@ -30,16 +30,16 @@
         {
             this.volver = new System.Windows.Forms.Button();
             this.resultados = new System.Windows.Forms.GroupBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.nombre = new System.Windows.Forms.Label();
             this.boxBusqueda = new System.Windows.Forms.TextBox();
             this.buscar = new System.Windows.Forms.Button();
             this.Filtros = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.darBaja = new System.Windows.Forms.Button();
             this.modificar = new System.Windows.Forms.Button();
             this.resultados.SuspendLayout();
-            this.Filtros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.Filtros.SuspendLayout();
             this.SuspendLayout();
             // 
             // volver
@@ -61,6 +61,15 @@
             this.resultados.TabIndex = 2;
             this.resultados.TabStop = false;
             this.resultados.Text = "Resultados";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(7, 20);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(458, 191);
+            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // nombre
             // 
@@ -99,15 +108,6 @@
             this.Filtros.TabStop = false;
             this.Filtros.Text = "Busqueda";
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(7, 20);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(458, 191);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
             // darBaja
             // 
             this.darBaja.Location = new System.Drawing.Point(212, 316);
@@ -140,9 +140,9 @@
             this.Name = "FormCiudades_List";
             this.Text = "Listado de Ciudades";
             this.resultados.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.Filtros.ResumeLayout(false);
             this.Filtros.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }

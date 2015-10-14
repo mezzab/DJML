@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba.Inicio_Aplicacion;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
@@ -65,10 +66,10 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void volver_Click(object sender, EventArgs e)
         { // solo para probar
-            FormCiudades_List a = new FormCiudades_List();
+            Form a = new FormInicioFuncionalidades();
             this.Hide();
             a.ShowDialog();
-            a = (FormCiudades_List)this.ActiveMdiChild;
+            a = (FormInicioFuncionalidades)this.ActiveMdiChild;
         }
     }
 }
