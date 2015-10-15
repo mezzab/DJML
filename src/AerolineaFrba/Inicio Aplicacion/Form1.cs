@@ -25,9 +25,9 @@ namespace AerolineaFrba
             //ESTO DEBERIA DE MANDARTE AL LOGIN!!!!!!!!!!!
  
             this.Visible = false;
-            Form frm = new FormLogin();
+            Form frm = new FormInicioFuncionalidades();
             frm.ShowDialog();
-            frm = (FormLogin)this.ActiveMdiChild;
+            frm = (FormInicioFuncionalidades)this.ActiveMdiChild;
         }
 
         private void button2_Click(object sender, EventArgs e)
