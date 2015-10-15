@@ -58,7 +58,7 @@ namespace AerolineaFrba.Abm_Rol
                 qry.pComando = sql1;
                 int existeRol = (int)qry.ObtenerUnicoCampo();
 
-                if (existeRol == 1)
+                if (existeRol.Equals(1))
                 {
                     //MUESTRA ERROR - DESCRIPCION EXISTENTE 
                     txtRol.Text = null;

@@ -27,3 +27,35 @@ C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\src\AerolineaF
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Inicio_Aplicacion.FormInicioFuncionalidades.resources
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.FormRolAlta.resources
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.FormGenerarViaje.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\bin\Debug\AerolineaFrba.exe.config
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.exe
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.pdb
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\bin\Debug\Abm Ciudad\FormCiudades_Baja.resx
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\bin\Debug\Abm Ciudad\FormCiudades_Baja.cs
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\bin\Debug\Abm Ciudad\FormCiudades_Baja.Designer.cs
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\bin\Debug\AerolineaFrba.exe
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\bin\Debug\AerolineaFrba.pdb
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.csprojResolveAssemblyReference.cache
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.FormAeronave.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Aeronave.FormAeronaveBaja.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.FormCiudades_Baja.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.FormCiudades.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.FormCiudades_Alta.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.FormCiudades_Modi.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ciudad.FormCiudades_List.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.FormRol.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.FormRolAlta.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.FormRolBaja.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.FormRolConsulta.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Rol.FormRolModificacion.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.Form1.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.FormCompra3.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.FormCompra1.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.FormCompra2.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.FormCompra4.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Generacion_Viaje.FormGenerarViaje.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Form1.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Inicio_Aplicacion.FormInicioFuncionalidades.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Properties.Resources.resources
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.csproj.GenerateResource.Cache
+C:\Users\trian\Desktop\tp-gestion\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Login_Usuario.FormLogin.resources

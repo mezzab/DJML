@@ -82,6 +82,7 @@ namespace AerolineaFrba.Abm_Rol
             this.Controls.Add(this.bnAlta);
             this.Name = "FormRol";
             this.Text = "ABM ROL";
+            this.Load += new System.EventHandler(this.FormRol_Load);
             this.ResumeLayout(false);
 
         }
@@ -118,6 +119,11 @@ namespace AerolineaFrba.Abm_Rol
             FormRolConsulta frm = new FormRolConsulta();
             frm.ShowDialog();
             this.Visible = true;
+        }
+
+        private void FormRol_Load(object sender, EventArgs e)
+        {
+
         }
 
     }

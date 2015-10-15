@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Inicio_Aplicacion;
+using AerolineaFrba.Login_Usuario;
 
 
 namespace AerolineaFrba
@@ -24,9 +25,9 @@ namespace AerolineaFrba
             //ESTO DEBERIA DE MANDARTE AL LOGIN!!!!!!!!!!!
  
             this.Visible = false;
-            Form frm = new FormInicioFuncionalidades();
+            Form frm = new FormLogin();
             frm.ShowDialog();
-            frm = (FormInicioFuncionalidades)this.ActiveMdiChild;
+            frm = (FormLogin)this.ActiveMdiChild;
         }
 
         private void button2_Click(object sender, EventArgs e)

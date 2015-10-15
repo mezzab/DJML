@@ -24,5 +24,10 @@ namespace AerolineaFrba.Compra
             volver.ShowDialog();
             volver = (FormCompra1)this.ActiveMdiChild;
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
