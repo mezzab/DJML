@@ -30,7 +30,7 @@
         {
             this.abm_rol = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.button_rutas = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -55,14 +55,15 @@
             this.button2.Text = "ABM AERONAVE";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // button_rutas
             // 
-            this.button3.Location = new System.Drawing.Point(45, 109);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(146, 53);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "AMB RUTAS";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button_rutas.Location = new System.Drawing.Point(45, 109);
+            this.button_rutas.Name = "button_rutas";
+            this.button_rutas.Size = new System.Drawing.Size(146, 53);
+            this.button_rutas.TabIndex = 2;
+            this.button_rutas.Text = "AMB RUTAS";
+            this.button_rutas.UseVisualStyleBackColor = true;
+            this.button_rutas.Click += new System.EventHandler(this.button_rutas_Click);
             // 
             // button4
             // 
@@ -102,7 +103,7 @@
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button_rutas);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.abm_rol);
             this.Name = "FormInicioFuncionalidades";
@@ -115,7 +116,7 @@
 
         private System.Windows.Forms.Button abm_rol;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button_rutas;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button5;

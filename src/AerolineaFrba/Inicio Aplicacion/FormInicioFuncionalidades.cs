@@ -11,6 +11,7 @@ using AerolineaFrba.Abm_Rol;
 using AerolineaFrba.Generacion_Viaje;
 using AerolineaFrba.Compra;
 using AerolineaFrba.Abm_Ciudad;
+using AerolineaFrba.Abm_Ruta;
 
 namespace AerolineaFrba.Inicio_Aplicacion
 {
@@ -54,6 +55,14 @@ namespace AerolineaFrba.Inicio_Aplicacion
             frm.ShowDialog();
             frm = (FormCiudades)this.ActiveMdiChild;
         
+        }
+
+        private void button_rutas_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Form frm = new FormRuta();
+            frm.ShowDialog();
+            frm = (FormRuta)this.ActiveMdiChild;
         }
     }
 }

@@ -21,6 +21,9 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void FormRutaListado_Load(object sender, EventArgs e)
         {
+            //SqlConnection conexion = new SqlConnection();
+            //conexion.ConnectionString = Settings.Default.CadenaDeConexion;
+
             string qry = "SELECT DISTINCT RUTA_CODIGO as Codigo, " +
                                          "(SELECT CIUD_DETALLE FROM DJML.CIUDADES WHERE CIUD_ID = RUTA_CIUDAD_ORIGEN) as Origen, " +
                                          "(SELECT CIUD_DETALLE FROM DJML.CIUDADES WHERE CIUD_ID = RUTA_CIUDAD_DESTINO) as Destino, " +
