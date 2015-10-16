@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Ruta
 {
-    partial class Form1
+    partial class FormRuta
     {
         /// <summary>
         /// Required designer variable.
@@ -84,7 +84,7 @@
             this.button_volver.Text = "Volver";
             this.button_volver.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // FormRuta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -94,7 +94,7 @@
             this.Controls.Add(this.button_listado);
             this.Controls.Add(this.button_baja);
             this.Controls.Add(this.button_alta);
-            this.Name = "Form1";
+            this.Name = "FormRuta";
             this.Text = "ABM RUTA";
             this.ResumeLayout(false);
 

@@ -63,6 +63,7 @@ namespace AerolineaFrba.Inicio_Aplicacion
             Form frm = new FormRuta();
             frm.ShowDialog();
             frm = (FormRuta)this.ActiveMdiChild;
+        
         }
     }
 }

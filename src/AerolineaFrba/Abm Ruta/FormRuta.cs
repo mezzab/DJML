@@ -12,9 +12,9 @@ using AerolineaFrba.Abm_Ruta;
 
 namespace AerolineaFrba.Abm_Ruta
 {
-    public partial class Form1 : Form
+    public partial class FormRuta : Form
     {
-        public Form1()
+        public FormRuta()
         {
             InitializeComponent();
         }
