@@ -130,6 +130,36 @@
     <Compile Include="Abm Ruta\FormRuta.Designer.cs">
       <DependentUpon>FormRuta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Ruta\FormRutaAlta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\FormRutaAlta.Designer.cs">
+      <DependentUpon>FormRutaAlta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ruta\FormRutaBaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\FormRutaBaja.Designer.cs">
+      <DependentUpon>FormRutaBaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ruta\FormRutaListado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\FormRutaListado.Designer.cs">
+      <DependentUpon>FormRutaListado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ruta\FormRutaModificacion1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\FormRutaModificacion1.Designer.cs">
+      <DependentUpon>FormRutaModificacion1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ruta\FormRutaModificacion2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\FormRutaModificacion2.Designer.cs">
+      <DependentUpon>FormRutaModificacion2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Canje Millas\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -251,6 +281,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ruta\FormRuta.resx">
       <DependentUpon>FormRuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\FormRutaAlta.resx">
+      <DependentUpon>FormRutaAlta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\FormRutaBaja.resx">
+      <DependentUpon>FormRutaBaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\FormRutaListado.resx">
+      <DependentUpon>FormRutaListado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\FormRutaModificacion1.resx">
+      <DependentUpon>FormRutaModificacion1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\FormRutaModificacion2.resx">
+      <DependentUpon>FormRutaModificacion2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\FormCompra3.resx">
       <DependentUpon>FormCompra3.cs</DependentUpon>
