@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Ruta
 {
-    partial class Form1
+    partial class FormRuta
     {
         /// <summary>
         /// Required designer variable.
@@ -28,70 +28,73 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.button_alta = new System.Windows.Forms.Button();
+            this.button_baja = new System.Windows.Forms.Button();
+            this.button_listado = new System.Windows.Forms.Button();
+            this.button_modificacion = new System.Windows.Forms.Button();
+            this.button_volver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // button_alta
             // 
-            this.button1.Location = new System.Drawing.Point(34, 36);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Alta";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button_alta.Location = new System.Drawing.Point(34, 36);
+            this.button_alta.Name = "button_alta";
+            this.button_alta.Size = new System.Drawing.Size(75, 23);
+            this.button_alta.TabIndex = 0;
+            this.button_alta.Text = "Alta";
+            this.button_alta.UseVisualStyleBackColor = true;
+            this.button_alta.Click += new System.EventHandler(this.button_alta_Click);
             // 
-            // button2
+            // button_baja
             // 
-            this.button2.Location = new System.Drawing.Point(186, 35);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Baja";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button_baja.Location = new System.Drawing.Point(186, 35);
+            this.button_baja.Name = "button_baja";
+            this.button_baja.Size = new System.Drawing.Size(75, 23);
+            this.button_baja.TabIndex = 1;
+            this.button_baja.Text = "Baja";
+            this.button_baja.UseVisualStyleBackColor = true;
+            this.button_baja.Click += new System.EventHandler(this.button_baja_Click);
             // 
-            // button3
+            // button_listado
             // 
-            this.button3.Location = new System.Drawing.Point(34, 138);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Listado";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button_listado.Location = new System.Drawing.Point(34, 138);
+            this.button_listado.Name = "button_listado";
+            this.button_listado.Size = new System.Drawing.Size(75, 23);
+            this.button_listado.TabIndex = 2;
+            this.button_listado.Text = "Listado";
+            this.button_listado.UseVisualStyleBackColor = true;
+            this.button_listado.Click += new System.EventHandler(this.button_listado_Click);
             // 
-            // button4
+            // button_modificacion
             // 
-            this.button4.Location = new System.Drawing.Point(186, 138);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Modificacion";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button_modificacion.Location = new System.Drawing.Point(186, 138);
+            this.button_modificacion.Name = "button_modificacion";
+            this.button_modificacion.Size = new System.Drawing.Size(75, 23);
+            this.button_modificacion.TabIndex = 3;
+            this.button_modificacion.Text = "Modificacion";
+            this.button_modificacion.UseVisualStyleBackColor = true;
+            this.button_modificacion.Click += new System.EventHandler(this.button_modificacion_Click);
             // 
-            // button5
+            // button_volver
             // 
-            this.button5.Location = new System.Drawing.Point(109, 197);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Volver";
-            this.button5.UseVisualStyleBackColor = true;
+            this.button_volver.Location = new System.Drawing.Point(109, 197);
+            this.button_volver.Name = "button_volver";
+            this.button_volver.Size = new System.Drawing.Size(75, 23);
+            this.button_volver.TabIndex = 4;
+            this.button_volver.Text = "Volver";
+            this.button_volver.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // FormRuta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Name = "Form1";
+            this.Controls.Add(this.button_volver);
+            this.Controls.Add(this.button_modificacion);
+            this.Controls.Add(this.button_listado);
+            this.Controls.Add(this.button_baja);
+            this.Controls.Add(this.button_alta);
+            this.Name = "FormRuta";
             this.Text = "ABM RUTA";
             this.ResumeLayout(false);
 
@@ -99,10 +102,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button_alta;
+        private System.Windows.Forms.Button button_baja;
+        private System.Windows.Forms.Button button_listado;
+        private System.Windows.Forms.Button button_modificacion;
+        private System.Windows.Forms.Button button_volver;
     }
 }

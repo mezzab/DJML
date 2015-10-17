@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Ruta
 {
-    partial class FormRutaAlta
+    partial class FormRutaModificacion2
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button_volver = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_guardar = new System.Windows.Forms.Button();
             this.label_message = new System.Windows.Forms.Label();
@@ -42,18 +41,9 @@
             this.comboBox_servicio = new System.Windows.Forms.ComboBox();
             this.comboBox_destino = new System.Windows.Forms.ComboBox();
             this.comboBox_origen = new System.Windows.Forms.ComboBox();
+            this.button_volver = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // button_volver
-            // 
-            this.button_volver.Location = new System.Drawing.Point(133, 322);
-            this.button_volver.Name = "button_volver";
-            this.button_volver.Size = new System.Drawing.Size(75, 23);
-            this.button_volver.TabIndex = 4;
-            this.button_volver.Text = "Volver";
-            this.button_volver.UseVisualStyleBackColor = true;
-            this.button_volver.Click += new System.EventHandler(this.button_volver_Click);
             // 
             // groupBox1
             // 
@@ -72,7 +62,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(311, 295);
-            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rutas Aereas";
             // 
@@ -84,7 +74,6 @@
             this.button_guardar.TabIndex = 6;
             this.button_guardar.Text = "Guardar";
             this.button_guardar.UseVisualStyleBackColor = true;
-            this.button_guardar.Click += new System.EventHandler(this.button_guardar_Click);
             // 
             // label_message
             // 
@@ -183,17 +172,25 @@
             this.comboBox_origen.Size = new System.Drawing.Size(121, 21);
             this.comboBox_origen.TabIndex = 0;
             // 
-            // FormRutaAlta
+            // button_volver
+            // 
+            this.button_volver.Location = new System.Drawing.Point(133, 322);
+            this.button_volver.Name = "button_volver";
+            this.button_volver.Size = new System.Drawing.Size(75, 23);
+            this.button_volver.TabIndex = 6;
+            this.button_volver.Text = "Volver";
+            this.button_volver.UseVisualStyleBackColor = true;
+            // 
+            // FormRutaModificacion2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 357);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_volver);
-            this.Name = "FormRutaAlta";
-            this.Padding = new System.Windows.Forms.Padding(10);
-            this.Text = "ABM RUTA - ALTA";
-            this.Load += new System.EventHandler(this.FormRutaAlta_Load_1);
+            this.Name = "FormRutaModificacion2";
+            this.Text = "ABM RUTA - Modificación";
+            this.Load += new System.EventHandler(this.FormRutaModificacion2_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -202,19 +199,19 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button_volver;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox_servicio;
-        private System.Windows.Forms.ComboBox comboBox_destino;
-        private System.Windows.Forms.ComboBox comboBox_origen;
         private System.Windows.Forms.Button button_guardar;
         private System.Windows.Forms.Label label_message;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox comboBox_servicio;
+        private System.Windows.Forms.ComboBox comboBox_destino;
+        private System.Windows.Forms.ComboBox comboBox_origen;
+        private System.Windows.Forms.Button button_volver;
     }
 }

@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace AerolineaFrba.Abm_Ruta
 {
-    public partial class FormRutaAlta : Form
+    public partial class FormRutaModificacion1 : Form
     {
-        public FormRutaAlta()
+        public FormRutaModificacion1()
         {
             InitializeComponent();
         }
 
-        private void FormRutaAlta_Load(object sender, EventArgs e)
+        private void FormRutaModificacion1_Load(object sender, EventArgs e)
         {
             //comboBox_origen
             string qry_origen = "SELECT CIUD_DETALLE, CIUD_ID FROM DJML.CIUDADES ORDER BY 1";
@@ -31,22 +31,5 @@ namespace AerolineaFrba.Abm_Ruta
             string qry_servicio = "SELECT SERV_DESCRIPCION, SERV_ID FROM DJML.SERVICIOS ORDER BY 1";
             DataTable servicio_data = new Query(qry_servicio).ObtenerDataTable();
         }
-
-        private void button_guardar_Click(object sender, EventArgs e)
-        {
-            //ToDo
-            //Validate: No guardar un ruta identica a otra
-        }
-
-        private void button_volver_Click(object sender, EventArgs e)
-        {
-            //ToDo
-        }
-
-        private void FormRutaAlta_Load_1(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }
