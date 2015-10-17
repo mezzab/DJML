@@ -1,0 +1,7 @@
+*.suo
+src/AerolineaFrba/bin/Debug/*
+src/AerolineaFrba/obj/Debug/*
+*.csproj
+*.exe
+
+

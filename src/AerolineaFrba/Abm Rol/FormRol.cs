@@ -24,6 +24,7 @@ namespace AerolineaFrba.Abm_Rol
         private Button bnBaja;
         private Button bnListado;
         private Button bnModificacion;
+        private Button button1;
         
         private void InitializeComponent()
         {
@@ -31,6 +32,7 @@ namespace AerolineaFrba.Abm_Rol
             this.bnBaja = new System.Windows.Forms.Button();
             this.bnListado = new System.Windows.Forms.Button();
             this.bnModificacion = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bnAlta
@@ -73,9 +75,20 @@ namespace AerolineaFrba.Abm_Rol
             this.bnModificacion.UseVisualStyleBackColor = true;
             this.bnModificacion.Click += new System.EventHandler(this.bnModificacion_Click_1);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(96, 219);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Volver";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FormRol
             // 
             this.ClientSize = new System.Drawing.Size(284, 288);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.bnModificacion);
             this.Controls.Add(this.bnListado);
             this.Controls.Add(this.bnBaja);
@@ -119,6 +132,18 @@ namespace AerolineaFrba.Abm_Rol
             FormRolConsulta frm = new FormRolConsulta();
             frm.ShowDialog();
             this.Visible = true;
+        }
+
+
+        
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormInicioFuncionalidades inicioF = new FormInicioFuncionalidades();
+            this.Hide();
+            inicioF.ShowDialog();
+            inicioF = (FormInicioFuncionalidades)this.ActiveMdiChild;
+            
         }
 
         private void FormRol_Load(object sender, EventArgs e)

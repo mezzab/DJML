@@ -44,19 +44,17 @@ namespace AerolineaFrba.Login_Usuario
 
             if (!faltanDatos())
             //CONSULTA POR USUARIO/CONTRASEÑA DISTINTO VACIO
-            {   
-               /* //VALIDA USUARIO HABILITADO Y SI EXISTE
-                if ((usuarioHabilitado) && existeUsuario(string txtUsu))
-                {
-                    string sql_usua = "SELECT USUA_USERNAME FROM DJML.USUARIOS WHERE USUA_USERNAME = '" + txtUsu.Text + "'";
-                    Query qry = new Query(sql_usua);
-                    qry.Ejecutar();
-                    string sql_passw = "SELECT USUA_PASSWORD FROM DJML.USUARIOS WHERE USUA_PASSWORD = '" + txtPassw.Text + "'";
-                    Query qry2 = new Query(sql_passw);
-                    qry2.Ejecutar();
+            {
+                string sql_usua = "SELECT USUA_USERNAME FROM DJML.USUARIOS WHERE USUA_USERNAME = '" + txtUsu.Text + "'";
+                Query qry = new Query(sql_usua);
+                qry.Ejecutar();
+                string sql_passw = "SELECT USUA_PASSWORD FROM DJML.USUARIOS WHERE USUA_PASSWORD = '" + txtPassw.Text + "'";
+                Query qry2 = new Query(sql_passw);
+                qry2.Ejecutar();
 
-                }
-                */
+                //Falta comprobar bien y hacer sha512
+
+
 
             }
             else
@@ -95,10 +93,6 @@ namespace AerolineaFrba.Login_Usuario
 
         }
 
-        private bool existeUsuario(string txtUsu)
-        {
-            return ((int)new Query("SELECT COUNT(1) FROM DJML.USUARIOS WHERE USUA_USERNAME ='" + txtUsu + "'").ObtenerUnicoCampo() ==1);
-        }
         private void label2_Click(object sender, EventArgs e)
         {
         
