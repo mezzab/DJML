@@ -129,5 +129,13 @@ namespace AerolineaFrba.Compra
         {
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            FormCompra2 asd = new FormCompra2();
+            this.Hide();
+            asd.ShowDialog();
+            asd = (FormCompra2)this.ActiveMdiChild;
+        }
     }
 }

@@ -25,9 +25,21 @@ namespace AerolineaFrba.Compra
             volver = (FormCompra1)this.ActiveMdiChild;
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FormEncomienda enc = new FormEncomienda();
+            this.Hide();
+            enc.ShowDialog();
+            enc = (FormEncomienda)this.ActiveMdiChild;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            FormPasaje Pasaje = new FormPasaje();
+            this.Hide();
+            Pasaje.ShowDialog();
+            Pasaje = (FormPasaje)this.ActiveMdiChild;
         }
     }
 }
