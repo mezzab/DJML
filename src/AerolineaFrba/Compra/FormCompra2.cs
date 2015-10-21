@@ -28,18 +28,24 @@ namespace AerolineaFrba.Compra
 
         private void button2_Click(object sender, EventArgs e)
         {
-            FormEncomienda enc = new FormEncomienda();
+            FormPasaje enc = new FormPasaje();
             this.Hide();
             enc.ShowDialog();
-            enc = (FormEncomienda)this.ActiveMdiChild;
+            enc = (FormPasaje)this.ActiveMdiChild;
+
+            int tipocompra;
+            tipocompra = 0;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            FormPasaje Pasaje = new FormPasaje();
+            FormEncomienda Pasaje = new FormEncomienda();
             this.Hide();
             Pasaje.ShowDialog();
-            Pasaje = (FormPasaje)this.ActiveMdiChild;
+            Pasaje = (FormEncomienda)this.ActiveMdiChild;
+
+            int tipocompra;
+            tipocompra = 1;
         }
     }
 }
