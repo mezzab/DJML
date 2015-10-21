@@ -19,7 +19,7 @@ namespace AerolineaFrba.Compra
             InitializeComponent();
         }
 
-        private void FormCompra1_Load(object sender, EventArgs e)
+        private void FormPasaje_Load(object sender, EventArgs e)
         {
             button1.Enabled = false;
             LlenarComboBox1();
@@ -28,6 +28,7 @@ namespace AerolineaFrba.Compra
         }
         public void LlenarComboBox1()
         {
+       
             SqlConnection conexion = new SqlConnection();
             conexion.ConnectionString = Settings.Default.CadenaDeConexion;
 

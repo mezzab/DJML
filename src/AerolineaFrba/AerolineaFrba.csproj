@@ -190,6 +190,18 @@
     <Compile Include="Compra\FormCompra1.Designer.cs">
       <DependentUpon>FormCompra1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra\FormEncomienda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\FormEncomienda.Designer.cs">
+      <DependentUpon>FormEncomienda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra\FormPasaje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\FormPasaje.Designer.cs">
+      <DependentUpon>FormPasaje.cs</DependentUpon>
+    </Compile>
     <Compile Include="Consulta Millas\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -308,6 +320,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\FormCompra4.resx">
       <DependentUpon>FormCompra4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\FormEncomienda.resx">
+      <DependentUpon>FormEncomienda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\FormPasaje.resx">
+      <DependentUpon>FormPasaje.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\FormGenerarViaje.resx">
       <DependentUpon>FormGenerarViaje.cs</DependentUpon>
