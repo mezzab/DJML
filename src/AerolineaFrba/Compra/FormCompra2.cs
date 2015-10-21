@@ -12,6 +12,8 @@ namespace AerolineaFrba.Compra
 {
     public partial class FormCompra2 : Form
     {
+        public static Boolean tipoPasaje = true;
+
         public FormCompra2()
         {
             InitializeComponent();
@@ -32,9 +34,6 @@ namespace AerolineaFrba.Compra
             this.Hide();
             enc.ShowDialog();
             enc = (FormPasaje)this.ActiveMdiChild;
-
-            int tipocompra;
-            tipocompra = 0;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -44,8 +43,27 @@ namespace AerolineaFrba.Compra
             Pasaje.ShowDialog();
             Pasaje = (FormEncomienda)this.ActiveMdiChild;
 
-            int tipocompra;
-            tipocompra = 1;
+            
+          
+        }
+
+        private void FormCompra2_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(FormCompra1.viajeID.ToString());
+        }
+
+        private void button4_Click_1(object sender, EventArgs e) // esto es solo para probar, despues vuela. 
+        {
+            Query qry10 = new Query("SELECT VIAJE_AERO_ID FROM DJML.VIAJES WHERE VIAJE_ID =" + "'"+FormCompra1.viajeID+"'");
+
+            string aeroID = (string)qry10.ObtenerUnicoCampo();
+            MessageBox.Show("El numero de matricula de la aeronave que realizara el viaje es:  " + aeroID , "Consulta de matricula", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBox.Show(FormCompra1.viajeID.ToString());
         }
     }
 }

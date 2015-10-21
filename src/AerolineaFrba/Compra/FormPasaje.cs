@@ -13,10 +13,14 @@ using AerolineaFrba.Properties;
 namespace AerolineaFrba.Compra
 {
     public partial class FormPasaje : Form
-    {
+    { 
+        
+        public static int cantPasajes;
+
         public FormPasaje()
         {
             InitializeComponent();
+           
         }
 
         private void FormPasaje_Load(object sender, EventArgs e)
@@ -24,23 +28,18 @@ namespace AerolineaFrba.Compra
             button1.Enabled = false;
             LlenarComboBox1();
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            FormCompra2.tipoPasaje = true;
          
         }
         public void LlenarComboBox1()
         {
-       
-            SqlConnection conexion = new SqlConnection();
-            conexion.ConnectionString = Settings.Default.CadenaDeConexion;
-
-            DataSet ds = new DataSet();
-            SqlDataAdapter da = new SqlDataAdapter("select CIUD_DETALLE from DJML.CIUDADES", conexion);
-            da.Fill(ds, "DJML.CIUDADES");
-
-            comboBox1.DataSource = ds.Tables[0].DefaultView;
-            comboBox1.ValueMember = "CIUD_DETALLE";
-            comboBox1.SelectedItem = null;
+             comboBox1.Items.Add(1);
+             comboBox1.Items.Add(2);
+             comboBox1.Items.Add(3);
+             comboBox1.Items.Add(4);
+             comboBox1.Items.Add(5);
+         
         }
-
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -60,11 +59,23 @@ namespace AerolineaFrba.Compra
             this.Hide();
             m.ShowDialog();
             m = (FormCompra3)this.ActiveMdiChild;
+
+           
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cantPasajes = Int32.Parse(comboBox1.Text.Trim());
+
+            button1.Enabled = true;
 
         }
+
+        private void FormPasaje_Load()
+        {
+
+        }
+
     }
 }

@@ -15,9 +15,13 @@ namespace AerolineaFrba.Compra
 {
     public partial class FormCompra1 : Form
     {
+        public static int viajeID;
+        public static string aeroID;
+    
         public FormCompra1()
         {
             InitializeComponent();
+           
         }
 
         private void FormCompra1_Load(object sender, EventArgs e)
@@ -94,7 +98,7 @@ namespace AerolineaFrba.Compra
             comboBox1.SelectedItem = null;            
             comboBox2.SelectedItem = null;
 
-            //    dataGrid.DataSource = null;
+            //dataGrid.DataSource = null;
             button3.Enabled = false;
         }
 
@@ -103,7 +107,7 @@ namespace AerolineaFrba.Compra
             string origen = comboBox1.Text;
             string destino = comboBox2.Text;
 
-            string qry = "SELECT S.SERV_DESCRIPCION TIPO_DE_SERVICIO, COUNT(DISTINCT X.BXA_ID) BUTACAS_LIBRES, A.AERO_KILOS_DISPONIBLES KILOS_DISPONIBLES" +
+            string qry = "SELECT V.VIAJE_ID, S.SERV_DESCRIPCION TIPO_DE_SERVICIO, COUNT(DISTINCT X.BXA_ID) BUTACAS_LIBRES, A.AERO_KILOS_DISPONIBLES KILOS_DISPONIBLES" +
     " FROM DJML.RUTAS R, DJML.VIAJES V, DJML.SERVICIOS S, DJML.BUTACA_AERO B, DJML.AERONAVES A, DJML.BUTACA_AERO X" +
     " WHERE R.RUTA_CODIGO = V.VIAJE_RUTA_ID " +
     " AND R.RUTA_SERVICIO_ID = S.SERV_ID" +
@@ -114,10 +118,14 @@ namespace AerolineaFrba.Compra
     " AND R.RUTA_CIUDAD_ORIGEN = (select CIUD_ID from djml.CIUDADES WHERE CIUD_DETALLE = '"+destino+"')" +
     " AND X.BXA_ESTADO = 1" +
     //" AND V.VIAJE_FECHA_SALIDA > '2017-01-01 02:00:00.000' AND V.VIAJE_FECHA_SALIDA < '2017-02-01 02:00:00.000'" +
-    " GROUP BY S.SERV_DESCRIPCION, A.AERO_KILOS_DISPONIBLES, V.VIAJE_FECHA_SALIDA";
+    " GROUP BY V.VIAJE_ID, S.SERV_DESCRIPCION, A.AERO_KILOS_DISPONIBLES, V.VIAJE_FECHA_SALIDA";
 
 
             dataGridView1.DataSource = new Query(qry).ObtenerDataTable();
+            //dataGridView1.Columns["VIAJE_ID"].Visible = false;  //OCULTO LA COLUMNA
+           
+            
+
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -127,15 +135,19 @@ namespace AerolineaFrba.Compra
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            
+            viajeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
 
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
             FormCompra2 asd = new FormCompra2();
             this.Hide();
             asd.ShowDialog();
             asd = (FormCompra2)this.ActiveMdiChild;
+
+            
+                       
+           
         }
+
+      
     }
 }
