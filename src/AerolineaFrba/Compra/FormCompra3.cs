@@ -148,6 +148,7 @@ namespace AerolineaFrba.Compra
         private void txtnombre_TextChanged(object sender, EventArgs e)
         {
             
+
         }
 
         private void txtdni_TextChanged(object sender, EventArgs e)

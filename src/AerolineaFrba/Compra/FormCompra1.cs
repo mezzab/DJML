@@ -97,34 +97,46 @@ namespace AerolineaFrba.Compra
         {
             comboBox1.SelectedItem = null;            
             comboBox2.SelectedItem = null;
-
-            //dataGrid.DataSource = null;
+            date.ResetText();
+            dataGridView1.DataSource = null;
             button3.Enabled = false;
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {
-            string origen = comboBox1.Text;
-            string destino = comboBox2.Text;
-
-            string qry = "SELECT V.VIAJE_ID, S.SERV_DESCRIPCION TIPO_DE_SERVICIO, COUNT(DISTINCT X.BXA_ID) BUTACAS_LIBRES, A.AERO_KILOS_DISPONIBLES KILOS_DISPONIBLES" +
-    " FROM DJML.RUTAS R, DJML.VIAJES V, DJML.SERVICIOS S, DJML.BUTACA_AERO B, DJML.AERONAVES A, DJML.BUTACA_AERO X" +
-    " WHERE R.RUTA_CODIGO = V.VIAJE_RUTA_ID " +
-    " AND R.RUTA_SERVICIO_ID = S.SERV_ID" +
-    " AND B.BXA_AERO_MATRICULA = V.VIAJE_AERO_ID" +
-    " AND A.AERO_MATRICULA = V.VIAJE_AERO_ID" +
-    " AND X.BXA_AERO_MATRICULA = A.AERO_MATRICULA" +
-    " AND R.RUTA_CIUDAD_DESTINO = (select CIUD_ID from djml.CIUDADES WHERE CIUD_DETALLE = '"+origen+"')" +
-    " AND R.RUTA_CIUDAD_ORIGEN = (select CIUD_ID from djml.CIUDADES WHERE CIUD_DETALLE = '"+destino+"')" +
-    " AND X.BXA_ESTADO = 1" +
-    //" AND V.VIAJE_FECHA_SALIDA > '2017-01-01 02:00:00.000' AND V.VIAJE_FECHA_SALIDA < '2017-02-01 02:00:00.000'" +
-    " GROUP BY V.VIAJE_ID, S.SERV_DESCRIPCION, A.AERO_KILOS_DISPONIBLES, V.VIAJE_FECHA_SALIDA";
+        {   bool error1 = date.Value.Date < DateTime.Now.Date; 
+            bool error2 = comboBox1.SelectedValue == comboBox2.SelectedValue;
+            if (error1)
+                MessageBox.Show("Fecha incorrecta");
+            else if (error2)
+                MessageBox.Show("Las ciudades origen y destino no pueden coincidir");
+            else
+            {
+                string origen = comboBox1.Text;
+                string destino = comboBox2.Text;
 
 
-            dataGridView1.DataSource = new Query(qry).ObtenerDataTable();
-            //dataGridView1.Columns["VIAJE_ID"].Visible = false;  //OCULTO LA COLUMNA
-           
-            
+                DateTime fecha_salida = date.Value.Date;
+                string qry = "SELECT V.VIAJE_ID, S.SERV_DESCRIPCION TIPO_DE_SERVICIO, COUNT(DISTINCT X.BXA_ID) BUTACAS_LIBRES, A.AERO_KILOS_DISPONIBLES KILOS_DISPONIBLES" +
+        " FROM DJML.RUTAS R, DJML.VIAJES V, DJML.SERVICIOS S, DJML.BUTACA_AERO B, DJML.AERONAVES A, DJML.BUTACA_AERO X" +
+        " WHERE R.RUTA_CODIGO = V.VIAJE_RUTA_ID " +
+        " AND R.RUTA_SERVICIO_ID = S.SERV_ID" +
+        " AND B.BXA_AERO_MATRICULA = V.VIAJE_AERO_ID" +
+        " AND A.AERO_MATRICULA = V.VIAJE_AERO_ID" +
+        " AND X.BXA_AERO_MATRICULA = A.AERO_MATRICULA" +
+        " AND R.RUTA_CIUDAD_DESTINO = (select CIUD_ID from djml.CIUDADES WHERE CIUD_DETALLE = '" + origen + "')" +
+        " AND R.RUTA_CIUDAD_ORIGEN = (select CIUD_ID from djml.CIUDADES WHERE CIUD_DETALLE = '" + destino + "')" +
+        " AND X.BXA_ESTADO = 1" +
+        " AND YEAR(V.VIAJE_FECHA_SALIDA) = YEAR('"+fecha_salida+"')" +
+        " AND MONTH(V.VIAJE_FECHA_SALIDA) = MONTH('" + fecha_salida + "') " +
+        " AND DAY(V.VIAJE_FECHA_SALIDA) = DAY('" + fecha_salida + "')" +
+                    //" AND V.VIAJE_FECHA_SALIDA > '2017-01-01 02:00:00.000' AND V.VIAJE_FECHA_SALIDA < '2017-02-01 02:00:00.000'" +
+        " GROUP BY V.VIAJE_ID, S.SERV_DESCRIPCION, A.AERO_KILOS_DISPONIBLES, V.VIAJE_FECHA_SALIDA";
+
+
+                dataGridView1.DataSource = new Query(qry).ObtenerDataTable();
+                //dataGridView1.Columns["VIAJE_ID"].Visible = false;  //OCULTO LA COLUMNA
+
+            }
 
         }
 
@@ -146,6 +158,11 @@ namespace AerolineaFrba.Compra
             
                        
            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {  DateTime fecha_salida = date.Value.Date;
+       // MessageBox.Show(fecha_salida);
         }
 
       
