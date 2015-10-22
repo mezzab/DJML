@@ -440,8 +440,9 @@ BEGIN
 
 	---MIRAGRACION DATOS TABLA REGISTRO_DESTINO---
 	
-	
+	--
 	--HACER: FALTA MIGRACION!!
+	-- PARA MI NO SE MIGRA
 END 
 GO
 
@@ -519,7 +520,7 @@ BEGIN
 --============================================================
 						--TABLA PASAJE
 --============================================================
-CREATE TABLE DJML.PASAJES (
+	CREATE TABLE DJML.PASAJES (
 	PASA_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	PASA_VIAJE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.VIAJES(VIAJE_ID),
 	PASA_CLIE_DNI INT NOT NULL,
@@ -530,7 +531,12 @@ CREATE TABLE DJML.PASAJES (
 
 	PRINT 'SE CREO LA TABLA PASAJE CORRECTAMENTE'
 
-	select * from gd_esquema.Maestra
+	----- FALTA MIGRAR ESTA TABLA!!!!!!
+	----------------------------------------------
+	------------------------------------------------------------
+	----------------------------------------------------------------------------
+	---------------------------------------------------------------------------------------
+
 
 
 --============================================================
@@ -546,6 +552,12 @@ CREATE TABLE DJML.PASAJES (
 	)
 
 	PRINT 'SE CREO LA TABLA ENCOMIENDA CORRECTAMENTE'
+
+	----- FALTA MIGRAR ESTA TABLA!!!!!!
+	----------------------------------------------
+	------------------------------------------------------------
+	----------------------------------------------------------------------------
+	---------------------------------------------------------------------------------------
 	
 END
 GO
@@ -566,6 +578,7 @@ BEGIN
 
 	INSERT INTO DJML.MEDIOS_DE_PAGO(MEDI_DESCRIPCION) VALUES ('EFECTIVO')
 	INSERT INTO DJML.MEDIOS_DE_PAGO(MEDI_DESCRIPCION) VALUES ('TC')
+
 
 --=======================================================================
                             -- TABLA TARJETA DE CREDITO
