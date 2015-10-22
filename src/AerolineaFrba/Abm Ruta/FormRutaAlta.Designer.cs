@@ -37,8 +37,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.text_precio_encomienda = new System.Windows.Forms.TextBox();
+            this.text_precio_pasaje = new System.Windows.Forms.TextBox();
             this.comboBox_servicio = new System.Windows.Forms.ComboBox();
             this.comboBox_destino = new System.Windows.Forms.ComboBox();
             this.comboBox_origen = new System.Windows.Forms.ComboBox();
@@ -47,7 +47,7 @@
             // 
             // button_volver
             // 
-            this.button_volver.Location = new System.Drawing.Point(133, 322);
+            this.button_volver.Location = new System.Drawing.Point(133, 374);
             this.button_volver.Name = "button_volver";
             this.button_volver.Size = new System.Drawing.Size(75, 23);
             this.button_volver.TabIndex = 4;
@@ -64,21 +64,21 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.text_precio_encomienda);
+            this.groupBox1.Controls.Add(this.text_precio_pasaje);
             this.groupBox1.Controls.Add(this.comboBox_servicio);
             this.groupBox1.Controls.Add(this.comboBox_destino);
             this.groupBox1.Controls.Add(this.comboBox_origen);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(311, 295);
+            this.groupBox1.Size = new System.Drawing.Size(311, 356);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rutas Aereas";
             // 
             // button_guardar
             // 
-            this.button_guardar.Location = new System.Drawing.Point(121, 252);
+            this.button_guardar.Location = new System.Drawing.Point(121, 327);
             this.button_guardar.Name = "button_guardar";
             this.button_guardar.Size = new System.Drawing.Size(75, 23);
             this.button_guardar.TabIndex = 6;
@@ -94,7 +94,7 @@
             this.label_message.Location = new System.Drawing.Point(15, 167);
             this.label_message.Name = "label_message";
             this.label_message.Padding = new System.Windows.Forms.Padding(10);
-            this.label_message.Size = new System.Drawing.Size(285, 70);
+            this.label_message.Size = new System.Drawing.Size(285, 143);
             this.label_message.TabIndex = 10;
             this.label_message.Text = "errores";
             this.label_message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -145,19 +145,19 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Ciudad Origen";
             // 
-            // textBox2
+            // text_precio_encomienda
             // 
-            this.textBox2.Location = new System.Drawing.Point(179, 127);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 4;
+            this.text_precio_encomienda.Location = new System.Drawing.Point(179, 127);
+            this.text_precio_encomienda.Name = "text_precio_encomienda";
+            this.text_precio_encomienda.Size = new System.Drawing.Size(121, 20);
+            this.text_precio_encomienda.TabIndex = 4;
             // 
-            // textBox1
+            // text_precio_pasaje
             // 
-            this.textBox1.Location = new System.Drawing.Point(179, 101);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 20);
-            this.textBox1.TabIndex = 3;
+            this.text_precio_pasaje.Location = new System.Drawing.Point(179, 101);
+            this.text_precio_pasaje.Name = "text_precio_pasaje";
+            this.text_precio_pasaje.Size = new System.Drawing.Size(121, 20);
+            this.text_precio_pasaje.TabIndex = 3;
             // 
             // comboBox_servicio
             // 
@@ -187,13 +187,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 357);
+            this.ClientSize = new System.Drawing.Size(334, 410);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_volver);
             this.Name = "FormRutaAlta";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "ABM RUTA - ALTA";
-            this.Load += new System.EventHandler(this.FormRutaAlta_Load_1);
+            this.Load += new System.EventHandler(this.FormRutaAlta_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -205,8 +205,8 @@
         private System.Windows.Forms.Button button_volver;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox text_precio_encomienda;
+        private System.Windows.Forms.TextBox text_precio_pasaje;
         private System.Windows.Forms.ComboBox comboBox_servicio;
         private System.Windows.Forms.ComboBox comboBox_destino;
         private System.Windows.Forms.ComboBox comboBox_origen;
