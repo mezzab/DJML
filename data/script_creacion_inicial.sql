@@ -579,6 +579,24 @@ BEGIN
 	INSERT INTO DJML.MEDIOS_DE_PAGO(MEDI_DESCRIPCION) VALUES ('EFECTIVO')
 	INSERT INTO DJML.MEDIOS_DE_PAGO(MEDI_DESCRIPCION) VALUES ('TC')
 
+	--=======================================================================
+                            -- TABLA TIPOS DE TARJETA
+--=======================================================================
+
+
+	CREATE TABLE DJML.TIPOS_DE_TARJETA (
+    ID   INT   IDENTITY(1,1)     PRIMARY KEY,
+    NOMBRE    NVARCHAR(255) NOT NULL,
+	CUOTAS INT DEFAULT 0   
+)
+
+ -- Migracion
+
+	INSERT INTO DJML.TIPOS_DE_TARJETA (NOMBRE, CUOTAS)
+	VALUES ('VISA', 6),
+	('MASTERCARD', 12),
+	('AMEX', 3),
+	('DINERS', 0);
 
 --=======================================================================
                             -- TABLA TARJETA DE CREDITO
@@ -586,9 +604,10 @@ BEGIN
 	CREATE TABLE DJML.TARJETAS_DE_CREDITO(
 	TARJ_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	TARJ_NUMERO BIGINT NOT NULL,
-	TARJ_TIPO CHAR(15), 
+	TARJ_TIPO_ID INT FOREIGN KEY REFERENCES DJML.TIPOS_DE_TARJETA(ID), 
 	TARJ_VENCIMIENTO INT,
 	TARJ_CODIGO_SEGURIDAD INT
+
 	)
 
 --=======================================================================
