@@ -116,7 +116,7 @@ namespace AerolineaFrba.Compra
 
 
                 DateTime fecha_salida = date.Value.Date;
-                string qry = "SELECT V.VIAJE_ID, S.SERV_DESCRIPCION TIPO_DE_SERVICIO, COUNT(DISTINCT X.BXA_ID) BUTACAS_LIBRES, A.AERO_KILOS_DISPONIBLES KILOS_DISPONIBLES" +
+                string qry = "SELECT V.VIAJE_ID, S.SERV_DESCRIPCION SERVICIO, COUNT(DISTINCT X.BXA_ID) BUTACAS_LIBRES, A.AERO_KILOS_DISPONIBLES KGS_DISPONIBLES" +
         " FROM DJML.RUTAS R, DJML.VIAJES V, DJML.SERVICIOS S, DJML.BUTACA_AERO B, DJML.AERONAVES A, DJML.BUTACA_AERO X" +
         " WHERE R.RUTA_CODIGO = V.VIAJE_RUTA_ID " +
         " AND R.RUTA_SERVICIO_ID = S.SERV_ID" +
@@ -134,8 +134,19 @@ namespace AerolineaFrba.Compra
 
 
                 dataGridView1.DataSource = new Query(qry).ObtenerDataTable();
-                //dataGridView1.Columns["VIAJE_ID"].Visible = false;  //OCULTO LA COLUMNA
-
+                //OCULTO LA COLUMNA
+                dataGridView1.Columns["VIAJE_ID"].Visible = false;  
+                //REDEFINO ANCHO DE LAS COLUMNAS DEL DATA GRID PARA QUE SE VEA LINDO
+                DataGridViewColumn column = dataGridView1.Columns[0];
+                column.Width = 95;
+                DataGridViewColumn column1 = dataGridView1.Columns[1];
+                column1.Width = 90;
+                DataGridViewColumn column2 = dataGridView1.Columns[2];
+                column2.Width = 115;
+                DataGridViewColumn column3 = dataGridView1.Columns[3];
+                column3.Width = 125;
+                DataGridViewColumn column4 = dataGridView1.Columns[4];
+                column4.Width = 135;
             }
 
         }
