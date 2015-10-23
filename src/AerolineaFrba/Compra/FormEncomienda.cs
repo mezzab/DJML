@@ -11,9 +11,9 @@ using System.Windows.Forms;
 namespace AerolineaFrba.Compra
 {
     public partial class FormEncomienda : Form
-    {   
+    {
+        public static int kilos;
         
-
         public FormEncomienda()
         {
             InitializeComponent();
@@ -48,11 +48,18 @@ namespace AerolineaFrba.Compra
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (textBox1.Text.Trim() != "" || textBox1 != null)
+            if ( kilosEncomienda != null)
             {
                 button2.Enabled = true;
             }
-            
+
+           kilos = Int32.Parse(kilosEncomienda.Text.Trim());
+
+          // MessageBox.Show(string(kilos));
+        }
+
+        private void textBox1_ValueChanged(object sender, EventArgs e)
+        {
 
         }
     }
