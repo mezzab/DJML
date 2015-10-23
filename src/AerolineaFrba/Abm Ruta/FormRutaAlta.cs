@@ -29,6 +29,7 @@ namespace AerolineaFrba.Abm_Ruta
         private void button_guardar_Click(object sender, EventArgs e)
         {          
             string ciudad_origen_id = comboBox_origen.Text.Trim();  //ToDo: pasar a id
+            var hola = comboBox_origen.SelectedItem;
             string ciudad_destino_id = comboBox_destino.Text.Trim();//ToDo: pasar a id 
             string servicio_id = comboBox_servicio.Text.Trim();     //ToDo: pasar a id
             string precio_pasaje = text_precio_pasaje.Text.Trim();
@@ -56,7 +57,8 @@ namespace AerolineaFrba.Abm_Ruta
                 error_message += "Los campos Ciudad Origen y Ciudad Destino deben ser diferentes." + Environment.NewLine + Environment.NewLine;
             }
             //Validate: No guardar un ruta identica a otra
-            if (false)
+            //if (ruta_repetida(ciudad_origen_id, ciudad_destino_id, servicio_id))
+            if (ruta_repetida("29", "21", "1"))
             {
                 error_message += "Ya exite una ruta identica a la ingresada." ;
             }
@@ -70,13 +72,7 @@ namespace AerolineaFrba.Abm_Ruta
                 label_message.Text = "Sos crack!";
                 label_message.Visible = true;
             }
-            //SqlConnection conexion = new SqlConnection();
-            //conexion.ConnectionString = Settings.Default.CadenaDeConexion;
-            /*string qry_validate = "SELECT RUTA_CODIGO FROM DJML.RUTAS" +
-                                   "WHERE RUTA_CIUDAD_ORIGEN = " + ciudad_origen_id +
-                                   ", RUTA_CIUDAD_DESTINO = " + ciudad_destino_id +
-                                   ", RUTA_SERVICIO_ID = " + servicio_id;
-            DataTable validate_data = new Query(qry_validate).ObtenerDataTable();
+            
 
             // if (validate_data not empty) {
             
@@ -110,10 +106,12 @@ namespace AerolineaFrba.Abm_Ruta
             da_ciudades.Fill(ds_ciudades, "DJML.CIUDADES");
 
             comboBox_origen.DataSource = ds_ciudades.Tables[0].DefaultView;
-            comboBox_origen.ValueMember = "CIUD_DETALLE";
+            comboBox_origen.DisplayMember = "CIUD_DETALLE";
+            comboBox_origen.ValueMember = "CIUD_ID";
             comboBox_origen.SelectedItem = null;
             comboBox_origen.Text = null;
             comboBox_origen.DropDownStyle = ComboBoxStyle.DropDownList;
+
         }
 
         private void llenar_combo_destino()
@@ -126,7 +124,8 @@ namespace AerolineaFrba.Abm_Ruta
             da_ciudades.Fill(ds_ciudades, "DJML.CIUDADES");
 
             comboBox_destino.DataSource = ds_ciudades.Tables[0].DefaultView;
-            comboBox_destino.ValueMember = "CIUD_DETALLE";
+            comboBox_destino.DisplayMember = "CIUD_DETALLE";
+            comboBox_destino.ValueMember = "CIUD_ID";
             comboBox_destino.SelectedItem = null;
             comboBox_destino.Text = null;
             comboBox_destino.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -142,10 +141,30 @@ namespace AerolineaFrba.Abm_Ruta
             da_servicios.Fill(ds_servicios, "DJML.SERVICIOS");
 
             comboBox_servicio.DataSource = ds_servicios.Tables[0].DefaultView;
-            comboBox_servicio.ValueMember = "SERV_DESCRIPCION";
+            comboBox_servicio.DisplayMember = "SERV_DESCRIPCION";
+            comboBox_servicio.ValueMember = "SERV_ID";
             comboBox_servicio.SelectedItem = null;
             comboBox_servicio.Text = null;
             comboBox_servicio.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private bool ruta_repetida(string origen_id, string destino_id, string servicio_id)
+        {
+            SqlConnection conexion = new SqlConnection();
+            conexion.ConnectionString = Settings.Default.CadenaDeConexion;
+
+            string qry_validate = "SELECT RUTA_CODIGO FROM DJML.RUTAS" +
+                                  "WHERE RUTA_CIUDAD_ORIGEN = " + origen_id +
+                                  ", RUTA_CIUDAD_DESTINO = " + destino_id +
+                                  ", RUTA_SERVICIO_ID = " + servicio_id;
+
+            DataSet ds_validate = new DataSet();
+            SqlDataAdapter da_validate = new SqlDataAdapter(qry_validate, conexion);
+            da_validate.Fill(ds_validate, "DJML.RUTAS");
+
+            var response = ds_validate.Tables[0].DefaultView;
+
+            return false;
         }
         
     }
