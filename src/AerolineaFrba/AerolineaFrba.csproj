@@ -166,6 +166,12 @@
     <Compile Include="Canje Millas\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra\FormCompra Exitosa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\FormCompra Exitosa.Designer.cs">
+      <DependentUpon>FormCompra Exitosa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Compra\FormCompra4.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,17 +202,29 @@
     <Compile Include="Compra\FormEncomienda.Designer.cs">
       <DependentUpon>FormEncomienda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra\FormFormaDePago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\FormFormaDePago.Designer.cs">
+      <DependentUpon>FormFormaDePago.cs</DependentUpon>
+    </Compile>
     <Compile Include="Compra\FormPasaje.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Compra\FormPasaje.Designer.cs">
       <DependentUpon>FormPasaje.cs</DependentUpon>
     </Compile>
-    <Compile Include="Consulta Millas\Form1.cs">
+    <Compile Include="Compra\FormTarjeta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Consulta Millas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Compra\FormTarjeta.Designer.cs">
+      <DependentUpon>FormTarjeta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Consulta Millas\ConsultarMillas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consulta Millas\ConsultarMillas.Designer.cs">
+      <DependentUpon>ConsultarMillas.cs</DependentUpon>
     </Compile>
     <Compile Include="Globales.cs" />
     <Compile Include="Devolucion\Form1.cs">
@@ -309,6 +327,9 @@
     <EmbeddedResource Include="Abm Ruta\FormRutaModificacion2.resx">
       <DependentUpon>FormRutaModificacion2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Compra\FormCompra Exitosa.resx">
+      <DependentUpon>FormCompra Exitosa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Compra\FormCompra3.resx">
       <DependentUpon>FormCompra3.cs</DependentUpon>
     </EmbeddedResource>
@@ -324,8 +345,17 @@
     <EmbeddedResource Include="Compra\FormEncomienda.resx">
       <DependentUpon>FormEncomienda.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Compra\FormFormaDePago.resx">
+      <DependentUpon>FormFormaDePago.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Compra\FormPasaje.resx">
       <DependentUpon>FormPasaje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\FormTarjeta.resx">
+      <DependentUpon>FormTarjeta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consulta Millas\ConsultarMillas.resx">
+      <DependentUpon>ConsultarMillas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\FormGenerarViaje.resx">
       <DependentUpon>FormGenerarViaje.cs</DependentUpon>
