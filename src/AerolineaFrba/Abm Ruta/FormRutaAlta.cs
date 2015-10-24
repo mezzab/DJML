@@ -28,7 +28,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button_guardar_Click(object sender, EventArgs e)
         {          
-            string ciudad_origen_id = comboBox_origen.Text.Trim();  //ToDo: pasar a id
+            Int32 ciudad_origen_id = (Int32)comboBox_origen.SelectedValue;  //ToDo: pasar a id
             var hola = comboBox_origen.SelectedItem;
             string ciudad_destino_id = comboBox_destino.Text.Trim();//ToDo: pasar a id 
             string servicio_id = comboBox_servicio.Text.Trim();     //ToDo: pasar a id
@@ -38,7 +38,7 @@ namespace AerolineaFrba.Abm_Ruta
             string error_message = "";
 
             //Validate: No vacios en el formulario
-            if (ciudad_origen_id == string.Empty || ciudad_destino_id == string.Empty || servicio_id == string.Empty || precio_pasaje == string.Empty || precio_encomienda == string.Empty)
+            if (ciudad_origen_id == 0 || ciudad_destino_id == string.Empty || servicio_id == string.Empty || precio_pasaje == string.Empty || precio_encomienda == string.Empty)
             {
                 error_message += "Los campos del formulario no pueden estar vacios." + Environment.NewLine + Environment.NewLine;
             }
@@ -52,7 +52,7 @@ namespace AerolineaFrba.Abm_Ruta
                 error_message += "Los campos Precio deben ser numericos." + Environment.NewLine + Environment.NewLine;
             }
             //Validate: origen y destino diferentes
-            if (ciudad_origen_id != string.Empty && ciudad_destino_id != string.Empty && ciudad_origen_id == ciudad_destino_id)
+            if (ciudad_origen_id != 0 && ciudad_destino_id != string.Empty) //&& ciudad_origen_id == ciudad_destino_id
             {
                 error_message += "Los campos Ciudad Origen y Ciudad Destino deben ser diferentes." + Environment.NewLine + Environment.NewLine;
             }
