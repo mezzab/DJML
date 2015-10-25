@@ -57,13 +57,13 @@ namespace AerolineaFrba.Compra
             MessageBox.Show(FormCompra1.viajeID.ToString());
         }
 
-        private void button4_Click_1(object sender, EventArgs e) // esto es solo para probar, despues vuela. 
+        /*private void button4_Click_1(object sender, EventArgs e) // esto es solo para probar, despues vuela. 
         {
             Query qry10 = new Query("SELECT VIAJE_AERO_ID FROM DJML.VIAJES WHERE VIAJE_ID =" + "'"+FormCompra1.viajeID+"'");
 
             string aeroID = (string)qry10.ObtenerUnicoCampo();
             MessageBox.Show("El numero de matricula de la aeronave que realizara el viaje es:" + aeroID , "Consulta de matricula", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //MessageBox.Show(FormCompra1.viajeID.ToString());
-        }
+        }*/
     }
 }

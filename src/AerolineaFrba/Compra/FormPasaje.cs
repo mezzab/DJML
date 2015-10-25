@@ -16,6 +16,7 @@ namespace AerolineaFrba.Compra
     { 
         
         public static int cantPasajes;
+        public static int cantPasajes1;
 
         public FormPasaje()
         {
@@ -60,14 +61,13 @@ namespace AerolineaFrba.Compra
             m.ShowDialog();
             m = (FormCompra3)this.ActiveMdiChild;
 
-           
 
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             cantPasajes = Int32.Parse(comboBox1.Text.Trim());
-
+            cantPasajes1 = Int32.Parse(comboBox1.Text.Trim());
             button1.Enabled = true;
 
         }
@@ -76,6 +76,7 @@ namespace AerolineaFrba.Compra
         {
 
         }
+
 
     }
 }
