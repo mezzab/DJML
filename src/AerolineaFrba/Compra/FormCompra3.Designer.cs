@@ -30,7 +30,7 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.BuscarPorCliente = new System.Windows.Forms.Button();
-            this.dni = new System.Windows.Forms.TextBox();
+            this.dniNum = new System.Windows.Forms.TextBox();
             this.tipo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -53,15 +53,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.LimpiarCliente = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.butacaSeleccionada = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Volver = new System.Windows.Forms.Button();
             this.Siguiente = new System.Windows.Forms.Button();
             this.pasajero = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.Actualizar = new System.Windows.Forms.Button();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.butacaSeleccionada = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -71,7 +71,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.BuscarPorCliente);
-            this.groupBox1.Controls.Add(this.dni);
+            this.groupBox1.Controls.Add(this.dniNum);
             this.groupBox1.Controls.Add(this.tipo);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -93,13 +93,13 @@
             this.BuscarPorCliente.UseVisualStyleBackColor = true;
             this.BuscarPorCliente.Click += new System.EventHandler(this.BuscarPorCliente_Click);
             // 
-            // dni
+            // dniNum
             // 
-            this.dni.Location = new System.Drawing.Point(21, 79);
-            this.dni.Name = "dni";
-            this.dni.Size = new System.Drawing.Size(114, 20);
-            this.dni.TabIndex = 4;
-            this.dni.TextChanged += new System.EventHandler(this.dni_TextChanged);
+            this.dniNum.Location = new System.Drawing.Point(21, 79);
+            this.dniNum.Name = "dniNum";
+            this.dniNum.Size = new System.Drawing.Size(114, 20);
+            this.dniNum.TabIndex = 4;
+            this.dniNum.TextChanged += new System.EventHandler(this.dni_TextChanged);
             // 
             // tipo
             // 
@@ -307,6 +307,16 @@
             this.groupBox2.Text = "Butacas disponibles";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // butacaSeleccionada
+            // 
+            this.butacaSeleccionada.BackColor = System.Drawing.SystemColors.Menu;
+            this.butacaSeleccionada.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.butacaSeleccionada.Location = new System.Drawing.Point(9, 293);
+            this.butacaSeleccionada.Name = "butacaSeleccionada";
+            this.butacaSeleccionada.Size = new System.Drawing.Size(256, 13);
+            this.butacaSeleccionada.TabIndex = 4;
+            this.butacaSeleccionada.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -326,6 +336,11 @@
             this.dataGridView1.Size = new System.Drawing.Size(261, 240);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
             // 
             // Volver
             // 
@@ -366,6 +381,7 @@
             this.label12.Size = new System.Drawing.Size(296, 17);
             this.label12.TabIndex = 16;
             this.label12.Text = "Por favor, ingrese los datos del Pasajero Nro:";
+            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // Actualizar
             // 
@@ -375,21 +391,6 @@
             this.Actualizar.TabIndex = 17;
             this.Actualizar.Text = "Actualizar Datos";
             this.Actualizar.UseVisualStyleBackColor = true;
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
-            // 
-            // butacaSeleccionada
-            // 
-            this.butacaSeleccionada.BackColor = System.Drawing.SystemColors.Menu;
-            this.butacaSeleccionada.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.butacaSeleccionada.Location = new System.Drawing.Point(9, 293);
-            this.butacaSeleccionada.Name = "butacaSeleccionada";
-            this.butacaSeleccionada.Size = new System.Drawing.Size(256, 13);
-            this.butacaSeleccionada.TabIndex = 4;
-            this.butacaSeleccionada.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // FormCompra3
             // 
@@ -423,7 +424,7 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button BuscarPorCliente;
-        private System.Windows.Forms.TextBox dni;
+        private System.Windows.Forms.TextBox dniNum;
         private System.Windows.Forms.ComboBox tipo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;

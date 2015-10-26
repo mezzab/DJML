@@ -161,7 +161,8 @@ namespace AerolineaFrba.Compra
                     datosDe = datosDe + 1;
                     pasajero.Text = datosDe.ToString();
                     LimpiarCliente_Click(sender, e);
-
+                    llenarButacas();
+                    butacaSeleccionada.Visible = false;
 
                     /* FormCompra3 nuevaCarga = new FormCompra3();
                      this.Hide();
@@ -271,7 +272,7 @@ namespace AerolineaFrba.Compra
         {
             String tipoDoc = tipo.Text.Trim();
                      
-            String dni = this.dni.Text;
+            String dni = this.dniNum.Text;
 
                       
             if (dni != "" && tipoDoc != "")
@@ -286,13 +287,15 @@ namespace AerolineaFrba.Compra
                     else
                     {
                         MessageBox.Show("El cliente es inexistente, debe cargar sus datos para poder seguir con las operaciones");
-                                                
+                       
+                        
+                        tipo2.Text = tipo.Text;
                         apellido.Text = "";
                         nombre.Text = "";
                         direccion.Text = "";
                         mail.Text = "";
                         telefono.Text = "";
-                        numero.Text = "";
+                        numero.Text = dniNum.Text;
                         fechaNacimiento.ResetText();
                   
                     }
@@ -343,8 +346,8 @@ namespace AerolineaFrba.Compra
             Telefono = qry4.ObtenerUnicoCampo().ToString();
 
             DNI = dni;
-            //  TipoDni = tipoDoc;
-
+            TipoDNI = tipo.Text.ToString();
+           // MessageBox.Show("mmm" + TipoDNI + "MMM");
             string sql5 = "SELECT CLIE_FECHA_NACIMIENTO FROM DJML.CLIENTES " +
              "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipoDoc + "') " +
              "AND CLIE_DNI =" + dni;
@@ -356,7 +359,7 @@ namespace AerolineaFrba.Compra
         //AUXILIAR DE AUTOCOMPLETAR DATOS
         private void completarDatos()
         {
-            
+            tipo2.Text = TipoDNI;
             apellido.Text = Apellido;
             nombre.Text = Nombre;
             direccion.Text = Direccion;
@@ -412,7 +415,7 @@ namespace AerolineaFrba.Compra
 
             tipo.DataSource = ds1.Tables[0].DefaultView;
             tipo.ValueMember = "DESCRIPCION";
-            tipo.SelectedItem = null;
+            tipo.SelectedItem = null; 
         }
 
         public void LlenarComboBoxTipoDocumento2()
@@ -432,9 +435,9 @@ namespace AerolineaFrba.Compra
         
         private void LimpiarCliente_Click(object sender, EventArgs e)
         {
-            //tipo.DataSource = Nothing;
-           // tipo2.DataSource = Nothing;
-            dni.Text = "";
+            tipo.Text = null;
+            tipo2.Text = null;
+            dniNum.Text = "";
             apellido.Text = "";
             nombre.Text = "";
             direccion.Text = "";
@@ -442,8 +445,7 @@ namespace AerolineaFrba.Compra
             telefono.Text = "";
             numero.Text = "";
             fechaNacimiento.ResetText();
-
-         
+                    
         }
 
         private void tipoDeDocumento_SelectedIndexChanged(object sender, EventArgs e)
@@ -473,10 +475,15 @@ namespace AerolineaFrba.Compra
 
         //BOTON SELECCIONAR DEL DATAGRID DE BUTACAS
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        {   
             butaca = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             tipoBucata = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
             butacaSeleccionada.Text = "Seleccionaste la butaca " +butaca+ ", " + tipoBucata;
+            butacaSeleccionada.Visible = true;
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
 
         }
 
