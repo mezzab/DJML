@@ -220,6 +220,7 @@
     <Compile Include="Compra\FormTarjeta.Designer.cs">
       <DependentUpon>FormTarjeta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra\tabla.cs" />
     <Compile Include="Consulta Millas\ConsultarMillas.cs">
       <SubType>Form</SubType>
     </Compile>
