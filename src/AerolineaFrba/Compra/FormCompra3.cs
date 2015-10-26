@@ -25,7 +25,7 @@ namespace AerolineaFrba.Compra
         public static string Direccion;
         public static string Telefono;
         public static string Mail;
-        public static UInt32 DNI;
+        public static string DNI ;
         public static string TipoDNI;
         public static DateTime FechaNacimiento;
 
@@ -98,7 +98,7 @@ namespace AerolineaFrba.Compra
             tabla.Columns.Add("Tipo de Documento", typeof(string));
             tabla.Columns.Add("Numero de Documento", typeof(int));
             tabla.Columns.Add("Mail", typeof(string));
-            tabla.Columns.Add("Telefono", typeof(int));
+            tabla.Columns.Add("Telefono", typeof(UInt64));
             tabla.Columns.Add("Fecha de nacimiento", typeof(DateTime));
             tabla.Columns.Add("Direccion", typeof(string));
             tabla.Columns.Add("Precio", typeof(int));
@@ -158,33 +158,36 @@ namespace AerolineaFrba.Compra
                     }
                     //agrego los datos del pasajero
 
+
+                       
+                     if (esNuevo)
+                     {
+                         avisar("Todavia no anda el Insert para un cliente nuevo");
+                        cargarNuevoCliente(); //INSERT DE LOS CAMPOS
+                        
+                    }
+                    else
+                     {
+                         
+                        actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE
+                        
+                    }
+
                     cargarDatos();
-                    actualizarDatos();
                     darBajaButaca();
 
 
                     FormPasaje.cantPasajes = (FormPasaje.cantPasajes - 1);
                     datosDe = datosDe + 1;
+                    
                     pasajero.Text = datosDe.ToString();
+                    
                     LimpiarCliente_Click(sender, e);
                     llenarButacas();
                     butacaSeleccionada.Visible = false;
                     esNuevo = false;
-
-                    ////////
-                    //DESELECCIONAR BUTACA
-                    //////////
-
-                    /* FormCompra3 nuevaCarga = new FormCompra3();
-                     this.Hide();
-                     nuevaCarga.ShowDialog();
-                     nuevaCarga = (FormCompra3)this.ActiveMdiChild; */
-
-                    /*
-                    FormFormaDePago siguiente = new FormFormaDePago();
-                    this.Hide();
-                    siguiente.ShowDialog();
-                    siguiente = (FormFormaDePago)this.ActiveMdiChild;*/
+                     butaca = "";
+                    tipoBucata = "";
 
                 }
                 else if (FormPasaje.cantPasajes == 1)
@@ -195,10 +198,20 @@ namespace AerolineaFrba.Compra
                     }
 
                     cargarDatos();
-                    actualizarDatos();
+
+                    if (esNuevo)
+                    {
+                        avisar("Todavia no anda el Insert para un cliente nuevo");
+                        cargarNuevoCliente(); //INSERT DE LOS CAMPOS
+
+                    }
+                    else
+                    {
+                     actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE
+                    }
+                    
                     darBajaButaca();
-
-
+                    
                     //lo mando a verificacion
                     FormCompra4 siguiente = new FormCompra4();
                     this.Hide();
@@ -207,6 +220,7 @@ namespace AerolineaFrba.Compra
 
                 }
             }
+
             else if (controlarQueEsteTodoCompletado() == false)
             {
                 MessageBox.Show("Debes completar los datos obligatorios y seleccionar una butaca" ,"", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -214,9 +228,9 @@ namespace AerolineaFrba.Compra
 
         }
 
-        private void avisar()
+        private void avisar(string quePaso)
         {
-            MessageBox.Show("Se han guardado los nuevos datos del cliente", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(quePaso, "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //FALTA HACER LOS UPDATES
@@ -229,7 +243,7 @@ namespace AerolineaFrba.Compra
                 string qry = "update DJML.CLIENTES " +
                           " set CLIE_NOMBRE = '" + nombre.Text + "'" +
                           " where CLIE_DNI = " + DNI +
-                          "and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+                          " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
 
                 new Query(qry).Ejecutar();
                
@@ -241,7 +255,7 @@ namespace AerolineaFrba.Compra
                string qry = "update DJML.CLIENTES " +
                            " set CLIE_APELLIDO = '" + apellido.Text + "'" +
                            " where CLIE_DNI = " + DNI +
-                           "and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+                           " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
 
                new Query(qry).Ejecutar();
                seCambioAlgo = true;
@@ -251,7 +265,7 @@ namespace AerolineaFrba.Compra
                string qry = "update DJML.CLIENTES " +
                          " set CLIE_DIRECCION= '" + direccion.Text + "'" +
                          " where CLIE_DNI = " + DNI +
-                         "and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+                         " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
 
                new Query(qry).Ejecutar();
 
@@ -262,7 +276,7 @@ namespace AerolineaFrba.Compra
                string qry = "update DJML.CLIENTES " +
                          " set CLIE_TELEFONO = '" + telefono.Text + "'" +
                          " where CLIE_DNI = " + DNI +
-                         "and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+                         " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
 
                new Query(qry).Ejecutar();
                seCambioAlgo = true;
@@ -272,23 +286,28 @@ namespace AerolineaFrba.Compra
                string qry = "update DJML.CLIENTES " +
                          " set CLIE_EMAIL = '" + mail.Text + "'" +
                          " where CLIE_DNI = " + DNI +
-                         "and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+                         " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
 
                new Query(qry).Ejecutar();
 
                seCambioAlgo = true;
            }
-          /* if (FechaNacimiento.ToString() != fechaNacimiento.Text)
+          
+          if (FechaNacimiento.ToString() != fechaNacimiento.Text)
            {
-
-               seCambioAlgo = true;
+               string qry = "update DJML.CLIENTES " +
+                          "SET CLIE_FECHA_NACIMIENTO = '"+ fechaNacimiento.Text+"'" +
+                          " where CLIE_DNI = " + DNI +
+                          " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+              
+              seCambioAlgo = true;
            }
            if (DNI.ToString() != numero.Text)
            {
                string qry = "update DJML.CLIENTES " +
                          " set CLIE_DNI = '" + numero.Text + "'" +
                          " where CLIE_DNI = " + DNI +
-                         "and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+                         " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
 
                new Query(qry).Ejecutar();
                seCambioAlgo = true;
@@ -298,21 +317,44 @@ namespace AerolineaFrba.Compra
                string qry = "update DJML.CLIENTES " +
                       " set CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + tipo2.Text + "')" +
                       " where CLIE_DNI = " + dniNum.Text +
-                      "and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+                      " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
 
                new Query(qry).Ejecutar();
 
                seCambioAlgo = true;
-           }*/
+           }
 
            if (seCambioAlgo)
            {
-               avisar();
+               string cambio = "Se han guardado los nuevos datos del cliente";
+               avisar(cambio);
            }
 
         }
 
-    
+        private void cargarNuevoCliente()
+        {
+
+           /*
+            string sql = "INSERT INTO DJML.CLIENTES(CLIE_DNI, CLIE_TIPO_DOC, CLIE_NOMBRE, CLIE_APELLIDO, CLIE_DIRECCION, CLIE_EMAIL, CLIE_TELEFONO, CLIE_FECHA_NACIMIENTO) "+
+                                            "VALUES("+ numero.Text + ", '"
+                                                    + "(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + tipo2.Text + "')" + ", '"
+                                                    + nombre.Text + "', '"
+                                                    + apellido.Text + "', '"
+                                                    + direccion.Text + "', '"
+                                                    + mail.Text +  "', "
+                                                    + telefono.Text + "', '"
+                                                    + fechaNacimiento.Text +"' )";
+            Query qry = new Query(sql);
+            qry.pComando = sql;
+            qry.Ejecutar();
+           */
+             
+           
+           
+          
+        }
+
         private void darBajaButaca()
         {
 
@@ -331,24 +373,25 @@ namespace AerolineaFrba.Compra
         {
             String tipoDoc = tipo.Text.Trim();
 
-            UInt32 dni = Convert.ToUInt32(dniNum.Text);
+            string dni = dniNum.Text;
 
                       
-            if (dni != 0 && tipoDoc != "")
+            if (dni != "" && tipoDoc != "")
             {
-                if (dni >= 999999)
+                if (dni.Length >= 7 )
                 {
-                    if (validarDni(dni, tipoDoc))
+                    if (existeUsuario(dni, tipoDoc))
                     {
+                        esNuevo = false; 
                         buscarDatos(dni,tipoDoc );
                         completarDatos();
+                       // avisar("existe usuario");
                     }
                     else
                     {
                         MessageBox.Show("El cliente es inexistente, debe cargar sus datos para poder seguir con las operaciones");
 
                         esNuevo = true;
-                        
                         tipo2.Text = tipo.Text;
                         apellido.Text = "";
                         nombre.Text = "";
@@ -372,7 +415,7 @@ namespace AerolineaFrba.Compra
         }
 
         //AUXILIAR DE AUTOCOMPLETAR DATOS
-        private void buscarDatos(UInt32 dni, string tipoDoc) //completarDatos
+        private void buscarDatos(string dni, string tipoDoc) //completarDatos
         {
             string sql = "SELECT CLIE_NOMBRE FROM DJML.CLIENTES " +
                         "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipoDoc + "') " +
@@ -431,8 +474,7 @@ namespace AerolineaFrba.Compra
 
         }
 
-
-        private bool validarDni(UInt32 dni, string tipoDoc)
+        private bool existeUsuario(string dni, string tipoDoc)
         {
             string sql = "SELECT CLIE_DNI FROM DJML.CLIENTES " +
                          "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipoDoc + "') " +
@@ -464,7 +506,6 @@ namespace AerolineaFrba.Compra
            
         }
 
-
         public void LlenarComboBoxTipoDocumento()
         {
             SqlConnection conexion1 = new SqlConnection();
@@ -492,8 +533,7 @@ namespace AerolineaFrba.Compra
             tipo2.ValueMember = "DESCRIPCION";
             tipo2.SelectedItem = null;
         }
-
-        
+   
         private void LimpiarCliente_Click(object sender, EventArgs e)
         {
             tipo.Text = null;
