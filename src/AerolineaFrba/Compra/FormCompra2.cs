@@ -13,6 +13,7 @@ namespace AerolineaFrba.Compra
     public partial class FormCompra2 : Form
     {
         public static Boolean tipoPasaje = true;
+        public static bool esModificar = false;
 
         public FormCompra2()
         {

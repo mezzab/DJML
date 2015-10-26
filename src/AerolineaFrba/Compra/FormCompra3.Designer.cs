@@ -60,6 +60,8 @@
             this.pasajero = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.Actualizar = new System.Windows.Forms.Button();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.butacaSeleccionada = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -294,6 +296,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.butacaSeleccionada);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Location = new System.Drawing.Point(292, 48);
@@ -316,10 +319,13 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Seleccionar});
             this.dataGridView1.Location = new System.Drawing.Point(6, 43);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(261, 272);
+            this.dataGridView1.Size = new System.Drawing.Size(261, 240);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Volver
             // 
@@ -357,9 +363,9 @@
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label12.Location = new System.Drawing.Point(17, 13);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(292, 17);
+            this.label12.Size = new System.Drawing.Size(296, 17);
             this.label12.TabIndex = 16;
-            this.label12.Text = "Por favor ingrese los datos del Pasajero Nro:";
+            this.label12.Text = "Por favor, ingrese los datos del Pasajero Nro:";
             // 
             // Actualizar
             // 
@@ -369,6 +375,21 @@
             this.Actualizar.TabIndex = 17;
             this.Actualizar.Text = "Actualizar Datos";
             this.Actualizar.UseVisualStyleBackColor = true;
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            // 
+            // butacaSeleccionada
+            // 
+            this.butacaSeleccionada.BackColor = System.Drawing.SystemColors.Menu;
+            this.butacaSeleccionada.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.butacaSeleccionada.Location = new System.Drawing.Point(9, 293);
+            this.butacaSeleccionada.Name = "butacaSeleccionada";
+            this.butacaSeleccionada.Size = new System.Drawing.Size(256, 13);
+            this.butacaSeleccionada.TabIndex = 4;
+            this.butacaSeleccionada.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // FormCompra3
             // 
@@ -384,7 +405,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FormCompra3";
-            this.Text = "Pasajero 1";
+            this.Text = "Carga datos de pasajeros";
             this.Load += new System.EventHandler(this.FormCompra3_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -432,5 +453,7 @@
         private System.Windows.Forms.TextBox pasajero;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button Actualizar;
+        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
+        private System.Windows.Forms.TextBox butacaSeleccionada;
     }
 }

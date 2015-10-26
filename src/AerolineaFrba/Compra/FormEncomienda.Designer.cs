@@ -82,7 +82,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Name = "FormEncomienda";
-            this.Text = "Form2";
+            this.Text = "Compra de Encomienda";
             this.Load += new System.EventHandler(this.FormEncomienda_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kilosEncomienda)).EndInit();
             this.ResumeLayout(false);

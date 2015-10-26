@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.total = new System.Windows.Forms.TextBox();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.verificacion)).BeginInit();
             this.SuspendLayout();
@@ -73,7 +74,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label1.Location = new System.Drawing.Point(80, 303);
+            this.label1.Location = new System.Drawing.Point(204, 303);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(151, 17);
             this.label1.TabIndex = 3;
@@ -85,9 +86,9 @@
             this.total.BackColor = System.Drawing.SystemColors.MenuBar;
             this.total.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.total.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.total.Location = new System.Drawing.Point(237, 303);
+            this.total.Location = new System.Drawing.Point(361, 304);
             this.total.Name = "total";
-            this.total.Size = new System.Drawing.Size(100, 16);
+            this.total.Size = new System.Drawing.Size(90, 16);
             this.total.TabIndex = 4;
             // 
             // Modificar
@@ -97,11 +98,22 @@
             this.Modificar.Name = "Modificar";
             this.Modificar.Width = 70;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(20, 291);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(178, 43);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Son incorrectos: Volver a empezar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // FormCompra4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(691, 346);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.total);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
@@ -124,5 +136,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox total;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;
+        private System.Windows.Forms.Button button1;
     }
 }
