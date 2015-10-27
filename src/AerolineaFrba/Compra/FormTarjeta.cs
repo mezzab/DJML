@@ -9,11 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using AerolineaFrba.Properties;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace AerolineaFrba.Compra
 {
     public partial class FormEfectivo : Form
     {
+        public static DataTable tablaTarjeta = new DataTable();
+
         public static string Nombre;
         public static string Apellido;
         public static string Direccion;
@@ -22,7 +26,9 @@ namespace AerolineaFrba.Compra
         public static string DNI;
         public static string TipoDNI;
         public static DateTime FechaNacimiento;
-       
+
+        public static bool esNuevo = true;
+
 
         public FormEfectivo()
         {
@@ -61,7 +67,7 @@ namespace AerolineaFrba.Compra
             telefono.Text = "";
             numero.Text = "";
             fechaNacimiento.ResetText();
-            
+
         }
         public void LlenarComboBoxTipoDocumento()
         {
@@ -77,17 +83,64 @@ namespace AerolineaFrba.Compra
             tipo.SelectedItem = null;
         }
 
+        public void LlenarComboBoxTiposTarjetas()
+        {
+            SqlConnection conexion1 = new SqlConnection();
+            conexion1.ConnectionString = Settings.Default.CadenaDeConexion;
+
+            DataSet ds1 = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter("select nombre from djml.tipos_de_tarjeta", conexion1);
+            da.Fill(ds1, "DJML.TIPOS_DE_TARJETA");
+
+            tiposTarjeta.DataSource = ds1.Tables[0].DefaultView;
+            tiposTarjeta.ValueMember = "NOMBRE";
+            tiposTarjeta.SelectedItem = null;
+        }
+
         private void FormEfectivo_Load(object sender, EventArgs e)
         {
+            if (FormFormaDePago.pagoEnEfectivo == true)
+            {  
+                groupBox2.Visible = false;
+                groupBox4.Visible = true;
+            }
+            if (FormFormaDePago.pagoEnEfectivo == false)
+            {
+                groupBox2.Visible = true;
+                groupBox4.Visible = false;
+            }
+
             Comprar.Enabled = false;
             LlenarComboBoxTipoDocumento();
             tipo.DropDownStyle = ComboBoxStyle.DropDownList;
+            LlenarComboBoxTiposTarjetas();
+            tiposTarjeta.DropDownStyle = ComboBoxStyle.DropDownList;
+            cuotas.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void tipoDeDocumento_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void cargarNuevoCliente()
+        {
+            string aux = "1";
+            if (tipo2.Text.ToString() == "DNI")
+            { aux = "1"; }
+            if (tipo2.Text.ToString() == "LC")
+            { aux = "2"; }
+            if (tipo2.Text.ToString() == "LE")
+            { aux = "3"; }
+
+            string sql = "INSERT INTO DJML.CLIENTES(CLIE_DNI, CLIE_TIPO_DOC, CLIE_NOMBRE, CLIE_APELLIDO, CLIE_DIRECCION, CLIE_EMAIL, CLIE_TELEFONO, CLIE_FECHA_NACIMIENTO) " +
+                                            "VALUES(" + numero.Text + ", '" + aux + "', '" + nombre.Text + "', '" + apellido.Text + "', '" + direccion.Text + "', '" + mail.Text + "', " + telefono.Text + ", '" + fechaNacimiento.Text + "' )";
+            Query qry = new Query(sql);
+            //qry.pComando = sql;
+            qry.Ejecutar();
+
+        }
+
 
         private void LimpiarTodo_Click(object sender, EventArgs e)
         {
@@ -103,6 +156,8 @@ namespace AerolineaFrba.Compra
             fechaNacimiento.ResetText();
 
         }
+
+
 
         private bool validarDni(string dni, string tipoDoc)
         {
@@ -176,29 +231,149 @@ namespace AerolineaFrba.Compra
 
         }
 
+        private void actualizarDatos()
+        {
+            bool seCambioAlgo = false;
+            string aux = "1";
+            if (tipo2.Text.ToString() == "DNI")
+            { aux = "1"; }
+            if (tipo2.Text.ToString() == "LC")
+            { aux = "2"; }
+            if (tipo2.Text.ToString() == "LE")
+            { aux = "3"; }
 
+            if (Nombre != nombre.Text)
+            {
+                string qry = "update DJML.CLIENTES " +
+                          " set CLIE_NOMBRE = '" + nombre.Text + "'" +
+                          " where CLIE_DNI = " + DNI +
+                          " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+
+                new Query(qry).Ejecutar();
+
+                seCambioAlgo = true;
+            }
+            if (Apellido != apellido.Text)
+            {
+
+                string qry = "update DJML.CLIENTES " +
+                            " set CLIE_APELLIDO = '" + apellido.Text + "'" +
+                            " where CLIE_DNI = " + DNI +
+                            " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+
+                new Query(qry).Ejecutar();
+                seCambioAlgo = true;
+            }
+            if (Direccion != direccion.Text)
+            {
+                string qry = "update DJML.CLIENTES " +
+                          " set CLIE_DIRECCION= '" + direccion.Text + "'" +
+                          " where CLIE_DNI = " + DNI +
+                          " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+
+                new Query(qry).Ejecutar();
+
+                seCambioAlgo = true;
+            }
+            if (Telefono != telefono.Text)
+            {
+                string qry = "update DJML.CLIENTES " +
+                          " set CLIE_TELEFONO = '" + telefono.Text + "'" +
+                          " where CLIE_DNI = " + DNI +
+                          " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+
+                new Query(qry).Ejecutar();
+                seCambioAlgo = true;
+            }
+            if (Mail != mail.Text)
+            {
+                string qry = "update DJML.CLIENTES " +
+                          " set CLIE_EMAIL = '" + mail.Text + "'" +
+                          " where CLIE_DNI = " + DNI +
+                          " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+
+                new Query(qry).Ejecutar();
+
+                seCambioAlgo = true;
+            }
+
+            if (FechaNacimiento.ToString() != fechaNacimiento.Text)
+            {
+
+                //BUG
+                string converted = DateTime.ParseExact(fechaNacimiento.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
+                //avisar("mmm" + converted + "mmm");
+                string qry = "update DJML.CLIENTES" +
+                           " set CLIE_FECHA_NACIMIENTO = CAST('" + converted + "' AS DATETIME)" +
+                           " where CLIE_DNI = " + DNI +
+                           " and CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+
+                seCambioAlgo = true;
+            }
+            if (DNI.ToString() != numero.Text)
+            {
+                string qry = "update DJML.CLIENTES " +
+                          " set CLIE_DNI = '" + numero.Text + "'" +
+                          " where CLIE_DNI = " + DNI +
+                          " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+
+                new Query(qry).Ejecutar();
+                seCambioAlgo = true;
+            }
+            if (TipoDNI != tipo2.Text)
+            {
+                string qry = "update DJML.CLIENTES " +
+                       " set CLIE_TIPO_DOC =" + aux +
+                       " where CLIE_DNI = " + dniNum.Text +
+                       " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+
+                new Query(qry).Ejecutar();
+
+                seCambioAlgo = true;
+            }
+
+            if (seCambioAlgo)
+            {
+                string cambio = "Se han guardado los nuevos datos del cliente";
+                avisar(cambio);
+            }
+
+        }
+
+        private bool existeUsuario(string dni, string tipoDoc)
+        {
+            string sql = "SELECT CLIE_DNI FROM DJML.CLIENTES " +
+                         "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipoDoc + "') " +
+                         "AND CLIE_DNI =" + dni;
+            Query qry = new Query(sql);
+            object ndni = qry.ObtenerUnicoCampo();
+
+            return ndni != null;
+        }
 
         private void BuscarPorCliente_Click(object sender, EventArgs e)
         {
             String tipoDoc = tipo.Text.Trim();
 
-            String dni = this.dniNum.Text;
+            string dni = dniNum.Text;
 
 
             if (dni != "" && tipoDoc != "")
             {
                 if (dni.Length >= 7)
                 {
-                    if (validarDni(dni, tipoDoc))
+                    if (existeUsuario(dni, tipoDoc))
                     {
+                        esNuevo = false;
                         buscarDatos(dni, tipoDoc);
                         completarDatos();
+                        // avisar("existe usuario");
                     }
                     else
                     {
                         MessageBox.Show("El cliente es inexistente, debe cargar sus datos para poder seguir con las operaciones");
 
-
+                        esNuevo = true;
                         tipo2.Text = tipo.Text;
                         apellido.Text = "";
                         nombre.Text = "";
@@ -218,5 +393,84 @@ namespace AerolineaFrba.Compra
                 MessageBox.Show("Seleccione un tipo e ingrese un numero de documento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void ActualizarDatos_Click(object sender, EventArgs e)
+        {
+            if (esNuevo == false)
+            {
+                actualizarDatos();
+
+            }
+            if (esNuevo)
+            {
+                avisar("Primero debe clickear en 'Nuevo', para guardar al nuevo cliente.");
+            }
+        }
+
+
+        private void avisar(string quePaso)
+        {
+            MessageBox.Show(quePaso, "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void Comprar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tiposTarjeta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            cargarCuotas(tiposTarjeta.Text);
+            
+
+        }
+
+        private void cuotas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cargarCuotas( string tipo)
+        {
+
+             string sql = "select CUOTAS from djml.tipos_de_tarjeta " +
+                           "WHERE NOMBRE = '"+ tipo + "'" ;
+            Query qry = new Query(sql);
+            UInt16 MaxCuotas = Convert.ToUInt16(qry.ObtenerUnicoCampo());
+
+            cuotas.Items.Clear();
+
+            for (int i = 1; i <= MaxCuotas; i++)
+            {
+                cuotas.Items.Add(i);
+             }
+
+        }
+
+        private void NuevoCliente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Nuevo_Click(object sender, EventArgs e)
+        {
+
+            if (existeUsuario(numero.Text, tipo2.Text))
+            {
+                avisar("Ya existe un usuario con ese tipo y numero de documento.");
+            }
+            if (existeUsuario(numero.Text, tipo2.Text) == false)
+            {
+            cargarNuevoCliente();
+
+            esNuevo = false;
+            }
+
+        }
+
+
+
     }
+
 }

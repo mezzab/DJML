@@ -84,6 +84,7 @@
             this.Controls.Add(this.button1);
             this.Name = "FormFormaDePago";
             this.Text = "Compra";
+            this.Load += new System.EventHandler(this.FormFormaDePago_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

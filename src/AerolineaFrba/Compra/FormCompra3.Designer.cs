@@ -89,7 +89,7 @@
             this.BuscarPorCliente.Name = "BuscarPorCliente";
             this.BuscarPorCliente.Size = new System.Drawing.Size(97, 37);
             this.BuscarPorCliente.TabIndex = 5;
-            this.BuscarPorCliente.Text = "Buscar";
+            this.BuscarPorCliente.Text = " Buscar";
             this.BuscarPorCliente.UseVisualStyleBackColor = true;
             this.BuscarPorCliente.Click += new System.EventHandler(this.BuscarPorCliente_Click);
             // 
@@ -211,6 +211,7 @@
             this.telefono.Name = "telefono";
             this.telefono.Size = new System.Drawing.Size(100, 20);
             this.telefono.TabIndex = 11;
+            this.telefono.TextChanged += new System.EventHandler(this.telefono_TextChanged);
             // 
             // label9
             // 

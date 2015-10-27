@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using AerolineaFrba.Properties;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace AerolineaFrba.Compra
 {
     public partial class FormCompra3 : Form
     {
+            
         public static DataTable tabla = new DataTable();
         public static int datosDe = 1;
         public static string butaca = "";
@@ -29,7 +32,7 @@ namespace AerolineaFrba.Compra
         public static string TipoDNI;
         public static DateTime FechaNacimiento;
 
-        public static bool esNuevo = false;
+        public static bool esNuevo = true;
         
         public FormCompra3()
         {
@@ -104,7 +107,7 @@ namespace AerolineaFrba.Compra
             tabla.Columns.Add("Precio", typeof(int));
         }
 
-        private void cargarDatos()
+        private void cargarDatosATabla()
         {
             DataRow uno = tabla.NewRow();
             uno["Butaca"] = butaca;
@@ -162,7 +165,7 @@ namespace AerolineaFrba.Compra
                        
                      if (esNuevo)
                      {
-                         avisar("Todavia no anda el Insert para un cliente nuevo");
+                         //avisar("Todavia no anda el Insert para un cliente nuevo");
                         cargarNuevoCliente(); //INSERT DE LOS CAMPOS
                         
                     }
@@ -173,7 +176,7 @@ namespace AerolineaFrba.Compra
                         
                     }
 
-                    cargarDatos();
+                    cargarDatosATabla();
                     darBajaButaca();
 
 
@@ -197,7 +200,7 @@ namespace AerolineaFrba.Compra
                         crearColumnas();
                     }
 
-                    cargarDatos();
+                    cargarDatosATabla();
 
                     if (esNuevo)
                     {
@@ -237,6 +240,13 @@ namespace AerolineaFrba.Compra
         private void actualizarDatos()
         {
            bool seCambioAlgo = false;
+           string aux = "1";
+           if (tipo2.Text.ToString() == "DNI")
+           { aux = "1"; }
+           if (tipo2.Text.ToString() == "LC")
+           { aux = "2"; }
+           if (tipo2.Text.ToString() == "LE")
+           { aux = "3"; }
 
            if(Nombre != nombre.Text)
             {
@@ -295,10 +305,14 @@ namespace AerolineaFrba.Compra
           
           if (FechaNacimiento.ToString() != fechaNacimiento.Text)
            {
-               string qry = "update DJML.CLIENTES " +
-                          "SET CLIE_FECHA_NACIMIENTO = '"+ fechaNacimiento.Text+"'" +
+
+                //BUG
+               string converted = DateTime.ParseExact(fechaNacimiento.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
+               //avisar("mmm" + converted + "mmm");
+               string qry = "update DJML.CLIENTES" +
+                          " set CLIE_FECHA_NACIMIENTO = CAST('"+ converted +"' AS DATETIME)" +
                           " where CLIE_DNI = " + DNI +
-                          " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+                          " and CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
               
               seCambioAlgo = true;
            }
@@ -315,7 +329,7 @@ namespace AerolineaFrba.Compra
               if (TipoDNI != tipo2.Text)
            {
                string qry = "update DJML.CLIENTES " +
-                      " set CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + tipo2.Text + "')" +
+                      " set CLIE_TIPO_DOC =" + aux +
                       " where CLIE_DNI = " + dniNum.Text +
                       " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
 
@@ -334,24 +348,21 @@ namespace AerolineaFrba.Compra
 
         private void cargarNuevoCliente()
         {
-
-           /*
-            string sql = "INSERT INTO DJML.CLIENTES(CLIE_DNI, CLIE_TIPO_DOC, CLIE_NOMBRE, CLIE_APELLIDO, CLIE_DIRECCION, CLIE_EMAIL, CLIE_TELEFONO, CLIE_FECHA_NACIMIENTO) "+
-                                            "VALUES("+ numero.Text + ", '"
-                                                    + "(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + tipo2.Text + "')" + ", '"
-                                                    + nombre.Text + "', '"
-                                                    + apellido.Text + "', '"
-                                                    + direccion.Text + "', '"
-                                                    + mail.Text +  "', "
-                                                    + telefono.Text + "', '"
-                                                    + fechaNacimiento.Text +"' )";
+            string aux = "1";
+            if (tipo2.Text.ToString() == "DNI")
+             { aux = "1";  }
+            if (tipo2.Text.ToString() == "LC")
+             { aux = "2";  }
+            if (tipo2.Text.ToString() == "LE")
+             { aux = "3";  }
+                   
+            string sql = "INSERT INTO DJML.CLIENTES(CLIE_DNI, CLIE_TIPO_DOC, CLIE_NOMBRE, CLIE_APELLIDO, CLIE_DIRECCION, CLIE_EMAIL, CLIE_TELEFONO, CLIE_FECHA_NACIMIENTO) " +
+                                            "VALUES("+ numero.Text + ", '"+ aux + "', '"+ nombre.Text + "', '"+ apellido.Text + "', '"+ direccion.Text + "', '"+ mail.Text +  "', "+ telefono.Text + ", '"+ fechaNacimiento.Text +"' )";
             Query qry = new Query(sql);
-            qry.pComando = sql;
+            //qry.pComando = sql;
             qry.Ejecutar();
-           */
              
-           
-           
+                      
           
         }
 
@@ -575,8 +586,9 @@ namespace AerolineaFrba.Compra
 
         private void dni_TextChanged(object sender, EventArgs e)
         {
-
-            //OBLIGAR A QUE INTRODUZCA NUMEROS
+          //  dniNum.TextChanged += dni_TextChanged;
+            dniNum.Text = Regex.Replace(dniNum.Text, @"[^\d]", "");
+            //OBLIGA A QUE INTRODUZCA NUMEROS
         }
 
         private void verificacion_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -601,12 +613,30 @@ namespace AerolineaFrba.Compra
 
         private void numero_TextChanged(object sender, EventArgs e)
         {
-           /* if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
-            {
-                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                e.Handled = true;
-                return;
-            }*/
+            //  dniNum.TextChanged += dni_TextChanged;
+            numero.Text = Regex.Replace(numero.Text, @"[^\d]", "");
+            //OBLIGA A QUE INTRODUZCA NUMEROS
+            
+        }
+
+        public static void AllowNumber(KeyPressEventArgs e)
+        {
+            if (char.IsLetter(e.KeyChar) || //Letras
+                char.IsSymbol(e.KeyChar) || //Símbolos
+                char.IsWhiteSpace(e.KeyChar) || //Espaço
+                char.IsPunctuation(e.KeyChar)) //Pontuação
+                e.Handled = true; //Não permitir
+            //Com o script acima é possível utilizar Números, 'Del', 'BackSpace'..
+
+            //Abaixo só é permito de 0 a 9
+            //if ((e.KeyChar < '0') || (e.KeyChar > '9')) e.Handled = true; //Allow only numbers
+        }
+
+        private void telefono_TextChanged(object sender, EventArgs e)
+        {
+            //  dniNum.TextChanged += dni_TextChanged;
+            telefono.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+            //OBLIGA A QUE INTRODUZCA NUMEROS
         }
 
 
