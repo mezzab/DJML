@@ -66,7 +66,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.apellido = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.tiposTarjeta = new System.Windows.Forms.ComboBox();
+            this.tipoT = new System.Windows.Forms.ComboBox();
             this.Nuevo = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -89,20 +89,20 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.tiposTarjeta);
+            this.groupBox2.Controls.Add(this.tipoT);
             this.groupBox2.Controls.Add(this.cuotas);
-            this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.NuevaTarjeta);
+            this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.vencimientoTarjeta);
             this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Controls.Add(this.codigoTarjeta);
-            this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.numTarjeta);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(13, 276);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(513, 138);
+            this.groupBox2.Size = new System.Drawing.Size(513, 149);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Tarjeta";
@@ -110,7 +110,7 @@
             // cuotas
             // 
             this.cuotas.FormattingEnabled = true;
-            this.cuotas.Location = new System.Drawing.Point(377, 93);
+            this.cuotas.Location = new System.Drawing.Point(366, 45);
             this.cuotas.Name = "cuotas";
             this.cuotas.Size = new System.Drawing.Size(91, 21);
             this.cuotas.TabIndex = 10;
@@ -119,7 +119,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(374, 78);
+            this.label14.Location = new System.Drawing.Point(363, 30);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(40, 13);
             this.label14.TabIndex = 9;
@@ -127,18 +127,19 @@
             // 
             // NuevaTarjeta
             // 
-            this.NuevaTarjeta.Location = new System.Drawing.Point(377, 26);
+            this.NuevaTarjeta.Location = new System.Drawing.Point(366, 87);
             this.NuevaTarjeta.Name = "NuevaTarjeta";
-            this.NuevaTarjeta.Size = new System.Drawing.Size(91, 36);
+            this.NuevaTarjeta.Size = new System.Drawing.Size(91, 42);
             this.NuevaTarjeta.TabIndex = 8;
             this.NuevaTarjeta.Text = "Nueva";
             this.NuevaTarjeta.UseVisualStyleBackColor = true;
+            this.NuevaTarjeta.Click += new System.EventHandler(this.NuevaTarjeta_Click);
             // 
             // vencimientoTarjeta
             // 
             this.vencimientoTarjeta.CustomFormat = "MM/yy";
             this.vencimientoTarjeta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.vencimientoTarjeta.Location = new System.Drawing.Point(195, 42);
+            this.vencimientoTarjeta.Location = new System.Drawing.Point(18, 94);
             this.vencimientoTarjeta.Name = "vencimientoTarjeta";
             this.vencimientoTarjeta.Size = new System.Drawing.Size(144, 20);
             this.vencimientoTarjeta.TabIndex = 7;
@@ -158,11 +159,12 @@
             this.codigoTarjeta.Name = "codigoTarjeta";
             this.codigoTarjeta.Size = new System.Drawing.Size(144, 20);
             this.codigoTarjeta.TabIndex = 5;
+            this.codigoTarjeta.TextChanged += new System.EventHandler(this.codigoTarjeta_TextChanged);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(192, 26);
+            this.label12.Location = new System.Drawing.Point(15, 78);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(113, 13);
             this.label12.TabIndex = 4;
@@ -171,7 +173,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(15, 78);
+            this.label11.Location = new System.Drawing.Point(15, 30);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(28, 13);
             this.label11.TabIndex = 2;
@@ -179,15 +181,16 @@
             // 
             // numTarjeta
             // 
-            this.numTarjeta.Location = new System.Drawing.Point(18, 42);
+            this.numTarjeta.Location = new System.Drawing.Point(195, 46);
             this.numTarjeta.Name = "numTarjeta";
             this.numTarjeta.Size = new System.Drawing.Size(144, 20);
             this.numTarjeta.TabIndex = 1;
+            this.numTarjeta.TextChanged += new System.EventHandler(this.numTarjeta_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 26);
+            this.label1.Location = new System.Drawing.Point(192, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 0;
@@ -195,7 +198,7 @@
             // 
             // Volver
             // 
-            this.Volver.Location = new System.Drawing.Point(90, 420);
+            this.Volver.Location = new System.Drawing.Point(91, 441);
             this.Volver.Name = "Volver";
             this.Volver.Size = new System.Drawing.Size(99, 41);
             this.Volver.TabIndex = 2;
@@ -205,7 +208,7 @@
             // 
             // Comprar
             // 
-            this.Comprar.Location = new System.Drawing.Point(203, 420);
+            this.Comprar.Location = new System.Drawing.Point(204, 441);
             this.Comprar.Name = "Comprar";
             this.Comprar.Size = new System.Drawing.Size(108, 41);
             this.Comprar.TabIndex = 3;
@@ -215,7 +218,7 @@
             // 
             // LimpiarTodo
             // 
-            this.LimpiarTodo.Location = new System.Drawing.Point(327, 420);
+            this.LimpiarTodo.Location = new System.Drawing.Point(328, 441);
             this.LimpiarTodo.Name = "LimpiarTodo";
             this.LimpiarTodo.Size = new System.Drawing.Size(108, 41);
             this.LimpiarTodo.TabIndex = 4;
@@ -254,6 +257,7 @@
             this.dniNum.Name = "dniNum";
             this.dniNum.Size = new System.Drawing.Size(114, 20);
             this.dniNum.TabIndex = 4;
+            this.dniNum.TextChanged += new System.EventHandler(this.dniNum_TextChanged);
             // 
             // tipo
             // 
@@ -357,6 +361,7 @@
             this.numero.Name = "numero";
             this.numero.Size = new System.Drawing.Size(100, 20);
             this.numero.TabIndex = 7;
+            this.numero.TextChanged += new System.EventHandler(this.numero_TextChanged);
             // 
             // telefono
             // 
@@ -364,6 +369,7 @@
             this.telefono.Name = "telefono";
             this.telefono.Size = new System.Drawing.Size(100, 20);
             this.telefono.TabIndex = 11;
+            this.telefono.TextChanged += new System.EventHandler(this.telefono_TextChanged);
             // 
             // label9
             // 
@@ -438,14 +444,14 @@
             this.label15.TabIndex = 0;
             this.label15.Text = "Apellido";
             // 
-            // tiposTarjeta
+            // tipoT
             // 
-            this.tiposTarjeta.FormattingEnabled = true;
-            this.tiposTarjeta.Location = new System.Drawing.Point(18, 94);
-            this.tiposTarjeta.Name = "tiposTarjeta";
-            this.tiposTarjeta.Size = new System.Drawing.Size(144, 21);
-            this.tiposTarjeta.TabIndex = 11;
-            this.tiposTarjeta.SelectedIndexChanged += new System.EventHandler(this.tiposTarjeta_SelectedIndexChanged);
+            this.tipoT.FormattingEnabled = true;
+            this.tipoT.Location = new System.Drawing.Point(18, 46);
+            this.tipoT.Name = "tipoT";
+            this.tipoT.Size = new System.Drawing.Size(144, 21);
+            this.tipoT.TabIndex = 11;
+            this.tipoT.SelectedIndexChanged += new System.EventHandler(this.tiposTarjeta_SelectedIndexChanged);
             // 
             // Nuevo
             // 
@@ -492,7 +498,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1040, 482);
+            this.ClientSize = new System.Drawing.Size(1040, 563);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -554,7 +560,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox apellido;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ComboBox tiposTarjeta;
+        private System.Windows.Forms.ComboBox tipoT;
         private System.Windows.Forms.Button Nuevo;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TextBox total;

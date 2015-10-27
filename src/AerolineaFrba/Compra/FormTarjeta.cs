@@ -92,9 +92,9 @@ namespace AerolineaFrba.Compra
             SqlDataAdapter da = new SqlDataAdapter("select nombre from djml.tipos_de_tarjeta", conexion1);
             da.Fill(ds1, "DJML.TIPOS_DE_TARJETA");
 
-            tiposTarjeta.DataSource = ds1.Tables[0].DefaultView;
-            tiposTarjeta.ValueMember = "NOMBRE";
-            tiposTarjeta.SelectedItem = null;
+            tipoT.DataSource = ds1.Tables[0].DefaultView;
+            tipoT.ValueMember = "NOMBRE";
+            tipoT.SelectedItem = null;
         }
 
         private void FormEfectivo_Load(object sender, EventArgs e)
@@ -114,7 +114,7 @@ namespace AerolineaFrba.Compra
             LlenarComboBoxTipoDocumento();
             tipo.DropDownStyle = ComboBoxStyle.DropDownList;
             LlenarComboBoxTiposTarjetas();
-            tiposTarjeta.DropDownStyle = ComboBoxStyle.DropDownList;
+            tipoT.DropDownStyle = ComboBoxStyle.DropDownList;
             cuotas.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
@@ -138,6 +138,37 @@ namespace AerolineaFrba.Compra
             Query qry = new Query(sql);
             //qry.pComando = sql;
             qry.Ejecutar();
+
+        }
+
+        private void cargarNuevaTarjeta(string numeroTarjeta)
+        {
+            //BUG ... 
+            // FECHA DE VENCIMIENTO DE LA TARJETA? 
+            if (tipoT.Text == "")
+            {
+                avisar("Debe seleccionar un tipo de tarjeta");
+            }
+            else if (tipoT.Text != "")
+            {
+                string tipoTarjeta = tipoT.Text;
+                string sql = "SELECT ID FROM DJML.TIPOS_DE_TARJETA " +
+                            "WHERE NOMBRE = '" + tipoT.Text + "'" ;
+                Query qry = new Query(sql);
+                string idTipoTarjeta = qry.ObtenerUnicoCampo().ToString();
+
+                avisar("el id de la tarjeta es: " + idTipoTarjeta);
+
+                string sql2 = "INSERT INTO DJML.TARJETAS_DE_CREDITO(TARJ_NUMERO, TARJ_TIPO_ID) " +
+                                                "VALUES(" + numeroTarjeta + ", " + idTipoTarjeta + ")";
+                Query qry2 = new Query(sql2);
+                //qry.pComando = sql;
+                qry2.Ejecutar();
+
+                avisar("Se guardo correctamente la nueva tarjeta en el sistema.");
+            }
+        
+
 
         }
 
@@ -351,6 +382,17 @@ namespace AerolineaFrba.Compra
             return ndni != null;
         }
 
+        private bool existeTarjeta(string numeroTarjeta)
+        {
+            string sql = "SELECT TARJ_ID FROM DJML.TARJETAS_DE_CREDITO " +
+                         "WHERE TARJ_NUMERO =" + numeroTarjeta  ;
+          
+            Query qry = new Query(sql);
+            object idTarjeta = qry.ObtenerUnicoCampo();
+
+            return idTarjeta != null;
+        }
+
         private void BuscarPorCliente_Click(object sender, EventArgs e)
         {
             String tipoDoc = tipo.Text.Trim();
@@ -421,7 +463,7 @@ namespace AerolineaFrba.Compra
         private void tiposTarjeta_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            cargarCuotas(tiposTarjeta.Text);
+            cargarCuotas(tipoT.Text);
             
 
         }
@@ -467,6 +509,70 @@ namespace AerolineaFrba.Compra
             esNuevo = false;
             }
 
+        }
+
+        private void NuevaTarjeta_Click(object sender, EventArgs e)
+        {
+            if (numTarjeta.Text == "") 
+            {
+                avisar("Debe ingresar un numero de tarjeta.");
+            }
+            else if (numTarjeta.Text.Length != 16 )
+            {
+                avisar("La tarjeta debe tener 16 digitos.");
+            }
+            if( numTarjeta.Text.Length == 16 )
+            {
+
+                string numeroTarjeta = numTarjeta.Text;
+
+                if (existeTarjeta(numeroTarjeta))
+                {
+                    avisar("Ya esta guardada esta tarjeta en el sistema.");
+                }
+                if (existeTarjeta(numeroTarjeta) == false)
+                {
+
+                    cargarNuevaTarjeta(numeroTarjeta);
+
+                }
+            }
+
+        }
+
+        private void dniNum_TextChanged(object sender, EventArgs e)
+        {
+            //  dniNum.TextChanged += dni_TextChanged;
+            telefono.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+            //OBLIGA A QUE INTRODUZCA NUMEROS
+        }
+
+        private void numero_TextChanged(object sender, EventArgs e)
+        {
+            //  dniNum.TextChanged += dni_TextChanged;
+            telefono.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+            //OBLIGA A QUE INTRODUZCA NUMEROS
+        }
+
+        private void telefono_TextChanged(object sender, EventArgs e)
+        {
+            //  dniNum.TextChanged += dni_TextChanged;
+            telefono.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+            //OBLIGA A QUE INTRODUZCA NUMEROS
+        }
+
+        private void numTarjeta_TextChanged(object sender, EventArgs e)
+        {
+            //  dniNum.TextChanged += dni_TextChanged;
+            telefono.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+            //OBLIGA A QUE INTRODUZCA NUMEROS
+        }
+
+        private void codigoTarjeta_TextChanged(object sender, EventArgs e)
+        {
+            //  dniNum.TextChanged += dni_TextChanged;
+            telefono.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+            //OBLIGA A QUE INTRODUZCA NUMEROS
         }
 
 
