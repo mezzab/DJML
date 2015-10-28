@@ -457,6 +457,8 @@ namespace AerolineaFrba.Compra
 
         private void Comprar_Click(object sender, EventArgs e)
         {
+           //HACER
+
 
         }
 

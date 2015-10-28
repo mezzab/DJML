@@ -21,10 +21,10 @@ namespace AerolineaFrba.Compra
 
         private void button3_Click(object sender, EventArgs e)
         {
-            FormCompra3 m = new FormCompra3();
+            CompraPasaje m = new CompraPasaje();
             this.Hide();
             m.ShowDialog();
-            m = (FormCompra3)this.ActiveMdiChild;
+            m = (CompraPasaje)this.ActiveMdiChild;
         }
 
         private void button2_Click(object sender, EventArgs e)

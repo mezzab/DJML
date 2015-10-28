@@ -39,6 +39,12 @@ namespace AerolineaFrba.Compra
              comboBox1.Items.Add(3);
              comboBox1.Items.Add(4);
              comboBox1.Items.Add(5);
+             comboBox1.Items.Add(6);
+             comboBox1.Items.Add(7);
+             comboBox1.Items.Add(8);
+             comboBox1.Items.Add(9);
+             comboBox1.Items.Add(10);
+ 
          
         }
 
@@ -56,10 +62,10 @@ namespace AerolineaFrba.Compra
             {
                 button1.Enabled = true;
             }
-             FormCompra3 m = new FormCompra3();
+             CompraPasaje m = new CompraPasaje();
             this.Hide();
             m.ShowDialog();
-            m = (FormCompra3)this.ActiveMdiChild;
+            m = (CompraPasaje)this.ActiveMdiChild;
 
 
         }

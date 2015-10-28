@@ -59,7 +59,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(88, 50);
             this.button3.TabIndex = 8;
-            this.button3.Text = "Comprar Encomienda";
+            this.button3.Text = "Comprar Encomiendas";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 

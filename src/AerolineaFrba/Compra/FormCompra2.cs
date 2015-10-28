@@ -39,10 +39,10 @@ namespace AerolineaFrba.Compra
 
         private void button3_Click(object sender, EventArgs e)
         {
-            FormEncomienda Pasaje = new FormEncomienda();
+            CompraEncomienda Pasaje = new CompraEncomienda();
             this.Hide();
             Pasaje.ShowDialog();
-            Pasaje = (FormEncomienda)this.ActiveMdiChild;
+            Pasaje = (CompraEncomienda)this.ActiveMdiChild;
 
             
           

@@ -14,11 +14,11 @@ using System.Text.RegularExpressions;
 
 namespace AerolineaFrba.Compra
 {
-    public partial class FormCompra3 : Form
+    public partial class CompraPasaje : Form
     {
             
         public static DataTable tabla = new DataTable();
-        public static int datosDe = 1;
+        public static int cantidadPasajesCargados = 0;
         public static string butaca = "";
         public static string tipoBucata = "";
         public static string aeroButacaID = "";
@@ -34,7 +34,7 @@ namespace AerolineaFrba.Compra
 
         public static bool esNuevo = true;
         
-        public FormCompra3()
+        public CompraPasaje()
         {
             InitializeComponent();
         }
@@ -75,25 +75,16 @@ namespace AerolineaFrba.Compra
 
         private void Volver_Click(object sender, EventArgs e)
         {
-            if (FormCompra2.tipoPasaje == true)
-            {
                 FormPasaje volver = new FormPasaje();
                 this.Hide();
                 volver.ShowDialog();
                 volver = (FormPasaje)this.ActiveMdiChild;
-            }
-
-            else
-            {
-                FormEncomienda volver = new FormEncomienda();
-                this.Hide();
-                volver.ShowDialog();
-                volver = (FormEncomienda)this.ActiveMdiChild;
-            }
+      
         }
 
         private void crearColumnas()
-        {
+        {   
+            tabla.Columns.Add("Id Butaca", typeof(string));
             tabla.Columns.Add("Butaca", typeof(string));
             tabla.Columns.Add("Tipo Butaca", typeof(string));
             tabla.Columns.Add("Nombre", typeof(string));
@@ -110,8 +101,10 @@ namespace AerolineaFrba.Compra
         private void cargarDatosATabla()
         {
             DataRow uno = tabla.NewRow();
+            uno["Id Butaca"] = aeroButacaID;
             uno["Butaca"] = butaca;
             uno["Tipo Butaca"] = tipoBucata;
+         
             uno["Nombre"] = nombre.Text;
             uno["Apellido"] = apellido.Text;
             uno["Tipo de Documento"] = tipo2.Text;
@@ -151,9 +144,14 @@ namespace AerolineaFrba.Compra
         {
             if (controlarQueEsteTodoCompletado())
             {
-
-                if (FormPasaje.cantPasajes > 1)
+                if (cantidadPasajesCargados == FormPasaje.cantPasajes)
                 {
+                    avisar("Usted ya cargó los datos de los " + FormPasaje.cantPasajes + " pasajes que quiere comprar.");
+                }
+
+                if (cantidadPasajesCargados < FormPasaje.cantPasajes)
+                {
+                   
                     if (FormPasaje.cantPasajes == FormPasaje.cantPasajes1) // si es el primero entonces crea las columnas
                     {   //creo las columnas de la tabla statica
 
@@ -162,71 +160,47 @@ namespace AerolineaFrba.Compra
                     //agrego los datos del pasajero
 
 
-                       
-                     if (esNuevo)
-                     {
-                         //avisar("Todavia no anda el Insert para un cliente nuevo");
+
+                    if (esNuevo)
+                    {
+                        //avisar("Todavia no anda el Insert para un cliente nuevo");
                         cargarNuevoCliente(); //INSERT DE LOS CAMPOS
-                        
+
                     }
                     else
-                     {
-                         
+                    {
+
                         actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE
-                        
+
                     }
 
+
                     cargarDatosATabla();
-                    darBajaButaca();
 
+                    darBajaButaca(aeroButacaID);
 
-                    FormPasaje.cantPasajes = (FormPasaje.cantPasajes - 1);
-                    datosDe = datosDe + 1;
-                    
-                    pasajero.Text = datosDe.ToString();
-                    
+                    FormPasaje.cantPasajes1--;
+                    cantidadPasajesCargados++;
+
+                   
                     LimpiarCliente_Click(sender, e);
                     llenarButacas();
                     butacaSeleccionada.Visible = false;
                     esNuevo = false;
-                     butaca = "";
+                    butaca = "";
                     tipoBucata = "";
 
                 }
-                else if (FormPasaje.cantPasajes == 1)
-                {
-                    if (FormPasaje.cantPasajes == FormPasaje.cantPasajes1) // si es el unico entonces crea las columnas
-                    {
-                        crearColumnas();
-                    }
+       
+                verificacion.DataSource = tabla;
+                verificacion.Show();
+                verificacion.Columns["Id Butaca"].Visible = false;
 
-                    cargarDatosATabla();
-
-                    if (esNuevo)
-                    {
-                        avisar("Todavia no anda el Insert para un cliente nuevo");
-                        cargarNuevoCliente(); //INSERT DE LOS CAMPOS
-
-                    }
-                    else
-                    {
-                     actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE
-                    }
-                    
-                    darBajaButaca();
-                    
-                    //lo mando a verificacion
-                    FormCompra4 siguiente = new FormCompra4();
-                    this.Hide();
-                    siguiente.ShowDialog();
-                    siguiente = (FormCompra4)this.ActiveMdiChild;
-
-                }
             }
 
             else if (controlarQueEsteTodoCompletado() == false)
             {
-                MessageBox.Show("Debes completar los datos obligatorios y seleccionar una butaca" ,"", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debes completar los datos obligatorios y seleccionar una butaca.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
@@ -303,7 +277,7 @@ namespace AerolineaFrba.Compra
                seCambioAlgo = true;
            }
           
-          if (FechaNacimiento.ToString() != fechaNacimiento.Text)
+         /* if (FechaNacimiento.ToString() != fechaNacimiento.Text)
            {
 
                 //BUG
@@ -315,18 +289,8 @@ namespace AerolineaFrba.Compra
                           " and CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
               
               seCambioAlgo = true;
-           }
-           if (DNI.ToString() != numero.Text)
-           {
-               string qry = "update DJML.CLIENTES " +
-                         " set CLIE_DNI = '" + numero.Text + "'" +
-                         " where CLIE_DNI = " + DNI +
-                         " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
-
-               new Query(qry).Ejecutar();
-               seCambioAlgo = true;
-           }
-              if (TipoDNI != tipo2.Text)
+           }*/
+               if (TipoDNI != tipo2.Text)
            {
                string qry = "update DJML.CLIENTES " +
                       " set CLIE_TIPO_DOC =" + aux +
@@ -340,7 +304,7 @@ namespace AerolineaFrba.Compra
 
            if (seCambioAlgo)
            {
-               string cambio = "Se han guardado los nuevos datos del cliente";
+               string cambio = "Se han guardado los nuevos datos del cliente.";
                avisar(cambio);
            }
 
@@ -366,7 +330,7 @@ namespace AerolineaFrba.Compra
           
         }
 
-        private void darBajaButaca()
+        private void darBajaButaca(string aeroButacaID)
         {
 
             //DAR DE BAJA BUTACA
@@ -378,7 +342,18 @@ namespace AerolineaFrba.Compra
 
             new Query(qry).Ejecutar();
         }
-  
+
+        private void darAltaButaca(string aeroButacaID)
+        {
+
+            string qry5 = " update DJML.BUTACA_AERO" +
+                            " set BXA_ESTADO = 1" +
+                            " where BXA_ID = '" + aeroButacaID + "'";
+
+            new Query(qry5).Ejecutar();
+            //avisar("mmm" + aeroButacaID+ "mmm");
+
+        }
         //AUTOCOMPLETA CAMPOS
         private void BuscarPorCliente_Click(object sender, EventArgs e)
         {
@@ -498,20 +473,18 @@ namespace AerolineaFrba.Compra
 
         private void FormCompra3_Load(object sender, EventArgs e)
         {
-            if (FormCompra2.esModificar == true)
-            {
-                Siguiente.Visible = false;
-                Actualizar.Visible = true;
-            }
-
-            Actualizar.Visible = false;
-
-            pasajero.Text = datosDe.ToString();
+            verificacion.DataSource = tabla;
+            verificacion.Show();
+            //verificacion.Columns["Id Butaca"].Visible = false;
+            
            // Siguiente.Enabled = false;
             LlenarComboBoxTipoDocumento();
             LlenarComboBoxTipoDocumento2();
             tipo.DropDownStyle = ComboBoxStyle.DropDownList;
             tipo2.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            DataGridViewColumn column = verificacion.Columns[0];
+            column.Width = 52;
 
             llenarButacas();
            
@@ -575,14 +548,6 @@ namespace AerolineaFrba.Compra
 
         }
 
-        public bool isCaracterValido(Char c)
-        {
-            if ((c >= '0' && c <= '9'))
-            {
-                return true;
-            }
-            return false;
-        }
 
         private void dni_TextChanged(object sender, EventArgs e)
         {
@@ -619,18 +584,6 @@ namespace AerolineaFrba.Compra
             
         }
 
-        public static void AllowNumber(KeyPressEventArgs e)
-        {
-            if (char.IsLetter(e.KeyChar) || //Letras
-                char.IsSymbol(e.KeyChar) || //Símbolos
-                char.IsWhiteSpace(e.KeyChar) || //Espaço
-                char.IsPunctuation(e.KeyChar)) //Pontuação
-                e.Handled = true; //Não permitir
-            //Com o script acima é possível utilizar Números, 'Del', 'BackSpace'..
-
-            //Abaixo só é permito de 0 a 9
-            //if ((e.KeyChar < '0') || (e.KeyChar > '9')) e.Handled = true; //Allow only numbers
-        }
 
         private void telefono_TextChanged(object sender, EventArgs e)
         {
@@ -639,8 +592,59 @@ namespace AerolineaFrba.Compra
             //OBLIGA A QUE INTRODUZCA NUMEROS
         }
 
+        private void verificacion_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            string idButacaAlta = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+           
+            ////BUG
+            darAltaButaca(idButacaAlta);
 
-       
+            borrarFilaDeTabla(idButacaAlta);
+
+            verificacion.Rows.RemoveAt(e.RowIndex);
+            
+            llenarButacas();
+
+            cantidadPasajesCargados--;
+
+                 
+       }
+
+        private void borrarFilaDeTabla(string idButaca)
+        {
+            for (int i = tabla.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = tabla.Rows[i];
+                if (dr["Id Butaca"] == idButaca.ToString())
+                    dr.Delete();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            if (cantidadPasajesCargados < FormPasaje.cantPasajes)
+            {
+                int resta = FormPasaje.cantPasajes - cantidadPasajesCargados;
+                avisar("Todavia debe agregar los datos de  " + resta + " pasajeros.");
+            }
+
+            if (cantidadPasajesCargados == FormPasaje.cantPasajes)
+            {
+
+                //lo mando a pagar
+                FormFormaDePago siguiente = new FormFormaDePago();
+                this.Hide();
+                siguiente.ShowDialog();
+                siguiente = (FormFormaDePago)this.ActiveMdiChild;
+            }
+        }
+
+        private void Actualizar_Click(object sender, EventArgs e)
+        {
+
+        }
+      
     }
 }
 
