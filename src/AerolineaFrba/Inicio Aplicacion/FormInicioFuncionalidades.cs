@@ -27,6 +27,8 @@ namespace AerolineaFrba.Inicio_Aplicacion
             
             this.Visible = false;
             Form frm = new FormRol();
+            frm.StartPosition = FormStartPosition.CenterScreen;
+          
             frm.ShowDialog();
             frm = (FormRol)this.ActiveMdiChild;
         }
@@ -35,6 +37,8 @@ namespace AerolineaFrba.Inicio_Aplicacion
         {
             this.Visible = false;
             Form frm = new FormGenerarViaje();
+            frm.StartPosition = FormStartPosition.CenterScreen;
+          
             frm.ShowDialog();
             frm = (FormGenerarViaje)this.ActiveMdiChild;
         }
@@ -43,7 +47,9 @@ namespace AerolineaFrba.Inicio_Aplicacion
         private void button5_Click_1(object sender, EventArgs e)
         {
             this.Visible = false;
-            FormCompra1 frm = new FormCompra1();
+             FormCompra1 frm = new FormCompra1();
+             frm.StartPosition = FormStartPosition.CenterScreen;
+        
             frm.ShowDialog();
             frm = (FormCompra1)this.ActiveMdiChild;
         }
@@ -52,6 +58,8 @@ namespace AerolineaFrba.Inicio_Aplicacion
         {
             this.Visible = false;
             Form frm = new FormCiudades();
+            frm.StartPosition = FormStartPosition.CenterScreen;
+          
             frm.ShowDialog();
             frm = (FormCiudades)this.ActiveMdiChild;
         
@@ -61,6 +69,8 @@ namespace AerolineaFrba.Inicio_Aplicacion
         {
             this.Visible = false;
             Form frm = new FormRuta();
+            frm.StartPosition = FormStartPosition.CenterScreen;
+          
             frm.ShowDialog();
             frm = (FormRuta)this.ActiveMdiChild;
         

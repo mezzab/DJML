@@ -60,6 +60,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.apellido = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.encomiendas)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -85,6 +86,7 @@
             this.encomiendas.Name = "encomiendas";
             this.encomiendas.Size = new System.Drawing.Size(536, 198);
             this.encomiendas.TabIndex = 25;
+            this.encomiendas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.encomiendas_CellContentClick);
             // 
             // Eliminar
             // 
@@ -151,6 +153,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.BuscarPorCliente);
             this.groupBox1.Controls.Add(this.dniNum);
             this.groupBox1.Controls.Add(this.tipo);
@@ -366,6 +369,16 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Apellido";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(442, 19);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 46);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Imprimir tabla";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // CompraEncomienda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -426,5 +439,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox kilos;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button2;
     }
 }

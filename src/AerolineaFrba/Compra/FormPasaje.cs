@@ -26,6 +26,7 @@ namespace AerolineaFrba.Compra
 
         private void FormPasaje_Load(object sender, EventArgs e)
         {
+                        
             button1.Enabled = false;
             LlenarComboBox1();
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -51,6 +52,7 @@ namespace AerolineaFrba.Compra
         private void button2_Click(object sender, EventArgs e)
         {
             FormCompra2 m = new FormCompra2();
+            m.StartPosition = FormStartPosition.CenterScreen;
             this.Hide();
             m.ShowDialog();
             m = (FormCompra2)this.ActiveMdiChild;
@@ -63,6 +65,7 @@ namespace AerolineaFrba.Compra
                 button1.Enabled = true;
             }
              CompraPasaje m = new CompraPasaje();
+             m.StartPosition = FormStartPosition.CenterScreen;
             this.Hide();
             m.ShowDialog();
             m = (CompraPasaje)this.ActiveMdiChild;

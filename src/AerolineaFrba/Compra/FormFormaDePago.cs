@@ -23,6 +23,8 @@ namespace AerolineaFrba.Compra
         {
             CompraPasaje m = new CompraPasaje();
             this.Hide();
+            m.StartPosition = FormStartPosition.CenterScreen;
+          
             m.ShowDialog();
             m = (CompraPasaje)this.ActiveMdiChild;
         }
@@ -32,6 +34,8 @@ namespace AerolineaFrba.Compra
             pagoEnEfectivo = true;
 
             FormEfectivo t = new FormEfectivo();
+            t.StartPosition = FormStartPosition.CenterScreen;
+          
             this.Hide();
             t.ShowDialog();
             t = (FormEfectivo)this.ActiveMdiChild;
@@ -45,6 +49,8 @@ namespace AerolineaFrba.Compra
             pagoEnEfectivo = false;
 
             FormEfectivo t = new FormEfectivo();
+            t.StartPosition = FormStartPosition.CenterScreen;
+          
             this.Hide();
             t.ShowDialog();
             t = (FormEfectivo)this.ActiveMdiChild;

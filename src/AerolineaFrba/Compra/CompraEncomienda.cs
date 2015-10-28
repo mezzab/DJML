@@ -117,6 +117,7 @@ namespace AerolineaFrba.Compra
         private void Volver_Click(object sender, EventArgs e)
         {
             FormCompra2 volver = new FormCompra2();
+            volver.StartPosition = FormStartPosition.CenterScreen;
             this.Hide();
             volver.ShowDialog();
             volver = (FormCompra2)this.ActiveMdiChild;
@@ -385,6 +386,7 @@ namespace AerolineaFrba.Compra
 
                    //lo mando a pagar
                    FormFormaDePago siguiente = new FormFormaDePago();
+                   siguiente.StartPosition = FormStartPosition.CenterScreen;
                    this.Hide();
                    siguiente.ShowDialog();
                    siguiente = (FormFormaDePago)this.ActiveMdiChild;
@@ -427,7 +429,20 @@ namespace AerolineaFrba.Compra
                    
                    encomiendas.DataSource = tablaEncomiendas;
                    encomiendas.Show();
-                   // encomiendas.Columns["Id Butaca"].Visible = false;
+                 
+                   encomiendas.Columns["Mail"].Visible = false;
+                   encomiendas.Columns["Telefono"].Visible = false;
+                   encomiendas.Columns["Fecha de nacimiento"].Visible = false;
+                   encomiendas.Columns["Direccion"].Visible = false;
+                   DataGridViewColumn column = encomiendas.Columns[0];
+                   column.Width = 50;
+                   DataGridViewColumn column2 = encomiendas.Columns[2];
+                   column2.Width = 50;
+                   DataGridViewColumn column3 = encomiendas.Columns[5];
+                   column3.Width = 75;
+            
+
+                    // encomiendas.Columns["Id"].Visible = false;
                }
 
                else if (controlarQueEsteTodoCompletado() == false)
@@ -500,6 +515,20 @@ namespace AerolineaFrba.Compra
            }
 
            private void groupBox3_Enter(object sender, EventArgs e)
+           {
+
+           }
+
+           private void button2_Click(object sender, EventArgs e)
+           {
+               for (int i = tablaEncomiendas.Rows.Count - 1; i >= 0; i--)
+               {
+                   DataRow dr = tablaEncomiendas.Rows[i];
+                   avisar(dr["Apellido"].ToString());
+               }
+           }
+
+           private void encomiendas_CellContentClick(object sender, DataGridViewCellEventArgs e)
            {
 
            }

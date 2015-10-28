@@ -77,6 +77,7 @@ namespace AerolineaFrba.Compra
         private void Volver_Click(object sender, EventArgs e)
         {
                 FormPasaje volver = new FormPasaje();
+                volver.StartPosition = FormStartPosition.CenterScreen;
                 this.Hide();
                 volver.ShowDialog();
                 volver = (FormPasaje)this.ActiveMdiChild;
@@ -196,6 +197,20 @@ namespace AerolineaFrba.Compra
                 verificacion.DataSource = tabla;
                 verificacion.Show();
                 verificacion.Columns["Id Butaca"].Visible = false;
+                verificacion.Columns["Mail"].Visible = false;
+                verificacion.Columns["Telefono"].Visible = false;
+                verificacion.Columns["Fecha de nacimiento"].Visible = false;
+                verificacion.Columns["Direccion"].Visible = false;
+                DataGridViewColumn column = verificacion.Columns[0];
+                column.Width = 50;
+                DataGridViewColumn column2 = verificacion.Columns[2];
+                column2.Width = 50;
+                DataGridViewColumn column3 = verificacion.Columns[3];
+                column3.Width = 75;
+                DataGridViewColumn column6 = verificacion.Columns[6];
+                column6.Width = 60;
+                DataGridViewColumn column12 = verificacion.Columns[12];
+                column6.Width = 78;
 
             }
 
@@ -479,20 +494,23 @@ namespace AerolineaFrba.Compra
 
         private void FormCompra3_Load(object sender, EventArgs e)
         {
+            
+            this.StartPosition = FormStartPosition.CenterScreen;
+            
             verificacion.DataSource = tabla;
             verificacion.Show();
             //verificacion.Columns["Id Butaca"].Visible = false;
             
            // Siguiente.Enabled = false;
             LlenarComboBoxTipoDocumento();
-            LlenarComboBoxTipoDocumento2();
-            tipo.DropDownStyle = ComboBoxStyle.DropDownList;
+             tipo.DropDownStyle = ComboBoxStyle.DropDownList;
+             LlenarComboBoxTipoDocumento2();
             tipo2.DropDownStyle = ComboBoxStyle.DropDownList;
            
             tipo2.Enabled = false;
             tipo.Text = tipo2.Text;
-
             numero.Enabled = false;
+            tipo2.Text = "DNI";
             DataGridViewColumn column = verificacion.Columns[0];
             column.Width = 52;
 
@@ -650,6 +668,7 @@ namespace AerolineaFrba.Compra
 
                 //lo mando a pagar
                 FormFormaDePago siguiente = new FormFormaDePago();
+                siguiente.StartPosition = FormStartPosition.CenterScreen;
                 this.Hide();
                 siguiente.ShowDialog();
                 siguiente = (FormFormaDePago)this.ActiveMdiChild;

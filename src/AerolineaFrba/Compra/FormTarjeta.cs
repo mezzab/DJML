@@ -53,6 +53,8 @@ namespace AerolineaFrba.Compra
         private void button1_Click(object sender, EventArgs e)
         {
             FormFormaDePago volver = new FormFormaDePago();
+            volver.StartPosition = FormStartPosition.CenterScreen;
+          
             this.Hide();
             volver.ShowDialog();
             volver = (FormFormaDePago)this.ActiveMdiChild;
@@ -458,6 +460,15 @@ namespace AerolineaFrba.Compra
         private void Comprar_Click(object sender, EventArgs e)
         {
            //HACER
+
+
+
+            Form1 volver = new Form1();
+            volver.StartPosition = FormStartPosition.CenterScreen;
+
+            this.Hide();
+            volver.ShowDialog();
+            volver = (Form1)this.ActiveMdiChild;
 
 
         }

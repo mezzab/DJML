@@ -23,6 +23,8 @@ namespace AerolineaFrba.Compra
         private void button1_Click(object sender, EventArgs e)
         {
             FormCompra1 volver = new FormCompra1();
+            volver.StartPosition = FormStartPosition.CenterScreen;
+          
             this.Hide();
             volver.ShowDialog();
             volver = (FormCompra1)this.ActiveMdiChild;
@@ -32,6 +34,7 @@ namespace AerolineaFrba.Compra
         private void button2_Click(object sender, EventArgs e)
         {
             FormPasaje enc = new FormPasaje();
+            enc.StartPosition = FormStartPosition.CenterScreen;
             this.Hide();
             enc.ShowDialog();
             enc = (FormPasaje)this.ActiveMdiChild;
@@ -41,6 +44,8 @@ namespace AerolineaFrba.Compra
         {
             CompraEncomienda Pasaje = new CompraEncomienda();
             this.Hide();
+            Pasaje.StartPosition = FormStartPosition.CenterScreen;
+          
             Pasaje.ShowDialog();
             Pasaje = (CompraEncomienda)this.ActiveMdiChild;
 
@@ -50,7 +55,7 @@ namespace AerolineaFrba.Compra
 
         private void FormCompra2_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button4_Click(object sender, EventArgs e)
