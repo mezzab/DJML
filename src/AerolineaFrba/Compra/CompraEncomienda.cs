@@ -141,8 +141,11 @@ namespace AerolineaFrba.Compra
         {
             DataRow encomienda = tablaEncomiendas.NewRow();
             encomienda["Id"] = identificador;
-            encomienda["Kilos"] = kilosEncomienda;
+         
+            encomienda["Kilos"] = kilos.Text;
+   
             encomienda["Nombre"] = nombre.Text;
+
             encomienda["Apellido"] = apellido.Text;
             encomienda["Tipo de Documento"] = tipo2.Text;
             encomienda["Numero de Documento"] = numero.Text;
@@ -390,49 +393,49 @@ namespace AerolineaFrba.Compra
 
            private void Siguiente_Click_1(object sender, EventArgs e)
            {
+               if (controlarQueEsteTodoCompletado())
                {
-                   if (controlarQueEsteTodoCompletado())
+                   if (cantidadEncomiendasCargadas == 10)
                    {
-                       if (esLaPrimeraVez) // si es el primero entonces crea las columnas
+                       avisar("El sistema no permite enviar mas de 10 encomiendas por compra.");
+                   }
+
+                   if (cantidadEncomiendasCargadas < 10)
+                   {   if (FormPasaje.cantPasajes == FormPasaje.cantPasajes1) // si es el primero entonces crea las columnas
                        {   //creo las columnas de la tabla statica
-
-                           crearColumnas();
-                           esLaPrimeraVez = false;
-                       }
-                      
-                       
-                       if (esNuevo)
-                       {
-                            cargarNuevoCliente(); //INSERT DE LOS CAMPOS
-
-                       }
-                       if (esNuevo == false)
-                       {
-                            actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE
-
+                          crearColumnas();
                        }
 
                        cargarDatosATabla();
-
-                       LimpiarCliente_Click_1(sender, e);
-
                        cantidadEncomiendasCargadas++;
-                       esNuevo = false;
+
+                       if (esNuevo)
+                       {  //avisar("Todavia no anda el Insert para un cliente nuevo");
+                           cargarNuevoCliente(); //INSERT DE LOS CAMPOS
+                       }
+                       else
+                       {
+                           actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE
+                       }
+                        
+                       LimpiarCliente_Click_1(sender, e);
+                      
+                       esNuevo = false;                    
 
                    }
 
+                   
                    encomiendas.DataSource = tablaEncomiendas;
                    encomiendas.Show();
-                   // BUG verificacion.Columns["Id Butaca"].Visible = false;
-
-
-                   if (controlarQueEsteTodoCompletado() == false)
-                   {
-                       MessageBox.Show("Debes completar los datos obligatorios e ingresar la cantidad de kilos que deseas enviar.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                   }
-
+                   // encomiendas.Columns["Id Butaca"].Visible = false;
                }
 
+               else if (controlarQueEsteTodoCompletado() == false)
+               {
+                   MessageBox.Show("Debes completar los datos obligatorios e ingresar la cantidad de kilos que deseas enviar", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               }
+
+            
            }
 
            private void BuscarPorCliente_Click_1(object sender, EventArgs e)

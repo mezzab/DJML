@@ -29,7 +29,7 @@ namespace AerolineaFrba.Compra
             button1.Enabled = false;
             LlenarComboBox1();
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            FormCompra2.tipoPasaje = true;
+            FormCompra2.esEncomienda = false;
          
         }
         public void LlenarComboBox1()

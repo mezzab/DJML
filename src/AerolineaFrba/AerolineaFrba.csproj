@@ -166,23 +166,23 @@
     <Compile Include="Canje Millas\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra\CompraEncomienda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\CompraEncomienda.Designer.cs">
+      <DependentUpon>CompraEncomienda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Compra\FormCompra Exitosa.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Compra\FormCompra Exitosa.Designer.cs">
       <DependentUpon>FormCompra Exitosa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\FormCompra4.cs">
+    <Compile Include="Compra\CompraPasaje.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra\FormCompra4.Designer.cs">
-      <DependentUpon>FormCompra4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Compra\FormCompra3.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Compra\FormCompra3.Designer.cs">
-      <DependentUpon>FormCompra3.cs</DependentUpon>
+    <Compile Include="Compra\CompraPasaje.Designer.cs">
+      <DependentUpon>CompraPasaje.cs</DependentUpon>
     </Compile>
     <Compile Include="Compra\FormCompra2.cs">
       <SubType>Form</SubType>
@@ -195,12 +195,6 @@
     </Compile>
     <Compile Include="Compra\FormCompra1.Designer.cs">
       <DependentUpon>FormCompra1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Compra\FormEncomienda.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Compra\FormEncomienda.Designer.cs">
-      <DependentUpon>FormEncomienda.cs</DependentUpon>
     </Compile>
     <Compile Include="Compra\FormFormaDePago.cs">
       <SubType>Form</SubType>
@@ -331,8 +325,8 @@
     <EmbeddedResource Include="Compra\FormCompra Exitosa.resx">
       <DependentUpon>FormCompra Exitosa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Compra\FormCompra3.resx">
-      <DependentUpon>FormCompra3.cs</DependentUpon>
+    <EmbeddedResource Include="Compra\CompraPasaje.resx">
+      <DependentUpon>CompraPasaje.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\FormCompra1.resx">
       <DependentUpon>FormCompra1.cs</DependentUpon>
@@ -340,11 +334,8 @@
     <EmbeddedResource Include="Compra\FormCompra2.resx">
       <DependentUpon>FormCompra2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Compra\FormCompra4.resx">
-      <DependentUpon>FormCompra4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Compra\FormEncomienda.resx">
-      <DependentUpon>FormEncomienda.cs</DependentUpon>
+    <EmbeddedResource Include="Compra\CompraEncomienda.resx">
+      <DependentUpon>CompraEncomienda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\FormFormaDePago.resx">
       <DependentUpon>FormFormaDePago.cs</DependentUpon>
