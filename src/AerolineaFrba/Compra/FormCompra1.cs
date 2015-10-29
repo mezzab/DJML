@@ -26,6 +26,8 @@ namespace AerolineaFrba.Compra
 
         private void FormCompra1_Load(object sender, EventArgs e)
         {
+
+
             button3.Enabled = false;
             LlenarComboBox1();
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -39,6 +41,8 @@ namespace AerolineaFrba.Compra
              
             FormInicioFuncionalidades FormInicioFuncionalidades = new FormInicioFuncionalidades();
             this.Hide();
+            FormInicioFuncionalidades.StartPosition = FormStartPosition.CenterScreen;
+          
             FormInicioFuncionalidades.ShowDialog();
             FormInicioFuncionalidades = (FormInicioFuncionalidades)this.ActiveMdiChild;
 
@@ -162,6 +166,7 @@ namespace AerolineaFrba.Compra
             viajeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
 
             FormCompra2 asd = new FormCompra2();
+            asd.StartPosition = FormStartPosition.CenterScreen;
             this.Hide();
             asd.ShowDialog();
             asd = (FormCompra2)this.ActiveMdiChild;
@@ -174,6 +179,15 @@ namespace AerolineaFrba.Compra
         private void button4_Click(object sender, EventArgs e)
         {  DateTime fecha_salida = date.Value.Date;
        // MessageBox.Show(fecha_salida);
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            FormFormaDePago FormInicioFuncionalidades = new FormFormaDePago();
+            this.Hide();
+            FormInicioFuncionalidades.ShowDialog();
+            FormInicioFuncionalidades = (FormFormaDePago)this.ActiveMdiChild;
+
         }
 
       

@@ -12,6 +12,8 @@ namespace AerolineaFrba.Compra
 {
     public partial class FormFormaDePago : Form
     {
+        public static Boolean pagoEnEfectivo;
+
         public FormFormaDePago()
         {
             InitializeComponent();
@@ -19,28 +21,44 @@ namespace AerolineaFrba.Compra
 
         private void button3_Click(object sender, EventArgs e)
         {
-            FormCompra3 m = new FormCompra3();
+            CompraPasaje m = new CompraPasaje();
             this.Hide();
+            m.StartPosition = FormStartPosition.CenterScreen;
+          
             m.ShowDialog();
-            m = (FormCompra3)this.ActiveMdiChild;
+            m = (CompraPasaje)this.ActiveMdiChild;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            /*FormEfectivoPosta E = new FormEfectivoPosta();
-            this.Hide();
-            E.ShowDialog();
-            E = (FormEfectivoPosta)this.ActiveMdiChild;*/
+            pagoEnEfectivo = true;
 
-            MessageBox.Show("Todavia no hice este form guacho", "AGUANNNNNTA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            FormEfectivo t = new FormEfectivo();
+            t.StartPosition = FormStartPosition.CenterScreen;
+          
+            this.Hide();
+            t.ShowDialog();
+            t = (FormEfectivo)this.ActiveMdiChild;
+
+           // MessageBox.Show("Todavia no hice este form guacho", "AGUANNNNNTA", MessageBoxButtons.OK, MessageBoxIcon.Information);
            }
 
         private void button1_Click(object sender, EventArgs e)
         {       //dice efectivo pero tiene mal creado el nombre el puto form, todavia no se como sacarlo
+            
+            pagoEnEfectivo = false;
+
             FormEfectivo t = new FormEfectivo();
+            t.StartPosition = FormStartPosition.CenterScreen;
+          
             this.Hide();
             t.ShowDialog();
             t = (FormEfectivo)this.ActiveMdiChild;
+        }
+
+        private void FormFormaDePago_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -12,7 +12,8 @@ namespace AerolineaFrba.Compra
 {
     public partial class FormCompra2 : Form
     {
-        public static Boolean tipoPasaje = true;
+        public static Boolean esEncomienda = true;
+        public static bool esModificar = false;
 
         public FormCompra2()
         {
@@ -22,6 +23,8 @@ namespace AerolineaFrba.Compra
         private void button1_Click(object sender, EventArgs e)
         {
             FormCompra1 volver = new FormCompra1();
+            volver.StartPosition = FormStartPosition.CenterScreen;
+          
             this.Hide();
             volver.ShowDialog();
             volver = (FormCompra1)this.ActiveMdiChild;
@@ -31,6 +34,7 @@ namespace AerolineaFrba.Compra
         private void button2_Click(object sender, EventArgs e)
         {
             FormPasaje enc = new FormPasaje();
+            enc.StartPosition = FormStartPosition.CenterScreen;
             this.Hide();
             enc.ShowDialog();
             enc = (FormPasaje)this.ActiveMdiChild;
@@ -38,10 +42,12 @@ namespace AerolineaFrba.Compra
 
         private void button3_Click(object sender, EventArgs e)
         {
-            FormEncomienda Pasaje = new FormEncomienda();
+            CompraEncomienda Pasaje = new CompraEncomienda();
             this.Hide();
+            Pasaje.StartPosition = FormStartPosition.CenterScreen;
+          
             Pasaje.ShowDialog();
-            Pasaje = (FormEncomienda)this.ActiveMdiChild;
+            Pasaje = (CompraEncomienda)this.ActiveMdiChild;
 
             
           
@@ -49,7 +55,7 @@ namespace AerolineaFrba.Compra
 
         private void FormCompra2_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -57,13 +63,13 @@ namespace AerolineaFrba.Compra
             MessageBox.Show(FormCompra1.viajeID.ToString());
         }
 
-        private void button4_Click_1(object sender, EventArgs e) // esto es solo para probar, despues vuela. 
+        /*private void button4_Click_1(object sender, EventArgs e) // esto es solo para probar, despues vuela. 
         {
             Query qry10 = new Query("SELECT VIAJE_AERO_ID FROM DJML.VIAJES WHERE VIAJE_ID =" + "'"+FormCompra1.viajeID+"'");
 
             string aeroID = (string)qry10.ObtenerUnicoCampo();
             MessageBox.Show("El numero de matricula de la aeronave que realizara el viaje es:" + aeroID , "Consulta de matricula", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //MessageBox.Show(FormCompra1.viajeID.ToString());
-        }
+        }*/
     }
 }

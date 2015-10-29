@@ -51,7 +51,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(12, 76);
+            this.label2.Location = new System.Drawing.Point(12, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(222, 24);
             this.label2.TabIndex = 1;
@@ -63,7 +63,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(240, 76);
+            this.label3.Location = new System.Drawing.Point(240, 56);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 24);
             this.label3.TabIndex = 2;
@@ -103,6 +103,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Compra Realizada";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

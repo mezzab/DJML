@@ -16,6 +16,7 @@ namespace AerolineaFrba.Compra
     { 
         
         public static int cantPasajes;
+        public static int cantPasajes1;
 
         public FormPasaje()
         {
@@ -25,10 +26,11 @@ namespace AerolineaFrba.Compra
 
         private void FormPasaje_Load(object sender, EventArgs e)
         {
+                        
             button1.Enabled = false;
             LlenarComboBox1();
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            FormCompra2.tipoPasaje = true;
+            FormCompra2.esEncomienda = false;
          
         }
         public void LlenarComboBox1()
@@ -38,12 +40,19 @@ namespace AerolineaFrba.Compra
              comboBox1.Items.Add(3);
              comboBox1.Items.Add(4);
              comboBox1.Items.Add(5);
+             comboBox1.Items.Add(6);
+             comboBox1.Items.Add(7);
+             comboBox1.Items.Add(8);
+             comboBox1.Items.Add(9);
+             comboBox1.Items.Add(10);
+ 
          
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             FormCompra2 m = new FormCompra2();
+            m.StartPosition = FormStartPosition.CenterScreen;
             this.Hide();
             m.ShowDialog();
             m = (FormCompra2)this.ActiveMdiChild;
@@ -55,19 +64,19 @@ namespace AerolineaFrba.Compra
             {
                 button1.Enabled = true;
             }
-             FormCompra3 m = new FormCompra3();
+             CompraPasaje m = new CompraPasaje();
+             m.StartPosition = FormStartPosition.CenterScreen;
             this.Hide();
             m.ShowDialog();
-            m = (FormCompra3)this.ActiveMdiChild;
+            m = (CompraPasaje)this.ActiveMdiChild;
 
-           
 
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             cantPasajes = Int32.Parse(comboBox1.Text.Trim());
-
+            cantPasajes1 = Int32.Parse(comboBox1.Text.Trim());
             button1.Enabled = true;
 
         }
@@ -76,6 +85,7 @@ namespace AerolineaFrba.Compra
         {
 
         }
+
 
     }
 }
