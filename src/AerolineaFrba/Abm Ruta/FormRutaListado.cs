@@ -38,7 +38,10 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button_volver_Click(object sender, EventArgs e)
         {
-            //ToDo
+            FormRuta ruta = new FormRuta();
+            this.Hide();
+            ruta.ShowDialog();
+            ruta = (FormRuta)this.ActiveMdiChild;
         }
 
     }
