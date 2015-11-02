@@ -463,12 +463,12 @@ namespace AerolineaFrba.Compra
 
 
 
-            Form1 volver = new Form1();
+            CompraEnco volver = new CompraEnco();
             volver.StartPosition = FormStartPosition.CenterScreen;
 
             this.Hide();
             volver.ShowDialog();
-            volver = (Form1)this.ActiveMdiChild;
+            volver = (CompraEnco)this.ActiveMdiChild;
 
 
         }

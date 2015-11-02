@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba.Inicio_Aplicacion;
 
 namespace AerolineaFrba.Devolucion
 {
-    public partial class Devolucion1 : Form
+    public partial class Devolucion0 : Form
     {
-        public Devolucion1()
+        public Devolucion0()
         {
             InitializeComponent();
         }
@@ -20,13 +21,12 @@ namespace AerolineaFrba.Devolucion
         private void button1_Click(object sender, EventArgs e)
         {
 
-
-            Devolucion0 FormInicioFuncionalidades = new Devolucion0();
+            FormInicioFuncionalidades FormInicioFuncionalidades = new FormInicioFuncionalidades();
             this.Hide();
             FormInicioFuncionalidades.StartPosition = FormStartPosition.CenterScreen;
 
             FormInicioFuncionalidades.ShowDialog();
-            FormInicioFuncionalidades = (Devolucion0)this.ActiveMdiChild;
+            FormInicioFuncionalidades = (FormInicioFuncionalidades)this.ActiveMdiChild;
         }
     }
 }
