@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.motivo = new System.Windows.Forms.RichTextBox();
             this.Siguiente = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -55,18 +56,30 @@
             // Siguiente
             // 
             this.Siguiente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.Siguiente.Location = new System.Drawing.Point(16, 200);
+            this.Siguiente.Location = new System.Drawing.Point(98, 200);
             this.Siguiente.Name = "Siguiente";
-            this.Siguiente.Size = new System.Drawing.Size(291, 49);
+            this.Siguiente.Size = new System.Drawing.Size(209, 49);
             this.Siguiente.TabIndex = 2;
-            this.Siguiente.Text = "Finalizar devolucion";
+            this.Siguiente.Text = "Finalizar devolución";
             this.Siguiente.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.button1.Location = new System.Drawing.Point(16, 200);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 49);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Atras";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Devolucion1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(321, 261);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Siguiente);
             this.Controls.Add(this.motivo);
             this.Controls.Add(this.label1);
@@ -82,5 +95,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox motivo;
         private System.Windows.Forms.Button Siguiente;
+        private System.Windows.Forms.Button button1;
     }
 }

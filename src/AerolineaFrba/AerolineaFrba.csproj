@@ -168,17 +168,23 @@
     <Compile Include="Canje Millas\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\CompraEncomienda.cs">
+    <Compile Include="Compra\CompraEncomienda LUEGO SE BORRA.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra\CompraEncomienda.Designer.cs">
-      <DependentUpon>CompraEncomienda.cs</DependentUpon>
+    <Compile Include="Compra\CompraEncomienda LUEGO SE BORRA.Designer.cs">
+      <DependentUpon>CompraEncomienda LUEGO SE BORRA.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\FormCompra Exitosa.cs">
+    <Compile Include="Compra\CompraExitosa.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra\FormCompra Exitosa.Designer.cs">
-      <DependentUpon>FormCompra Exitosa.cs</DependentUpon>
+    <Compile Include="Compra\CompraExitosa.Designer.cs">
+      <DependentUpon>CompraExitosa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra\CompraEncomiendas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\CompraEncomiendas.Designer.cs">
+      <DependentUpon>CompraEncomiendas.cs</DependentUpon>
     </Compile>
     <Compile Include="Compra\CompraPasaje.cs">
       <SubType>Form</SubType>
@@ -223,13 +229,25 @@
     <Compile Include="Consulta Millas\ConsultarMillas.Designer.cs">
       <DependentUpon>ConsultarMillas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Globales.cs" />
-    <Compile Include="Devolucion\Form1.cs">
+    <Compile Include="Devolucion\Devolucion0.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Devolucion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Devolucion\Devolucion0.Designer.cs">
+      <DependentUpon>Devolucion0.cs</DependentUpon>
     </Compile>
+    <Compile Include="Devolucion\Devolucion1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Devolucion\Devolucion1.Designer.cs">
+      <DependentUpon>Devolucion1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Devolucion\Devolucion2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Devolucion\Devolucion2.Designer.cs">
+      <DependentUpon>Devolucion2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Globales.cs" />
     <Compile Include="Inicio Aplicacion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -324,8 +342,11 @@
     <EmbeddedResource Include="Abm Ruta\FormRutaModificacion2.resx">
       <DependentUpon>FormRutaModificacion2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Compra\FormCompra Exitosa.resx">
-      <DependentUpon>FormCompra Exitosa.cs</DependentUpon>
+    <EmbeddedResource Include="Compra\CompraExitosa.resx">
+      <DependentUpon>CompraExitosa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\CompraEncomiendas.resx">
+      <DependentUpon>CompraEncomiendas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\CompraPasaje.resx">
       <DependentUpon>CompraPasaje.cs</DependentUpon>
@@ -336,8 +357,8 @@
     <EmbeddedResource Include="Compra\FormCompra2.resx">
       <DependentUpon>FormCompra2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Compra\CompraEncomienda.resx">
-      <DependentUpon>CompraEncomienda.cs</DependentUpon>
+    <EmbeddedResource Include="Compra\CompraEncomienda LUEGO SE BORRA.resx">
+      <DependentUpon>CompraEncomienda LUEGO SE BORRA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\FormFormaDePago.resx">
       <DependentUpon>FormFormaDePago.cs</DependentUpon>
@@ -350,6 +371,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Consulta Millas\ConsultarMillas.resx">
       <DependentUpon>ConsultarMillas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devolucion\Devolucion0.resx">
+      <DependentUpon>Devolucion0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devolucion\Devolucion1.resx">
+      <DependentUpon>Devolucion1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devolucion\Devolucion2.resx">
+      <DependentUpon>Devolucion2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\FormGenerarViaje.resx">
       <DependentUpon>FormGenerarViaje.cs</DependentUpon>

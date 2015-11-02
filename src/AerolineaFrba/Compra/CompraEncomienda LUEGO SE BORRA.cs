@@ -16,7 +16,6 @@ namespace AerolineaFrba.Compra
 {
     public partial class CompraEncomienda : Form
     {
-        public static DataTable tablaEncomiendas = new DataTable();
         public static int cantidadEncomiendasCargadas = 0;
         public static string kilosEncomienda = "";
         public static string aeroButacaID = "";
@@ -41,7 +40,7 @@ namespace AerolineaFrba.Compra
 
         private void CompraEncomienda_Load(object sender, EventArgs e)
         {
-            encomiendas.DataSource = tablaEncomiendas;
+            encomiendas.DataSource = CompraPasaje.tabla;
             encomiendas.Show();
             //verificacion.Columns["Id Butaca"].Visible = false;
 
@@ -124,23 +123,23 @@ namespace AerolineaFrba.Compra
         }
 
         private void crearColumnas()
-        {   
-            tablaEncomiendas.Columns.Add("Id", typeof(int));
-            tablaEncomiendas.Columns.Add("Kilos", typeof(string));
-            tablaEncomiendas.Columns.Add("Nombre", typeof(string));
-            tablaEncomiendas.Columns.Add("Apellido", typeof(string));
-            tablaEncomiendas.Columns.Add("Tipo de Documento", typeof(string));
-            tablaEncomiendas.Columns.Add("Numero de Documento", typeof(int));
-            tablaEncomiendas.Columns.Add("Mail", typeof(string));
-            tablaEncomiendas.Columns.Add("Telefono", typeof(UInt64));
-            tablaEncomiendas.Columns.Add("Fecha de nacimiento", typeof(DateTime));
-            tablaEncomiendas.Columns.Add("Direccion", typeof(string));
-            tablaEncomiendas.Columns.Add("Precio", typeof(int));
+        {
+            CompraPasaje.tabla.Columns.Add("Id", typeof(int));
+            CompraPasaje.tabla.Columns.Add("Kilos", typeof(string));
+            CompraPasaje.tabla.Columns.Add("Nombre", typeof(string));
+            CompraPasaje.tabla.Columns.Add("Apellido", typeof(string));
+            CompraPasaje.tabla.Columns.Add("Tipo de Documento", typeof(string));
+            CompraPasaje.tabla.Columns.Add("Numero de Documento", typeof(int));
+            CompraPasaje.tabla.Columns.Add("Mail", typeof(string));
+            CompraPasaje.tabla.Columns.Add("Telefono", typeof(UInt64));
+            CompraPasaje.tabla.Columns.Add("Fecha de nacimiento", typeof(DateTime));
+            CompraPasaje.tabla.Columns.Add("Direccion", typeof(string));
+            CompraPasaje.tabla.Columns.Add("Precio", typeof(int));
         }
 
         private void cargarDatosATabla()
         {
-            DataRow encomienda = tablaEncomiendas.NewRow();
+            DataRow encomienda = CompraPasaje.tabla.NewRow();
             encomienda["Id"] = identificador;
          
             encomienda["Kilos"] = kilos.Text;
@@ -426,8 +425,8 @@ namespace AerolineaFrba.Compra
 
                    }
 
-                   
-                   encomiendas.DataSource = tablaEncomiendas;
+
+                   encomiendas.DataSource = CompraPasaje.tabla;
                    encomiendas.Show();
                  
                    encomiendas.Columns["Mail"].Visible = false;
@@ -521,9 +520,9 @@ namespace AerolineaFrba.Compra
 
            private void button2_Click(object sender, EventArgs e)
            {
-               for (int i = tablaEncomiendas.Rows.Count - 1; i >= 0; i--)
+               for (int i = CompraPasaje.tabla.Rows.Count - 1; i >= 0; i--)
                {
-                   DataRow dr = tablaEncomiendas.Rows[i];
+                   DataRow dr = CompraPasaje.tabla.Rows[i];
                    avisar(dr["Apellido"].ToString());
                }
            }
