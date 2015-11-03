@@ -26,14 +26,6 @@ namespace AerolineaFrba.Abm_Ruta
             llenar_combo_servicio(); 
         }
 
-        private void button_volver_Click(object sender, EventArgs e)
-        {
-            FormRuta ruta = new FormRuta();
-            this.Hide();
-            ruta.ShowDialog();
-            ruta = (FormRuta)this.ActiveMdiChild;
-        }
-
         private void llenar_combo_origen()
         {
             SqlConnection conexion = new SqlConnection();
@@ -85,5 +77,14 @@ namespace AerolineaFrba.Abm_Ruta
             comboBox_servicio.Text = null;
             comboBox_servicio.DropDownStyle = ComboBoxStyle.DropDownList;
         }
+
+        private void button_volver_Click(object sender, EventArgs e)
+        {
+            FormRuta ruta = new FormRuta();
+            this.Hide();
+            ruta.ShowDialog();
+            ruta = (FormRuta)this.ActiveMdiChild;
+        }
+
     }
 }

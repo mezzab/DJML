@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGrid = new System.Windows.Forms.DataGridView();
-            this.button_volver = new System.Windows.Forms.Button();
+            this.message = new System.Windows.Forms.Label();
+            this.button_eliminar = new System.Windows.Forms.Button();
+            this.button_buscar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox_servicio = new System.Windows.Forms.ComboBox();
             this.comboBox_destino = new System.Windows.Forms.ComboBox();
             this.comboBox_origen = new System.Windows.Forms.ComboBox();
-            this.button_buscar = new System.Windows.Forms.Button();
-            this.button_eliminar = new System.Windows.Forms.Button();
-            this.message = new System.Windows.Forms.Label();
+            this.dataGrid = new System.Windows.Forms.DataGridView();
+            this.button_volver = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.SuspendLayout();
@@ -63,22 +63,39 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rutas Aereas";
             // 
-            // dataGrid
+            // message
             // 
-            this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGrid.Location = new System.Drawing.Point(13, 127);
-            this.dataGrid.Name = "dataGrid";
-            this.dataGrid.Size = new System.Drawing.Size(583, 61);
-            this.dataGrid.TabIndex = 0;
+            this.message.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.message.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.message.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.message.Location = new System.Drawing.Point(179, 16);
+            this.message.Name = "message";
+            this.message.Size = new System.Drawing.Size(365, 40);
+            this.message.TabIndex = 16;
+            this.message.Text = "No hay rutas que cumplan con su descripción";
+            this.message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.message.Visible = false;
             // 
-            // button_volver
+            // button_eliminar
             // 
-            this.button_volver.Location = new System.Drawing.Point(329, 267);
-            this.button_volver.Name = "button_volver";
-            this.button_volver.Size = new System.Drawing.Size(75, 23);
-            this.button_volver.TabIndex = 6;
-            this.button_volver.Text = "Volver";
-            this.button_volver.UseVisualStyleBackColor = true;
+            this.button_eliminar.BackColor = System.Drawing.Color.Red;
+            this.button_eliminar.Enabled = false;
+            this.button_eliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_eliminar.Location = new System.Drawing.Point(614, 136);
+            this.button_eliminar.Name = "button_eliminar";
+            this.button_eliminar.Size = new System.Drawing.Size(87, 45);
+            this.button_eliminar.TabIndex = 15;
+            this.button_eliminar.Text = "ELIMINAR";
+            this.button_eliminar.UseVisualStyleBackColor = false;
+            // 
+            // button_buscar
+            // 
+            this.button_buscar.Location = new System.Drawing.Point(638, 70);
+            this.button_buscar.Name = "button_buscar";
+            this.button_buscar.Size = new System.Drawing.Size(75, 23);
+            this.button_buscar.TabIndex = 14;
+            this.button_buscar.Text = "Buscar!";
+            this.button_buscar.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -131,39 +148,23 @@
             this.comboBox_origen.Size = new System.Drawing.Size(121, 21);
             this.comboBox_origen.TabIndex = 8;
             // 
-            // button_buscar
+            // dataGrid
             // 
-            this.button_buscar.Location = new System.Drawing.Point(638, 70);
-            this.button_buscar.Name = "button_buscar";
-            this.button_buscar.Size = new System.Drawing.Size(75, 23);
-            this.button_buscar.TabIndex = 14;
-            this.button_buscar.Text = "Buscar!";
-            this.button_buscar.UseVisualStyleBackColor = true;
+            this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGrid.Location = new System.Drawing.Point(13, 127);
+            this.dataGrid.Name = "dataGrid";
+            this.dataGrid.Size = new System.Drawing.Size(583, 61);
+            this.dataGrid.TabIndex = 0;
             // 
-            // button_eliminar
+            // button_volver
             // 
-            this.button_eliminar.BackColor = System.Drawing.Color.Red;
-            this.button_eliminar.Enabled = false;
-            this.button_eliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_eliminar.Location = new System.Drawing.Point(614, 136);
-            this.button_eliminar.Name = "button_eliminar";
-            this.button_eliminar.Size = new System.Drawing.Size(87, 45);
-            this.button_eliminar.TabIndex = 15;
-            this.button_eliminar.Text = "ELIMINAR";
-            this.button_eliminar.UseVisualStyleBackColor = false;
-            // 
-            // message
-            // 
-            this.message.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.message.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.message.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.message.Location = new System.Drawing.Point(179, 16);
-            this.message.Name = "message";
-            this.message.Size = new System.Drawing.Size(365, 40);
-            this.message.TabIndex = 16;
-            this.message.Text = "No hay rutas que cumplan con su descripción";
-            this.message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.message.Visible = false;
+            this.button_volver.Location = new System.Drawing.Point(329, 267);
+            this.button_volver.Name = "button_volver";
+            this.button_volver.Size = new System.Drawing.Size(75, 23);
+            this.button_volver.TabIndex = 6;
+            this.button_volver.Text = "Volver";
+            this.button_volver.UseVisualStyleBackColor = true;
+            this.button_volver.Click += new System.EventHandler(this.button_volver_Click);
             // 
             // FormRutaBaja
             // 
