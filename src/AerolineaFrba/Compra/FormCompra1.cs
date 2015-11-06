@@ -120,21 +120,21 @@ namespace AerolineaFrba.Compra
 
 
                 DateTime fecha_salida = date.Value.Date;
-                string qry = "SELECT V.VIAJE_ID, S.SERV_DESCRIPCION SERVICIO, COUNT(DISTINCT X.BXA_ID) BUTACAS_LIBRES, A.AERO_KILOS_DISPONIBLES KGS_DISPONIBLES" +
-        " FROM DJML.RUTAS R, DJML.VIAJES V, DJML.SERVICIOS S, DJML.BUTACA_AERO B, DJML.AERONAVES A, DJML.BUTACA_AERO X" +
-        " WHERE R.RUTA_CODIGO = V.VIAJE_RUTA_ID " +
-        " AND R.RUTA_SERVICIO_ID = S.SERV_ID" +
-        " AND B.BXA_AERO_MATRICULA = V.VIAJE_AERO_ID" +
-        " AND A.AERO_MATRICULA = V.VIAJE_AERO_ID" +
-        " AND X.BXA_AERO_MATRICULA = A.AERO_MATRICULA" +
-        " AND R.RUTA_CIUDAD_DESTINO = (select CIUD_ID from djml.CIUDADES WHERE CIUD_DETALLE = '" + origen + "')" +
-        " AND R.RUTA_CIUDAD_ORIGEN = (select CIUD_ID from djml.CIUDADES WHERE CIUD_DETALLE = '" + destino + "')" +
-        " AND X.BXA_ESTADO = 1" +
-        " AND YEAR(V.VIAJE_FECHA_SALIDA) = YEAR('"+fecha_salida+"')" +
-        " AND MONTH(V.VIAJE_FECHA_SALIDA) = MONTH('" + fecha_salida + "') " +
-        " AND DAY(V.VIAJE_FECHA_SALIDA) = DAY('" + fecha_salida + "')" +
-                    //" AND V.VIAJE_FECHA_SALIDA > '2017-01-01 02:00:00.000' AND V.VIAJE_FECHA_SALIDA < '2017-02-01 02:00:00.000'" +
-        " GROUP BY V.VIAJE_ID, S.SERV_DESCRIPCION, A.AERO_KILOS_DISPONIBLES, V.VIAJE_FECHA_SALIDA";
+                string qry = " select v.VIAJE_ID, s.SERV_DESCRIPCION, COUNT(DISTINCT X.BXA_ID) BUTACAS_LIBRES, A.AERO_KILOS_DISPONIBLES KGS_DISPONIBLES" +
+                            " from djml.VIAJES v, djml.RUTAS r, djml.TRAMOS t, djml.SERVICIOS s, DJML.BUTACA_AERO B, DJML.AERONAVES A, DJML.BUTACA_AERO X" +
+                            " where v.VIAJE_RUTA_ID = r.RUTA_CODIGO" +
+                            " and r.RUTA_TRAMO = t.TRAMO_ID" +
+                            " and r.RUTA_SERVICIO = s.SERV_ID" +
+                            " AND B.BXA_AERO_MATRICULA = v.VIAJE_AERO_ID" +
+                            " AND A.AERO_MATRICULA = v.VIAJE_AERO_ID" +
+                            " AND X.BXA_AERO_MATRICULA = A.AERO_MATRICULA" +
+                            " AND X.BXA_ESTADO = 1" +
+                            " AND t.TRAMO_CIUDAD_ORIGEN = (select CIUD_ID from djml.CIUDADES WHERE CIUD_DETALLE ='" + origen + "') " +
+                            " AND t.TRAMO_CIUDAD_DESTINO= (select CIUD_ID from djml.CIUDADES WHERE CIUD_DETALLE ='" + destino + "') " +
+                            " and YEAR(v.VIAJE_FECHA_SALIDA) = YEAR('" + fecha_salida + "') " +
+                            " AND MONTH(v.VIAJE_FECHA_SALIDA) = MONTH('" + fecha_salida + "') " +
+                            " AND DAY(v.VIAJE_FECHA_SALIDA) = DAY('" + fecha_salida + "') " +
+                            " group by v.viaje_id, s.SERV_DESCRIPCION, a.AERO_KILOS_DISPONIBLES ";
 
 
                 dataGridView1.DataSource = new Query(qry).ObtenerDataTable();
