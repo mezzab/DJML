@@ -51,11 +51,11 @@ namespace AerolineaFrba.Abm_Ruta
             Query qry2 = new Query("SELECT 1 FROM [DJML].RUTAS");
             dataGrid.DataSource = qry2.ObtenerDataTable();
         }
-
+        */
         private void dataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-        }*/
+        }
 
     }
 }
