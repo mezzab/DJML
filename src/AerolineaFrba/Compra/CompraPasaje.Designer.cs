@@ -62,11 +62,26 @@
             this.verificacion = new System.Windows.Forms.DataGridView();
             this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button1 = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.kilos = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.combo = new System.Windows.Forms.ComboBox();
+            this.t1 = new System.Windows.Forms.Label();
+            this.t = new System.Windows.Forms.Label();
+            this.verificacion2 = new System.Windows.Forms.DataGridView();
+            this.Eliminar1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.verificacion)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.verificacion2)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -82,13 +97,13 @@
             this.groupBox1.Size = new System.Drawing.Size(277, 321);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Cliente";
+            this.groupBox1.Text = "CLIENTE";
             // 
             // BuscarPorCliente
             // 
             this.BuscarPorCliente.Location = new System.Drawing.Point(152, 63);
             this.BuscarPorCliente.Name = "BuscarPorCliente";
-            this.BuscarPorCliente.Size = new System.Drawing.Size(97, 37);
+            this.BuscarPorCliente.Size = new System.Drawing.Size(103, 37);
             this.BuscarPorCliente.TabIndex = 5;
             this.BuscarPorCliente.Text = " Buscar";
             this.BuscarPorCliente.UseVisualStyleBackColor = true;
@@ -229,15 +244,16 @@
             this.mail.Name = "mail";
             this.mail.Size = new System.Drawing.Size(100, 20);
             this.mail.TabIndex = 9;
+            this.mail.TextChanged += new System.EventHandler(this.mail_TextChanged);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(138, 117);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(26, 13);
+            this.label8.Size = new System.Drawing.Size(39, 13);
             this.label8.TabIndex = 8;
-            this.label8.Text = "Mail";
+            this.label8.Text = "Mail (*)";
             // 
             // direccion
             // 
@@ -289,11 +305,11 @@
             // 
             // LimpiarCliente
             // 
-            this.LimpiarCliente.Location = new System.Drawing.Point(579, 213);
+            this.LimpiarCliente.Location = new System.Drawing.Point(297, 277);
             this.LimpiarCliente.Name = "LimpiarCliente";
-            this.LimpiarCliente.Size = new System.Drawing.Size(89, 53);
+            this.LimpiarCliente.Size = new System.Drawing.Size(144, 50);
             this.LimpiarCliente.TabIndex = 15;
-            this.LimpiarCliente.Text = "Limpiar";
+            this.LimpiarCliente.Text = "Limpiar todo";
             this.LimpiarCliente.UseVisualStyleBackColor = true;
             this.LimpiarCliente.Click += new System.EventHandler(this.LimpiarCliente_Click);
             // 
@@ -302,21 +318,24 @@
             this.groupBox2.Controls.Add(this.butacaSeleccionada);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(292, 12);
+            this.groupBox2.Controls.Add(this.Siguiente);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.groupBox2.Location = new System.Drawing.Point(455, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(271, 320);
+            this.groupBox2.Size = new System.Drawing.Size(271, 319);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Butacas disponibles";
+            this.groupBox2.Text = "PASAJE";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // butacaSeleccionada
             // 
             this.butacaSeleccionada.BackColor = System.Drawing.SystemColors.Menu;
             this.butacaSeleccionada.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.butacaSeleccionada.Location = new System.Drawing.Point(9, 293);
+            this.butacaSeleccionada.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.butacaSeleccionada.Location = new System.Drawing.Point(6, 236);
             this.butacaSeleccionada.Name = "butacaSeleccionada";
-            this.butacaSeleccionada.Size = new System.Drawing.Size(256, 13);
+            this.butacaSeleccionada.Size = new System.Drawing.Size(256, 16);
             this.butacaSeleccionada.TabIndex = 4;
             this.butacaSeleccionada.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -336,7 +355,7 @@
             this.Seleccionar});
             this.dataGridView1.Location = new System.Drawing.Point(6, 38);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(261, 240);
+            this.dataGridView1.Size = new System.Drawing.Size(261, 182);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -347,7 +366,7 @@
             // 
             // Volver
             // 
-            this.Volver.Location = new System.Drawing.Point(36, 563);
+            this.Volver.Location = new System.Drawing.Point(38, 632);
             this.Volver.Name = "Volver";
             this.Volver.Size = new System.Drawing.Size(148, 54);
             this.Volver.TabIndex = 3;
@@ -357,11 +376,12 @@
             // 
             // Siguiente
             // 
-            this.Siguiente.Location = new System.Drawing.Point(579, 278);
+            this.Siguiente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.Siguiente.Location = new System.Drawing.Point(9, 263);
             this.Siguiente.Name = "Siguiente";
-            this.Siguiente.Size = new System.Drawing.Size(90, 54);
+            this.Siguiente.Size = new System.Drawing.Size(253, 43);
             this.Siguiente.TabIndex = 4;
-            this.Siguiente.Text = "Agregar";
+            this.Siguiente.Text = "Cargar Pasaje";
             this.Siguiente.UseVisualStyleBackColor = true;
             this.Siguiente.Click += new System.EventHandler(this.Siguiente_Click);
             // 
@@ -370,9 +390,9 @@
             this.verificacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.verificacion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Eliminar});
-            this.verificacion.Location = new System.Drawing.Point(9, 347);
+            this.verificacion.Location = new System.Drawing.Point(5, 19);
             this.verificacion.Name = "verificacion";
-            this.verificacion.Size = new System.Drawing.Size(671, 198);
+            this.verificacion.Size = new System.Drawing.Size(706, 117);
             this.verificacion.TabIndex = 18;
             this.verificacion.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.verificacion_CellContentClick_1);
             // 
@@ -383,7 +403,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(491, 563);
+            this.button1.Location = new System.Drawing.Point(493, 632);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(189, 54);
             this.button1.TabIndex = 19;
@@ -391,15 +411,128 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button2);
+            this.groupBox4.Controls.Add(this.kilos);
+            this.groupBox4.Controls.Add(this.label12);
+            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.groupBox4.Location = new System.Drawing.Point(289, 116);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(160, 153);
+            this.groupBox4.TabIndex = 20;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "ENCOMIENDA";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(18, 29);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(118, 13);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Ingrese el peso en Kgs:";
+            // 
+            // kilos
+            // 
+            this.kilos.Location = new System.Drawing.Point(18, 51);
+            this.kilos.Name = "kilos";
+            this.kilos.Size = new System.Drawing.Size(120, 20);
+            this.kilos.TabIndex = 1;
+            this.kilos.TextChanged += new System.EventHandler(this.kilos_TextChanged);
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.button2.Location = new System.Drawing.Point(6, 88);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(148, 52);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Cargar Encomienda";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // combo
+            // 
+            this.combo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.combo.FormattingEnabled = true;
+            this.combo.Location = new System.Drawing.Point(298, 74);
+            this.combo.Name = "combo";
+            this.combo.Size = new System.Drawing.Size(141, 25);
+            this.combo.TabIndex = 21;
+            this.combo.SelectedIndexChanged += new System.EventHandler(this.combo_SelectedIndexChanged);
+            // 
+            // t1
+            // 
+            this.t1.AutoSize = true;
+            this.t1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.t1.Location = new System.Drawing.Point(302, 23);
+            this.t1.Name = "t1";
+            this.t1.Size = new System.Drawing.Size(123, 20);
+            this.t1.TabIndex = 22;
+            this.t1.Text = "Seleccione qué";
+            this.t1.Click += new System.EventHandler(this.label13_Click);
+            // 
+            // t
+            // 
+            this.t.AutoSize = true;
+            this.t.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.t.Location = new System.Drawing.Point(303, 46);
+            this.t.Name = "t";
+            this.t.Size = new System.Drawing.Size(126, 20);
+            this.t.TabIndex = 23;
+            this.t.Text = "desea comprar:";
+            this.t.Click += new System.EventHandler(this.label14_Click);
+            // 
+            // verificacion2
+            // 
+            this.verificacion2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.verificacion2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Eliminar1});
+            this.verificacion2.Location = new System.Drawing.Point(6, 14);
+            this.verificacion2.Name = "verificacion2";
+            this.verificacion2.Size = new System.Drawing.Size(706, 129);
+            this.verificacion2.TabIndex = 24;
+            this.verificacion2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.verificacion2_CellContentClick);
+            // 
+            // Eliminar1
+            // 
+            this.Eliminar1.HeaderText = "Eliminar";
+            this.Eliminar1.Name = "Eliminar1";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.verificacion);
+            this.groupBox5.Location = new System.Drawing.Point(9, 334);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(717, 143);
+            this.groupBox5.TabIndex = 25;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "LISTA DE PASAJES A COMPRAR";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.verificacion2);
+            this.groupBox6.Location = new System.Drawing.Point(9, 480);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(717, 149);
+            this.groupBox6.TabIndex = 26;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "LISTA DE ENCOMIENDAS A COMPRAR";
+            // 
             // CompraPasaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(693, 634);
+            this.ClientSize = new System.Drawing.Size(733, 698);
+            this.Controls.Add(this.groupBox6);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.t);
+            this.Controls.Add(this.t1);
+            this.Controls.Add(this.combo);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.verificacion);
             this.Controls.Add(this.LimpiarCliente);
-            this.Controls.Add(this.Siguiente);
             this.Controls.Add(this.Volver);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -414,7 +547,13 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.verificacion)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.verificacion2)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -454,5 +593,16 @@
         private System.Windows.Forms.DataGridView verificacion;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewButtonColumn Eliminar;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox kilos;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox combo;
+        private System.Windows.Forms.Label t1;
+        private System.Windows.Forms.Label t;
+        private System.Windows.Forms.DataGridView verificacion2;
+        private System.Windows.Forms.DataGridViewButtonColumn Eliminar1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox groupBox6;
     }
 }

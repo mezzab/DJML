@@ -30,7 +30,6 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.message = new System.Windows.Forms.Label();
-            this.button_eliminar = new System.Windows.Forms.Button();
             this.button_buscar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,6 +39,7 @@
             this.comboBox_origen = new System.Windows.Forms.ComboBox();
             this.dataGrid = new System.Windows.Forms.DataGridView();
             this.button_volver = new System.Windows.Forms.Button();
+            this.ELIMINAR = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.SuspendLayout();
@@ -47,7 +47,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.message);
-            this.groupBox1.Controls.Add(this.button_eliminar);
             this.groupBox1.Controls.Add(this.button_buscar);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -75,18 +74,6 @@
             this.message.Text = "No hay rutas que cumplan con su descripción";
             this.message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.message.Visible = false;
-            // 
-            // button_eliminar
-            // 
-            this.button_eliminar.BackColor = System.Drawing.Color.Red;
-            this.button_eliminar.Enabled = false;
-            this.button_eliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_eliminar.Location = new System.Drawing.Point(614, 136);
-            this.button_eliminar.Name = "button_eliminar";
-            this.button_eliminar.Size = new System.Drawing.Size(87, 45);
-            this.button_eliminar.TabIndex = 15;
-            this.button_eliminar.Text = "ELIMINAR";
-            this.button_eliminar.UseVisualStyleBackColor = false;
             // 
             // button_buscar
             // 
@@ -152,10 +139,13 @@
             // dataGrid
             // 
             this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGrid.Location = new System.Drawing.Point(13, 127);
+            this.dataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ELIMINAR});
+            this.dataGrid.Location = new System.Drawing.Point(16, 127);
             this.dataGrid.Name = "dataGrid";
-            this.dataGrid.Size = new System.Drawing.Size(583, 61);
+            this.dataGrid.Size = new System.Drawing.Size(707, 61);
             this.dataGrid.TabIndex = 0;
+            this.dataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_CellContentClick);
             // 
             // button_volver
             // 
@@ -166,6 +156,11 @@
             this.button_volver.Text = "Volver";
             this.button_volver.UseVisualStyleBackColor = true;
             this.button_volver.Click += new System.EventHandler(this.button_volver_Click);
+            // 
+            // ELIMINAR
+            // 
+            this.ELIMINAR.HeaderText = "ELIMINAR";
+            this.ELIMINAR.Name = "ELIMINAR";
             // 
             // FormRutaBaja
             // 
@@ -190,7 +185,6 @@
         private System.Windows.Forms.DataGridView dataGrid;
         private System.Windows.Forms.Button button_volver;
         private System.Windows.Forms.Label message;
-        private System.Windows.Forms.Button button_eliminar;
         private System.Windows.Forms.Button button_buscar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -198,5 +192,6 @@
         private System.Windows.Forms.ComboBox comboBox_servicio;
         private System.Windows.Forms.ComboBox comboBox_destino;
         private System.Windows.Forms.ComboBox comboBox_origen;
+        private System.Windows.Forms.DataGridViewButtonColumn ELIMINAR;
     }
 }

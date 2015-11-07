@@ -165,11 +165,11 @@ namespace AerolineaFrba.Compra
             
             viajeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
 
-            FormCompra2 asd = new FormCompra2();
+            CompraPasaje asd = new CompraPasaje();
             asd.StartPosition = FormStartPosition.CenterScreen;
             this.Hide();
             asd.ShowDialog();
-            asd = (FormCompra2)this.ActiveMdiChild;
+            asd = (CompraPasaje)this.ActiveMdiChild;
 
             
                        

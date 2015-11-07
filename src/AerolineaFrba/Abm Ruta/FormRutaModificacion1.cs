@@ -86,5 +86,10 @@ namespace AerolineaFrba.Abm_Ruta
             ruta = (FormRuta)this.ActiveMdiChild;
         }
 
+
+        private void button_buscar_Click(object sender, EventArgs e)
+        {
+         
+        }
     }
 }
