@@ -63,12 +63,9 @@ C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\Aerol
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.FormRutaModificacion1.resources
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Abm_Ruta.FormRutaModificacion2.resources
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.CompraEnco.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.CompraEncomiendas.resources
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.CompraPasaje.resources
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.FormCompra1.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.FormCompra2.resources
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.FormFormaDePago.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.FormPasaje.resources
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Compra.FormEfectivo.resources
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Consulta_Millas.ConsultarMillas.resources
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Debug\AerolineaFrba.Devolucion.Devolucion0.resources

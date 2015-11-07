@@ -88,7 +88,7 @@ namespace AerolineaFrba.Generacion_Viaje
             comboBoxAeronaves.Visible = false;
             label5.Visible = false;
             datos.Visible = false;
-            cargarDatosCiudades();
+            cargarGridCiudades();
         }
 
         private void fechaSalida_ValueChanged(object sender, EventArgs e)
@@ -108,7 +108,7 @@ namespace AerolineaFrba.Generacion_Viaje
 
             //obtener datos de ruta
             int rutaServicioId;
-            Query qry3 = new Query("SELECT RUTA_SERVICIO_ID FROM DJML.RUTAS WHERE RUTA_CODIGO = '" + rutaCodigo + "'");
+            Query qry3 = new Query("SELECT RUTA_SERVICIO FROM DJML.RUTAS WHERE RUTA_CODIGO = '" + rutaCodigo + "'");
             rutaServicioId = (int)qry3.ObtenerUnicoCampo();
   
             //obtener datos aeronave
@@ -118,16 +118,16 @@ namespace AerolineaFrba.Generacion_Viaje
 
             if (servicioAeronave == rutaServicioId)
             {   
-                /*
+                
                 //HACER: CORREGIR INSERCION EN FECHAS QUE ESTA ROMPIENDO
 
                 //hace la insercion en la base de datos del nuevo viaje generado
                 string sql1 = "INSERT INTO DJML.VIAJES (VIAJE_FECHA_SALIDA, VIAJE_FECHA_LLEGADA, VIAJE_FECHA_LLEGADA_ESTIMADA, VIAJE_AERO_ID, VIAJE_RUTA_ID)"
-                                + "values (" + fechaSalida.Value + ", '" + fechaLlegada.Value + "', " + fechaLlegadaEstimada.Value + ", " + comboBoxAeronaves.SelectedValue + ", " + rutaCodigo + ")";
+                                + "values ('" + fechaSalida.Value.ToShortDateString() + "', '" + fechaLlegada.Value.ToShortDateString() + "', '" + fechaLlegadaEstimada.Value.ToShortDateString() + "', '" + comboBoxAeronaves.SelectedValue.ToString() + "', " + rutaCodigo + ")";
                 Query qry = new Query(sql1);
                 qry.pComando = sql1;
                 qry.Ejecutar();
-                */
+                
                 MessageBox.Show("Viaje Generado Correctamente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 
                 //Lo envia a form Funcionalidades
@@ -141,12 +141,7 @@ namespace AerolineaFrba.Generacion_Viaje
                 MessageBox.Show("No coinciden el Tipo de Servicio de la Aeronave con el Servicio de la Ruta de Vuelo. ¡Seleccione otra opcion!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
-           
-
-          
-           /* Query qry3 = new Query("insert into djml.viajes ");
-            datos.DataSource = qry3.ObtenerDataTable();
-            * */
+   
         }
 
       
@@ -168,13 +163,15 @@ namespace AerolineaFrba.Generacion_Viaje
             comboBoxAeronaves.Visible = false;
         }
 
-       private void cargarDatosCiudades()
+       private void cargarGridCiudades()
         {
             SqlConnection conexion = new SqlConnection();
             conexion.ConnectionString = Settings.Default.CadenaDeConexion;
 
-            Query qry2 = new Query("select RUTA_CODIGO, C1.CIUD_DETALLE AS CIUDAD_ORIGEN, C2.CIUD_DETALLE AS CIUDAD_DESTINO from djml.RUTAS R JOIN DJML.CIUDADES C1 ON r.RUTA_CIUDAD_ORIGEN = c1.CIUD_ID JOIN DJML.CIUDADES C2 ON R.RUTA_CIUDAD_DESTINO = C2.CIUD_ID");
-            datos.DataSource = qry2.ObtenerDataTable();
+           // Query qry3 = new Query("select RUTA_CODIGO, C1.CIUD_DETALLE AS CIUDAD_ORIGEN, C2.CIUD_DETALLE AS CIUDAD_DESTINO from djml.RUTAS R JOIN DJML.CIUDADES C1 ON r.RUTA_CIUDAD_ORIGEN = c1.CIUD_ID JOIN DJML.CIUDADES C2 ON R.RUTA_CIUDAD_DESTINO = C2.CIUD_ID");
+
+            Query qry3 = new Query("SELECT R.RUTA_CODIGO, C1.CIUD_DETALLE AS ORIGEN, C2.CIUD_DETALLE AS DESTINO FROM DJML.RUTAS R JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_ORIGEN = C1.CIUD_ID JOIN DJML.CIUDADES C2 ON T.TRAMO_CIUDAD_DESTINO = C2.CIUD_ID");
+            datos.DataSource = qry3.ObtenerDataTable();
   
         }
       
@@ -184,14 +181,7 @@ namespace AerolineaFrba.Generacion_Viaje
             
         }
 
-        private void bnMostrar_Click(object sender, EventArgs e)
-        {
-            if(comboBoxAeronaves.SelectedIndex != -1)
-            {
-                datos.Visible = true;
-            }
-        }
-
+    
 
 
         }

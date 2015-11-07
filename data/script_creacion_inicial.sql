@@ -47,7 +47,6 @@ DROP PROCEDURE DJML.CREAR_CANJES
 
 DROP SCHEMA DJML
 
-
 --============================================================	
 --			GESTION DE DATOS 2C 2015 - TP AEROLINEA FRBA						
 -- ===========================================================
@@ -486,10 +485,7 @@ BEGIN
 	PRINT 'SE CREO LA TABLA REGISTRO_DESTINO CORRECTAMENTE'
 
 	---MIRAGRACION DATOS TABLA REGISTRO_DESTINO---
-	
-	--
-	--HACER: FALTA MIGRACION!!
-	-- PARA MI NO SE MIGRA
+	--HACER: NO SE MIGRA!!
 END 
 GO
 
@@ -580,12 +576,14 @@ BEGIN
 
 	PRINT 'SE CREO LA TABLA PASAJE CORRECTAMENTE'
 
+	---MIGRACION DATOS TABLA PASAJES---
 /*
 	insert into djml.PASAJES(PASA_VIAJE_ID,PASA_CLIE_ID,PASA_BUTA_ID)
 	select distinct V.VIAJE_ID,C.CLIE_ID,BA.BXA_ID from gd_esquema.Maestra m
 	JOIN DJML.VIAJES V on M.FechaSalida = V.VIAJE_FECHA_SALIDA
 	AND M.FechaLLegada = V.VIAJE_FECHA_LLEGADA
 	AND M.Fecha_LLegada_Estimada = V.VIAJE_FECHA_LLEGADA_ESTIMADA
+	AND M.Aeronave_Matricula = V.VIAJE_AERO_ID
 	JOIN DJML.CLIENTES C ON M.Cli_Dni = C.CLIE_DNI
 	AND M.Cli_Telefono = C.CLIE_TELEFONO
 	JOIN DJML.BUTACAS B ON M.Butaca_Nro = B.BUTA_NRO
@@ -596,10 +594,12 @@ BEGIN
 	AND M.Aeronave_Matricula = BA.BXA_AERO_MATRICULA 
 	WHERE M.Pasaje_Codigo <> 0
 	AND M.Paquete_Codigo = 0
+	and m.Pasaje_FechaCompra is not null
 
 
-	intente hacer esta pero no me salio...	
+	--HACER:: REVISAR Y CORREGIR!!!
 */
+
 
 
 --============================================================
@@ -614,11 +614,20 @@ BEGIN
 
 	PRINT 'SE CREO LA TABLA ENCOMIENDA CORRECTAMENTE'
 
-	----- FALTA MIGRAR ESTA TABLA!!!!!!
-	----------------------------------------------
-	------------------------------------------------------------
-	----------------------------------------------------------------------------
-	---------------------------------------------------------------------------------------
+	---MIGRACION DATOS TABLA ENCOMIENDAS---
+
+	insert into djml.ENCOMIENDAS(ENCO_VIAJE_ID,ENCO_CLIE_ID,ENCO_KG)
+	select distinct V.VIAJE_ID,C.CLIE_ID,m.Paquete_KG from gd_esquema.Maestra m
+	JOIN DJML.VIAJES V on M.FechaSalida = V.VIAJE_FECHA_SALIDA
+	AND M.FechaLLegada = V.VIAJE_FECHA_LLEGADA
+	AND M.Fecha_LLegada_Estimada = V.VIAJE_FECHA_LLEGADA_ESTIMADA
+	AND M.Aeronave_Matricula = V.VIAJE_AERO_ID
+	JOIN DJML.CLIENTES C ON M.Cli_Dni = C.CLIE_DNI
+	AND M.Cli_Telefono = C.CLIE_TELEFONO
+	where m.Paquete_Codigo <> 0
+	and m.Pasaje_Codigo = 0
+	
+	--HACER: REVISAR!! 
 	
 END
 GO
@@ -778,4 +787,3 @@ CREATE VIEW DJML.v_rutas
 		JOIN DJML.CIUDADES c2 ON c2.CIUD_ID = t.TRAMO_CIUDAD_DESTINO
 		WHERE RUTA_IS_ACTIVE = 1
 */
-
