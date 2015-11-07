@@ -100,7 +100,7 @@ namespace AerolineaFrba.Compra
         }
 
         private void FormEfectivo_Load(object sender, EventArgs e)
-        {
+        { /*
             if (FormFormaDePago.pagoEnEfectivo == true)
             {  
                 groupBox2.Visible = false;
@@ -112,7 +112,10 @@ namespace AerolineaFrba.Compra
                 groupBox4.Visible = false;
             }
 
-            Comprar.Enabled = false;
+           */
+            tipo2.Enabled = false;
+            numero.Enabled = false;
+
             LlenarComboBoxTipoDocumento();
             tipo.DropDownStyle = ComboBoxStyle.DropDownList;
             LlenarComboBoxTiposTarjetas();
@@ -143,10 +146,9 @@ namespace AerolineaFrba.Compra
 
         }
 
-        private void cargarNuevaTarjeta(string numeroTarjeta)
+        private void cargarNuevaTarjeta(string numeroTarjeta, string codigo)
         {
-            //BUG ... 
-            // FECHA DE VENCIMIENTO DE LA TARJETA? 
+            
             if (tipoT.Text == "")
             {
                 avisar("Debe seleccionar un tipo de tarjeta");
@@ -159,10 +161,11 @@ namespace AerolineaFrba.Compra
                 Query qry = new Query(sql);
                 string idTipoTarjeta = qry.ObtenerUnicoCampo().ToString();
 
-                avisar("el id de la tarjeta es: " + idTipoTarjeta);
-
-                string sql2 = "INSERT INTO DJML.TARJETAS_DE_CREDITO(TARJ_NUMERO, TARJ_TIPO_ID) " +
-                                                "VALUES(" + numeroTarjeta + ", " + idTipoTarjeta + ")";
+                // 
+                //avisar("el id de la tarjeta es: " + idTipoTarjeta);
+                
+                string sql2 = "INSERT INTO DJML.TARJETAS_DE_CREDITO(TARJ_NUMERO, TARJ_TIPO_ID, TARJ_CODIGO) " +
+                                                "VALUES(" + numeroTarjeta + ", " + idTipoTarjeta + ", " + codigo + " )";
                 Query qry2 = new Query(sql2);
                 //qry.pComando = sql;
                 qry2.Ejecutar();
@@ -170,7 +173,6 @@ namespace AerolineaFrba.Compra
                 avisar("Se guardo correctamente la nueva tarjeta en el sistema.");
             }
         
-
 
         }
 
@@ -187,6 +189,11 @@ namespace AerolineaFrba.Compra
             telefono.Text = "";
             numero.Text = "";
             fechaNacimiento.ResetText();
+            tipoT.Text = "";
+            codigoTarjeta.Text = "";
+            cuotas.Text = "";
+            vencimientoTarjeta.ResetText(); 
+            numTarjeta.Text = "";
 
         }
 
@@ -384,15 +391,40 @@ namespace AerolineaFrba.Compra
             return ndni != null;
         }
 
+        private bool controlarCodigoTarjeta(string numero, string codigo)
+        {
+            string sql = "SELECT TARJ_NUMERO FROM DJML.TARJETAS_DE_CREDITO " +
+                         "WHERE TARJ_NUMERO ='" + numero + "'" +
+                         " AND TARJ_CODIGO = '" + codigo + "'";
+
+            Query qry = new Query(sql);
+            object tarjeta = qry.ObtenerUnicoCampo();
+
+            return tarjeta != null;
+
+        }
+
+        private void actualizarCodigoDeSeguridad(string numero, string codigo)
+        {
+            string qry = "update DJML.TARJETAS_DE_CREDITO " +
+                         " set TARJ_CODIGO = '" + codigo + "'" +
+                         " where TARJ_NUMERO = '" + numero +"'";
+
+            new Query(qry).Ejecutar();
+        
+        }
+
+
+
         private bool existeTarjeta(string numeroTarjeta)
         {
-            string sql = "SELECT TARJ_ID FROM DJML.TARJETAS_DE_CREDITO " +
+            string sql = "SELECT TARJ_NUMERO FROM DJML.TARJETAS_DE_CREDITO " +
                          "WHERE TARJ_NUMERO =" + numeroTarjeta  ;
           
             Query qry = new Query(sql);
-            object idTarjeta = qry.ObtenerUnicoCampo();
+            object objeto = qry.ObtenerUnicoCampo();
 
-            return idTarjeta != null;
+            return objeto != null;
         }
 
         private void BuscarPorCliente_Click(object sender, EventArgs e)
@@ -459,18 +491,85 @@ namespace AerolineaFrba.Compra
 
         private void Comprar_Click(object sender, EventArgs e)
         {
-           //HACER
+          
+            if (controlarQueEsteTodoCompletado())
+            {
+                if (existeTarjeta(numTarjeta.Text))
+                {
+                    if (controlarCodigoTarjeta(numTarjeta.Text, codigoTarjeta.Text) == false)
+                    {
+                        //ANTES CONTROLABA QUE SEA EL MISMO CODIGO Y SI ERA DISTINTO AL GUARDADO EN LA BD LE AVISABA AL USUARIO
+                        //avisar("Codigo de seguridad de la tarjeta es incorrecto.");
 
+                        //AHORA ACTUALIZO EL CODIGO DE SEGURIDAD A LA TARJETA CARGADA.
 
+                        actualizarCodigoDeSeguridad(numTarjeta.Text, codigoTarjeta.Text);
+                        avisar("Se guardo el nuevo codigo de seguridad correctamente");
 
-            CompraEnco volver = new CompraEnco();
-            volver.StartPosition = FormStartPosition.CenterScreen;
+                       // registrarCompra(); TODO:
+                    }
+                    if (controlarCodigoTarjeta(numTarjeta.Text, codigoTarjeta.Text))
+                    {
+                        /* ESTO ACTUALIZA Y CREA NUEVO CLIENTE AUTOMATICAMENTE... 
+                        if (esNuevo)
+                        {
+                            cargarNuevoCliente(); //SI EL CLIENTE ES NUEVO HACE INSERT DE LOS CAMPOS
+                        }
+                        else
+                        {
+                            actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO DEL CLIENTE ACTUALIZA LOS DATOS DEL CLIENTE
+                        }
+                        */
 
-            this.Hide();
-            volver.ShowDialog();
-            volver = (CompraEnco)this.ActiveMdiChild;
+                        // TODO: 
+                        // registrarCompra();
 
+                        CompraEnco volver = new CompraEnco();
+                        volver.StartPosition = FormStartPosition.CenterScreen;
 
+                        this.Hide();
+                        volver.ShowDialog();
+                        volver = (CompraEnco)this.ActiveMdiChild;
+                    }
+
+                }
+                if (existeTarjeta(numTarjeta.Text) == false)
+                {
+                    avisar("Si la tarjeta es nueva, primero debe cargarla.");
+                
+                }
+
+            }
+                
+            if (controlarQueEsteTodoCompletado() == false)
+            {
+                avisar("Debe completar todos los campos obligatorios.");
+            }
+
+            
+        }
+
+        private bool controlarQueEsteTodoCompletado()
+        {
+            bool estanTodos = false;
+
+            if (apellido.Text != "" &&
+            nombre.Text != "" &&
+            direccion.Text != "" &&
+            //mail.Text != "" && //es opcional
+            telefono.Text != "" &&
+            numero.Text != "" &&
+            fechaNacimiento.Text != "" &&
+            tipoT.Text != "" &&
+            codigoTarjeta.Text != "" &&
+            cuotas.Text != "" &&
+            vencimientoTarjeta.Text != "" &&
+            numTarjeta.Text != "")
+            {
+                estanTodos = true;
+            }
+
+            return estanTodos;
         }
 
         private void tiposTarjeta_SelectedIndexChanged(object sender, EventArgs e)
@@ -478,7 +577,6 @@ namespace AerolineaFrba.Compra
 
             cargarCuotas(tipoT.Text);
             
-
         }
 
         private void cuotas_SelectedIndexChanged(object sender, EventArgs e)
@@ -513,13 +611,15 @@ namespace AerolineaFrba.Compra
 
             if (existeUsuario(numero.Text, tipo2.Text))
             {
-                avisar("Ya existe un usuario con ese tipo y numero de documento.");
+                avisar("Ya existe un usuario con ese tipo y numero de documento. Debe cargarlo y luego, de ser necesario, actualizar sus datos.");
             }
             if (existeUsuario(numero.Text, tipo2.Text) == false)
             {
+
             cargarNuevoCliente();
 
             esNuevo = false;
+
             }
 
         }
@@ -538,6 +638,7 @@ namespace AerolineaFrba.Compra
             {
 
                 string numeroTarjeta = numTarjeta.Text;
+                string codigoT = codigoTarjeta.Text;
 
                 if (existeTarjeta(numeroTarjeta))
                 {
@@ -546,7 +647,7 @@ namespace AerolineaFrba.Compra
                 if (existeTarjeta(numeroTarjeta) == false)
                 {
 
-                    cargarNuevaTarjeta(numeroTarjeta);
+                    cargarNuevaTarjeta(numeroTarjeta, codigoT);
 
                 }
             }
@@ -558,7 +659,10 @@ namespace AerolineaFrba.Compra
             //  dniNum.TextChanged += dni_TextChanged;
             telefono.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
             //OBLIGA A QUE INTRODUZCA NUMEROS
+
+            numero.Text = dniNum.Text;
         }
+
 
         private void numero_TextChanged(object sender, EventArgs e)
         {
@@ -586,6 +690,21 @@ namespace AerolineaFrba.Compra
             //  dniNum.TextChanged += dni_TextChanged;
             telefono.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
             //OBLIGA A QUE INTRODUZCA NUMEROS
+        }
+
+        private void tipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tipo2.Text = tipo.Text;
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter_1(object sender, EventArgs e)
+        {
+
         }
 
 

@@ -57,15 +57,15 @@
             this.label11 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Volver = new System.Windows.Forms.Button();
             this.Siguiente = new System.Windows.Forms.Button();
+            this.Volver = new System.Windows.Forms.Button();
             this.verificacion = new System.Windows.Forms.DataGridView();
             this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.kilos = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.kilos = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.combo = new System.Windows.Forms.ComboBox();
             this.t1 = new System.Windows.Forms.Label();
             this.t = new System.Windows.Forms.Label();
@@ -364,16 +364,6 @@
             this.Seleccionar.HeaderText = "Seleccionar";
             this.Seleccionar.Name = "Seleccionar";
             // 
-            // Volver
-            // 
-            this.Volver.Location = new System.Drawing.Point(38, 632);
-            this.Volver.Name = "Volver";
-            this.Volver.Size = new System.Drawing.Size(148, 54);
-            this.Volver.TabIndex = 3;
-            this.Volver.Text = "Atras";
-            this.Volver.UseVisualStyleBackColor = true;
-            this.Volver.Click += new System.EventHandler(this.Volver_Click);
-            // 
             // Siguiente
             // 
             this.Siguiente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
@@ -384,6 +374,16 @@
             this.Siguiente.Text = "Cargar Pasaje";
             this.Siguiente.UseVisualStyleBackColor = true;
             this.Siguiente.Click += new System.EventHandler(this.Siguiente_Click);
+            // 
+            // Volver
+            // 
+            this.Volver.Location = new System.Drawing.Point(38, 632);
+            this.Volver.Name = "Volver";
+            this.Volver.Size = new System.Drawing.Size(148, 54);
+            this.Volver.TabIndex = 3;
+            this.Volver.Text = "Atras";
+            this.Volver.UseVisualStyleBackColor = true;
+            this.Volver.Click += new System.EventHandler(this.Volver_Click);
             // 
             // verificacion
             // 
@@ -403,11 +403,12 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(493, 632);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(189, 54);
             this.button1.TabIndex = 19;
-            this.button1.Text = "Siguiente: Pagar";
+            this.button1.Text = "SIGUIENTE: PAGAR";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -424,23 +425,6 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "ENCOMIENDA";
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(18, 29);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(118, 13);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Ingrese el peso en Kgs:";
-            // 
-            // kilos
-            // 
-            this.kilos.Location = new System.Drawing.Point(18, 51);
-            this.kilos.Name = "kilos";
-            this.kilos.Size = new System.Drawing.Size(120, 20);
-            this.kilos.TabIndex = 1;
-            this.kilos.TextChanged += new System.EventHandler(this.kilos_TextChanged);
-            // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
@@ -451,6 +435,23 @@
             this.button2.Text = "Cargar Encomienda";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // kilos
+            // 
+            this.kilos.Location = new System.Drawing.Point(18, 51);
+            this.kilos.Name = "kilos";
+            this.kilos.Size = new System.Drawing.Size(120, 20);
+            this.kilos.TabIndex = 1;
+            this.kilos.TextChanged += new System.EventHandler(this.kilos_TextChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(18, 29);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(118, 13);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Ingrese el peso en Kgs:";
             // 
             // combo
             // 

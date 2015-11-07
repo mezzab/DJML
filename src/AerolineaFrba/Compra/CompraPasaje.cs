@@ -41,8 +41,8 @@ namespace AerolineaFrba.Compra
 
         public static int cantidadPasajesCargados = 0; 
         public static int cantidadEncomiendasCargados = 0;
-        public static int maxPasajes = 6;
-        public static int maxEncomiendas = 6;
+        public static int maxPasajes = 10;
+        public static int maxEncomiendas = 10;
 
         public static int idEncomienda = 0;
 
@@ -249,7 +249,7 @@ namespace AerolineaFrba.Compra
 
                     cargarDatosATabla();
 
-                    darBajaButaca(aeroButacaID);
+                    darBajaAltaButaca(aeroButacaID, 0);
 
                     cantidadPasajesCargados++;
 
@@ -428,35 +428,20 @@ namespace AerolineaFrba.Compra
 
         }
 
-        private void darBajaButaca(string aeroButacaID)
+        private void darBajaAltaButaca(string aeroButacaID, int bajaAlta)
         {
 
             //DAR DE BAJA BUTACA
             // MessageBox.Show("se ha dado de baja la butaca de id= " + aeroButacaID);
 
             string qry = " update DJML.BUTACA_AERO " +
-                            " set BXA_ESTADO = 0  " +
+                            " set BXA_ESTADO = "+bajaAlta+ "" +
                             " where BXA_ID = '" + aeroButacaID + "'";
 
             new Query(qry).Ejecutar();
         }
 
-        private void darAltaButaca(string aeroButacaID)
-        {
-
-            string alta = " update DJML.BUTACA_AERO " +
-                            " set BXA_ESTADO = 1" +
-                            " where BXA_ID = '" + aeroButacaID + "'";
-
-
-            Query qry = new Query(alta);
-            qry.pComando = alta;
-            new Query(alta).Ejecutar();
-
-
-            //avisar("mmm" + aeroButacaID+ "mmm");
-
-        }
+   
         //AUTOCOMPLETA CAMPOS
         private void BuscarPorCliente_Click(object sender, EventArgs e)
         {
@@ -593,9 +578,9 @@ namespace AerolineaFrba.Compra
             LlenarCombo();
             combo.DropDownStyle = ComboBoxStyle.DropDownList;
             tipo2.Enabled = false;
-            tipo.Text = tipo2.Text;
+            //tipo.Text = tipo2.Text;
             numero.Enabled = false;
-            tipo2.Text = "DNI";
+            //tipo2.Text = "DNI";
             DataGridViewColumn column = verificacion.Columns[0];
             column.Width = 52;
 
@@ -727,8 +712,8 @@ namespace AerolineaFrba.Compra
 
         private void verificacion_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            avisar("Falta implementar este boton");
-            /* TODO:
+            // avisar("Falta implementar este boton");
+            
             string idButacaAlta = verificacion.Rows[e.RowIndex].Cells[1].Value.ToString();
 
             avisar(idButacaAlta);
@@ -737,11 +722,11 @@ namespace AerolineaFrba.Compra
 
             verificacion.Rows.RemoveAt(e.RowIndex);
 
-            darAltaButaca(idButacaAlta);
+            darBajaAltaButaca(idButacaAlta, 1);
             llenarButacas();
 
             cantidadPasajesCargados--;
-            */
+            
 
         }
 
@@ -766,9 +751,7 @@ namespace AerolineaFrba.Compra
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            // TODO: 
-
-                //lo mando a pagar
+           
                 FormFormaDePago siguiente = new FormFormaDePago();
                 siguiente.StartPosition = FormStartPosition.CenterScreen;
                 this.Hide();
@@ -832,7 +815,7 @@ namespace AerolineaFrba.Compra
                 {
                     avisar("Usted ya cargó el maximo de encomiendas permitidas por tramite.");
                 }
-                //TODO: Borrar maximos
+               
 
                 if (cantidadEncomiendasCargados < maxEncomiendas)
                 {
@@ -854,19 +837,18 @@ namespace AerolineaFrba.Compra
                     }
                     else
                     {
-
                         actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE
-
                     }
 
 
                     cargarDatosATabla2();
 
-                    //TODO: bajar kilogramos de la aeronave
+                    
+                    modificarKilosAeronave(kilos.Text, "restar");
                    
                     cantidadEncomiendasCargados++;
                     idEncomienda++;
-
+                    
                     LimpiarCliente_Click(sender, e);
 
                 }
@@ -880,7 +862,7 @@ namespace AerolineaFrba.Compra
                 verificacion2.Columns["Direccion"].Visible = false;
                 DataGridViewColumn column = verificacion2.Columns[0];
                 column.Width = 50;
-           //     DataGridViewColumn column2 = verificacion2.Columns[2];
+             //   DataGridViewColumn column2 = verificacion2.Columns[2];
              //   column2.Width = 50;
                 DataGridViewColumn column3 = verificacion2.Columns[2];
                 column3.Width = 75;
@@ -908,6 +890,32 @@ namespace AerolineaFrba.Compra
 
         }
 
+        private void modificarKilosAeronave(string kilosIngresados, string operacion)
+        {
+            
+            string aux = "+ 0";
+
+            avisar("se van a " + operacion + kilosIngresados.ToString() + " kilos");
+
+            if (operacion == "sumar")
+            {
+                aux = "+ "+kilosIngresados; 
+            }
+            else if (operacion == "restar")
+            {
+                aux = "- " + kilosIngresados; 
+            }
+
+            string qry2000 = "update djml.AERONAVES " +
+                           "set AERO_KILOS_DISPONIBLES = AERO_KILOS_DISPONIBLES" + aux + 
+                           "where AERO_MATRICULA = '"+ FormCompra1.aeroID + "'";
+
+            new Query(qry2000).Ejecutar();
+
+            //TODO: Controlar que no pase a negativo.
+
+        }
+
         private void kilos_TextChanged(object sender, EventArgs e)
         {
             kgs = kilos.Text;
@@ -920,22 +928,27 @@ namespace AerolineaFrba.Compra
 
         private void verificacion2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            avisar("Falta implementar este boton");
-            /* TODO:
+                      
             string kilosALiberar = verificacion2.Rows[e.RowIndex].Cells[2].Value.ToString();
             string idEncomiendaA = verificacion2.Rows[e.RowIndex].Cells[1].Value.ToString();
                       
-
             borrarFilaDeTabla2(idEncomiendaA);
 
             verificacion2.Rows.RemoveAt(e.RowIndex);
 
-            liberarKgs(kilosALiberar);
+            modificarKilosAeronave(kilosALiberar, "sumar");
          
-           cantidadEncomiendasCargados--; */
+            cantidadEncomiendasCargados--; 
+
+            
         }
+
+    
+        
     }
 }
 
 
 
+//TODO: validar que el cliente no haya comprado un pasaje para ese dia
+//TODO: hacer que un cliente no pueda comprar dos pasajes para el mismo

@@ -24,6 +24,11 @@ namespace AerolineaFrba.Compra
            
         }
 
+        private void avisar(string quePaso)
+        {
+            MessageBox.Show(quePaso, "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void FormCompra1_Load(object sender, EventArgs e)
         {
 
@@ -165,11 +170,23 @@ namespace AerolineaFrba.Compra
             
             viajeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
 
+            string sql = "select VIAJE_AERO_ID from djml.VIAJES " +
+                         "where VIAJE_ID = " + viajeID ;
+            Query qry = new Query(sql);
+            aeroID = qry.ObtenerUnicoCampo().ToString();
+
+            // avisar("viaje id= " + viajeID + " ... matricula= " + aeroID + " ");
+
             CompraPasaje asd = new CompraPasaje();
             asd.StartPosition = FormStartPosition.CenterScreen;
             this.Hide();
             asd.ShowDialog();
             asd = (CompraPasaje)this.ActiveMdiChild;
+
+
+
+
+
 
             
                        
