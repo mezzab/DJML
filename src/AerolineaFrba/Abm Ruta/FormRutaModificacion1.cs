@@ -31,5 +31,10 @@ namespace AerolineaFrba.Abm_Ruta
             string qry_servicio = "SELECT SERV_DESCRIPCION, SERV_ID FROM DJML.SERVICIOS ORDER BY 1";
             DataTable servicio_data = new Query(qry_servicio).ObtenerDataTable();
         }
+
+        private void button_buscar_Click(object sender, EventArgs e)
+        {
+         
+        }
     }
 }

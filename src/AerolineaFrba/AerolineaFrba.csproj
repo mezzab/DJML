@@ -192,12 +192,6 @@
     <Compile Include="Compra\FormFormaDePago.Designer.cs">
       <DependentUpon>FormFormaDePago.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\FormPasaje.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Compra\FormPasaje.Designer.cs">
-      <DependentUpon>FormPasaje.cs</DependentUpon>
-    </Compile>
     <Compile Include="Compra\FormTarjeta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -335,9 +329,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\FormFormaDePago.resx">
       <DependentUpon>FormFormaDePago.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Compra\FormPasaje.resx">
-      <DependentUpon>FormPasaje.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\FormTarjeta.resx">
       <DependentUpon>FormTarjeta.cs</DependentUpon>

@@ -105,6 +105,7 @@
             this.button_buscar.TabIndex = 14;
             this.button_buscar.Text = "Buscar!";
             this.button_buscar.UseVisualStyleBackColor = true;
+            this.button_buscar.Click += new System.EventHandler(this.button_buscar_Click);
             // 
             // label3
             // 
