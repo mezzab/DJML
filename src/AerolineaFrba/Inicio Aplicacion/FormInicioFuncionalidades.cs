@@ -12,6 +12,7 @@ using AerolineaFrba.Generacion_Viaje;
 using AerolineaFrba.Compra;
 using AerolineaFrba.Abm_Ciudad;
 using AerolineaFrba.Abm_Ruta;
+using AerolineaFrba.Devolucion;
 
 namespace AerolineaFrba.Inicio_Aplicacion
 {
@@ -75,5 +76,16 @@ namespace AerolineaFrba.Inicio_Aplicacion
             frm = (FormRuta)this.ActiveMdiChild;
         
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Devolucion0 frm = new Devolucion0();
+            frm.StartPosition = FormStartPosition.CenterScreen;
+
+            frm.ShowDialog();
+            frm = (Devolucion0)this.ActiveMdiChild;
+        }
+
     }
 }

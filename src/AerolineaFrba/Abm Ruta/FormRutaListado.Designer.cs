@@ -30,9 +30,9 @@
         {
             this.button_volver = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGrid = new System.Windows.Forms.DataGridView();
+            this.datos = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datos)).BeginInit();
             this.SuspendLayout();
             // 
             // button_volver
@@ -47,7 +47,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dataGrid);
+            this.groupBox1.Controls.Add(this.datos);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(595, 274);
@@ -55,13 +55,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rutas Aereas";
             // 
-            // dataGrid
+            // datos
             // 
-            this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGrid.Location = new System.Drawing.Point(6, 19);
-            this.dataGrid.Name = "dataGrid";
-            this.dataGrid.Size = new System.Drawing.Size(583, 249);
-            this.dataGrid.TabIndex = 0;
+            this.datos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datos.Location = new System.Drawing.Point(6, 19);
+            this.datos.Name = "datos";
+            this.datos.Size = new System.Drawing.Size(583, 249);
+            this.datos.TabIndex = 0;
+            this.datos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_CellContentClick);
             // 
             // FormRutaListado
             // 
@@ -74,7 +75,7 @@
             this.Text = "ABM RUTA - LISTADO";
             this.Load += new System.EventHandler(this.FormRutaListado_Load);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -83,6 +84,6 @@
 
         private System.Windows.Forms.Button button_volver;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGrid;
+        private System.Windows.Forms.DataGridView datos;
     }
 }

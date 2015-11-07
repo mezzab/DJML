@@ -42,12 +42,12 @@ namespace AerolineaFrba.Compra
 
         private void button3_Click(object sender, EventArgs e)
         {
-            CompraEncomienda Pasaje = new CompraEncomienda();
+            CompraEncomiendas Pasaje = new CompraEncomiendas();
             this.Hide();
             Pasaje.StartPosition = FormStartPosition.CenterScreen;
           
             Pasaje.ShowDialog();
-            Pasaje = (CompraEncomienda)this.ActiveMdiChild;
+            Pasaje = (CompraEncomiendas)this.ActiveMdiChild;
 
             
           

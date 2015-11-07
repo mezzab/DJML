@@ -22,6 +22,16 @@ namespace AerolineaFrba.Abm_Ruta
         private void FormRutaListado_Load(object sender, EventArgs e)
         {
             cargarGrid();
+         
+        }
+
+        private void cargarGrid() 
+        {
+            SqlConnection conexion = new SqlConnection();
+            conexion.ConnectionString = Settings.Default.CadenaDeConexion;
+    
+            Query qry2 = new Query("select ruta_codigo from djml.rutas ");
+            datos.DataSource = qry2.ObtenerDataTable();
         }
 
         private void button_volver_Click(object sender, EventArgs e)
@@ -32,7 +42,7 @@ namespace AerolineaFrba.Abm_Ruta
             ruta = (FormRuta)this.ActiveMdiChild;
         }
 
-        private void cargarGrid()
+        /*private void cargarGrid()
         {
             SqlConnection conexion = new SqlConnection();
             conexion.ConnectionString = Settings.Default.CadenaDeConexion;
@@ -41,6 +51,11 @@ namespace AerolineaFrba.Abm_Ruta
             Query qry2 = new Query("SELECT 1 FROM [DJML].RUTAS");
             dataGrid.DataSource = qry2.ObtenerDataTable();
         }
+
+        private void dataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }*/
 
     }
 }

@@ -168,12 +168,6 @@
     <Compile Include="Canje Millas\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\CompraEncomienda LUEGO SE BORRA.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Compra\CompraEncomienda LUEGO SE BORRA.Designer.cs">
-      <DependentUpon>CompraEncomienda LUEGO SE BORRA.cs</DependentUpon>
-    </Compile>
     <Compile Include="Compra\CompraExitosa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -356,9 +350,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\FormCompra2.resx">
       <DependentUpon>FormCompra2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Compra\CompraEncomienda LUEGO SE BORRA.resx">
-      <DependentUpon>CompraEncomienda LUEGO SE BORRA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\FormFormaDePago.resx">
       <DependentUpon>FormFormaDePago.cs</DependentUpon>
