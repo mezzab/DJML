@@ -25,15 +25,6 @@ namespace AerolineaFrba.Abm_Ruta
          
         }
 
-        private void cargarGrid() 
-        {
-            SqlConnection conexion = new SqlConnection();
-            conexion.ConnectionString = Settings.Default.CadenaDeConexion;
-    
-            Query qry2 = new Query("select ruta_codigo from djml.rutas ");
-            datos.DataSource = qry2.ObtenerDataTable();
-        }
-
         private void button_volver_Click(object sender, EventArgs e)
         {
             FormRuta ruta = new FormRuta();
@@ -42,16 +33,12 @@ namespace AerolineaFrba.Abm_Ruta
             ruta = (FormRuta)this.ActiveMdiChild;
         }
 
-        /*private void cargarGrid()
+        private void cargarGrid()
         {
-            SqlConnection conexion = new SqlConnection();
-            conexion.ConnectionString = Settings.Default.CadenaDeConexion;
-
-            //Query qry2 = new Query("SELECT [Ciudad Origen], [Ciudad Destino], [Servicio], [Pasaje], [Kilo Encomienda] FROM [DJML].v_rutas ORDER BY 1");
-            Query qry2 = new Query("SELECT 1 FROM [DJML].RUTAS");
-            dataGrid.DataSource = qry2.ObtenerDataTable();
+            Query qry2 = new Query("SELECT [Ciudad Origen], [Ciudad Destino], [Servicio], [Pasaje], [Kilo Encomienda] FROM [DJML].v_rutas ORDER BY 1");
+            datos.DataSource = qry2.ObtenerDataTable();
         }
-        */
+        
         private void dataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
