@@ -41,5 +41,17 @@ namespace AerolineaFrba.Compra
         {
 
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+          
+        }
     }
 }
+
+
+//TODO: En el datagrid se va a mostar una tabla con:
+/// tipo dni, dni, butaca, tipobutaca, CODIGO
+/// tipo dni, dni, kilos, CODIGO
+///
+

@@ -707,6 +707,14 @@ namespace AerolineaFrba.Compra
 
         }
 
+        private void registrarCompra()
+        {
+            // hacer for each CompraPasaje.tabla;
+            // hacer for each CompraPasaje.tabla2;
+    
+        
+        
+        }
 
 
     }
