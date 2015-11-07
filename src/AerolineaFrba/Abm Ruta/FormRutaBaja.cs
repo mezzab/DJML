@@ -85,5 +85,16 @@ namespace AerolineaFrba.Abm_Ruta
             ruta.ShowDialog();
             ruta = (FormRuta)this.ActiveMdiChild;
         }
+
+        private void button_buscar_Click(object sender, EventArgs e)
+        {
+            //var origen_id = comboBox_origen.SelectedValue;
+            var origen = comboBox_origen.Text;
+            //ComboBox typeItem = (ComboBox)comboBox_origen.SelectedItem;
+            //string value = typeItem.Content.ToString();
+            string qry = "SELECT [Ciudad Origen], [Ciudad Destino], [Servicio], [Pasaje], [Kilo Encomienda] FROM [DJML].v_rutas" +
+                         "WHERE [Ciudad Origen] = " + origen;
+            dataGrid.DataSource = new Query(qry).ObtenerDataTable();
+        }
     }
 }
