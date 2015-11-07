@@ -24,11 +24,9 @@ namespace AerolineaFrba.Abm_Ruta
             //comboBox_origen
             string qry_origen = "SELECT CIUD_DETALLE, CIUD_ID FROM DJML.CIUDADES ORDER BY 1";
             DataTable origen_data = new Query(qry_origen).ObtenerDataTable();
-
             //comboBox_destino
             string qry_destino = "SELECT CIUD_DETALLE, CIUD_ID FROM DJML.CIUDADES ORDER BY 1";
             DataTable destino_data = new Query(qry_destino).ObtenerDataTable();
-
             //comboBox_servicio
             string qry_servicio = "SELECT SERV_DESCRIPCION, SERV_ID FROM DJML.SERVICIOS ORDER BY 1";
             DataTable servicio_data = new Query(qry_servicio).ObtenerDataTable();
@@ -101,11 +99,11 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void darBajaRuta(string codigo)
         {
-            
-            string qry =   "update DJML.RUTAS" +
+
+            string qry = "update DJML.RUTAS" +
                           " set RUTA_IS_ACTIVE = 0 " +
-                          " where RUTA_CODIGO = " + codigo ;
-                          
+                          " where RUTA_CODIGO = " + codigo;
+
 
             new Query(qry).Ejecutar();
 

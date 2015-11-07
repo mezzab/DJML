@@ -772,9 +772,9 @@ EXEC DJML.CREAR_COMPRAS
 --============================================================
 /*	
 CREATE VIEW DJML.v_rutas
-	AS SELECT	c1.CIUD_DETALLE as 'Ciudad_Origen'
+	AS SELECT	c1.CIUD_DETALLE as 'Ciudad Origen'
 			  , c1.CIUD_ID as 'OrigenID'
-			  , c2.CIUD_DETALLE as 'Ciudad_Destino'
+			  , c2.CIUD_DETALLE as 'Ciudad Destino'
 			  , c2.CIUD_ID as 'DestinoID'
 			  , s.SERV_DESCRIPCION as 'Servicio'
 			  , s.SERV_ID as 'ServicioID'

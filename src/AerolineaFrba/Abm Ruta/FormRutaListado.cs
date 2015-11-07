@@ -25,20 +25,20 @@ namespace AerolineaFrba.Abm_Ruta
          
         }
 
-        private void cargarGrid() 
-        {
-            SqlConnection conexion = new SqlConnection();
-            conexion.ConnectionString = Settings.Default.CadenaDeConexion;
-    
-            Query qry2 = new Query("select ruta_codigo from djml.rutas ");
-            datos.DataSource = qry2.ObtenerDataTable();
-        }
-
         private void button_volver_Click(object sender, EventArgs e)
         {
-            //ToDo
+            FormRuta ruta = new FormRuta();
+            this.Hide();
+            ruta.ShowDialog();
+            ruta = (FormRuta)this.ActiveMdiChild;
         }
 
+        private void cargarGrid()
+        {
+            Query qry2 = new Query("SELECT [Ciudad Origen], [Ciudad Destino], [Servicio], [Pasaje], [Kilo Encomienda] FROM [DJML].v_rutas ORDER BY 1");
+            datos.DataSource = qry2.ObtenerDataTable();
+        }
+        
         private void dataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
