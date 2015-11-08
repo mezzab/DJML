@@ -35,8 +35,9 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void cargarGrid()
         {
-            Query qry2 = new Query("SELECT [Ciudad Origen], [Ciudad Destino], [Servicio], [Pasaje], [Kilo Encomienda] FROM [DJML].v_rutas ORDER BY 1");
+            Query qry2 = new Query("SELECT [Ciudad_Origen], [Ciudad_Destino], [Servicio], [Pasaje], [Kilo Encomienda] FROM [DJML].v_rutas ORDER BY 1");
             datos.DataSource = qry2.ObtenerDataTable();
+
         }
         
         private void dataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)

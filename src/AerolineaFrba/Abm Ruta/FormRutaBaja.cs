@@ -91,7 +91,7 @@ namespace AerolineaFrba.Abm_Ruta
 
             darBajaRuta(RutaCodigo);
 
-            MessageBox.Show("Se ha dado de baja la ruta de codigo " + RutaCodigo + "correctamente", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Se ha dado de baja la ruta de codigo " + RutaCodigo + " correctamente", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             button_volver_Click(sender, e);
 
