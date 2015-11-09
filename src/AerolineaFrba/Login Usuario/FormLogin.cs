@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.Security.Cryptography;
 using AerolineaFrba.Properties;
 using AerolineaFrba.Abm_Rol;
+using AerolineaFrba.Inicio_Aplicacion;
 
 
 namespace AerolineaFrba.Login_Usuario
@@ -129,10 +130,10 @@ namespace AerolineaFrba.Login_Usuario
 
                     if (validaUsuario.Equals(1))
                     {
-                        FormRol rol = new FormRol();
+                        FormInicioFuncionalidades func = new FormInicioFuncionalidades();
                         this.Hide();
-                        rol.ShowDialog();
-                        rol = (FormRol)this.ActiveMdiChild;
+                        func.ShowDialog();
+                        func = (FormInicioFuncionalidades)this.ActiveMdiChild;
                     }
                     
 
