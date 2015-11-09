@@ -33,15 +33,14 @@ namespace AerolineaFrba.Compra
         {
             pagoEnEfectivo = true;
 
-            FormEfectivo t = new FormEfectivo();
+            Form1 t = new Form1();
             t.StartPosition = FormStartPosition.CenterScreen;
           
             this.Hide();
             t.ShowDialog();
-            t = (FormEfectivo)this.ActiveMdiChild;
+            t = (Form1)this.ActiveMdiChild;
 
-           // MessageBox.Show("Todavia no hice este form guacho", "AGUANNNNNTA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-           }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {       //dice efectivo pero tiene mal creado el nombre el puto form, todavia no se como sacarlo
@@ -58,8 +57,6 @@ namespace AerolineaFrba.Compra
 
         private void FormFormaDePago_Load(object sender, EventArgs e)
         {
-
-            this.StartPosition = FormStartPosition.CenterScreen;
         }
     }
 }

@@ -60,7 +60,6 @@
             this.Siguiente = new System.Windows.Forms.Button();
             this.Volver = new System.Windows.Forms.Button();
             this.verificacion = new System.Windows.Forms.DataGridView();
-            this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -70,7 +69,6 @@
             this.t1 = new System.Windows.Forms.Label();
             this.t = new System.Windows.Forms.Label();
             this.verificacion2 = new System.Windows.Forms.DataGridView();
-            this.Eliminar1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
@@ -388,18 +386,10 @@
             // verificacion
             // 
             this.verificacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.verificacion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Eliminar});
             this.verificacion.Location = new System.Drawing.Point(5, 19);
             this.verificacion.Name = "verificacion";
             this.verificacion.Size = new System.Drawing.Size(706, 117);
             this.verificacion.TabIndex = 18;
-            this.verificacion.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.verificacion_CellContentClick_1);
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "Eliminar";
-            this.Eliminar.Name = "Eliminar";
             // 
             // button1
             // 
@@ -488,18 +478,10 @@
             // verificacion2
             // 
             this.verificacion2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.verificacion2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Eliminar1});
             this.verificacion2.Location = new System.Drawing.Point(6, 14);
             this.verificacion2.Name = "verificacion2";
             this.verificacion2.Size = new System.Drawing.Size(706, 129);
             this.verificacion2.TabIndex = 24;
-            this.verificacion2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.verificacion2_CellContentClick);
-            // 
-            // Eliminar1
-            // 
-            this.Eliminar1.HeaderText = "Eliminar";
-            this.Eliminar1.Name = "Eliminar1";
             // 
             // groupBox5
             // 
@@ -593,7 +575,6 @@
         private System.Windows.Forms.TextBox butacaSeleccionada;
         private System.Windows.Forms.DataGridView verificacion;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewButtonColumn Eliminar;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox kilos;
@@ -602,7 +583,6 @@
         private System.Windows.Forms.Label t1;
         private System.Windows.Forms.Label t;
         private System.Windows.Forms.DataGridView verificacion2;
-        private System.Windows.Forms.DataGridViewButtonColumn Eliminar1;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox6;
     }

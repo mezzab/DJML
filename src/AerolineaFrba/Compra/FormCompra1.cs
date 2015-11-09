@@ -198,15 +198,6 @@ namespace AerolineaFrba.Compra
        // MessageBox.Show(fecha_salida);
         }
 
-        private void button4_Click_1(object sender, EventArgs e)
-        {
-            FormFormaDePago qqq = new FormFormaDePago();
-            this.Hide();
-            qqq.StartPosition = FormStartPosition.CenterScreen;
-            qqq.ShowDialog();
-            qqq = (FormFormaDePago)this.ActiveMdiChild;
-
-        }
 
       
     }

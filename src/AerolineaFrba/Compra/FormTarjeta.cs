@@ -116,6 +116,9 @@ namespace AerolineaFrba.Compra
             tipo2.Enabled = false;
             numero.Enabled = false;
 
+            total.Text = "$  " + CompraPasaje.PrecioTotal.ToString();
+
+
             LlenarComboBoxTipoDocumento();
             tipo.DropDownStyle = ComboBoxStyle.DropDownList;
             LlenarComboBoxTiposTarjetas();
@@ -667,7 +670,7 @@ namespace AerolineaFrba.Compra
         private void numero_TextChanged(object sender, EventArgs e)
         {
             //  dniNum.TextChanged += dni_TextChanged;
-            telefono.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+            numero.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
             //OBLIGA A QUE INTRODUZCA NUMEROS
         }
 

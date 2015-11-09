@@ -49,6 +49,11 @@ namespace AerolineaFrba.Compra
         public static bool primeraE = true;
         public static bool primerP = true;
 
+        public static int pesoCargado = 0;
+        List<int> butacasCargadas = new List<int>();
+
+        public static int PrecioTotal = 0;
+
         public CompraPasaje()
         {
             InitializeComponent();
@@ -80,16 +85,39 @@ namespace AerolineaFrba.Compra
 
             dataGridView1.Columns["aeroButacaID"].Visible = false;
 
-            DataGridViewColumn column = dataGridView1.Columns[0];
-            column.Width = 52;
-            DataGridViewColumn column1 = dataGridView1.Columns[1];
+            //DataGridViewColumn column = dataGridView1.Columns[0];     ELIMINAR
+            //column.Width = 52;                                        ELIMINAR
+            DataGridViewColumn column1 = dataGridView1.Columns[0];
             column1.Width = 60;
-            DataGridViewColumn column2 = dataGridView1.Columns[2];
+            DataGridViewColumn column2 = dataGridView1.Columns[1];
             column2.Width = 78;
         }
 
         private void Volver_Click(object sender, EventArgs e)
         {
+
+            //avisar("Se suman" + pesoCargado.ToString() + "kilos");
+            modificarKilosAeronave(pesoCargado.ToString(), "sumar");
+         
+             for (int i = 0; i <= butacasCargadas.Count - 1; i++)
+             {
+                 //avisar("Se da alta de butaca: " + butacasCargadas[i].ToString());
+                 darBajaAltaButaca(butacasCargadas[i].ToString(), 1);
+             }
+
+           // llenarButacas();
+
+            cantidadEncomiendasCargados = 0; 
+            cantidadPasajesCargados = 0;
+
+            tabla.Clear();
+            tabla2.Clear();
+            
+            pesoCargado = 0;
+            butacasCargadas.Clear();
+
+
+
             FormCompra1 volver = new FormCompra1();
             volver.StartPosition = FormStartPosition.CenterScreen;
             this.Hide();
@@ -246,6 +274,7 @@ namespace AerolineaFrba.Compra
 
                     }
 
+                    butacasCargadas.Add(Convert.ToInt32(aeroButacaID));
 
                     cargarDatosATabla();
 
@@ -270,15 +299,15 @@ namespace AerolineaFrba.Compra
                 verificacion.Columns["Telefono"].Visible = false;
                 verificacion.Columns["Fecha de nacimiento"].Visible = false;
                 verificacion.Columns["Direccion"].Visible = false;
-                DataGridViewColumn column = verificacion.Columns[0];
-                column.Width = 50;
-                DataGridViewColumn column2 = verificacion.Columns[2];
+                //DataGridViewColumn column = verificacion.Columns[0];
+                //column.Width = 50;                                    ELIMINAR
+                DataGridViewColumn column2 = verificacion.Columns[1];
                 column2.Width = 50;
-                DataGridViewColumn column3 = verificacion.Columns[3];
+                DataGridViewColumn column3 = verificacion.Columns[2];
                 column3.Width = 75;
-                DataGridViewColumn column6 = verificacion.Columns[6];
+                DataGridViewColumn column6 = verificacion.Columns[5];
                 column6.Width = 60;
-                DataGridViewColumn column12 = verificacion.Columns[12];
+                DataGridViewColumn column12 = verificacion.Columns[11];
                 column6.Width = 78;
 
                 groupBox1.Enabled = false;
@@ -303,10 +332,17 @@ namespace AerolineaFrba.Compra
 
         }
 
+        private void avisarBien(string quePaso)
+        {
+            MessageBox.Show(quePaso, "SE INFORMA QUE:", MessageBoxButtons.OK, MessageBoxIcon.None);
+        }
+
+   
         private void avisar(string quePaso)
         {
-            MessageBox.Show(quePaso, "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(quePaso, "AVISO! ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
+
 
         //FALTA HACER LOS UPDATES
         private void actualizarDatos()
@@ -403,7 +439,7 @@ namespace AerolineaFrba.Compra
             if (seCambioAlgo)
             {
                 string cambio = "Se han guardado los nuevos datos del cliente.";
-                avisar(cambio);
+                avisarBien(cambio);
             }
 
         }
@@ -581,8 +617,8 @@ namespace AerolineaFrba.Compra
             //tipo.Text = tipo2.Text;
             numero.Enabled = false;
             //tipo2.Text = "DNI";
-            DataGridViewColumn column = verificacion.Columns[0];
-            column.Width = 52;
+            //DataGridViewColumn column = verificacion.Columns[0];
+            //column.Width = 52;                                    ELIMINAR
 
             llenarButacas();
 
@@ -591,8 +627,10 @@ namespace AerolineaFrba.Compra
             tipo.SelectedIndex = -1;
             combo.SelectedIndex = -1;
 
-            
+            verificacion.DataSource = tabla;
+            verificacion2.DataSource = tabla2;
 
+            
             groupBox1.Enabled = false;
             groupBox2.Enabled = false;
             groupBox4.Enabled = false;
@@ -710,48 +748,9 @@ namespace AerolineaFrba.Compra
             //OBLIGA A QUE INTRODUZCA NUMEROS
         }
 
-        private void verificacion_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-            // avisar("Falta implementar este boton");
-            
-            string idButacaAlta = verificacion.Rows[e.RowIndex].Cells[1].Value.ToString();
+       
 
-            avisar(idButacaAlta);
-
-            borrarFilaDeTabla(idButacaAlta);
-
-            verificacion.Rows.RemoveAt(e.RowIndex);
-
-            darBajaAltaButaca(idButacaAlta, 1);
-
-            llenarButacas();
-
-            cantidadPasajesCargados--;
-            
-
-        }
-
-        private void borrarFilaDeTabla(string idButaca)
-        {
-            for (int i = tabla.Rows.Count - 1; i >= 0; i--)
-            {
-                DataRow dr = tabla.Rows[i];
-                if (dr["Id Butaca"] == idButaca.ToString())
-                    dr.Delete();
-            }
-
-            //TODO: hacer denuevo esta funcion.
-        }
-
-        private void borrarFilaDeTabla2(string idEnco)
-        {
-            for (int i = tabla.Rows.Count - 1; i >= 0; i--)
-            {
-                DataRow dr = tabla.Rows[i];
-                if (dr["Id Encomienda"] == idEnco.ToString())
-                    dr.Delete();
-            }
-        }
+   
         private void button1_Click(object sender, EventArgs e)
         {
            
@@ -851,6 +850,8 @@ namespace AerolineaFrba.Compra
 
                         modificarKilosAeronave(kilos.Text, "restar");
 
+                        pesoCargado = pesoCargado + Convert.ToInt32(kilos.Text); 
+
                         cantidadEncomiendasCargados++;
                         idEncomienda++;
                         
@@ -861,15 +862,15 @@ namespace AerolineaFrba.Compra
                         verificacion2.Columns["Telefono"].Visible = false;
                         verificacion2.Columns["Fecha de nacimiento"].Visible = false;
                         verificacion2.Columns["Direccion"].Visible = false;
-                        DataGridViewColumn column = verificacion2.Columns[0];
-                        column.Width = 50;
+                        //DataGridViewColumn column = verificacion2.Columns[0];  ELIMINACION
+                        //column.Width = 50;                                     ELIMINACION
                         //   DataGridViewColumn column2 = verificacion2.Columns[2];
                         //   column2.Width = 50;
-                        DataGridViewColumn column3 = verificacion2.Columns[2];
+                        DataGridViewColumn column3 = verificacion2.Columns[1];
                         column3.Width = 75;
-                        DataGridViewColumn column6 = verificacion2.Columns[5];
+                        DataGridViewColumn column6 = verificacion2.Columns[4];
                         column6.Width = 60;
-                        DataGridViewColumn column12 = verificacion2.Columns[11];
+                        DataGridViewColumn column12 = verificacion2.Columns[10];
                         column6.Width = 78;
 
                     }
@@ -877,7 +878,7 @@ namespace AerolineaFrba.Compra
                     if (sePasa(kilos.Text) == true)
                     {
                         avisar("No queda espacio en el avion para llevar una encomienda de ese peso.");
-
+                        
                     }
                 }
 
@@ -933,6 +934,8 @@ namespace AerolineaFrba.Compra
 
         private void kilos_TextChanged(object sender, EventArgs e)
         {
+           kilos.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+            //OBLIGA A QUE INTRODUZCA NUMEROS
             kgs = kilos.Text;
         }
 
@@ -941,22 +944,9 @@ namespace AerolineaFrba.Compra
 
         }
 
-        private void verificacion2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-                      
-            string kilosALiberar = verificacion2.Rows[e.RowIndex].Cells[2].Value.ToString();
-            string idEncomiendaA = verificacion2.Rows[e.RowIndex].Cells[1].Value.ToString();
-                      
-            borrarFilaDeTabla2(idEncomiendaA);
-
-            verificacion2.Rows.RemoveAt(e.RowIndex);
-
-            modificarKilosAeronave(kilosALiberar, "sumar");
-         
-            cantidadEncomiendasCargados--; 
-
+       
             
-        }
+       
         
         private bool sePasa(string kilosDisponibles)
         {
@@ -990,4 +980,62 @@ namespace AerolineaFrba.Compra
 
 //TODO: validar que el cliente no haya comprado un pasaje para ese dia
 //TODO: hacer que un cliente no pueda comprar dos pasajes para el mismo
-//TODO: boton eliminar de los data grid
+//TODO: calcular el precio de los pasajes y encomiendas y agregarlos a la tabla! 
+
+
+/*  ///////////// COSAS QUE TAL VEZ USE MAS ADELNTE ////////////
+        
+ * ESTO ERA EL BOTON ELIMINAR DEL DATAGRID VERIFICAICON2          
+{
+    string kilosALiberar = verificacion2.Rows[e.RowIndex].Cells[2].Value.ToString();
+    string idEncomiendaA = verificacion2.Rows[e.RowIndex].Cells[1].Value.ToString();
+                      
+    borrarFilaDeTabla2(idEncomiendaA);
+
+    verificacion2.Rows.RemoveAt(e.RowIndex);
+
+    modificarKilosAeronave(kilosALiberar, "sumar");
+         
+    cantidadEncomiendasCargados--; 
+}        
+        
+ * ESTO ERA EL BOTON ELIMINAR DEL DATAGRID VERIFICAR
+{            
+    string idButacaAlta = verificacion.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+    avisar(idButacaAlta);
+
+    borrarFilaDeTabla(idButacaAlta);
+
+    verificacion.Rows.RemoveAt(e.RowIndex);
+
+    darBajaAltaButaca(idButacaAlta, 1);
+
+    llenarButacas();
+
+    cantidadPasajesCargados--;
+}        
+ 
+private void borrarFilaDeTabla(string idButaca)
+{
+    for (int i = tabla.Rows.Count - 1; i >= 0; i--)
+    {
+        DataRow dr = tabla.Rows[i];
+        if (dr["Id Butaca"] == idButaca.ToString())
+            dr.Delete();
+    }
+
+    //TODO: hacer denuevo esta funcion.
+}
+
+private void borrarFilaDeTabla2(string idEnco)
+{
+    for (int i = tabla.Rows.Count - 1; i >= 0; i--)
+    {
+        DataRow dr = tabla.Rows[i];
+        if (dr["Id Encomienda"] == idEnco.ToString())
+            dr.Delete();
+    }
+}
+        
+*/
