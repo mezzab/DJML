@@ -815,61 +815,70 @@ namespace AerolineaFrba.Compra
                 {
                     avisar("Usted ya cargó el maximo de encomiendas permitidas por tramite.");
                 }
-               
+
 
                 if (cantidadEncomiendasCargados < maxEncomiendas)
                 {
-
-                    if (primeraE == true) // si es el primero entonces crea las columnas
-                    {   //creo las columnas de la tabla statica
-
-                        crearColumnas2();
-                        primeraE = false;
-                    }
-                    //agrego los datos del pasajero
-
-
-                    if (esNuevo)
+                    if (sePasa(kilos.Text) == false)
                     {
-                        //avisar("Todavia no anda el Insert para un cliente nuevo");
-                        cargarNuevoCliente(); //INSERT DE LOS CAMPOS
+
+                        if (primeraE == true) // si es el primero entonces crea las columnas
+                        {   //creo las columnas de la tabla statica
+
+                            crearColumnas2();
+                            primeraE = false;
+                        }
+                        //agrego los datos del pasajero
+
+
+                        if (esNuevo)
+                        {
+                            //avisar("Todavia no anda el Insert para un cliente nuevo");
+                            cargarNuevoCliente(); //INSERT DE LOS CAMPOS
+
+                        }
+                        else
+                        {
+                            actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE
+                        }
+
+
+                        cargarDatosATabla2();
+
+
+                        modificarKilosAeronave(kilos.Text, "restar");
+
+                        cantidadEncomiendasCargados++;
+                        idEncomienda++;
+                        
+                        verificacion2.DataSource = tabla2;
+                        verificacion2.Show();
+                        verificacion2.Columns["Id Encomienda"].Visible = false;
+                        verificacion2.Columns["Mail"].Visible = false;
+                        verificacion2.Columns["Telefono"].Visible = false;
+                        verificacion2.Columns["Fecha de nacimiento"].Visible = false;
+                        verificacion2.Columns["Direccion"].Visible = false;
+                        DataGridViewColumn column = verificacion2.Columns[0];
+                        column.Width = 50;
+                        //   DataGridViewColumn column2 = verificacion2.Columns[2];
+                        //   column2.Width = 50;
+                        DataGridViewColumn column3 = verificacion2.Columns[2];
+                        column3.Width = 75;
+                        DataGridViewColumn column6 = verificacion2.Columns[5];
+                        column6.Width = 60;
+                        DataGridViewColumn column12 = verificacion2.Columns[11];
+                        column6.Width = 78;
 
                     }
-                    else
+
+                    if (sePasa(kilos.Text) == true)
                     {
-                        actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE
+                        avisar("No queda espacio en el avion para llevar una encomienda de ese peso.");
+
                     }
-
-
-                    cargarDatosATabla2();
-
-                    
-                    modificarKilosAeronave(kilos.Text, "restar");
-                   
-                    cantidadEncomiendasCargados++;
-                    idEncomienda++;
-                    
-                    LimpiarCliente_Click(sender, e);
-
                 }
 
-                verificacion2.DataSource = tabla2;
-                verificacion2.Show();
-                verificacion2.Columns["Id Encomienda"].Visible = false;
-                verificacion2.Columns["Mail"].Visible = false;
-                verificacion2.Columns["Telefono"].Visible = false;
-                verificacion2.Columns["Fecha de nacimiento"].Visible = false;
-                verificacion2.Columns["Direccion"].Visible = false;
-                DataGridViewColumn column = verificacion2.Columns[0];
-                column.Width = 50;
-             //   DataGridViewColumn column2 = verificacion2.Columns[2];
-             //   column2.Width = 50;
-                DataGridViewColumn column3 = verificacion2.Columns[2];
-                column3.Width = 75;
-                DataGridViewColumn column6 = verificacion2.Columns[5];
-                column6.Width = 60;
-                DataGridViewColumn column12 = verificacion2.Columns[11];
-                column6.Width = 78;
+                LimpiarCliente_Click(sender, e);
 
                 groupBox1.Enabled = false;
                 groupBox2.Enabled = false;
@@ -892,27 +901,30 @@ namespace AerolineaFrba.Compra
 
         private void modificarKilosAeronave(string kilosIngresados, string operacion)
         {
-            
+                       
             string aux = "+ 0";
 
-            avisar("se van a " + operacion + kilosIngresados.ToString() + " kilos");
+            //avisar("se van a " + operacion + kilosIngresados.ToString() + " kilos");
 
             if (operacion == "sumar")
             {
-                aux = "+ "+kilosIngresados; 
+                aux = "+ "+kilosIngresados;
+
             }
             else if (operacion == "restar")
-            {
-                aux = "- " + kilosIngresados; 
+            {   
+                aux = "- " + kilosIngresados;
+                
             }
 
+
             string qry2000 = "update djml.AERONAVES " +
-                           "set AERO_KILOS_DISPONIBLES = AERO_KILOS_DISPONIBLES" + aux + 
-                           "where AERO_MATRICULA = '"+ FormCompra1.aeroID + "'";
+                       "set AERO_KILOS_DISPONIBLES = AERO_KILOS_DISPONIBLES" + aux +
+                       "where AERO_MATRICULA = '" + FormCompra1.aeroID + "'";
 
             new Query(qry2000).Ejecutar();
+            
 
-            //TODO: Controlar que no pase a negativo.
 
         }
 
@@ -941,6 +953,29 @@ namespace AerolineaFrba.Compra
             cantidadEncomiendasCargados--; 
 
             
+        }
+        
+        private bool sePasa(string kilosDisponibles)
+        {
+            Query qry101 = new Query("SELECT AERO_KILOS_DISPONIBLES FROM DJML.AERONAVES WHERE AERO_MATRICULA=" + "'" + FormCompra1.aeroID + "'");
+            int A = Convert.ToInt32(qry101.ObtenerUnicoCampo());
+
+            int B = Convert.ToInt32(kilosDisponibles);
+            bool C= false;
+
+            int resta = A - B;
+
+            if (resta > 0)
+            { C = false ; }
+
+            if (resta == 0)
+            { C = false; }
+             
+            if (resta < 0)
+            { C = true ;}
+
+            return C;
+                
         }
 
     
