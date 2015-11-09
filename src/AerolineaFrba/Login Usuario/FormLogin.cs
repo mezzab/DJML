@@ -123,27 +123,36 @@ namespace AerolineaFrba.Login_Usuario
                 if ((usuarioHabilitado()) && existeUsuario(txtUsu.Text))
                 {
 
-                    string inicia = ("SELECT USUA_USERNAME = '" + txtUsu.Text + "' AND USUA_PASSWORD = '" + getSha256(txtPassw.Text) + "' FROM DJML.USUARIOS");
+                    string inicia = ("SELECT USUA_ID FROM DJML.USUARIOS WHERE USUA_USERNAME = '" + txtUsu.Text + "' AND USUA_PASSWORD = '" + getSha256(txtPassw.Text) + "'");
                     Query qr1 = new Query(inicia);
                     qr1.pComando = inicia;
-                    int validaUsuario = (int)qr1.ObtenerUnicoCampo();
+                    object validaUsuario = qr1.ObtenerUnicoCampo();
 
-                    if (validaUsuario.Equals(1))
+                    if (validaUsuario != null )
                     {
+
+                        MessageBox.Show("Ha iniciado sesion con exito.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+               
                         FormInicioFuncionalidades func = new FormInicioFuncionalidades();
                         this.Hide();
                         func.ShowDialog();
                         func = (FormInicioFuncionalidades)this.ActiveMdiChild;
                     }
-                    
+                    if (validaUsuario == null)
+                    {
 
-                    //MessageBox.Show("Vamo vieja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                        MessageBox.Show("La contraseña es incorrecta. BLA BLA BLA.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        // NO SE SI TENDRSA QUE SUMARLE UN INTENTO O ALGO ASI...
+                    }
+
+
+
+               }
 
                 else
                 {
                     intento();
-                    MessageBox.Show("Verifique habilitacion o habilitacion del usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(" Verifique habilitacion o habilitacion del usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     
                 }
             }
