@@ -209,6 +209,7 @@
             this.Controls.Add(this.fechaSalida);
             this.Controls.Add(this.button2);
             this.Name = "FormGenerarViaje";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Generar Viaje";
             this.Load += new System.EventHandler(this.FormGenerarViaje_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.datos)).EndInit();

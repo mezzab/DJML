@@ -84,6 +84,7 @@
             this.Controls.Add(this.motivo);
             this.Controls.Add(this.label1);
             this.Name = "Devolucion1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Devolución de pasaje/encomienda";
             this.ResumeLayout(false);
             this.PerformLayout();
