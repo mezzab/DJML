@@ -200,13 +200,17 @@ namespace AerolineaFrba.Compra
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            FormFormaDePago FormInicioFuncionalidades = new FormFormaDePago();
+            FormFormaDePago qqq = new FormFormaDePago();
             this.Hide();
-            FormInicioFuncionalidades.ShowDialog();
-            FormInicioFuncionalidades = (FormFormaDePago)this.ActiveMdiChild;
+            qqq.StartPosition = FormStartPosition.CenterScreen;
+            qqq.ShowDialog();
+            qqq = (FormFormaDePago)this.ActiveMdiChild;
 
         }
 
       
     }
 }
+
+
+//TODO: DATAGRID VACIO CLICK

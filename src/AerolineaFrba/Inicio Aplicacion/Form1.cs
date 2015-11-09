@@ -23,21 +23,21 @@ namespace AerolineaFrba
         private void button1_Click(object sender, EventArgs e)
         {   
             //ESTO TE MANDA AL LOGIN!!!!!!!!!!!
-        
+        /*
             this.Visible = false;
             Form frm = new FormLogin();
             frm.StartPosition = FormStartPosition.CenterScreen;
             frm.ShowDialog();
             frm = (FormLogin)this.ActiveMdiChild;
-        
-         /*
+        */
+         
          
             this.Visible = false;
             Form frm = new FormInicioFuncionalidades();
             frm.ShowDialog();
             frm = (FormInicioFuncionalidades)this.ActiveMdiChild;
          
-          */
+          
          
           }
 

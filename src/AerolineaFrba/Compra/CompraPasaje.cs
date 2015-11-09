@@ -723,6 +723,7 @@ namespace AerolineaFrba.Compra
             verificacion.Rows.RemoveAt(e.RowIndex);
 
             darBajaAltaButaca(idButacaAlta, 1);
+
             llenarButacas();
 
             cantidadPasajesCargados--;
@@ -738,6 +739,8 @@ namespace AerolineaFrba.Compra
                 if (dr["Id Butaca"] == idButaca.ToString())
                     dr.Delete();
             }
+
+            //TODO: hacer denuevo esta funcion.
         }
 
         private void borrarFilaDeTabla2(string idEnco)
@@ -987,3 +990,4 @@ namespace AerolineaFrba.Compra
 
 //TODO: validar que el cliente no haya comprado un pasaje para ese dia
 //TODO: hacer que un cliente no pueda comprar dos pasajes para el mismo
+//TODO: boton eliminar de los data grid

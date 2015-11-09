@@ -59,6 +59,7 @@ namespace AerolineaFrba.Compra
         private void FormFormaDePago_Load(object sender, EventArgs e)
         {
 
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
     }
 }
