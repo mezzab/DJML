@@ -1,7 +1,7 @@
 --============================================================
 				--ELIMINAR TABLAS Y PROCEDURES
 --============================================================
-
+/*
 DROP TABLE DJML.USUARIOS
 DROP TABLE DJML.ROL_FUNCIONALIDAD
 DROP TABLE DJML.ROLES
@@ -46,7 +46,7 @@ DROP PROCEDURE DJML.CREAR_CANJES
 
 
 DROP SCHEMA DJML
-
+*/
 --============================================================	
 --			GESTION DE DATOS 2C 2015 - TP AEROLINEA FRBA						
 -- ===========================================================
@@ -403,7 +403,7 @@ BEGIN
 	SELECT distinct Butaca_Nro, n.TIPO_BUTACA_ID, Butaca_Piso
 	FROM gd_esquema.Maestra m
 	JOIN djml.TIPO_BUTACA n on  m.Butaca_Tipo = n.DESCRIPCION
-	WHERE Butaca_Nro <> 0
+	--WHERE Butaca_Nro <> 0 -> No va!
 	order by 1
 	
 	
@@ -456,7 +456,8 @@ BEGIN
 	PRINT 'SE CREO LA TABLA VIAJES CORRECTAMENTE'
 
 	---MIGRACION DATOS TABLA VIAJES---
-
+	
+	/*
 	insert into djml.VIAJES(VIAJE_FECHA_SALIDA, VIAJE_FECHA_LLEGADA, VIAJE_FECHA_LLEGADA_ESTIMADA, VIAJE_AERO_ID, VIAJE_RUTA_ID)
 	select distinct m.FechaSalida, m.FechaLLegada, m.Fecha_LLegada_Estimada, a.aero_matricula, r.RL_RUTA
 	from gd_esquema.Maestra m
@@ -466,8 +467,23 @@ BEGIN
 	or m.Pasaje_Codigo <> 0
 	and m.FechaSalida is not null
 	and m.FechaLLegada is not null
-	
+	*/
 	--HACER: REVISAR!!
+	
+	-- Version de Lucas
+	insert into djml.VIAJES(VIAJE_FECHA_SALIDA, VIAJE_FECHA_LLEGADA, VIAJE_FECHA_LLEGADA_ESTIMADA, VIAJE_AERO_ID, VIAJE_RUTA_ID)
+	select distinct m.FechaSalida, m.FechaLLegada, m.Fecha_LLegada_Estimada, a.aero_matricula, r.RUTA_CODIGO
+	from gd_esquema.Maestra m
+	join DJML.AERONAVES a on a.AERO_MATRICULA = m.aeronave_matricula
+	JOIN DJML.SERVICIOS S ON s.SERV_DESCRIPCION = m.Tipo_Servicio
+	JOIN DJML.TRAMOS t ON (SELECT c1.CIUD_ID FROM DJML.CIUDADES c1 WHERE Ruta_Ciudad_Origen = c1.CIUD_DETALLE) = t.TRAMO_CIUDAD_ORIGEN
+						 AND (SELECT c2.CIUD_ID FROM DJML.CIUDADES c2 WHERE Ruta_Ciudad_Destino = c2.CIUD_DETALLE) = t.TRAMO_CIUDAD_DESTINO
+	JOIN DJML.RUTAS r ON r.RUTA_TRAMO = t.TRAMO_ID AND r.RUTA_SERVICIO = s.SERV_ID
+	where (m.Paquete_Codigo <> 0 or m.Pasaje_Codigo <> 0)
+	and m.FechaSalida is not null
+	and m.FechaLLegada is not null
+	
+
 	
 --============================================================
 					--TABLA REGISTRO_DESTINO
@@ -568,37 +584,42 @@ BEGIN
 						--TABLA PASAJE
 --============================================================
 	CREATE TABLE DJML.PASAJES (
-	PASA_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	PASA_ID INT NOT NULL PRIMARY KEY,
 	PASA_VIAJE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.VIAJES(VIAJE_ID),
 	PASA_CLIE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.CLIENTES(CLIE_ID),
-	PASA_BUTA_ID INT FOREIGN KEY REFERENCES DJML.BUTACA_AERO(BXA_ID) NOT NULL
+	PASA_COMPRA_ID INT FOREIGN KEY REFERENCES DJML.COMPRAS(COMPRA_ID), --	Controlar si esto deberia ser not null
+	PASA_BUTA_ID INT FOREIGN KEY REFERENCES DJML.BUTACA_AERO(BXA_ID) NOT NULL,
+	PASA_PRECIO numeric(18,2)
 	)
 
 	PRINT 'SE CREO LA TABLA PASAJE CORRECTAMENTE'
 
 	---MIGRACION DATOS TABLA PASAJES---
-/*
-	insert into djml.PASAJES(PASA_VIAJE_ID,PASA_CLIE_ID,PASA_BUTA_ID)
-	select distinct V.VIAJE_ID,C.CLIE_ID,BA.BXA_ID from gd_esquema.Maestra m
-	JOIN DJML.VIAJES V on M.FechaSalida = V.VIAJE_FECHA_SALIDA
-	AND M.FechaLLegada = V.VIAJE_FECHA_LLEGADA
-	AND M.Fecha_LLegada_Estimada = V.VIAJE_FECHA_LLEGADA_ESTIMADA
-	AND M.Aeronave_Matricula = V.VIAJE_AERO_ID
+
+	insert into djml.PASAJES(PASA_ID, PASA_VIAJE_ID,PASA_CLIE_ID,PASA_COMPRA_ID,PASA_BUTA_ID,PASA_PRECIO)
+	SELECT distinct Pasaje_Codigo, v.VIAJE_ID, C.CLIE_ID, NULL, B.BUTA_ID, Pasaje_Precio
+	FROM [GD2C2015].[gd_esquema].[Maestra] m
 	JOIN DJML.CLIENTES C ON M.Cli_Dni = C.CLIE_DNI
-	AND M.Cli_Telefono = C.CLIE_TELEFONO
+		AND M.Cli_Telefono = C.CLIE_TELEFONO
+	JOIN DJML.VIAJES v on m.FechaSalida = v.VIAJE_FECHA_SALIDA
+		AND m.FechaLLegada = v.VIAJE_FECHA_LLEGADA
+		AND m.Fecha_LLegada_Estimada = v.VIAJE_FECHA_LLEGADA_ESTIMADA
+		AND m.Aeronave_Matricula = v.VIAJE_AERO_ID
+	JOIN DJML.RUTAS R ON V.VIAJE_RUTA_ID = R.RUTA_CODIGO
+	JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID
 	JOIN DJML.BUTACAS B ON M.Butaca_Nro = B.BUTA_NRO
-	AND M.Butaca_Piso = B.BUTA_PISO
+		AND M.Butaca_Piso = B.BUTA_PISO
 	JOIN DJML.TIPO_BUTACA TP ON B.BUTA_TIPO_ID = TP.TIPO_BUTACA_ID
-	AND M.Butaca_Tipo = TP.DESCRIPCION
+		AND M.Butaca_Tipo = TP.DESCRIPCION
 	JOIN DJML.BUTACA_AERO BA ON B.BUTA_ID = BA.BXA_BUTA_ID
-	AND M.Aeronave_Matricula = BA.BXA_AERO_MATRICULA 
-	WHERE M.Pasaje_Codigo <> 0
-	AND M.Paquete_Codigo = 0
-	and m.Pasaje_FechaCompra is not null
+		AND M.Aeronave_Matricula = BA.BXA_AERO_MATRICULA
+	WHERE Paquete_Codigo = 0
+	AND (SELECT c1.CIUD_ID FROM DJML.CIUDADES c1 WHERE Ruta_Ciudad_Origen = c1.CIUD_DETALLE) = t.TRAMO_CIUDAD_ORIGEN
+	AND (SELECT c2.CIUD_ID FROM DJML.CIUDADES c2 WHERE Ruta_Ciudad_Destino = c2.CIUD_DETALLE) = t.TRAMO_CIUDAD_DESTINO
+	ORDER BY 1
 
+	PRINT 'SE MIGRO LA TABLA PASAJE CORRECTAMENTE'
 
-	--HACER:: REVISAR Y CORREGIR!!!
-*/
 
 
 
@@ -609,25 +630,33 @@ BEGIN
 	ENCO_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	ENCO_VIAJE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.VIAJES(VIAJE_ID),
 	ENCO_CLIE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.CLIENTES(CLIE_ID),
-	ENCO_KG INT NOT NULL
+	ENCO_COMPRA_ID INT FOREIGN KEY REFERENCES DJML.COMPRAS(COMPRA_ID), --	Controlar si esto deberia ser not null
+	ENCO_KG INT NOT NULL,
+	ENCO_PRECIO
 	)
 
 	PRINT 'SE CREO LA TABLA ENCOMIENDA CORRECTAMENTE'
 
 	---MIGRACION DATOS TABLA ENCOMIENDAS---
 
-	insert into djml.ENCOMIENDAS(ENCO_VIAJE_ID,ENCO_CLIE_ID,ENCO_KG)
-	select distinct V.VIAJE_ID,C.CLIE_ID,m.Paquete_KG from gd_esquema.Maestra m
+	insert into djml.ENCOMIENDAS(ENCO_ID,ENCO_VIAJE_ID,ENCO_CLIE_ID,ENCO_COMPRA_ID,ENCO_KG,ENCO_PRECIO)
+	select distinct m.Paquete_Codigo, V.VIAJE_ID,C.CLIE_ID, null, m.Paquete_KG, m.Paquete_Precio 
+	from gd_esquema.Maestra m
 	JOIN DJML.VIAJES V on M.FechaSalida = V.VIAJE_FECHA_SALIDA
-	AND M.FechaLLegada = V.VIAJE_FECHA_LLEGADA
-	AND M.Fecha_LLegada_Estimada = V.VIAJE_FECHA_LLEGADA_ESTIMADA
-	AND M.Aeronave_Matricula = V.VIAJE_AERO_ID
+		AND M.FechaLLegada = V.VIAJE_FECHA_LLEGADA
+		AND M.Fecha_LLegada_Estimada = V.VIAJE_FECHA_LLEGADA_ESTIMADA
+		AND M.Aeronave_Matricula = V.VIAJE_AERO_ID
+	JOIN DJML.RUTAS R ON V.VIAJE_RUTA_ID = R.RUTA_CODIGO
+	JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID
 	JOIN DJML.CLIENTES C ON M.Cli_Dni = C.CLIE_DNI
-	AND M.Cli_Telefono = C.CLIE_TELEFONO
-	where m.Paquete_Codigo <> 0
-	and m.Pasaje_Codigo = 0
+		AND M.Cli_Telefono = C.CLIE_TELEFONO
+	where m.Paquete_Codigo <> 0 
+	AND m.Pasaje_Codigo = 0
+	AND (SELECT c1.CIUD_ID FROM DJML.CIUDADES c1 WHERE Ruta_Ciudad_Origen = c1.CIUD_DETALLE) = t.TRAMO_CIUDAD_ORIGEN
+	AND (SELECT c2.CIUD_ID FROM DJML.CIUDADES c2 WHERE Ruta_Ciudad_Destino = c2.CIUD_DETALLE) = t.TRAMO_CIUDAD_DESTINO
+	ORDER BY 1
 	
-	--HACER: REVISAR!! 
+	PRINT 'SE MIGRO LA TABLA ENCOMIENDA CORRECTAMENTE'
 	
 END
 GO
