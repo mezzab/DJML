@@ -70,6 +70,7 @@
             this.txtPassw.Name = "txtPassw";
             this.txtPassw.Size = new System.Drawing.Size(100, 20);
             this.txtPassw.TabIndex = 3;
+            this.txtPassw.TextChanged += new System.EventHandler(this.txtPassw_TextChanged);
             // 
             // linkLabel1
             // 
@@ -100,7 +101,7 @@
             this.bnAceptar.TabIndex = 6;
             this.bnAceptar.Text = "Aceptar";
             this.bnAceptar.UseVisualStyleBackColor = true;
-            this.bnAceptar.Click += new System.EventHandler(this.bnAceptar_Click);
+            this.bnAceptar.Click += new System.EventHandler(this.bnAceptar_Click_Login);
             // 
             // FormLogin
             // 

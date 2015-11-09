@@ -8,17 +8,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
 using AerolineaFrba.Properties;
+using AerolineaFrba.Abm_Rol;
+
 
 namespace AerolineaFrba.Login_Usuario
 {
     public partial class FormLogin : Form
     {
+        
+        SqlConnection conexion = new SqlConnection();
+        private int idUsuario;
+
         public FormLogin()
         {
             InitializeComponent();
         }
-        
+
+
+        public int validar;
         public int loginInvalido;
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -37,32 +46,6 @@ namespace AerolineaFrba.Login_Usuario
 
         }
 
-        private void bnAceptar_Click(object sender, EventArgs e)
-        {
-            SqlConnection conexion = new SqlConnection();
-            conexion.ConnectionString = Settings.Default.CadenaDeConexion;
-
-            if (!faltanDatos())
-            //CONSULTA POR USUARIO/CONTRASEÑA DISTINTO VACIO
-            {
-                string sql_usua = "SELECT USUA_USERNAME FROM DJML.USUARIOS WHERE USUA_USERNAME = '" + txtUsu.Text + "'";
-                Query qry = new Query(sql_usua);
-                qry.Ejecutar();
-                string sql_passw = "SELECT USUA_PASSWORD FROM DJML.USUARIOS WHERE USUA_PASSWORD = '" + txtPassw.Text + "'";
-                Query qry2 = new Query(sql_passw);
-                qry2.Ejecutar();
-
-                //Falta comprobar bien y hacer sha512
-
-
-
-            }
-            else
-            {
-
-            }
-        }
-        
         //Valida la falta de campos, primero por ambos vacio, luego individualmente
         private bool faltanDatos()
         {
@@ -93,6 +76,78 @@ namespace AerolineaFrba.Login_Usuario
 
         }
 
+        private bool existeUsuario(string txtUsu)
+        {
+            return ((int)new Query("SELECT COUNT(1) FROM DJML.USUARIOS WHERE USUA_USERNAME ='" + txtUsu + "'").ObtenerUnicoCampo() == 1);
+        }
+        
+        private bool usuarioHabilitado()
+        {
+            return ((int)new Query("SELECT COUNT(1) FROM DJML.USUARIOS WHERE USUA_USERNAME = '" + txtUsu.Text + "' AND USUA_HABILITADO = 1").ObtenerUnicoCampo() == 1);
+        }
+        
+        private void validaUsuario()
+        {
+            validar = (int)new Query("SELECT count(1) FROM DJML.USUARIOS WHERE USUA_USERNAME ='" + txtUsu.Text + "'" +
+                        " AND USUA_PASSWORD ='" + getSha256(txtPassw.Text) + "'").ObtenerUnicoCampo();
+        }
+        
+        public string getSha256(string input)
+        {
+            byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+            byte[] result;
+            SHA256 shaM = new SHA256Managed();
+            result = shaM.ComputeHash(inputBytes);
+            return BitConverter.ToString(result);
+        }
+
+        public void intento()
+        {
+            string consulta = ("UPDATE DJML.USUARIOS SET USUA_USERNAME = '" + txtUsu.Text + "', USUA_PASSWORD = '" + getSha256(txtPassw.Text) + "', USUA_LOGIN_FALLIDOS = 0 WHERE USUA_ID =  " + txtUsu.Text);
+            Query qr = new Query(consulta);
+            qr.pComando = consulta;
+            int idUsuario = (int)qr.ObtenerUnicoCampo();
+
+        }
+
+        private void bnAceptar_Click_Login(object sender, EventArgs e)
+        {
+
+            conexion.ConnectionString = Settings.Default.CadenaDeConexion;
+
+            if (!faltanDatos())
+            //CONSULTA POR USUARIO/CONTRASEÑA DISTINTO VACIO
+            {   
+               //VALIDA USUARIO HABILITADO Y SI EXISTE
+                if ((usuarioHabilitado()) && existeUsuario(txtUsu.Text))
+                {
+
+                    string inicia = ("SELECT USUA_USERNAME = '" + txtUsu.Text + "' AND USUA_PASSWORD = '" + getSha256(txtPassw.Text) + "' FROM DJML.USUARIOS");
+                    Query qr1 = new Query(inicia);
+                    qr1.pComando = inicia;
+                    int validaUsuario = (int)qr1.ObtenerUnicoCampo();
+
+                    if (validaUsuario.Equals(1))
+                    {
+                        FormRol rol = new FormRol();
+                        this.Hide();
+                        rol.ShowDialog();
+                        rol = (FormRol)this.ActiveMdiChild;
+                    }
+                    
+
+                    //MessageBox.Show("Vamo vieja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                else
+                {
+                    intento();
+                    MessageBox.Show("Verifique habilitacion o habilitacion del usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    
+                }
+            }
+        }
+        
         private void label2_Click(object sender, EventArgs e)
         {
         
@@ -104,6 +159,11 @@ namespace AerolineaFrba.Login_Usuario
             this.Hide();
             login.ShowDialog();
             login = (Form1)this.ActiveMdiChild;
+        }
+
+        private void txtPassw_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
