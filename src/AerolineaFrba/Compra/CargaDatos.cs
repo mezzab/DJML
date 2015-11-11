@@ -84,6 +84,10 @@ namespace AerolineaFrba.Compra
             dataGridView1.DataSource = new Query(qryButacas).ObtenerDataTable();
 
             dataGridView1.Columns["aeroButacaID"].Visible = false;
+            
+            dataGridView1.ReadOnly = true;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
 
             DataGridViewColumn column = dataGridView1.Columns[0];     
             column.Width = 52;                                       
@@ -299,6 +303,10 @@ namespace AerolineaFrba.Compra
                 verificacion.Columns["Telefono"].Visible = false;
                 verificacion.Columns["Fecha de nacimiento"].Visible = false;
                 verificacion.Columns["Direccion"].Visible = false;
+
+                verificacion.ReadOnly = true;
+                verificacion.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
                 //DataGridViewColumn column = verificacion.Columns[0];
                 //column.Width = 50;                                    ELIMINAR
                 DataGridViewColumn column2 = verificacion.Columns[1];
@@ -866,6 +874,10 @@ namespace AerolineaFrba.Compra
                         //column.Width = 50;                                     ELIMINACION
                         //   DataGridViewColumn column2 = verificacion2.Columns[2];
                         //   column2.Width = 50;
+
+                        verificacion2.ReadOnly = true;
+                        verificacion2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                        
                         DataGridViewColumn column3 = verificacion2.Columns[1];
                         column3.Width = 75;
                         DataGridViewColumn column6 = verificacion2.Columns[4];

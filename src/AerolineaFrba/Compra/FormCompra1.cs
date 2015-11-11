@@ -31,8 +31,6 @@ namespace AerolineaFrba.Compra
 
         private void FormCompra1_Load(object sender, EventArgs e)
         {
-
-
             button3.Enabled = false;
             LlenarComboBox1();
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -144,8 +142,9 @@ namespace AerolineaFrba.Compra
 
                 dataGridView1.DataSource = new Query(qry).ObtenerDataTable();
                 //OCULTO LA COLUMNA
-                dataGridView1.Columns["VIAJE_ID"].Visible = false;  
-                //REDEFINO ANCHO DE LAS COLUMNAS DEL DATA GRID PARA QUE SE VEA LINDO
+                dataGridView1.Columns["VIAJE_ID"].Visible = false;
+                dataGridView1.ReadOnly = true;
+                dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 DataGridViewColumn column = dataGridView1.Columns[0];
                 column.Width = 95;
                 DataGridViewColumn column1 = dataGridView1.Columns[1];
@@ -169,6 +168,8 @@ namespace AerolineaFrba.Compra
         {
             
             viajeID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
+            
+            //TODO: controlar que no rompa cuando hay una fila vacia en el datagrid
 
             string sql = "select VIAJE_AERO_ID from djml.VIAJES " +
                          "where VIAJE_ID = " + viajeID ;
