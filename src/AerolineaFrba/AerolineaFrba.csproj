@@ -174,11 +174,11 @@
     <Compile Include="Compra\CompraExitosa.Designer.cs">
       <DependentUpon>CompraExitosa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\CompraPasaje.cs">
+    <Compile Include="Compra\CargaDatos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra\CompraPasaje.Designer.cs">
-      <DependentUpon>CompraPasaje.cs</DependentUpon>
+    <Compile Include="Compra\CargaDatos.Designer.cs">
+      <DependentUpon>CargaDatos.cs</DependentUpon>
     </Compile>
     <Compile Include="Compra\FormEfectivo.cs">
       <SubType>Form</SubType>
@@ -230,11 +230,11 @@
       <DependentUpon>Devolucion2.cs</DependentUpon>
     </Compile>
     <Compile Include="Globales.cs" />
-    <Compile Include="Inicio Aplicacion\Form1.cs">
+    <Compile Include="Inicio Aplicacion\Bienvenida.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Inicio Aplicacion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Inicio Aplicacion\Bienvenida.Designer.cs">
+      <DependentUpon>Bienvenida.cs</DependentUpon>
     </Compile>
     <Compile Include="Generacion Viaje\FormGenerarViaje.cs">
       <SubType>Form</SubType>
@@ -327,8 +327,8 @@
     <EmbeddedResource Include="Compra\CompraExitosa.resx">
       <DependentUpon>CompraExitosa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Compra\CompraPasaje.resx">
-      <DependentUpon>CompraPasaje.cs</DependentUpon>
+    <EmbeddedResource Include="Compra\CargaDatos.resx">
+      <DependentUpon>CargaDatos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\FormCompra1.resx">
       <DependentUpon>FormCompra1.cs</DependentUpon>
@@ -357,8 +357,8 @@
     <EmbeddedResource Include="Generacion Viaje\FormGenerarViaje.resx">
       <DependentUpon>FormGenerarViaje.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Inicio Aplicacion\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Inicio Aplicacion\Bienvenida.resx">
+      <DependentUpon>Bienvenida.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio Aplicacion\FormInicioFuncionalidades.resx">
       <DependentUpon>FormInicioFuncionalidades.cs</DependentUpon>

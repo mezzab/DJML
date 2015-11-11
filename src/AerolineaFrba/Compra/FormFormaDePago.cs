@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba.Inicio_Aplicacion;
+using System.Data.SqlClient;
+using AerolineaFrba.Properties;
+using AerolineaFrba.Inicio_Aplicacion;
 
 namespace AerolineaFrba.Compra
 {
@@ -21,42 +25,71 @@ namespace AerolineaFrba.Compra
 
         private void button3_Click(object sender, EventArgs e)
         {
-            CompraPasaje m = new CompraPasaje();
+            CargaDatos m = new CargaDatos();
             this.Hide();
             m.StartPosition = FormStartPosition.CenterScreen;
-          
+
             m.ShowDialog();
-            m = (CompraPasaje)this.ActiveMdiChild;
+            m = (CargaDatos)this.ActiveMdiChild;
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            pagoEnEfectivo = true;
-
-            Form1 t = new Form1();
-            t.StartPosition = FormStartPosition.CenterScreen;
-          
-            this.Hide();
-            t.ShowDialog();
-            t = (Form1)this.ActiveMdiChild;
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
-        {       //dice efectivo pero tiene mal creado el nombre el puto form, todavia no se como sacarlo
-            
-            pagoEnEfectivo = false;
+        {
+            switch (formaPago.Text)
+            {
+                case "Tarjeta de credito":
+                    pagoEnEfectivo = false;
 
-            FormEfectivo t = new FormEfectivo();
-            t.StartPosition = FormStartPosition.CenterScreen;
-          
-            this.Hide();
-            t.ShowDialog();
-            t = (FormEfectivo)this.ActiveMdiChild;
+                    PagoConTarjeta t = new PagoConTarjeta();
+                    t.StartPosition = FormStartPosition.CenterScreen;
+                    this.Hide();
+                    t.ShowDialog();
+                    t = (PagoConTarjeta)this.ActiveMdiChild;
+
+                    break;
+                case "Efectivo":
+                    pagoEnEfectivo = true;
+
+                    PagoEfectivo m = new PagoEfectivo();
+                    m.StartPosition = FormStartPosition.CenterScreen;
+                    this.Hide();
+                    m.ShowDialog();
+                    m = (PagoEfectivo)this.ActiveMdiChild;
+
+                    break;
+            }
         }
 
         private void FormFormaDePago_Load(object sender, EventArgs e)
         {
+
+            LlenarComboBoxTiposCompra();
+            formaPago.DropDownStyle = ComboBoxStyle.DropDownList;
+
+        }
+
+        private void LlenarComboBoxTiposCompra()
+        {
+
+            if (Bienvenida.rol == "Administrador")
+            {
+                formaPago.Items.Add("Efectivo");
+                formaPago.Items.Add("Tarjeta de credito");
+                formaPago.SelectedItem = null;
+
+            }
+            if (Bienvenida.rol == "Cliente")
+            {
+                formaPago.Items.Add("Efectivo");
+                formaPago.SelectedItem = null;
+            }
+
+        }
+
+        private void formaPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

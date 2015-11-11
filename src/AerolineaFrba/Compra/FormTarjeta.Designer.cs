@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Compra
 {
-    partial class FormEfectivo
+    partial class PagoConTarjeta
     {
         /// <summary>
         /// Required designer variable.

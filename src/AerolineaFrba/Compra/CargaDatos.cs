@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 
 namespace AerolineaFrba.Compra
 {
-    public partial class CompraPasaje : Form
+    public partial class CargaDatos : Form
     {
 
 
@@ -54,7 +54,7 @@ namespace AerolineaFrba.Compra
 
         public static int PrecioTotal = 0;
 
-        public CompraPasaje()
+        public CargaDatos()
         {
             InitializeComponent();
         }
@@ -85,11 +85,11 @@ namespace AerolineaFrba.Compra
 
             dataGridView1.Columns["aeroButacaID"].Visible = false;
 
-            //DataGridViewColumn column = dataGridView1.Columns[0];     ELIMINAR
-            //column.Width = 52;                                        ELIMINAR
-            DataGridViewColumn column1 = dataGridView1.Columns[0];
+            DataGridViewColumn column = dataGridView1.Columns[0];     
+            column.Width = 52;                                       
+            DataGridViewColumn column1 = dataGridView1.Columns[2];
             column1.Width = 60;
-            DataGridViewColumn column2 = dataGridView1.Columns[1];
+            DataGridViewColumn column2 = dataGridView1.Columns[3];
             column2.Width = 78;
         }
 

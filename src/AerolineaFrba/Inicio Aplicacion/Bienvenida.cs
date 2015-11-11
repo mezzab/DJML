@@ -15,12 +15,12 @@ namespace AerolineaFrba
 {   
 
 
-    public partial class Form1 : Form
+    public partial class Bienvenida : Form
     {
 
         public static string rol;
 
-        public Form1()
+        public Bienvenida()
         {
             InitializeComponent();
         }

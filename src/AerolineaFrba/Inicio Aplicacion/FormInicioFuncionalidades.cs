@@ -103,7 +103,7 @@ namespace AerolineaFrba.Inicio_Aplicacion
 
         private void FormInicioFuncionalidades_Load(object sender, EventArgs e)
         {
-            rolTextBox.Text = Form1.rol;
+            rolTextBox.Text = Bienvenida.rol;
 
             LlenarComboFuncionalidades();
             funcionalidades.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -113,7 +113,7 @@ namespace AerolineaFrba.Inicio_Aplicacion
 
         public void LlenarComboFuncionalidades()
         {
-            if (Form1.rol == "Administrador")
+            if (Bienvenida.rol == "Administrador")
             {
                 //avisar("se cargan las funcionalidades del administrador.");
 
@@ -133,7 +133,7 @@ namespace AerolineaFrba.Inicio_Aplicacion
 
 
             }
-            if (Form1.rol == "Cliente")
+            if (Bienvenida.rol == "Cliente")
             {
                 //avisar("se cargan las funcionalidades del cliente");
 
@@ -162,9 +162,9 @@ namespace AerolineaFrba.Inicio_Aplicacion
         private void Salir_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            Form frm = new Form1();
+            Form frm = new Bienvenida();
             frm.ShowDialog();
-            frm = (Form1)this.ActiveMdiChild;
+            frm = (Bienvenida)this.ActiveMdiChild;
         }
 
         private void button6_Click(object sender, EventArgs e)

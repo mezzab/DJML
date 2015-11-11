@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 
 namespace AerolineaFrba.Compra
 {
-    public partial class FormEfectivo : Form
+    public partial class PagoConTarjeta : Form
     {
         public static DataTable tablaTarjeta = new DataTable();
 
@@ -30,7 +30,7 @@ namespace AerolineaFrba.Compra
         public static bool esNuevo = true;
 
 
-        public FormEfectivo()
+        public PagoConTarjeta()
         {
             InitializeComponent();
         }
@@ -116,7 +116,7 @@ namespace AerolineaFrba.Compra
             tipo2.Enabled = false;
             numero.Enabled = false;
 
-            total.Text = "$  " + CompraPasaje.PrecioTotal.ToString();
+            total.Text = "$  " + CargaDatos.PrecioTotal.ToString();
 
 
             LlenarComboBoxTipoDocumento();

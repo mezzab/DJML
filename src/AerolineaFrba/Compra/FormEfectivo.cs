@@ -15,7 +15,7 @@ using System.Text.RegularExpressions;
 
 namespace AerolineaFrba.Compra
 {
-    public partial class Form1 : Form
+    public partial class PagoEfectivo : Form
     {
 
         public static string Nombre;
@@ -29,7 +29,7 @@ namespace AerolineaFrba.Compra
 
         public static bool esNuevo = true;
 
-        public Form1()
+        public PagoEfectivo()
         {
             InitializeComponent();
         }
@@ -86,7 +86,7 @@ namespace AerolineaFrba.Compra
             LlenarComboBoxTipoDocumento();
             tipo.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            total.Text = "$  " + CompraPasaje.PrecioTotal.ToString();
+            total.Text = "$  " + CargaDatos.PrecioTotal.ToString();
          
         }
 

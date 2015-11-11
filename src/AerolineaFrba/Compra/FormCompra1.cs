@@ -177,11 +177,11 @@ namespace AerolineaFrba.Compra
 
             // avisar("viaje id= " + viajeID + " ... matricula= " + aeroID + " ");
 
-            CompraPasaje asd = new CompraPasaje();
+            CargaDatos asd = new CargaDatos();
             asd.StartPosition = FormStartPosition.CenterScreen;
             this.Hide();
             asd.ShowDialog();
-            asd = (CompraPasaje)this.ActiveMdiChild;
+            asd = (CargaDatos)this.ActiveMdiChild;
 
 
 
