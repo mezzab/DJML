@@ -520,6 +520,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "CompraPasaje";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Carga datos de pasajeros";
             this.Load += new System.EventHandler(this.FormCompra3_Load);
             this.groupBox1.ResumeLayout(false);

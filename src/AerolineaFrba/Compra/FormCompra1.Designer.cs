@@ -183,6 +183,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormCompra1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Compra";
             this.Load += new System.EventHandler(this.FormCompra1_Load);
             this.groupBox1.ResumeLayout(false);

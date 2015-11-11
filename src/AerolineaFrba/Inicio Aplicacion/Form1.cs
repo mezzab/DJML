@@ -12,9 +12,14 @@ using AerolineaFrba.Login_Usuario;
 
 
 namespace AerolineaFrba
-{
+{   
+
+
     public partial class Form1 : Form
     {
+
+        public static string rol;
+
         public Form1()
         {
             InitializeComponent();
@@ -31,7 +36,7 @@ namespace AerolineaFrba
             frm = (FormLogin)this.ActiveMdiChild;
         */
          
-         
+            rol = "Administrador";
             this.Visible = false;
             Form frm = new FormInicioFuncionalidades();
             frm.ShowDialog();
@@ -43,7 +48,12 @@ namespace AerolineaFrba
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            rol = "Cliente";
+            this.Visible = false;
+            Form frm = new FormInicioFuncionalidades();
+            frm.ShowDialog();
+            frm = (FormInicioFuncionalidades)this.ActiveMdiChild;
+        
         }
 
         private void Form1_Load(object sender, EventArgs e)
