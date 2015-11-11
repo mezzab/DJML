@@ -94,6 +94,7 @@ namespace AerolineaFrba.Abm_Rol
             this.Controls.Add(this.bnBaja);
             this.Controls.Add(this.bnAlta);
             this.Name = "FormRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM ROL";
             this.Load += new System.EventHandler(this.FormRol_Load);
             this.ResumeLayout(false);

@@ -81,6 +81,7 @@
             this.Controls.Add(this.comboBoxRol);
             this.Controls.Add(this.label1);
             this.Name = "FormRolBaja";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormRolBaja";
             this.Load += new System.EventHandler(this.FormRolBaja_Load);
             this.ResumeLayout(false);

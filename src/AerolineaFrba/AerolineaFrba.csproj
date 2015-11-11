@@ -248,11 +248,11 @@
     <Compile Include="Inicio Aplicacion\FormInicioFuncionalidades.Designer.cs">
       <DependentUpon>FormInicioFuncionalidades.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.cs">
+    <Compile Include="Listado Estadistico\FormListadoEstadistico.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Listado Estadistico\FormListadoEstadistico.Designer.cs">
+      <DependentUpon>FormListadoEstadistico.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -362,6 +362,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio Aplicacion\FormInicioFuncionalidades.resx">
       <DependentUpon>FormInicioFuncionalidades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\FormListadoEstadistico.resx">
+      <DependentUpon>FormListadoEstadistico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -35,6 +35,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.bnListado = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // abm_rol
@@ -106,11 +107,22 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // bnListado
+            // 
+            this.bnListado.Location = new System.Drawing.Point(239, 249);
+            this.bnListado.Name = "bnListado";
+            this.bnListado.Size = new System.Drawing.Size(146, 53);
+            this.bnListado.TabIndex = 7;
+            this.bnListado.Text = "LISTADO ESTADISTICO";
+            this.bnListado.UseVisualStyleBackColor = true;
+            this.bnListado.Click += new System.EventHandler(this.bnListado_Click);
+            // 
             // FormInicioFuncionalidades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(461, 346);
+            this.Controls.Add(this.bnListado);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button1);
@@ -134,5 +146,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button bnListado;
     }
 }

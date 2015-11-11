@@ -115,6 +115,7 @@
             this.Controls.Add(this.txtRol);
             this.Controls.Add(this.label1);
             this.Name = "FormRolAlta";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormRolAlta";
             this.Load += new System.EventHandler(this.FormRolAlta_Load);
             this.ResumeLayout(false);

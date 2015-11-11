@@ -13,6 +13,7 @@ using AerolineaFrba.Compra;
 using AerolineaFrba.Abm_Ciudad;
 using AerolineaFrba.Abm_Ruta;
 using AerolineaFrba.Devolucion;
+using AerolineaFrba.Listado_Estadistico;
 
 namespace AerolineaFrba.Inicio_Aplicacion
 {
@@ -85,6 +86,14 @@ namespace AerolineaFrba.Inicio_Aplicacion
 
             frm.ShowDialog();
             frm = (Devolucion0)this.ActiveMdiChild;
+        }
+
+        private void bnListado_Click(object sender, EventArgs e)
+        {
+            FormListadoEstadistico inicioF = new FormListadoEstadistico();
+            this.Hide();
+            inicioF.ShowDialog();
+            inicioF = (FormListadoEstadistico)this.ActiveMdiChild;
         }
 
     }

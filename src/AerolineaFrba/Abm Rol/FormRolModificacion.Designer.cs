@@ -151,6 +151,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormRolModificacion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormRolModificacion";
             this.Load += new System.EventHandler(this.FormRolModificacion_Load);
             this.ResumeLayout(false);
