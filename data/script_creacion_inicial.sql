@@ -1,7 +1,6 @@
 --============================================================
 				--ELIMINAR TABLAS Y PROCEDURES
 --============================================================
-/*
 DROP TABLE DJML.USUARIOS
 DROP TABLE DJML.ROL_FUNCIONALIDAD
 DROP TABLE DJML.ROLES
@@ -46,7 +45,7 @@ DROP PROCEDURE DJML.CREAR_CANJES
 
 
 DROP SCHEMA DJML
-*/
+
 --============================================================	
 --			GESTION DE DATOS 2C 2015 - TP AEROLINEA FRBA						
 -- ===========================================================
@@ -581,6 +580,7 @@ BEGIN
 
 	---MIGRACION DATOS TABLA PASAJES---
 
+	/*
 	insert into djml.PASAJES(PASA_ID, PASA_VIAJE_ID,PASA_CLIE_ID,PASA_COMPRA_ID,PASA_BUTA_ID,PASA_PRECIO)
 	SELECT distinct Pasaje_Codigo, v.VIAJE_ID, C.CLIE_ID, NULL, B.BUTA_ID, Pasaje_Precio
 	FROM [GD2C2015].[gd_esquema].[Maestra] m
@@ -605,7 +605,8 @@ BEGIN
 
 	PRINT 'SE MIGRO LA TABLA PASAJE CORRECTAMENTE'
 
-
+	*/
+	
 
 
 --============================================================
@@ -658,13 +659,13 @@ BEGIN
 	MEDI_DESCRIPCION VARCHAR(15) NOT NULL
 	)
 
-	--MIGRACION
+	--MIGRACION TABLA MEDIOS_DE_PAGO
 
 	INSERT INTO DJML.MEDIOS_DE_PAGO(MEDI_DESCRIPCION) VALUES ('EFECTIVO')
 	INSERT INTO DJML.MEDIOS_DE_PAGO(MEDI_DESCRIPCION) VALUES ('TC')
 
 
-	--=======================================================================
+--=======================================================================
                             -- TABLA TIPOS DE TARJETA
 --=======================================================================
 
@@ -673,9 +674,9 @@ BEGIN
     ID INT IDENTITY(1,1) PRIMARY KEY,
     NOMBRE NVARCHAR(255) NOT NULL,
 	CUOTAS INT DEFAULT 0   
-)
+	)
 
- -- Migracion
+	--MIGRACION TABLA TIPOS_DE_TARJETA
 
 	INSERT INTO DJML.TIPOS_DE_TARJETA (NOMBRE, CUOTAS)
 	VALUES ('VISA', 6),
@@ -691,6 +692,8 @@ BEGIN
 	TARJ_TIPO_ID INT FOREIGN KEY REFERENCES DJML.TIPOS_DE_TARJETA(ID),
 	TARJ_CODIGO INT NOT NULL
 	)
+	
+	--HACER: NO SE MIGRA
 
 --=======================================================================
                             -- TABLA COMPRA
@@ -709,11 +712,9 @@ BEGIN
 
 
 
-	-- MIGRACION DATOS TABLA COMPRAS ---
--- FALTA HACER LA MIGRACION...
-
--- MIGRAR CON: MEDIO DE PAGO, TARJETA DE CREDITO EN NULL !!!!
--- ESTARIA COPADO HACER UN CHECK QUE CUANDO MEDIO DE PAGO SEA TC SE FIJE QUE TARJETA DE CREDITO NO ESTE EN NULL
+	-- MIGRACION DATOS TABLA COMPRAS
+	-- MIGRAR CON: MEDIO DE PAGO, TARJETA DE CREDITO EN NULL !!!!
+	-- ESTARIA COPADO HACER UN CHECK QUE CUANDO MEDIO DE PAGO SEA TC SE FIJE QUE TARJETA DE CREDITO NO ESTE EN NULL
 
 
 --=======================================================================
@@ -726,7 +727,9 @@ BEGIN
     CANC_COMPRA_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.COMPRAS(COMPRA_ID),
     CANC_MOTIVO NVARCHAR(255)NOT NULL
 	)
--------------------------------NO SE MIGRA
+		
+	--MIGRACION TABLA CANCELACIONES	
+	--HACER: NO SE MIGRA
 
 END 
 GO
@@ -745,21 +748,24 @@ CREATE TABLE DJML.PRODUCTO (
     PROD_STOCK INT  NOT NULL    
 	) 
 
-------------------------------------------------------- NO SE MIGRA
+	--MIGRACION TABLA PRODUCTO
+	--HACER: NO SE MIGRA
 
 --============================================================
 						--TABLA CANJES
 --============================================================
 
-CREATE TABLE DJML.CANJES (
+	CREATE TABLE DJML.CANJES (
     CANJ_ID INT IDENTITY(1,1)     PRIMARY KEY,
 	CANJ_CLIE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.CLIENTES(CLIE_ID),
     CANJ_PRODUCTO_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.PRODUCTO(PROD_ID),
     CANJ_CANTIDAD INT DEFAULT 1,
     CANJ_FECHA_CANJE DATETIME NOT NULL
 	)
----------------------------------------------------- NO SE MIGRA
-
+	
+	--MIGRACION TABLA CANJES
+	--HACER: NO SE MIGRA
+	
 END
 GO
 
@@ -802,4 +808,29 @@ CREATE VIEW DJML.v_rutas
 		JOIN DJML.CIUDADES c2 ON c2.CIUD_ID = t.TRAMO_CIUDAD_DESTINO
 		WHERE RUTA_IS_ACTIVE = 1
 */
-
+/*
+SELECT 
+	m.Pasaje_Codigo,
+	NULL,
+	v.VIAJE_ID,	
+	(SELECT c.CLIE_ID
+		FROM DJML.CLIENTES c
+		WHERE M.Cli_Dni = C.CLIE_DNI
+		AND M.Cli_Telefono = C.CLIE_TELEFONO
+	),
+	(SELECT B.BUTA_ID
+		FROM DJML.BUTACAS B
+		JOIN DJML.BUTACA_AERO BA ON B.BUTA_ID = BA.BXA_BUTA_ID
+			AND M.Aeronave_Matricula = BA.BXA_AERO_MATRICULA
+		WHERE M.Butaca_Nro = B.BUTA_NRO
+			AND M.Butaca_Piso = B.BUTA_PISO
+	),
+	m.Pasaje_Precio
+FROM [GD2C2015].[gd_esquema].[Maestra] m
+JOIN DJML.VIAJES v on m.FechaSalida = v.VIAJE_FECHA_SALIDA
+AND m.FechaLLegada = v.VIAJE_FECHA_LLEGADA
+AND m.Fecha_LLegada_Estimada = v.VIAJE_FECHA_LLEGADA_ESTIMADA
+AND m.Aeronave_Matricula = v.VIAJE_AERO_ID
+WHERE Paquete_Codigo = 0
+ORDER BY 1
+*/
