@@ -91,6 +91,7 @@ namespace AerolineaFrba.Abm_Aeronave
             this.Controls.Add(this.bnBaja);
             this.Controls.Add(this.bnAlta);
             this.Name = "FormAeronave";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM AERONAVE";
             this.Load += new System.EventHandler(this.FormAeronave_Load);
             this.ResumeLayout(false);
@@ -101,10 +102,6 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void FormAeronave_Load(object sender, EventArgs e)
         {
-            this.Visible = false;
-            FormAeronave frm = new FormAeronave();
-            frm.ShowDialog();
-            this.Visible = true;
         }
 
         private void bnListado_Click(object sender, EventArgs e)
@@ -114,10 +111,10 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void bnVolver_Click(object sender, EventArgs e)
         {
-            FormAeronave aero = new FormAeronave();
+            FormInicioFuncionalidades aero = new FormInicioFuncionalidades();
             this.Hide();
             aero.ShowDialog();
-            aero = (FormAeronave)this.ActiveMdiChild;
+            aero = (FormInicioFuncionalidades)this.ActiveMdiChild;
         }
 
         private void bnAlta_Click(object sender, EventArgs e)

@@ -51,5 +51,14 @@ namespace AerolineaFrba.Abm_Ruta
             this.Visible = true;
         }
 
+        private void button_volver_Click(object sender, EventArgs e)
+        {
+            
+            this.Visible = false;
+            FormInicioFuncionalidades frm = new FormInicioFuncionalidades();
+            frm.ShowDialog();
+            this.Visible = true;
+        }
+
     }
 }

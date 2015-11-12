@@ -96,6 +96,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.alta);
             this.Name = "FormCiudades";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormCiudades";
             this.Load += new System.EventHandler(this.FormCiudades_Load);
             this.ResumeLayout(false);

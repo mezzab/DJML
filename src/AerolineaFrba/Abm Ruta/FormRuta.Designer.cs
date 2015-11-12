@@ -83,6 +83,7 @@
             this.button_volver.TabIndex = 4;
             this.button_volver.Text = "Volver";
             this.button_volver.UseVisualStyleBackColor = true;
+            this.button_volver.Click += new System.EventHandler(this.button_volver_Click);
             // 
             // FormRuta
             // 
@@ -95,6 +96,7 @@
             this.Controls.Add(this.button_baja);
             this.Controls.Add(this.button_alta);
             this.Name = "FormRuta";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM RUTA";
             this.ResumeLayout(false);
 

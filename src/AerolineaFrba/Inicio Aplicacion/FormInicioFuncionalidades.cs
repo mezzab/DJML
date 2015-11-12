@@ -191,7 +191,7 @@ namespace AerolineaFrba.Inicio_Aplicacion
                     break;
                 case "ABM AERONAVE":
                     this.Visible = false;
-                    Form frm4 = new FormAeronave();
+                    FormAeronave frm4 = new FormAeronave();
                     frm4.ShowDialog();
                     frm4 = (FormAeronave)this.ActiveMdiChild;
                     break;
