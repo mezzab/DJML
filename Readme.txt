@@ -1,7 +1,7 @@
 Curso:
 K3072 	--> Lucas Quintana
 
-K3??? 	--> Diego Alfonsin
+K3122 	--> Diego Alfonsin
 	--> Marcos Mezzabotta
 	--> Juan Urbano
 
