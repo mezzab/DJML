@@ -103,7 +103,7 @@ namespace AerolineaFrba.Listado_Estadistico
             //Top 5 de los destinos con más pasajes comprados.
 
 
-          string listado = "SELECT * FROM DJML.CIUDADES";
+      //    string listado = "SELECT * FROM DJML.CIUDADES";
                 /*         
             -----comienzo listado Top 5 de los destinos con más pasajes comprados.
             select c.CIUD_DETALLE,p.PASA_VIAJE_ID,COUNT(p.PASA_VIAJE_ID) from djml.PASAJES p

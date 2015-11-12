@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using AerolineaFrba.Inicio_Aplicacion;
 using System.Data.SqlClient;
 using AerolineaFrba.Properties;
-using AerolineaFrba.Inicio_Aplicacion;
 
 namespace AerolineaFrba.Compra
 {

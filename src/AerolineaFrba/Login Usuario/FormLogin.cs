@@ -169,6 +169,7 @@ namespace AerolineaFrba.Login_Usuario
             this.Hide();
             login.ShowDialog();
             login = (Bienvenida)this.ActiveMdiChild;
+
         }
 
         private void txtPassw_TextChanged(object sender, EventArgs e)
