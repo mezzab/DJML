@@ -165,10 +165,10 @@ namespace AerolineaFrba.Login_Usuario
 
         private void bnSalir_Click(object sender, EventArgs e)
         {
-            Form1 login = new Form1();
+            Bienvenida login = new Bienvenida();
             this.Hide();
             login.ShowDialog();
-            login = (Form1)this.ActiveMdiChild;
+            login = (Bienvenida)this.ActiveMdiChild;
         }
 
         private void txtPassw_TextChanged(object sender, EventArgs e)
