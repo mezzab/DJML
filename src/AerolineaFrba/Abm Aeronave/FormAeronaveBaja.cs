@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using AerolineaFrba.Properties;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
@@ -29,6 +31,42 @@ namespace AerolineaFrba.Abm_Aeronave
             this.Hide();
             aero.ShowDialog();
             aero = (FormAeronave)this.ActiveMdiChild;
+
+        }
+
+        private void FormAeronaveBaja_Load(object sender, EventArgs e)
+        {
+            comboBoxTipoBaja.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxTipoBaja.Items.Add("COMPLETO VIDA UTIL");
+            comboBoxTipoBaja.Items.Add("FUERA DE SERVICIO");
+            
+        }
+
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(comboBoxTipoBaja.Text == "COMPLETO VIDA UTIL")
+            {
+                this.Visible = false;
+                FormBajaCompletoVidaUtil frm = new FormBajaCompletoVidaUtil();
+                frm.ShowDialog();
+                this.Visible = true;
+            }
+            else
+            if(comboBoxTipoBaja.Text == "FUERA DE SERVICIO")
+            {
+                this.Visible = false;
+                FormBajaFueraServicio frm = new FormBajaFueraServicio();
+                frm.ShowDialog();
+                this.Visible = true;
+            }
+              
+
+        }
+
+        private void comboBoxTipoBaja_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

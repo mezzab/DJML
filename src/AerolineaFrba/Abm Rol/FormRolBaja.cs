@@ -78,6 +78,11 @@ namespace AerolineaFrba.Abm_Rol
             }
         }
 
+        private void comboBoxRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             FormRol rol = new FormRol();

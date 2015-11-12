@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using AerolineaFrba.Inicio_Aplicacion;
 using AerolineaFrba.Abm_Aeronave;
 
+
 namespace AerolineaFrba.Abm_Aeronave
 {
     public partial class FormAeronave : Form
@@ -119,6 +120,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void bnAlta_Click(object sender, EventArgs e)
         {
+            
 
         }
 

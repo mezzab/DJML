@@ -744,36 +744,11 @@ CREATE VIEW DJML.v_rutas
 		JOIN DJML.CIUDADES c1 ON c1.CIUD_ID = t.TRAMO_CIUDAD_ORIGEN
 		JOIN DJML.CIUDADES c2 ON c2.CIUD_ID = t.TRAMO_CIUDAD_DESTINO
 		WHERE RUTA_IS_ACTIVE = 1
-<<<<<<< HEAD
-*/
-/*
-SELECT 
-	m.Pasaje_Codigo,
-	NULL,
-	v.VIAJE_ID,	
-	(SELECT c.CLIE_ID
-		FROM DJML.CLIENTES c
-		WHERE M.Cli_Dni = C.CLIE_DNI
-		AND M.Cli_Telefono = C.CLIE_TELEFONO
-	),
-	(SELECT B.BUTA_ID
-		FROM DJML.BUTACAS B
-		JOIN DJML.BUTACA_AERO BA ON B.BUTA_ID = BA.BXA_BUTA_ID
-			AND M.Aeronave_Matricula = BA.BXA_AERO_MATRICULA
-		WHERE M.Butaca_Nro = B.BUTA_NRO
-			AND M.Butaca_Piso = B.BUTA_PISO
-	),
-	m.Pasaje_Precio
-FROM [GD2C2015].[gd_esquema].[Maestra] m
-JOIN DJML.VIAJES v on m.FechaSalida = v.VIAJE_FECHA_SALIDA
-AND m.FechaLLegada = v.VIAJE_FECHA_LLEGADA
-AND m.Fecha_LLegada_Estimada = v.VIAJE_FECHA_LLEGADA_ESTIMADA
-AND m.Aeronave_Matricula = v.VIAJE_AERO_ID
-WHERE Paquete_Codigo = 0
-ORDER BY 1
-*/
 
-=======
+
 
 GO	
 PRINT 'SE CREO LA VISTA v_rutas CORRECTAMENTE'
+
+
+
