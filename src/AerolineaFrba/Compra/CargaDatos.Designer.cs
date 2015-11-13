@@ -503,7 +503,7 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "LISTA DE ENCOMIENDAS A COMPRAR";
             // 
-            // CompraPasaje
+            // CargaDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -519,7 +519,7 @@
             this.Controls.Add(this.Volver);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "CompraPasaje";
+            this.Name = "CargaDatos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Carga datos de pasajeros";
             this.Load += new System.EventHandler(this.FormCompra3_Load);
