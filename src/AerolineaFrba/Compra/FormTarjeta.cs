@@ -660,7 +660,7 @@ namespace AerolineaFrba.Compra
         private void dniNum_TextChanged(object sender, EventArgs e)
         {
             //  dniNum.TextChanged += dni_TextChanged;
-            dniNum.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+            dniNum.Text = Regex.Replace(dniNum.Text, @"[^\d]", "");
             //OBLIGA A QUE INTRODUZCA NUMEROS
 
             numero.Text = dniNum.Text;
@@ -684,14 +684,14 @@ namespace AerolineaFrba.Compra
         private void numTarjeta_TextChanged(object sender, EventArgs e)
         {
              // dniNum.TextChanged += dni_TextChanged;
-            numTarjeta.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+            numTarjeta.Text = Regex.Replace(numTarjeta.Text, @"[^\d]", "");
             //OBLIGA A QUE INTRODUZCA NUMEROS
         }
 
         private void codigoTarjeta_TextChanged(object sender, EventArgs e)
         {
             //  dniNum.TextChanged += dni_TextChanged;
-          codigoTarjeta.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+          codigoTarjeta.Text = Regex.Replace(codigoTarjeta.Text, @"[^\d]", "");
             //OBLIGA A QUE INTRODUZCA NUMEROS
         }
 

@@ -393,7 +393,7 @@ namespace AerolineaFrba.Compra
         private void dniNum_TextChanged(object sender, EventArgs e)
         {
             //  dniNum.TextChanged += dni_TextChanged;
-            dniNum.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+            dniNum.Text = Regex.Replace(dniNum.Text, @"[^\d]", "");
             //OBLIGA A QUE INTRODUZCA NUMEROS
 
             numero.Text = dniNum.Text;

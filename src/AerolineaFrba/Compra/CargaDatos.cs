@@ -260,10 +260,16 @@ namespace AerolineaFrba.Compra
 
                 if (cantidadPasajesCargados < maxPasajes)
                 {
-                    if (elClienteNoEstaEnLaTabla())
+                    if (elClienteNoEstaEnLaTabla() == false)
                     {
-                        if (elClienteTieneElDiaLibre())
-                        {
+                        avisar("Ya cargo un pasaje para este cliente");
+                        LimpiarCliente_Click(sender, e);
+
+                    }
+                    if (elClienteNoEstaEnLaTabla())
+                    { // avisar("el cliente no esta en tabla"); //borrar
+                        if (elClienteYaTieneAsignadoUnViajeEseDia() == "noTieneAsignado")
+                        {  // avisar("no tiene asignado viaje"); //borrar
 
                             if (primerP) // si es el primero entonces crea las columnas
                             {   //creo las columnas de la tabla statica
@@ -272,53 +278,49 @@ namespace AerolineaFrba.Compra
                                 primerP = false;
                             }
                             //agrego los datos del pasajero
-
-
-
-                            if (esNuevo)
-                            {
-                                if (existeCliente())
-                                {
-                                    avisar("Ya existe cliente con ese tipo y numero de documento. Preciona el boton buscar");
-                                    //TODO:limpiar todo, y dejar el dni y tipo, y seleccionado pasaje y SALIR
-                                    //TODO:implementar tambien en encomiendas
-                                }
-                                if (existeCliente()==false)
-                                {
-                                    //avisar("Todavia no anda el Insert para un cliente nuevo");
-                                    cargarNuevoCliente(); //INSERT DE LOS CAMPOS
-                                    guardarIdCliente();
-                                }
-                            }
-                            else
-                            {
-
-                                actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE
-
-                            }
-
-                            butacasCargadas.Add(Convert.ToInt32(aeroButacaID));
-
+                            
+                             butacasCargadas.Add(Convert.ToInt32(aeroButacaID));
+                             
                             cargarDatosATabla();
-
+                           
                             darBajaAltaButaca(aeroButacaID, 0);
-
+                            
                             cantidadPasajesCargados++;
 
-
+                          
                             LimpiarCliente_Click(sender, e);
+                            
                             llenarButacas();
+                         
                             butacaSeleccionada.Visible = false;
                             esNuevo = false;
                             butaca = "";
                             tipoBucata = "";
+                        } 
+                        /* //TODO:arreglar la comparacion por string
+                        if(elClienteYaTieneAsignadoUnViajeEseDia() == "yaExisteCliente")
+                        {
+                            //cargar dni y tipo y borrar lo demas TODO:
+                            avisar("se borra todo y se carga el viejo tipo. falta implementar");
                         }
+                        
+                        if(elClienteYaTieneAsignadoUnViajeEseDia() == "tieneAsignado")
+                        {
+                        avisar("Un pasajero no puede viajar a mas de un destino a la vez.");
+                        
+                        }
+                        */
+
                     }
+                    
+
 
                 }
-
+              
                 verificacion.DataSource = tabla;
+               
                 verificacion.Show();
+             
                 verificacion.Columns["Id Butaca"].Visible = false;
                 verificacion.Columns["Id Cliente"].Visible = false;
                 verificacion.Columns["Mail"].Visible = false;
@@ -347,7 +349,6 @@ namespace AerolineaFrba.Compra
                 t.ForeColor = Color.Red;
                 t1.ForeColor = Color.Red;
 
-                
                 tipo2.SelectedIndex = -1;
                 tipo.SelectedIndex = -1;
                 combo.SelectedIndex = -1;
@@ -362,39 +363,41 @@ namespace AerolineaFrba.Compra
 
         }
 
-        private bool elClienteNoEstaEnLaTabla() //TODO:
+        private bool elClienteNoEstaEnLaTabla() 
         {
-            bool vic = true;
-
-            //buscar si esta hay un cliente cargado con ese id
-
-            return vic;
+            return !buscarFilaDeTabla(IDC);
         }
 
-        private bool elClienteTieneElDiaLibre() //TODO:
+        private string elClienteYaTieneAsignadoUnViajeEseDia() //TODO:
         {
-            bool vic = true;
+            string quePaso = "nose";
 
             if (esNuevo)
             {
-                //controlar que no exista
-                
+                if (existeCliente())
+                {
+                    avisar("Ya existe cliente con ese tipo y numero de documento. Preciona el boton buscar");
+                    quePaso = "yaExisteCliente";
+                }
+                if (existeCliente() == false)
+                {        
+                    cargarNuevoCliente(); //INSERT DE LOS CAMPOS
+                    guardarIdCliente();
+                    quePaso = "noTieneAsignado";
+                    //TODO:controlar que tenga el dia libre
+                }
             }
-            else
-            {
-                actualizarDatos();
-                //controlar que no tenga viajes asignados ese dia
-
+            if (esNuevo == false) 
+            {   
+                actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE 
+                guardarIdCliente();
+                quePaso = "noTieneAsignado";
+                //TODO:Controlar que tenga el dia libre con el id;
             }
 
-
-
-
-            return vic;
+            return quePaso;
         }
-        
-
-
+    
         private void avisarBien(string quePaso)
         {
             MessageBox.Show(quePaso, "SE INFORMA QUE:", MessageBoxButtons.OK, MessageBoxIcon.None);
@@ -477,7 +480,7 @@ namespace AerolineaFrba.Compra
             }
 
             /* if (FechaNacimiento.ToString() != fechaNacimiento.Text)
-              {
+              {  TODO:ARREGLAR
 
                    //BUG
                   string converted = DateTime.ParseExact(fechaNacimiento.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
@@ -496,6 +499,7 @@ namespace AerolineaFrba.Compra
                     avisar("No se pudieron actualizar los nuevos datos ingresados. Ya hay un cliente con ese numero de dni y tipo.");
 
                     tipo.Text = TipoDNI;
+                  
                 
                 }
 
@@ -514,7 +518,7 @@ namespace AerolineaFrba.Compra
                 {
                     avisar("No se pueden actualizar los datos. Ya hay un cliente con ese numero de dni y tipo.");
 
-                    tipo.Text = TipoDNI;
+                    numero.Text = DNI;
                 }
 
                 string qry = "update DJML.CLIENTES " +
@@ -596,7 +600,7 @@ namespace AerolineaFrba.Compra
                         
                         // avisar("existe usuario");
                     }
-                    else
+                    else if( existeUsuario(dni, tipoDoc) ==false )
                     {
                         MessageBox.Show("El cliente es inexistente, debe cargar sus datos para poder seguir con las operaciones");
 
@@ -939,7 +943,7 @@ namespace AerolineaFrba.Compra
                             cargarNuevoCliente(); //INSERT DE LOS CAMPOS
 
                         }
-                        else
+                        else if(esNuevo==false)
                         {
                             actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE
                         }
@@ -1096,6 +1100,21 @@ namespace AerolineaFrba.Compra
 
             return (id_cliente != null);
         }
+
+        private bool buscarFilaDeTabla(string idm)
+        {
+            bool existeEnTabla = false;
+            
+            for (int i = tabla.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = tabla.Rows[i];
+                if (dr["Id Cliente"].ToString() == idm)
+                    existeEnTabla = true;
+            }
+
+            return existeEnTabla;         
+
+        }
         
     }
 }
@@ -1103,7 +1122,7 @@ namespace AerolineaFrba.Compra
 
 
 //TODO: validar que el cliente no haya comprado un pasaje para ese dia
-//TODO: hacer que un cliente no pueda comprar dos pasajes para el mismo
+
 //TODO: calcular el precio de los pasajes y encomiendas y agregarlos a la tabla! 
 
 
@@ -1149,7 +1168,6 @@ private void borrarFilaDeTabla(string idButaca)
             dr.Delete();
     }
 
-    //TODO: hacer denuevo esta funcion.
 }
 
 private void borrarFilaDeTabla2(string idEnco)
