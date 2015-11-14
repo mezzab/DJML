@@ -48,13 +48,18 @@ namespace AerolineaFrba.Compra
 
         public static bool primeraE = true;
         public static bool primerP = true;
-
+        
         public static int pesoCargado = 0;
         List<int> butacasCargadas = new List<int>();
 
-        public static int PrecioTotal = 0;
+
+        public static decimal precioBasePasaje;
+        public static decimal precioBaseEncomienda;
+        public static decimal porcentajeServicio;
 
         public static string IDC;
+
+
 
         
         public CargaDatos()
@@ -147,7 +152,7 @@ namespace AerolineaFrba.Compra
             tabla.Columns.Add("Telefono", typeof(UInt64));
             tabla.Columns.Add("Fecha de nacimiento", typeof(DateTime));
             tabla.Columns.Add("Direccion", typeof(string));
-            tabla.Columns.Add("Precio", typeof(int));
+            tabla.Columns.Add("Precio", typeof(decimal));
         }
 
         private void crearColumnas2()
@@ -162,8 +167,31 @@ namespace AerolineaFrba.Compra
             tabla2.Columns.Add("Telefono", typeof(UInt64));
             tabla2.Columns.Add("Fecha de nacimiento", typeof(DateTime));
             tabla2.Columns.Add("Direccion", typeof(string));
-            tabla2.Columns.Add("Precio", typeof(int));
+            tabla2.Columns.Add("Precio", typeof(decimal));
         }
+
+        private void calcularDatosParaCalculoDePrecios()
+        {
+            string sqls = "select SERV_PORCENTAJE from djml.SERVICIOS" +
+                            " where serv_id = (select RUTA_SERVICIO from djml.RUTAS" +
+                            " where ruta_codigo = ( select VIAJE_RUTA_ID from djml.viajes where viaje_id  =" + FormCompra1.viajeID + "))";
+            Query qrys = new Query(sqls);
+            porcentajeServicio = Convert.ToDecimal(qrys.ObtenerUnicoCampo());
+
+
+            string sqle = "select RUTA_PRECIO_BASE_KILO from djml.RUTAS" +
+                           " where ruta_codigo = ( select VIAJE_RUTA_ID from djml.viajes where viaje_id  =" + FormCompra1.viajeID + ")";
+            Query qrye = new Query(sqle);
+            precioBaseEncomienda = Convert.ToDecimal(qrye.ObtenerUnicoCampo());
+
+            string sqlp = "select RUTA_PRECIO_BASE_PASAJE from djml.RUTAS" +
+                        " where ruta_codigo = ( select VIAJE_RUTA_ID from djml.viajes where viaje_id  =" + FormCompra1.viajeID + ")";
+            Query qryp = new Query(sqlp);
+           precioBasePasaje = Convert.ToDecimal(qryp.ObtenerUnicoCampo());
+
+           // avisar("El id del viaje es: " + FormCompra1.viajeID + " .. el precio base de enco es :" + precioBaseEncomienda + " .. el precio base de pasaje es :" + precioBasePasaje + " ..y el porcentaje de servicio es :" + porcentajeServicio );
+
+       }
 
         private void cargarDatosATabla()
         {
@@ -182,11 +210,14 @@ namespace AerolineaFrba.Compra
             uno["Telefono"] = telefono.Text;
             uno["Fecha de nacimiento"] = fechaNacimiento.Text;
             uno["Direccion"] = direccion.Text;
-            // uno["Precio"] = precio;
 
+            uno["Precio"] = (precioBasePasaje * (1 + porcentajeServicio));
 
             //agrego los datos del pasajero a la tabla
             tabla.Rows.Add(uno);
+
+            //guardo el id en la lista 
+
         }
 
         private void cargarDatosATabla2()
@@ -203,7 +234,7 @@ namespace AerolineaFrba.Compra
             uno["Telefono"] = telefono.Text;
             uno["Fecha de nacimiento"] = fechaNacimiento.Text;
             uno["Direccion"] = direccion.Text;
-            // uno["Precio"] = precio;
+            uno["Precio"] = (precioBaseEncomienda * Convert.ToDecimal(kgs));
 
 
             //agrego los datos del pasajero a la tabla
@@ -740,6 +771,8 @@ namespace AerolineaFrba.Compra
 
             t.ForeColor = Color.Red;
             t1.ForeColor = Color.Red;
+
+            calcularDatosParaCalculoDePrecios();
         }
 
         public void LlenarComboBoxTipoDocumento()

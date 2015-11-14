@@ -487,6 +487,7 @@
             this.total.Name = "total";
             this.total.Size = new System.Drawing.Size(100, 16);
             this.total.TabIndex = 1;
+            this.total.TextChanged += new System.EventHandler(this.total_TextChanged);
             // 
             // label16
             // 
@@ -498,7 +499,7 @@
             this.label16.TabIndex = 0;
             this.label16.Text = "Importe a abonar: ";
             // 
-            // FormEfectivo
+            // PagoConTarjeta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -509,7 +510,7 @@
             this.Controls.Add(this.LimpiarTodo);
             this.Controls.Add(this.Comprar);
             this.Controls.Add(this.Volver);
-            this.Name = "FormEfectivo";
+            this.Name = "PagoConTarjeta";
             this.Text = "Carga de datos para pago con tarjeta";
             this.Load += new System.EventHandler(this.FormEfectivo_Load);
             this.groupBox2.ResumeLayout(false);
