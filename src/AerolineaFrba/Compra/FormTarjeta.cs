@@ -116,7 +116,8 @@ namespace AerolineaFrba.Compra
             tipo2.Enabled = false;
             numero.Enabled = false;
 
-            total.Text = "$  " + CargaDatos.PrecioTotal.ToString();
+            calcularPrecioTotal();
+            
 
 
             LlenarComboBoxTipoDocumento();
@@ -125,6 +126,32 @@ namespace AerolineaFrba.Compra
             tipoT.DropDownStyle = ComboBoxStyle.DropDownList;
             cuotas.DropDownStyle = ComboBoxStyle.DropDownList;
         }
+
+        private void calcularPrecioTotal()
+        {
+
+            decimal totalCalculado = 0;
+
+            for (int i = CargaDatos.tabla.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = CargaDatos.tabla.Rows[i];
+                decimal aux = Convert.ToDecimal(dr["Precio"]);
+                totalCalculado = totalCalculado + aux;
+
+            }
+            for (int i = CargaDatos.tabla2.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = CargaDatos.tabla2.Rows[i];
+                decimal aux = Convert.ToDecimal(dr["Precio"]);
+                totalCalculado = totalCalculado + aux;
+
+            }
+
+            total.Text = "$ " + totalCalculado.ToString();
+
+
+        }
+
 
         private void tipoDeDocumento_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -717,6 +744,29 @@ namespace AerolineaFrba.Compra
     
         
         
+        }
+
+        private void total_TextChanged(object sender, EventArgs e)
+        {
+            decimal totalCalculado = 0;
+
+            for (int i = CargaDatos.tabla.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = CargaDatos.tabla.Rows[i];
+                decimal aux = Convert.ToDecimal(dr["Precio"]);
+                totalCalculado = totalCalculado + aux;
+
+            }
+            for (int i = CargaDatos.tabla2.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = CargaDatos.tabla2.Rows[i];
+                decimal aux = Convert.ToDecimal(dr["Precio"]);
+                totalCalculado = totalCalculado + aux;
+
+            }
+
+            total.Text = "$ " + totalCalculado.ToString();
+
         }
 
 

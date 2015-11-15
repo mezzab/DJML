@@ -23,13 +23,13 @@ namespace AerolineaFrba.Compra
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {
+        {/*
             CargaDatos m = new CargaDatos();
             this.Hide();
             m.StartPosition = FormStartPosition.CenterScreen;
 
             m.ShowDialog();
-            m = (CargaDatos)this.ActiveMdiChild;
+            m = (CargaDatos)this.ActiveMdiChild;*/
         }
 
 

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.formaPago = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
@@ -37,23 +36,13 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.button1.Location = new System.Drawing.Point(145, 112);
+            this.button1.Location = new System.Drawing.Point(85, 111);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(98, 47);
             this.button1.TabIndex = 0;
             this.button1.Text = "Siguiente";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(28, 112);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(98, 48);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Volver";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label1
             // 
@@ -81,7 +70,6 @@
             this.ClientSize = new System.Drawing.Size(269, 187);
             this.Controls.Add(this.formaPago);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
             this.Name = "FormFormaDePago";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -95,7 +83,6 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox formaPago;
     }

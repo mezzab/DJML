@@ -303,7 +303,7 @@
             // 
             // LimpiarCliente
             // 
-            this.LimpiarCliente.Location = new System.Drawing.Point(297, 277);
+            this.LimpiarCliente.Location = new System.Drawing.Point(295, 116);
             this.LimpiarCliente.Name = "LimpiarCliente";
             this.LimpiarCliente.Size = new System.Drawing.Size(144, 50);
             this.LimpiarCliente.TabIndex = 15;
@@ -379,7 +379,7 @@
             this.Volver.Name = "Volver";
             this.Volver.Size = new System.Drawing.Size(148, 54);
             this.Volver.TabIndex = 3;
-            this.Volver.Text = "Atras";
+            this.Volver.Text = "Cancelar Compra";
             this.Volver.UseVisualStyleBackColor = true;
             this.Volver.Click += new System.EventHandler(this.Volver_Click);
             // 
@@ -408,7 +408,7 @@
             this.groupBox4.Controls.Add(this.kilos);
             this.groupBox4.Controls.Add(this.label12);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.groupBox4.Location = new System.Drawing.Point(289, 116);
+            this.groupBox4.Location = new System.Drawing.Point(289, 178);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(160, 153);
             this.groupBox4.TabIndex = 20;

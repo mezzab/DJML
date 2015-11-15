@@ -86,8 +86,9 @@ namespace AerolineaFrba.Compra
             LlenarComboBoxTipoDocumento();
             tipo.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            total.Text = "$  " + CargaDatos.PrecioTotal.ToString();
-         
+            calcularPrecioTotal();
+
+                    
         }
 
         private bool controlarQueEsteTodoCompletado()
@@ -413,6 +414,32 @@ namespace AerolineaFrba.Compra
         private void total_TextChanged(object sender, EventArgs e)
         {
 
+            
         }
+        private void calcularPrecioTotal()
+        {
+
+            decimal totalCalculado = 0;
+
+            for (int i = CargaDatos.tabla.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = CargaDatos.tabla.Rows[i];
+                decimal aux = Convert.ToDecimal(dr["Precio"]);
+                totalCalculado = totalCalculado + aux;
+
+            }
+            for (int i = CargaDatos.tabla2.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = CargaDatos.tabla2.Rows[i];
+                decimal aux = Convert.ToDecimal(dr["Precio"]);
+                totalCalculado = totalCalculado + aux;
+
+            }
+
+            total.Text = "$ " + totalCalculado.ToString();
+
+
+        }
+
     }
 }
