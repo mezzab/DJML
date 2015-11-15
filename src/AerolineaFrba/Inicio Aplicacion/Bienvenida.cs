@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Inicio_Aplicacion;
 using AerolineaFrba.Login_Usuario;
-
+using AerolineaFrba.Abm_Rol;
 
 namespace AerolineaFrba
 {   
@@ -28,22 +28,20 @@ namespace AerolineaFrba
         private void button1_Click(object sender, EventArgs e)
         {   
             //ESTO TE MANDA AL LOGIN!!!!!!!!!!!
-        /*
+
             this.Visible = false;
             Form frm = new FormLogin();
             frm.StartPosition = FormStartPosition.CenterScreen;
             frm.ShowDialog();
             frm = (FormLogin)this.ActiveMdiChild;
-        */
-         
+       
+         /*
             rol = "Administrador";
             this.Visible = false;
             Form frm = new FormInicioFuncionalidades();
             frm.ShowDialog();
             frm = (FormInicioFuncionalidades)this.ActiveMdiChild;
-         
-          
-         
+        */
           }
 
         private void button2_Click(object sender, EventArgs e)

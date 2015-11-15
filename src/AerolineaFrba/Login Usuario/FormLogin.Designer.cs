@@ -32,7 +32,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtUsu = new System.Windows.Forms.TextBox();
             this.txtPassw = new System.Windows.Forms.TextBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.bnSalir = new System.Windows.Forms.Button();
             this.bnAceptar = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -72,17 +71,6 @@
             this.txtPassw.TabIndex = 3;
             this.txtPassw.TextChanged += new System.EventHandler(this.txtPassw_TextChanged);
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(119, 89);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(60, 13);
-            this.linkLabel1.TabIndex = 4;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Registrarse";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
             // bnSalir
             // 
             this.bnSalir.Location = new System.Drawing.Point(38, 120);
@@ -110,7 +98,6 @@
             this.ClientSize = new System.Drawing.Size(226, 152);
             this.Controls.Add(this.bnAceptar);
             this.Controls.Add(this.bnSalir);
-            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.txtPassw);
             this.Controls.Add(this.txtUsu);
             this.Controls.Add(this.label2);
@@ -129,7 +116,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtUsu;
         private System.Windows.Forms.TextBox txtPassw;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button bnSalir;
         private System.Windows.Forms.Button bnAceptar;
     }
