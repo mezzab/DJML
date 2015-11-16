@@ -39,12 +39,22 @@ namespace AerolineaFrba.Compra
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            codigo.Text = FormFormaDePago.codigoCompra;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
           
+        }
+
+        private void label3_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

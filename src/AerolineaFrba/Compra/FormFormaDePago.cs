@@ -17,6 +17,9 @@ namespace AerolineaFrba.Compra
     {
         public static Boolean pagoEnEfectivo;
 
+        public static string codigoCompra;
+
+
         public FormFormaDePago()
         {
             InitializeComponent();

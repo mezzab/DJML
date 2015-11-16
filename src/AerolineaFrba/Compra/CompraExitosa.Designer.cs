@@ -55,18 +55,18 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label4.Location = new System.Drawing.Point(3, 226);
+            this.label4.Location = new System.Drawing.Point(10, 186);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(284, 20);
+            this.label4.Size = new System.Drawing.Size(371, 20);
             this.label4.TabIndex = 3;
-            this.label4.Text = " pasajes o entregar su encomiendas.";
+            this.label4.Text = "canjear sus pasajes o entregar su encomiendas.";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label5.Location = new System.Drawing.Point(9, 257);
+            this.label5.Location = new System.Drawing.Point(8, 218);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(264, 17);
             this.label5.TabIndex = 4;
@@ -76,20 +76,21 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label2.Location = new System.Drawing.Point(8, 206);
+            this.label2.Location = new System.Drawing.Point(7, 163);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(395, 20);
+            this.label2.Size = new System.Drawing.Size(368, 20);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Guarde este codigo, lo necesitará para canjear sus ";
+            this.label2.Text = "Guarde su codigo de compra, lo necesitará para";
+            this.label2.Click += new System.EventHandler(this.label2_Click_1);
             // 
             // codigo
             // 
             this.codigo.BackColor = System.Drawing.SystemColors.Menu;
             this.codigo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.codigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.codigo.Location = new System.Drawing.Point(92, 131);
+            this.codigo.Location = new System.Drawing.Point(185, 93);
             this.codigo.Name = "codigo";
-            this.codigo.Size = new System.Drawing.Size(218, 22);
+            this.codigo.Size = new System.Drawing.Size(175, 22);
             this.codigo.TabIndex = 7;
             // 
             // printDialog1
@@ -100,11 +101,12 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.label3.Location = new System.Drawing.Point(88, 89);
+            this.label3.Location = new System.Drawing.Point(53, 91);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(222, 24);
+            this.label3.Size = new System.Drawing.Size(126, 24);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Su codigo de compra es:";
+            this.label3.Text = "Su codigo es:";
+            this.label3.Click += new System.EventHandler(this.label3_Click_1);
             // 
             // shapeContainer1
             // 
@@ -114,7 +116,7 @@
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.lineShape2,
             this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(425, 291);
+            this.shapeContainer1.Size = new System.Drawing.Size(425, 253);
             this.shapeContainer1.TabIndex = 9;
             this.shapeContainer1.TabStop = false;
             // 
@@ -129,16 +131,16 @@
             // lineShape2
             // 
             this.lineShape2.Name = "lineShape2";
-            this.lineShape2.X1 = 14;
-            this.lineShape2.X2 = 404;
-            this.lineShape2.Y1 = 187;
-            this.lineShape2.Y2 = 187;
+            this.lineShape2.X1 = 11;
+            this.lineShape2.X2 = 401;
+            this.lineShape2.Y1 = 145;
+            this.lineShape2.Y2 = 145;
             // 
             // CompraExitosa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(425, 291);
+            this.ClientSize = new System.Drawing.Size(425, 253);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.codigo);
             this.Controls.Add(this.label2);

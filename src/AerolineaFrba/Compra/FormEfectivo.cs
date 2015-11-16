@@ -571,6 +571,11 @@ namespace AerolineaFrba.Compra
             qry1.pComando = sql;
             qry1.Ejecutar();
 
+
+            string sqlc = "SELECT COMPRA_CODIGO FROM DJML.COMPRAS " +
+                            "WHERE COMPRA_ID = (SELECT MAX(COMPRA_ID) from DJML.COMPRAS)";
+            Query qryc = new Query(sqlc);
+            FormFormaDePago.codigoCompra = qryc.ObtenerUnicoCampo().ToString();
         }
 
         private void registrarPasajes()
