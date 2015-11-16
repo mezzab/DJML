@@ -78,6 +78,7 @@
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cliente";
+//            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // BuscarPorCliente
             // 
@@ -353,6 +354,7 @@
             this.Comprar.TabIndex = 20;
             this.Comprar.Text = "PAGAR";
             this.Comprar.UseVisualStyleBackColor = true;
+            this.Comprar.Click += new System.EventHandler(this.Comprar_Click);
             // 
             // Volver
             // 
@@ -364,7 +366,7 @@
             this.Volver.UseVisualStyleBackColor = true;
             this.Volver.Click += new System.EventHandler(this.Volver_Click);
             // 
-            // Form1
+            // PagoEfectivo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -374,7 +376,7 @@
             this.Controls.Add(this.Volver);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Form1";
+            this.Name = "PagoEfectivo";
             this.Text = "Carga de datos para pago en efectivo";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);

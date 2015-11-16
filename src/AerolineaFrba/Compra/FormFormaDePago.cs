@@ -90,5 +90,14 @@ namespace AerolineaFrba.Compra
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            CargaDatos t = new CargaDatos();
+            t.StartPosition = FormStartPosition.CenterScreen;
+            this.Hide();
+            t.ShowDialog();
+            t = (CargaDatos)this.ActiveMdiChild;
+        }
     }
 }

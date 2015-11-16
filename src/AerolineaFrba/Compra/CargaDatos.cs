@@ -48,11 +48,7 @@ namespace AerolineaFrba.Compra
 
         public static bool primeraE = true;
         public static bool primerP = true;
-        
-        public static int pesoCargado = 0;
-        List<int> butacasCargadas = new List<int>();
-
-
+    
         public static decimal precioBasePasaje;
         public static decimal precioBaseEncomienda;
         public static decimal porcentajeServicio;
@@ -109,12 +105,13 @@ namespace AerolineaFrba.Compra
         {
 
             //avisar("Se suman" + pesoCargado.ToString() + "kilos");
-            modificarKilosAeronave(pesoCargado.ToString(), "sumar");
+            modificarKilosAeronave(FormCompra1.pesoCargado.ToString(), "sumar");
          
-             for (int i = 0; i <= butacasCargadas.Count - 1; i++)
+             for (int i = 0; i <= FormCompra1.butacasCargadas.Count - 1; i++)
              {
                  //avisar("Se da alta de butaca: " + butacasCargadas[i].ToString());
-                 darBajaAltaButaca(butacasCargadas[i].ToString(), 1);
+
+                 darBajaAltaButaca(FormCompra1.butacasCargadas[i].ToString(), 1);
              }
 
            // llenarButacas();
@@ -125,8 +122,8 @@ namespace AerolineaFrba.Compra
             tabla.Clear();
             tabla2.Clear();
             
-            pesoCargado = 0;
-            butacasCargadas.Clear();
+            FormCompra1.pesoCargado = 0;
+            FormCompra1.butacasCargadas.Clear();
 
 
 
@@ -150,7 +147,7 @@ namespace AerolineaFrba.Compra
             tabla.Columns.Add("Numero de Documento", typeof(int));
             tabla.Columns.Add("Mail", typeof(string));
             tabla.Columns.Add("Telefono", typeof(UInt64));
-            tabla.Columns.Add("Fecha de nacimiento", typeof(DateTime));
+            tabla.Columns.Add("Fecha de nacimiento", typeof(string));
             tabla.Columns.Add("Direccion", typeof(string));
             tabla.Columns.Add("Precio", typeof(decimal));
         }
@@ -165,7 +162,7 @@ namespace AerolineaFrba.Compra
             tabla2.Columns.Add("Numero de Documento", typeof(int));
             tabla2.Columns.Add("Mail", typeof(string));
             tabla2.Columns.Add("Telefono", typeof(UInt64));
-            tabla2.Columns.Add("Fecha de nacimiento", typeof(DateTime));
+            tabla2.Columns.Add("Fecha de nacimiento", typeof(string));
             tabla2.Columns.Add("Direccion", typeof(string));
             tabla2.Columns.Add("Precio", typeof(decimal));
         }
@@ -309,8 +306,8 @@ namespace AerolineaFrba.Compra
                                 primerP = false;
                             }
                             //agrego los datos del pasajero
-                            
-                             butacasCargadas.Add(Convert.ToInt32(aeroButacaID));
+
+                            FormCompra1.butacasCargadas.Add(Convert.ToInt32(aeroButacaID));
                              
                             cargarDatosATabla();
                            
@@ -510,19 +507,18 @@ namespace AerolineaFrba.Compra
                 seCambioAlgo = true;
             }
 
-            /* if (FechaNacimiento.ToString() != fechaNacimiento.Text)
-              {  TODO:ARREGLAR
+            if (FechaNacimiento.ToString("yyyy-dd-MM") != fechaNacimiento.Text)
+            {
 
-                   //BUG
-                  string converted = DateTime.ParseExact(fechaNacimiento.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
-                  //avisar("mmm" + converted + "mmm");
-                  string qry = "update DJML.CLIENTES" +
-                             " set CLIE_FECHA_NACIMIENTO = CAST('"+ converted +"' AS DATETIME)" +
-                             " where CLIE_DNI = " + DNI +
-                             " and CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
-              
-                 seCambioAlgo = true;
-              }*/
+                string aux5 = fechaNacimiento.Text + " 00:00:00.000";
+                string qry = "update DJML.CLIENTES" +
+                            " set CLIE_FECHA_NACIMIENTO ='" + aux5 + "'" +
+                            " where CLIE_ID = " + IDC;
+                new Query(qry).Ejecutar();
+
+                seCambioAlgo = true;
+            }
+
             if (TipoDNI != tipo.Text)
             {
                 if (existeCliente())
@@ -736,6 +732,9 @@ namespace AerolineaFrba.Compra
             
             this.StartPosition = FormStartPosition.CenterScreen;
 
+            fechaNacimiento.Format = DateTimePickerFormat.Custom;
+            fechaNacimiento.CustomFormat = "yyyy-dd-MM";
+            
             verificacion.DataSource = tabla;
             verificacion.Show();
             //verificacion.Columns["Id Butaca"].Visible = false;
@@ -987,7 +986,7 @@ namespace AerolineaFrba.Compra
 
                         modificarKilosAeronave(kilos.Text, "restar");
 
-                        pesoCargado = pesoCargado + Convert.ToInt32(kilos.Text); 
+                        FormCompra1.pesoCargado = FormCompra1.pesoCargado + Convert.ToInt32(kilos.Text); 
 
                         cantidadEncomiendasCargados++;
                         idEncomienda++;

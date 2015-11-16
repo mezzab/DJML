@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Compra
 {
-    partial class CompraEnco
+    partial class CompraExitosa
     {
         /// <summary>
         /// Required designer variable.
