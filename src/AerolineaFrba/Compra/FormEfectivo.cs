@@ -232,7 +232,7 @@ namespace AerolineaFrba.Compra
                 seCambioAlgo = true;
             }
 
-            avisar(FechaNacimiento.ToString("yyyy-dd-MM") +"mmm" +fechaNacimiento.Text);
+         
             if (FechaNacimiento.ToString("yyyy-dd-MM") != fechaNacimiento.Text)
             {
 
