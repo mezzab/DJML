@@ -957,6 +957,13 @@ namespace AerolineaFrba.Compra
 
                 if (cantidadEncomiendasCargados < maxEncomiendas)
                 {
+
+                    if (sePasa(kilos.Text) == true)
+                    {
+                        avisar("No queda espacio en el avion para llevar una encomienda de ese peso.");
+
+                    }
+
                     if (sePasa(kilos.Text) == false)
                     {
 
@@ -1015,11 +1022,7 @@ namespace AerolineaFrba.Compra
 
                     }
 
-                    if (sePasa(kilos.Text) == true)
-                    {
-                        avisar("No queda espacio en el avion para llevar una encomienda de ese peso.");
-                        
-                    }
+                
                 }
 
                 LimpiarCliente_Click(sender, e);

@@ -28,20 +28,22 @@ namespace AerolineaFrba
         private void button1_Click(object sender, EventArgs e)
         {   
             //ESTO TE MANDA AL LOGIN!!!!!!!!!!!
-
+            rol = "Administrador";
             this.Visible = false;
             Form frm = new FormLogin();
             frm.StartPosition = FormStartPosition.CenterScreen;
             frm.ShowDialog();
             frm = (FormLogin)this.ActiveMdiChild;
-       
+
+           
+
          /*
-            rol = "Administrador";
+            
             this.Visible = false;
             Form frm = new FormInicioFuncionalidades();
             frm.ShowDialog();
-            frm = (FormInicioFuncionalidades)this.ActiveMdiChild;
-        */
+            frm = (FormInicioFuncionalidades)this.ActiveMdiChild;*/
+        
           }
 
         private void button2_Click(object sender, EventArgs e)

@@ -673,10 +673,10 @@ namespace AerolineaFrba.Compra
             string aux2 = aux1.Substring(0, aux1.Length - 1);
 
             
-            string sql = " INSERT INTO DJML.COMPRAS( COMPRA_VIAJE_ID , COMPRA_CLIE_ID , COMPRA_MEDIO_DE_PAGO , COMPRA_TARJETA_DE_CREDITO , COMPRA_MONTO , COMPRA_FECHA , COMPRA_MILLAS )" +
-                                        " VALUES ( '" + FormCompra1.viajeID + "' , '" + IDCliente + "' , '2' , '" + numTarjeta.Text + "' , '" + aux2 + "' , '" + aux + "' , 100 )";
+            string sql = " INSERT INTO DJML.COMPRAS( COMPRA_VIAJE_ID , COMPRA_CLIE_ID , COMPRA_MEDIO_DE_PAGO , COMPRA_TARJETA_DE_CREDITO , COMPRA_MONTO , COMPRA_FECHA)" +
+                                        " VALUES ( '" + FormCompra1.viajeID + "' , '" + IDCliente + "' , '2' , '" + numTarjeta.Text + "' , '" + aux2 + "' , '" + aux + "')";
 
-            //TODO: AGREGARR MILLAS
+            
             Query qry1 = new Query(sql);
             qry1.pComando = sql;
             qry1.Ejecutar();
