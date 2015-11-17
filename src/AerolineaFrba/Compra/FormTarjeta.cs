@@ -29,6 +29,11 @@ namespace AerolineaFrba.Compra
 
         public static bool esNuevo = true;
 
+        public static int compraID;
+        public static string IDCliente;
+
+        public static decimal precioTotal;
+
 
         public PagoConTarjeta()
         {
@@ -90,6 +95,8 @@ namespace AerolineaFrba.Compra
             SqlConnection conexion1 = new SqlConnection();
             conexion1.ConnectionString = Settings.Default.CadenaDeConexion;
 
+          
+
             DataSet ds1 = new DataSet();
             SqlDataAdapter da = new SqlDataAdapter("select nombre from djml.tipos_de_tarjeta", conexion1);
             da.Fill(ds1, "DJML.TIPOS_DE_TARJETA");
@@ -113,10 +120,21 @@ namespace AerolineaFrba.Compra
             }
 
            */
+
+
+            fechaNacimiento.Format = DateTimePickerFormat.Custom;
+            fechaNacimiento.CustomFormat = "yyyy-dd-MM";
+            
+           
+
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            nfi.NumberDecimalSeparator = ".";
+
+
             tipo2.Enabled = false;
             numero.Enabled = false;
 
-            total.Text = "$  " + CargaDatos.PrecioTotal.ToString();
+            calcularPrecioTotal();
 
 
             LlenarComboBoxTipoDocumento();
@@ -125,6 +143,34 @@ namespace AerolineaFrba.Compra
             tipoT.DropDownStyle = ComboBoxStyle.DropDownList;
             cuotas.DropDownStyle = ComboBoxStyle.DropDownList;
         }
+
+        private void calcularPrecioTotal()
+        {
+
+            decimal totalCalculado = 0;
+
+            for (int i = CargaDatos.tabla.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = CargaDatos.tabla.Rows[i];
+                decimal aux = Convert.ToDecimal(dr["Precio"]);
+                totalCalculado = totalCalculado + aux;
+
+            }
+            for (int i = CargaDatos.tabla2.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = CargaDatos.tabla2.Rows[i];
+                decimal aux = Convert.ToDecimal(dr["Precio"]);
+                totalCalculado = totalCalculado + aux;
+
+            }
+
+            precioTotal = totalCalculado;
+            
+            total.Text = "$ " + totalCalculado.ToString();
+
+
+        }
+
 
         private void tipoDeDocumento_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -258,6 +304,8 @@ namespace AerolineaFrba.Compra
             Query qry5 = new Query(sql5);
             FechaNacimiento = (DateTime)qry5.ObtenerUnicoCampo();
 
+            
+
         }
 
         //AUXILIAR DE AUTOCOMPLETAR DATOS
@@ -278,11 +326,11 @@ namespace AerolineaFrba.Compra
         {
             bool seCambioAlgo = false;
             string aux = "1";
-            if (tipo2.Text.ToString() == "DNI")
+            if (tipo.Text.ToString() == "DNI")
             { aux = "1"; }
-            if (tipo2.Text.ToString() == "LC")
+            if (tipo.Text.ToString() == "LC")
             { aux = "2"; }
-            if (tipo2.Text.ToString() == "LE")
+            if (tipo.Text.ToString() == "LE")
             { aux = "3"; }
 
             if (Nombre != nombre.Text)
@@ -340,31 +388,30 @@ namespace AerolineaFrba.Compra
                 seCambioAlgo = true;
             }
 
-            if (FechaNacimiento.ToString() != fechaNacimiento.Text)
+            
+            if (FechaNacimiento.ToString("yyyy-dd-MM") != fechaNacimiento.Text)
             {
 
-                //BUG
-                string converted = DateTime.ParseExact(fechaNacimiento.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
-                //avisar("mmm" + converted + "mmm");
+                string aux5 = fechaNacimiento.Text + " 00:00:00.000";
                 string qry = "update DJML.CLIENTES" +
-                           " set CLIE_FECHA_NACIMIENTO = CAST('" + converted + "' AS DATETIME)" +
-                           " where CLIE_DNI = " + DNI +
-                           " and CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
-
-                seCambioAlgo = true;
-            }
-            if (DNI.ToString() != numero.Text)
-            {
-                string qry = "update DJML.CLIENTES " +
-                          " set CLIE_DNI = '" + numero.Text + "'" +
-                          " where CLIE_DNI = " + DNI +
-                          " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
-
+                            " set CLIE_FECHA_NACIMIENTO ='" + aux5 + "'" +
+                            " where CLIE_ID = " + IDCliente;
                 new Query(qry).Ejecutar();
+
                 seCambioAlgo = true;
             }
-            if (TipoDNI != tipo2.Text)
+
+            if (TipoDNI != tipo.Text)
             {
+                if (existeCliente())
+                {
+                    avisar("No se pudieron actualizar los nuevos datos ingresados. Ya hay un cliente con ese numero de dni y tipo.");
+
+                    tipo.Text = TipoDNI;
+
+
+                }
+
                 string qry = "update DJML.CLIENTES " +
                        " set CLIE_TIPO_DOC =" + aux +
                        " where CLIE_DNI = " + dniNum.Text +
@@ -374,14 +421,45 @@ namespace AerolineaFrba.Compra
 
                 seCambioAlgo = true;
             }
+            if (DNI != numero.Text)//
+            {
+                if (existeCliente())
+                {
+                    avisar("No se pueden actualizar los datos. Ya hay un cliente con ese numero de dni y tipo.");
+
+                    numero.Text = DNI;
+                }
+
+                string qry = "update DJML.CLIENTES " +
+                       " set CLIE_DNI= '" + numero.Text + "'" +
+                       " where CLIE_DNI = " + dniNum.Text +
+                       " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+
+                new Query(qry).Ejecutar();
+
+                seCambioAlgo = true;
+            }
+
 
             if (seCambioAlgo)
             {
-                string cambio = "Se han guardado los nuevos datos del cliente";
+                string cambio = "Se han guardado los nuevos datos del cliente.";
                 avisar(cambio);
             }
 
         }
+
+        private bool existeCliente()
+        {
+            string sql = "SELECT CLIE_ID FROM DJML.CLIENTES " +
+                          "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipo.Text + "')" +
+                         " AND CLIE_DNI =" + numero.Text;
+            Query qry1 = new Query(sql);
+            object id_cliente = qry1.ObtenerUnicoCampo();
+
+            return (id_cliente != null);
+        }
+
 
         private bool existeUsuario(string dni, string tipoDoc)
         {
@@ -447,6 +525,7 @@ namespace AerolineaFrba.Compra
                         buscarDatos(dni, tipoDoc);
                         completarDatos();
                         // avisar("existe usuario");
+                        guardarIdCliente();
                     }
                     else
                     {
@@ -492,47 +571,54 @@ namespace AerolineaFrba.Compra
             MessageBox.Show(quePaso, "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void guardarIdCliente()
+        {
+
+            string sql1 = "SELECT CLIE_ID FROM DJML.CLIENTES " +
+            "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipo.Text + "')" +
+             " AND CLIE_DNI =" + numero.Text;
+            Query qry11 = new Query(sql1);
+            IDCliente = qry11.ObtenerUnicoCampo().ToString();
+
+        }
+
         private void Comprar_Click(object sender, EventArgs e)
         {
-          
+           
             if (controlarQueEsteTodoCompletado())
             {
                 if (existeTarjeta(numTarjeta.Text))
                 {
                     if (controlarCodigoTarjeta(numTarjeta.Text, codigoTarjeta.Text) == false)
                     {
-                        //ANTES CONTROLABA QUE SEA EL MISMO CODIGO Y SI ERA DISTINTO AL GUARDADO EN LA BD LE AVISABA AL USUARIO
-                        //avisar("Codigo de seguridad de la tarjeta es incorrecto.");
-
-                        //AHORA ACTUALIZO EL CODIGO DE SEGURIDAD A LA TARJETA CARGADA.
-
+                       
                         actualizarCodigoDeSeguridad(numTarjeta.Text, codigoTarjeta.Text);
                         avisar("Se guardo el nuevo codigo de seguridad correctamente");
 
-                       // registrarCompra(); TODO:
+                        controlarCliente();
+
+                        registrarCompra();
+                        registrarPasajes();
+                        registrarEncomiendas();
+
+                        CompraExitosa volver = new CompraExitosa();
+                        volver.StartPosition = FormStartPosition.CenterScreen;
+                        this.Hide();
+                        volver.ShowDialog();
+                        volver = (CompraExitosa)this.ActiveMdiChild;
                     }
                     if (controlarCodigoTarjeta(numTarjeta.Text, codigoTarjeta.Text))
                     {
-                        /* ESTO ACTUALIZA Y CREA NUEVO CLIENTE AUTOMATICAMENTE... 
-                        if (esNuevo)
-                        {
-                            cargarNuevoCliente(); //SI EL CLIENTE ES NUEVO HACE INSERT DE LOS CAMPOS
-                        }
-                        else
-                        {
-                            actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO DEL CLIENTE ACTUALIZA LOS DATOS DEL CLIENTE
-                        }
-                        */
+                        controlarCliente();
+                        registrarCompra();
+                        registrarPasajes();
+                        registrarEncomiendas();
 
-                        // TODO: 
-                        // registrarCompra();
-
-                        CompraEnco volver = new CompraEnco();
+                        CompraExitosa volver = new CompraExitosa();
                         volver.StartPosition = FormStartPosition.CenterScreen;
-
                         this.Hide();
                         volver.ShowDialog();
-                        volver = (CompraEnco)this.ActiveMdiChild;
+                        volver = (CompraExitosa)this.ActiveMdiChild;
                     }
 
                 }
@@ -551,6 +637,141 @@ namespace AerolineaFrba.Compra
 
             
         }
+
+        private void controlarCliente()
+        {
+            if (esNuevo)
+            {
+                if (existeCliente())
+                {
+                    avisar("Ya existe un usuario con ese numero y tipo de documento. Presione el boton buscar");
+                }
+                if (existeCliente() == false)
+                {
+
+                    cargarNuevoCliente(); //INSERT DE LOS CAMPOS
+                    guardarIdCliente();
+                }
+
+            }
+            else if (esNuevo == false)
+            {
+                actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE
+
+            }
+        
+        }
+
+        private void registrarCompra()
+        {
+            DateTime fechaHoy = DateTime.Now;
+
+
+            string aux = fechaHoy.ToString("yyyy-dd-MM") + " 00:00:00.000";
+            string aux0 = precioTotal.ToString("C").Replace(",", ".");
+            string aux1 = aux0.Replace(" ", "");
+            //string aux2 = aux1.Remove((paramstr.Length - 1), 1);
+            string aux2 = aux1.Substring(0, aux1.Length - 1);
+            string aux3 = precioTotal.ToString().Replace(",", ".");
+
+            
+            string sql = " INSERT INTO DJML.COMPRAS( COMPRA_VIAJE_ID , COMPRA_CLIE_ID , COMPRA_MEDIO_DE_PAGO , COMPRA_TARJETA_DE_CREDITO , COMPRA_MONTO , COMPRA_FECHA)" +
+                                        " VALUES ( '" + FormCompra1.viajeID + "' , '" + IDCliente + "' , '2' , '" + numTarjeta.Text + "' , '" + aux3 + "' , '" + aux + "')";
+
+            
+            Query qry1 = new Query(sql);
+            qry1.pComando = sql;
+            qry1.Ejecutar();
+
+            
+            string sqlc = "SELECT COMPRA_CODIGO FROM DJML.COMPRAS " +
+                            "WHERE COMPRA_ID = (SELECT MAX(COMPRA_ID) from DJML.COMPRAS)";
+            Query qryc = new Query(sqlc);
+            FormFormaDePago.codigoCompra = qryc.ObtenerUnicoCampo().ToString();
+
+            string sqlID = "SELECT COMPRA_ID FROM DJML.COMPRAS " +
+                           "WHERE COMPRA_ID = (SELECT MAX(COMPRA_ID) from DJML.COMPRAS)";
+            Query qryID = new Query(sqlID);
+            FormFormaDePago.IDCompra = qryID.ObtenerUnicoCampo().ToString();
+
+
+
+        }
+
+
+        private void registrarPasajes()
+        {
+            for (int i = CargaDatos.tabla.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = CargaDatos.tabla.Rows[i];
+                string idCliente = dr["Id Cliente"].ToString();
+                string idButaca = dr["Id Butaca"].ToString();
+                string PPASAJE = dr["Precio"].ToString().Replace(",", ".");
+
+                string nuevoPasaje = " INSERT INTO [DJML].[PASAJES]" +
+                                      " ([PASA_ID]" +
+                                      " ,[PASA_VIAJE_ID]" +
+                                      " ,[PASA_CLIE_ID]" +
+                                      " ,[PASA_COMPRA_ID]" +
+                                      " ,[PASA_BUTA_ID]" +
+                                      " ,[PASA_PRECIO])" +
+                                " VALUES" +
+                                      "  ( 5555556 " +
+                                       " , '" + FormCompra1.viajeID + "'" +
+                                      " , '" + idCliente + "'" +
+                                      " , '" + FormFormaDePago.IDCompra + "'" +
+                                      " , '" + idButaca + "'" +
+                                      " ,' " + PPASAJE + "')";
+
+
+                Query qry = new Query(nuevoPasaje);
+                qry.pComando = nuevoPasaje;
+                qry.Ejecutar();
+
+
+            }
+
+
+
+        }
+
+        private void registrarEncomiendas()
+        {
+
+            for (int i = CargaDatos.tabla2.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = CargaDatos.tabla2.Rows[i];
+                string idCliente = dr["Id Cliente"].ToString();
+                string kilos = dr["Kgs"].ToString();
+                string PEncomienda = dr["Precio"].ToString().Replace(",", ".");
+
+
+
+                string nuevaEncomienda = " INSERT INTO [DJML].[ENCOMIENDAS] " +
+                                       " ([ENCO_ID]" +
+                                       " ,[ENCO_VIAJE_ID]" +
+                                       " ,[ENCO_CLIE_ID]" +
+                                       " ,[ENCO_COMPRA_ID]" +
+                                       " ,[ENCO_KG]" +
+                                       " ,[ENCO_PRECIO])" +
+                                " VALUES" +
+                                      "  ( 5555556 " +
+                                      " , '" + FormCompra1.viajeID + "'" +
+                                      " , '" + idCliente + "'" +
+                                      " , '" + FormFormaDePago.IDCompra + "'" +
+                                      " , '" + kilos + "'" +
+                                      " ,' " + PEncomienda + "')";
+
+
+                Query qry11 = new Query(nuevaEncomienda);
+                qry11.pComando = nuevaEncomienda;
+                qry11.Ejecutar();
+
+
+            }
+
+        }
+
 
         private bool controlarQueEsteTodoCompletado()
         {
@@ -660,7 +881,7 @@ namespace AerolineaFrba.Compra
         private void dniNum_TextChanged(object sender, EventArgs e)
         {
             //  dniNum.TextChanged += dni_TextChanged;
-            dniNum.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+            dniNum.Text = Regex.Replace(dniNum.Text, @"[^\d]", "");
             //OBLIGA A QUE INTRODUZCA NUMEROS
 
             numero.Text = dniNum.Text;
@@ -670,7 +891,7 @@ namespace AerolineaFrba.Compra
         private void numero_TextChanged(object sender, EventArgs e)
         {
             //  dniNum.TextChanged += dni_TextChanged;
-            numero.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+            numero.Text = Regex.Replace(numero.Text, @"[^\d]", "");
             //OBLIGA A QUE INTRODUZCA NUMEROS
         }
 
@@ -684,14 +905,14 @@ namespace AerolineaFrba.Compra
         private void numTarjeta_TextChanged(object sender, EventArgs e)
         {
              // dniNum.TextChanged += dni_TextChanged;
-            numTarjeta.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+            numTarjeta.Text = Regex.Replace(numTarjeta.Text, @"[^\d]", "");
             //OBLIGA A QUE INTRODUZCA NUMEROS
         }
 
         private void codigoTarjeta_TextChanged(object sender, EventArgs e)
         {
             //  dniNum.TextChanged += dni_TextChanged;
-          codigoTarjeta.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+          codigoTarjeta.Text = Regex.Replace(codigoTarjeta.Text, @"[^\d]", "");
             //OBLIGA A QUE INTRODUZCA NUMEROS
         }
 
@@ -710,13 +931,36 @@ namespace AerolineaFrba.Compra
 
         }
 
-        private void registrarCompra()
+
+        private void total_TextChanged(object sender, EventArgs e)
         {
-            // hacer for each CompraPasaje.tabla;
-            // hacer for each CompraPasaje.tabla2;
-    
-        
-        
+            decimal totalCalculado = 0;
+
+            for (int i = CargaDatos.tabla.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = CargaDatos.tabla.Rows[i];
+                decimal aux = Convert.ToDecimal(dr["Precio"]);
+                totalCalculado = totalCalculado + aux;
+
+            }
+            for (int i = CargaDatos.tabla2.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = CargaDatos.tabla2.Rows[i];
+                decimal aux = Convert.ToDecimal(dr["Precio"]);
+                totalCalculado = totalCalculado + aux;
+
+            }
+
+            total.Text = "$ " + totalCalculado.ToString();
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+
+            
+
         }
 
 

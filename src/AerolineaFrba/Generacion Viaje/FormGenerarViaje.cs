@@ -63,8 +63,11 @@ namespace AerolineaFrba.Generacion_Viaje
         private void comboBoxAeronaves_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxAeronaves.SelectedIndex != -1)
+            { 
                 datos.Visible = true;
-            else
+                cargarGridCiudades();
+            }
+              else
                 datos.Visible = false;
         }
 
@@ -88,7 +91,7 @@ namespace AerolineaFrba.Generacion_Viaje
             comboBoxAeronaves.Visible = false;
             label5.Visible = false;
             datos.Visible = false;
-            cargarGridCiudades();
+       
         }
 
         private void fechaSalida_ValueChanged(object sender, EventArgs e)
@@ -168,9 +171,8 @@ namespace AerolineaFrba.Generacion_Viaje
             SqlConnection conexion = new SqlConnection();
             conexion.ConnectionString = Settings.Default.CadenaDeConexion;
 
-           // Query qry3 = new Query("select RUTA_CODIGO, C1.CIUD_DETALLE AS CIUDAD_ORIGEN, C2.CIUD_DETALLE AS CIUDAD_DESTINO from djml.RUTAS R JOIN DJML.CIUDADES C1 ON r.RUTA_CIUDAD_ORIGEN = c1.CIUD_ID JOIN DJML.CIUDADES C2 ON R.RUTA_CIUDAD_DESTINO = C2.CIUD_ID");
-
-            Query qry3 = new Query("SELECT R.RUTA_CODIGO, C1.CIUD_DETALLE AS ORIGEN, C2.CIUD_DETALLE AS DESTINO FROM DJML.RUTAS R JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_ORIGEN = C1.CIUD_ID JOIN DJML.CIUDADES C2 ON T.TRAMO_CIUDAD_DESTINO = C2.CIUD_ID");
+        
+            Query qry3 = new Query("SELECT R.RUTA_CODIGO, C1.CIUD_DETALLE AS ORIGEN, C2.CIUD_DETALLE AS DESTINO FROM DJML.RUTAS R JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_ORIGEN = C1.CIUD_ID JOIN DJML.CIUDADES C2 ON T.TRAMO_CIUDAD_DESTINO = C2.CIUD_ID ");
             datos.DataSource = qry3.ObtenerDataTable();
   
         }

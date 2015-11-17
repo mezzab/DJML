@@ -48,12 +48,16 @@ namespace AerolineaFrba.Compra
 
         public static bool primeraE = true;
         public static bool primerP = true;
+    
+        public static decimal precioBasePasaje;
+        public static decimal precioBaseEncomienda;
+        public static decimal porcentajeServicio;
 
-        public static int pesoCargado = 0;
-        List<int> butacasCargadas = new List<int>();
+        public static string IDC;
 
-        public static int PrecioTotal = 0;
 
+
+        
         public CargaDatos()
         {
             InitializeComponent();
@@ -101,12 +105,13 @@ namespace AerolineaFrba.Compra
         {
 
             //avisar("Se suman" + pesoCargado.ToString() + "kilos");
-            modificarKilosAeronave(pesoCargado.ToString(), "sumar");
+            modificarKilosAeronave(FormCompra1.pesoCargado.ToString(), "sumar");
          
-             for (int i = 0; i <= butacasCargadas.Count - 1; i++)
+             for (int i = 0; i <= FormCompra1.butacasCargadas.Count - 1; i++)
              {
                  //avisar("Se da alta de butaca: " + butacasCargadas[i].ToString());
-                 darBajaAltaButaca(butacasCargadas[i].ToString(), 1);
+
+                 darBajaAltaButaca(FormCompra1.butacasCargadas[i].ToString(), 1);
              }
 
            // llenarButacas();
@@ -117,8 +122,8 @@ namespace AerolineaFrba.Compra
             tabla.Clear();
             tabla2.Clear();
             
-            pesoCargado = 0;
-            butacasCargadas.Clear();
+            FormCompra1.pesoCargado = 0;
+            FormCompra1.butacasCargadas.Clear();
 
 
 
@@ -135,20 +140,22 @@ namespace AerolineaFrba.Compra
             tabla.Columns.Add("Id Butaca", typeof(string));
             tabla.Columns.Add("Butaca", typeof(string));
             tabla.Columns.Add("Tipo Butaca", typeof(string));
+            tabla.Columns.Add("Id Cliente", typeof(string));
             tabla.Columns.Add("Nombre", typeof(string));
             tabla.Columns.Add("Apellido", typeof(string));
             tabla.Columns.Add("Tipo de Documento", typeof(string));
             tabla.Columns.Add("Numero de Documento", typeof(int));
             tabla.Columns.Add("Mail", typeof(string));
             tabla.Columns.Add("Telefono", typeof(UInt64));
-            tabla.Columns.Add("Fecha de nacimiento", typeof(DateTime));
+            tabla.Columns.Add("Fecha de nacimiento", typeof(string));
             tabla.Columns.Add("Direccion", typeof(string));
-            tabla.Columns.Add("Precio", typeof(int));
+            tabla.Columns.Add("Precio", typeof(decimal));
         }
 
         private void crearColumnas2()
         {
             tabla2.Columns.Add("Id Encomienda", typeof(int));
+            tabla2.Columns.Add("Id Cliente", typeof(string));
             tabla2.Columns.Add("Kgs", typeof(int));
             tabla2.Columns.Add("Nombre", typeof(string));
             tabla2.Columns.Add("Apellido", typeof(string));
@@ -156,18 +163,43 @@ namespace AerolineaFrba.Compra
             tabla2.Columns.Add("Numero de Documento", typeof(int));
             tabla2.Columns.Add("Mail", typeof(string));
             tabla2.Columns.Add("Telefono", typeof(UInt64));
-            tabla2.Columns.Add("Fecha de nacimiento", typeof(DateTime));
+            tabla2.Columns.Add("Fecha de nacimiento", typeof(string));
             tabla2.Columns.Add("Direccion", typeof(string));
-            tabla2.Columns.Add("Precio", typeof(int));
+            tabla2.Columns.Add("Precio", typeof(decimal));
         }
+
+        private void calcularDatosParaCalculoDePrecios()
+        {
+            string sqls = "select SERV_PORCENTAJE from djml.SERVICIOS" +
+                            " where serv_id = (select RUTA_SERVICIO from djml.RUTAS" +
+                            " where ruta_codigo = ( select VIAJE_RUTA_ID from djml.viajes where viaje_id  =" + FormCompra1.viajeID + "))";
+            Query qrys = new Query(sqls);
+            porcentajeServicio = Convert.ToDecimal(qrys.ObtenerUnicoCampo());
+
+
+            string sqle = "select RUTA_PRECIO_BASE_KILO from djml.RUTAS" +
+                           " where ruta_codigo = ( select VIAJE_RUTA_ID from djml.viajes where viaje_id  =" + FormCompra1.viajeID + ")";
+            Query qrye = new Query(sqle);
+            precioBaseEncomienda = Convert.ToDecimal(qrye.ObtenerUnicoCampo());
+
+            string sqlp = "select RUTA_PRECIO_BASE_PASAJE from djml.RUTAS" +
+                        " where ruta_codigo = ( select VIAJE_RUTA_ID from djml.viajes where viaje_id  =" + FormCompra1.viajeID + ")";
+            Query qryp = new Query(sqlp);
+           precioBasePasaje = Convert.ToDecimal(qryp.ObtenerUnicoCampo());
+
+           // avisar("El id del viaje es: " + FormCompra1.viajeID + " .. el precio base de enco es :" + precioBaseEncomienda + " .. el precio base de pasaje es :" + precioBasePasaje + " ..y el porcentaje de servicio es :" + porcentajeServicio );
+
+       }
 
         private void cargarDatosATabla()
         {
             DataRow uno = tabla.NewRow();
+
             uno["Id Butaca"] = aeroButacaID;
             uno["Butaca"] = butaca;
             uno["Tipo Butaca"] = tipoBucata;
 
+            uno["Id Cliente"] = IDC;
             uno["Nombre"] = nombre.Text;
             uno["Apellido"] = apellido.Text;
             uno["Tipo de Documento"] = tipo.Text;
@@ -176,11 +208,14 @@ namespace AerolineaFrba.Compra
             uno["Telefono"] = telefono.Text;
             uno["Fecha de nacimiento"] = fechaNacimiento.Text;
             uno["Direccion"] = direccion.Text;
-            // uno["Precio"] = precio;
 
+            uno["Precio"] = (precioBasePasaje * (1 + porcentajeServicio));
 
             //agrego los datos del pasajero a la tabla
             tabla.Rows.Add(uno);
+
+            //guardo el id en la lista 
+
         }
 
         private void cargarDatosATabla2()
@@ -188,7 +223,7 @@ namespace AerolineaFrba.Compra
             DataRow uno = tabla2.NewRow();
             uno["Id Encomienda"] = idEncomienda;
             uno["Kgs"] = kgs;
-
+            uno["Id Cliente"] = IDC;
             uno["Nombre"] = nombre.Text;
             uno["Apellido"] = apellido.Text;
             uno["Tipo de Documento"] = tipo.Text;
@@ -197,7 +232,7 @@ namespace AerolineaFrba.Compra
             uno["Telefono"] = telefono.Text;
             uno["Fecha de nacimiento"] = fechaNacimiento.Text;
             uno["Direccion"] = direccion.Text;
-            // uno["Precio"] = precio;
+            uno["Precio"] = (precioBaseEncomienda * Convert.ToDecimal(kgs));
 
 
             //agrego los datos del pasajero a la tabla
@@ -254,51 +289,69 @@ namespace AerolineaFrba.Compra
 
                 if (cantidadPasajesCargados < maxPasajes)
                 {
-
-                    if (primerP ) // si es el primero entonces crea las columnas
-                    {   //creo las columnas de la tabla statica
-
-                        crearColumnas();
-                        primerP = false;
-                    }
-                    //agrego los datos del pasajero
-
-
-
-                    if (esNuevo)
+                    if (elClienteNoEstaEnLaTabla() == false)
                     {
-                        //avisar("Todavia no anda el Insert para un cliente nuevo");
-                        cargarNuevoCliente(); //INSERT DE LOS CAMPOS
+                        avisar("Ya cargo un pasaje para este cliente");
+                        LimpiarCliente_Click(sender, e);
 
                     }
-                    else
-                    {
+                    if (elClienteNoEstaEnLaTabla())
+                    { // avisar("el cliente no esta en tabla"); //borrar
+                        if (elClienteYaTieneAsignadoUnViajeEseDia() == "noTieneAsignado")
+                        {  // avisar("no tiene asignado viaje"); //borrar
 
-                        actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE
+                            if (primerP) // si es el primero entonces crea las columnas
+                            {   //creo las columnas de la tabla statica
+
+                                crearColumnas();
+                                primerP = false;
+                            }
+                            //agrego los datos del pasajero
+
+                            FormCompra1.butacasCargadas.Add(Convert.ToInt32(aeroButacaID));
+                             
+                            cargarDatosATabla();
+                           
+                            darBajaAltaButaca(aeroButacaID, 0);
+                            
+                            cantidadPasajesCargados++;
+
+                          
+                            LimpiarCliente_Click(sender, e);
+                            button1.Enabled = true;
+                            llenarButacas();
+                         
+                            butacaSeleccionada.Visible = false;
+                            esNuevo = false;
+                            butaca = "";
+                            tipoBucata = "";
+                        } 
+                        /* //TODO:arreglar la comparacion por string
+                        if(elClienteYaTieneAsignadoUnViajeEseDia() == "yaExisteCliente")
+                        {
+                            //cargar dni y tipo y borrar lo demas TODO:
+                            avisar("se borra todo y se carga el viejo tipo. falta implementar");
+                        }
+                        
+                        if(elClienteYaTieneAsignadoUnViajeEseDia() == "tieneAsignado")
+                        {
+                        avisar("Un pasajero no puede viajar a mas de un destino a la vez.");
+                        
+                        }
+                        */
 
                     }
+                    
 
-                    butacasCargadas.Add(Convert.ToInt32(aeroButacaID));
-
-                    cargarDatosATabla();
-
-                    darBajaAltaButaca(aeroButacaID, 0);
-
-                    cantidadPasajesCargados++;
-
-
-                    LimpiarCliente_Click(sender, e);
-                    llenarButacas();
-                    butacaSeleccionada.Visible = false;
-                    esNuevo = false;
-                    butaca = "";
-                    tipoBucata = "";
 
                 }
-
+              
                 verificacion.DataSource = tabla;
+               
                 verificacion.Show();
+             
                 verificacion.Columns["Id Butaca"].Visible = false;
+                verificacion.Columns["Id Cliente"].Visible = false;
                 verificacion.Columns["Mail"].Visible = false;
                 verificacion.Columns["Telefono"].Visible = false;
                 verificacion.Columns["Fecha de nacimiento"].Visible = false;
@@ -310,13 +363,13 @@ namespace AerolineaFrba.Compra
                 //DataGridViewColumn column = verificacion.Columns[0];
                 //column.Width = 50;                                    ELIMINAR
                 DataGridViewColumn column2 = verificacion.Columns[1];
-                column2.Width = 50;
+                column2.Width = 55;
                 DataGridViewColumn column3 = verificacion.Columns[2];
                 column3.Width = 75;
-                DataGridViewColumn column6 = verificacion.Columns[5];
-                column6.Width = 60;
-                DataGridViewColumn column12 = verificacion.Columns[11];
-                column6.Width = 78;
+                DataGridViewColumn column6 = verificacion.Columns[6];
+                column6.Width = 64;
+                DataGridViewColumn column12 = verificacion.Columns[12];
+                column6.Width = 82;
 
                 groupBox1.Enabled = false;
                 groupBox2.Enabled = false;
@@ -325,7 +378,6 @@ namespace AerolineaFrba.Compra
                 t.ForeColor = Color.Red;
                 t1.ForeColor = Color.Red;
 
-                
                 tipo2.SelectedIndex = -1;
                 tipo.SelectedIndex = -1;
                 combo.SelectedIndex = -1;
@@ -340,6 +392,41 @@ namespace AerolineaFrba.Compra
 
         }
 
+        private bool elClienteNoEstaEnLaTabla() 
+        {
+            return !buscarFilaDeTabla(IDC);
+        }
+
+        private string elClienteYaTieneAsignadoUnViajeEseDia() //TODO:
+        {
+            string quePaso = "nose";
+
+            if (esNuevo)
+            {
+                if (existeCliente())
+                {
+                    avisar("Ya existe cliente con ese tipo y numero de documento. Preciona el boton buscar");
+                    quePaso = "yaExisteCliente";
+                }
+                if (existeCliente() == false)
+                {        
+                    cargarNuevoCliente(); //INSERT DE LOS CAMPOS
+                    guardarIdCliente();
+                    quePaso = "noTieneAsignado";
+                    //TODO:controlar que tenga el dia libre
+                }
+            }
+            if (esNuevo == false) 
+            {   
+                actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE 
+                guardarIdCliente();
+                quePaso = "noTieneAsignado";
+                //TODO:Controlar que tenga el dia libre con el id;
+            }
+
+            return quePaso;
+        }
+    
         private void avisarBien(string quePaso)
         {
             MessageBox.Show(quePaso, "SE INFORMA QUE:", MessageBoxButtons.OK, MessageBoxIcon.None);
@@ -350,6 +437,8 @@ namespace AerolineaFrba.Compra
         {
             MessageBox.Show(quePaso, "AVISO! ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
+
+
 
 
         //FALTA HACER LOS UPDATES
@@ -419,21 +508,29 @@ namespace AerolineaFrba.Compra
                 seCambioAlgo = true;
             }
 
-            /* if (FechaNacimiento.ToString() != fechaNacimiento.Text)
-              {
+            if (FechaNacimiento.ToString("yyyy-dd-MM") != fechaNacimiento.Text)
+            {
 
-                   //BUG
-                  string converted = DateTime.ParseExact(fechaNacimiento.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMdd");
-                  //avisar("mmm" + converted + "mmm");
-                  string qry = "update DJML.CLIENTES" +
-                             " set CLIE_FECHA_NACIMIENTO = CAST('"+ converted +"' AS DATETIME)" +
-                             " where CLIE_DNI = " + DNI +
-                             " and CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
-              
-                 seCambioAlgo = true;
-              }*/
+                string aux5 = fechaNacimiento.Text + " 00:00:00.000";
+                string qry = "update DJML.CLIENTES" +
+                            " set CLIE_FECHA_NACIMIENTO ='" + aux5 + "'" +
+                            " where CLIE_ID = " + IDC;
+                new Query(qry).Ejecutar();
+
+                seCambioAlgo = true;
+            }
+
             if (TipoDNI != tipo.Text)
             {
+                if (existeCliente())
+                {
+                    avisar("No se pudieron actualizar los nuevos datos ingresados. Ya hay un cliente con ese numero de dni y tipo.");
+
+                    tipo.Text = TipoDNI;
+                  
+                
+                }
+
                 string qry = "update DJML.CLIENTES " +
                        " set CLIE_TIPO_DOC =" + aux +
                        " where CLIE_DNI = " + dniNum.Text +
@@ -443,6 +540,25 @@ namespace AerolineaFrba.Compra
 
                 seCambioAlgo = true;
             }
+            if (DNI != numero.Text)//
+            {
+                if (existeCliente())
+                {
+                    avisar("No se pueden actualizar los datos. Ya hay un cliente con ese numero de dni y tipo.");
+
+                    numero.Text = DNI;
+                }
+
+                string qry = "update DJML.CLIENTES " +
+                       " set CLIE_DNI= '" + numero.Text + "'" +
+                       " where CLIE_DNI = " + dniNum.Text +
+                       " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
+
+                new Query(qry).Ejecutar();
+
+                seCambioAlgo = true;
+            }
+
 
             if (seCambioAlgo)
             {
@@ -454,22 +570,25 @@ namespace AerolineaFrba.Compra
 
         private void cargarNuevoCliente()
         {
-            string aux = "1";
-            if (tipo.Text.ToString() == "DNI")
-            { aux = "1"; }
-            if (tipo.Text.ToString() == "LC")
-            { aux = "2"; }
-            if (tipo.Text.ToString() == "LE")
-            { aux = "3"; }
-
-            string sql = "INSERT INTO DJML.CLIENTES(CLIE_DNI, CLIE_TIPO_DOC, CLIE_NOMBRE, CLIE_APELLIDO, CLIE_DIRECCION, CLIE_EMAIL, CLIE_TELEFONO, CLIE_FECHA_NACIMIENTO) " +
-                                            "VALUES(" + numero.Text + ", '" + aux + "', '" + nombre.Text + "', '" + apellido.Text + "', '" + direccion.Text + "', '" + mail.Text + "', " + telefono.Text + ", '" + fechaNacimiento.Text + "' )";
-            Query qry = new Query(sql);
-            //qry.pComando = sql;
-            qry.Ejecutar();
+           
 
 
+                string aux = "1";
+                if (tipo.Text.ToString() == "DNI")
+                { aux = "1"; }
+                if (tipo.Text.ToString() == "LC")
+                { aux = "2"; }
+                if (tipo.Text.ToString() == "LE")
+                { aux = "3"; }
 
+                string sql = "INSERT INTO DJML.CLIENTES(CLIE_DNI, CLIE_TIPO_DOC, CLIE_NOMBRE, CLIE_APELLIDO, CLIE_DIRECCION, CLIE_EMAIL, CLIE_TELEFONO, CLIE_FECHA_NACIMIENTO) " +
+                                                "VALUES(" + numero.Text + ", '" + aux + "', '" + nombre.Text + "', '" + apellido.Text + "', '" + direccion.Text + "', '" + mail.Text + "', " + telefono.Text + ", '" + fechaNacimiento.Text + "' )";
+                Query qry = new Query(sql);
+                //qry.pComando = sql;
+                qry.Ejecutar();
+
+            
+            
         }
 
         private void darBajaAltaButaca(string aeroButacaID, int bajaAlta)
@@ -500,12 +619,16 @@ namespace AerolineaFrba.Compra
                 {
                     if (existeUsuario(dni, tipoDoc))
                     {
+                        
                         esNuevo = false;
                         buscarDatos(dni, tipoDoc);
                         completarDatos();
+                        guardarIdCliente();
+
+                        
                         // avisar("existe usuario");
                     }
-                    else
+                    else if( existeUsuario(dni, tipoDoc) ==false )
                     {
                         MessageBox.Show("El cliente es inexistente, debe cargar sus datos para poder seguir con las operaciones");
 
@@ -605,11 +728,15 @@ namespace AerolineaFrba.Compra
 
         private void FormCompra3_Load(object sender, EventArgs e)
         {
+            
             t.ForeColor = Color.Red;
             t1.ForeColor = Color.Red;
             
             this.StartPosition = FormStartPosition.CenterScreen;
 
+            fechaNacimiento.Format = DateTimePickerFormat.Custom;
+            fechaNacimiento.CustomFormat = "yyyy-dd-MM";
+            
             verificacion.DataSource = tabla;
             verificacion.Show();
             //verificacion.Columns["Id Butaca"].Visible = false;
@@ -645,6 +772,17 @@ namespace AerolineaFrba.Compra
 
             t.ForeColor = Color.Red;
             t1.ForeColor = Color.Red;
+
+            calcularDatosParaCalculoDePrecios();
+
+            if (FormCompra1.vuelve == true)
+            {
+                button1.Enabled = true;
+            }
+            if (FormCompra1.vuelve == false)
+            {
+                button1.Enabled = false;
+            }
         }
 
         public void LlenarComboBoxTipoDocumento()
@@ -761,7 +899,8 @@ namespace AerolineaFrba.Compra
    
         private void button1_Click(object sender, EventArgs e)
         {
-           
+                //TODO: controlar que se haya cargado aunquesea un pasaje o una encomienda
+
                 FormFormaDePago siguiente = new FormFormaDePago();
                 siguiente.StartPosition = FormStartPosition.CenterScreen;
                 this.Hide();
@@ -829,6 +968,13 @@ namespace AerolineaFrba.Compra
 
                 if (cantidadEncomiendasCargados < maxEncomiendas)
                 {
+
+                    if (sePasa(kilos.Text) == true)
+                    {
+                        avisar("No queda espacio en el avion para llevar una encomienda de ese peso.");
+
+                    }
+
                     if (sePasa(kilos.Text) == false)
                     {
 
@@ -847,7 +993,7 @@ namespace AerolineaFrba.Compra
                             cargarNuevoCliente(); //INSERT DE LOS CAMPOS
 
                         }
-                        else
+                        else if(esNuevo==false)
                         {
                             actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE
                         }
@@ -855,10 +1001,11 @@ namespace AerolineaFrba.Compra
 
                         cargarDatosATabla2();
 
+                        button1.Enabled = true;
 
                         modificarKilosAeronave(kilos.Text, "restar");
 
-                        pesoCargado = pesoCargado + Convert.ToInt32(kilos.Text); 
+                        FormCompra1.pesoCargado = FormCompra1.pesoCargado + Convert.ToInt32(kilos.Text); 
 
                         cantidadEncomiendasCargados++;
                         idEncomienda++;
@@ -866,10 +1013,12 @@ namespace AerolineaFrba.Compra
                         verificacion2.DataSource = tabla2;
                         verificacion2.Show();
                         verificacion2.Columns["Id Encomienda"].Visible = false;
+                        verificacion2.Columns["Id Cliente"].Visible = false;
                         verificacion2.Columns["Mail"].Visible = false;
                         verificacion2.Columns["Telefono"].Visible = false;
                         verificacion2.Columns["Fecha de nacimiento"].Visible = false;
                         verificacion2.Columns["Direccion"].Visible = false;
+
                         //DataGridViewColumn column = verificacion2.Columns[0];  ELIMINACION
                         //column.Width = 50;                                     ELIMINACION
                         //   DataGridViewColumn column2 = verificacion2.Columns[2];
@@ -887,11 +1036,7 @@ namespace AerolineaFrba.Compra
 
                     }
 
-                    if (sePasa(kilos.Text) == true)
-                    {
-                        avisar("No queda espacio en el avion para llevar una encomienda de ese peso.");
-                        
-                    }
+                
                 }
 
                 LimpiarCliente_Click(sender, e);
@@ -946,7 +1091,7 @@ namespace AerolineaFrba.Compra
 
         private void kilos_TextChanged(object sender, EventArgs e)
         {
-           kilos.Text = Regex.Replace(telefono.Text, @"[^\d]", "");
+           kilos.Text = Regex.Replace(kilos.Text, @"[^\d]", "");
             //OBLIGA A QUE INTRODUZCA NUMEROS
             kgs = kilos.Text;
         }
@@ -983,7 +1128,42 @@ namespace AerolineaFrba.Compra
                 
         }
 
-    
+        private void guardarIdCliente()
+        {
+
+            string sql = "SELECT CLIE_ID FROM DJML.CLIENTES " +
+            "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipo.Text + "')" +
+             " AND CLIE_DNI =" + numero.Text;
+            Query qry1 = new Query(sql);
+            IDC = qry1.ObtenerUnicoCampo().ToString();
+
+        }
+
+        private bool existeCliente()
+        {
+            string sql = "SELECT CLIE_ID FROM DJML.CLIENTES " +
+                          "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipo.Text + "')" +
+                         " AND CLIE_DNI =" + numero.Text;
+            Query qry1 = new Query(sql);
+            object id_cliente = qry1.ObtenerUnicoCampo();
+
+            return (id_cliente != null);
+        }
+
+        private bool buscarFilaDeTabla(string idm)
+        {
+            bool existeEnTabla = false;
+            
+            for (int i = tabla.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = tabla.Rows[i];
+                if (dr["Id Cliente"].ToString() == idm)
+                    existeEnTabla = true;
+            }
+
+            return existeEnTabla;         
+
+        }
         
     }
 }
@@ -991,7 +1171,7 @@ namespace AerolineaFrba.Compra
 
 
 //TODO: validar que el cliente no haya comprado un pasaje para ese dia
-//TODO: hacer que un cliente no pueda comprar dos pasajes para el mismo
+
 //TODO: calcular el precio de los pasajes y encomiendas y agregarlos a la tabla! 
 
 
@@ -1037,7 +1217,6 @@ private void borrarFilaDeTabla(string idButaca)
             dr.Delete();
     }
 
-    //TODO: hacer denuevo esta funcion.
 }
 
 private void borrarFilaDeTabla2(string idEnco)
@@ -1049,5 +1228,9 @@ private void borrarFilaDeTabla2(string idEnco)
             dr.Delete();
     }
 }
-        
+
+ * 
+ * actualizar datos
+ * 
+ * 
 */

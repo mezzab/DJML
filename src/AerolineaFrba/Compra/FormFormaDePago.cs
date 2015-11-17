@@ -17,19 +17,23 @@ namespace AerolineaFrba.Compra
     {
         public static Boolean pagoEnEfectivo;
 
+        public static string codigoCompra;
+        public static string IDCompra;
+
+
         public FormFormaDePago()
         {
             InitializeComponent();
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {
+        {/*
             CargaDatos m = new CargaDatos();
             this.Hide();
             m.StartPosition = FormStartPosition.CenterScreen;
 
             m.ShowDialog();
-            m = (CargaDatos)this.ActiveMdiChild;
+            m = (CargaDatos)this.ActiveMdiChild;*/
         }
 
 
@@ -88,6 +92,19 @@ namespace AerolineaFrba.Compra
 
         private void formaPago_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            FormCompra1.vuelve = true;
+            CargaDatos t = new CargaDatos();
+            t.StartPosition = FormStartPosition.CenterScreen;
+            this.Hide();
+            t.ShowDialog();
+            t = (CargaDatos)this.ActiveMdiChild;
+
 
         }
     }

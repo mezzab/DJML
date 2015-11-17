@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using AerolineaFrba.Inicio_Aplicacion;
 using System.Data.SqlClient;
 using AerolineaFrba.Properties;
+using System.Globalization;
 
 namespace AerolineaFrba.Compra
 {
@@ -17,7 +18,12 @@ namespace AerolineaFrba.Compra
     {
         public static int viajeID;
         public static string aeroID;
-    
+
+        public static int pesoCargado = 0;
+        public static List<int> butacasCargadas = new List<int>();
+
+        public static bool vuelve = false;
+
         public FormCompra1()
         {
             InitializeComponent();
@@ -31,11 +37,17 @@ namespace AerolineaFrba.Compra
 
         private void FormCompra1_Load(object sender, EventArgs e)
         {
+
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+
             button3.Enabled = false;
             LlenarComboBox1();
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             LlenarComboBox2();
             comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            date.Format = DateTimePickerFormat.Custom;
+            date.CustomFormat = "yyyy-dd-MM";
 
         }
 
@@ -197,6 +209,15 @@ namespace AerolineaFrba.Compra
         private void button4_Click(object sender, EventArgs e)
         {  DateTime fecha_salida = date.Value.Date;
        // MessageBox.Show(fecha_salida);
+        }
+
+      
+
+        private void button4_Click_2(object sender, EventArgs e)
+        {
+
+            
+
         }
 
 
