@@ -22,6 +22,8 @@ namespace AerolineaFrba.Compra
         public static int pesoCargado = 0;
         public static List<int> butacasCargadas = new List<int>();
 
+        public static bool vuelve = false;
+
         public FormCompra1()
         {
             InitializeComponent();

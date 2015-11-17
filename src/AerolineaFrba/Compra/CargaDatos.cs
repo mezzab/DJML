@@ -155,6 +155,7 @@ namespace AerolineaFrba.Compra
         private void crearColumnas2()
         {
             tabla2.Columns.Add("Id Encomienda", typeof(int));
+            tabla2.Columns.Add("Id Cliente", typeof(string));
             tabla2.Columns.Add("Kgs", typeof(int));
             tabla2.Columns.Add("Nombre", typeof(string));
             tabla2.Columns.Add("Apellido", typeof(string));
@@ -222,7 +223,7 @@ namespace AerolineaFrba.Compra
             DataRow uno = tabla2.NewRow();
             uno["Id Encomienda"] = idEncomienda;
             uno["Kgs"] = kgs;
-
+            uno["Id Cliente"] = IDC;
             uno["Nombre"] = nombre.Text;
             uno["Apellido"] = apellido.Text;
             uno["Tipo de Documento"] = tipo.Text;
@@ -317,7 +318,7 @@ namespace AerolineaFrba.Compra
 
                           
                             LimpiarCliente_Click(sender, e);
-                            
+                            button1.Enabled = true;
                             llenarButacas();
                          
                             butacaSeleccionada.Visible = false;
@@ -727,6 +728,7 @@ namespace AerolineaFrba.Compra
 
         private void FormCompra3_Load(object sender, EventArgs e)
         {
+            
             t.ForeColor = Color.Red;
             t1.ForeColor = Color.Red;
             
@@ -772,6 +774,15 @@ namespace AerolineaFrba.Compra
             t1.ForeColor = Color.Red;
 
             calcularDatosParaCalculoDePrecios();
+
+            if (FormCompra1.vuelve == true)
+            {
+                button1.Enabled = true;
+            }
+            if (FormCompra1.vuelve == false)
+            {
+                button1.Enabled = false;
+            }
         }
 
         public void LlenarComboBoxTipoDocumento()
@@ -990,6 +1001,7 @@ namespace AerolineaFrba.Compra
 
                         cargarDatosATabla2();
 
+                        button1.Enabled = true;
 
                         modificarKilosAeronave(kilos.Text, "restar");
 
@@ -1001,10 +1013,12 @@ namespace AerolineaFrba.Compra
                         verificacion2.DataSource = tabla2;
                         verificacion2.Show();
                         verificacion2.Columns["Id Encomienda"].Visible = false;
+                        verificacion2.Columns["Id Cliente"].Visible = false;
                         verificacion2.Columns["Mail"].Visible = false;
                         verificacion2.Columns["Telefono"].Visible = false;
                         verificacion2.Columns["Fecha de nacimiento"].Visible = false;
                         verificacion2.Columns["Direccion"].Visible = false;
+
                         //DataGridViewColumn column = verificacion2.Columns[0];  ELIMINACION
                         //column.Width = 50;                                     ELIMINACION
                         //   DataGridViewColumn column2 = verificacion2.Columns[2];

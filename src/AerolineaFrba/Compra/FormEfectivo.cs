@@ -561,10 +561,12 @@ namespace AerolineaFrba.Compra
             string aux1 = aux0.Replace(" ", "");
             //string aux2 = aux1.Remove((paramstr.Length - 1), 1);
             string aux2 = aux1.Substring(0, aux1.Length - 1);
+            string aux3 = precioTotal.ToString().Replace(",", ".");
 
 
             string sql = " INSERT INTO DJML.COMPRAS( COMPRA_VIAJE_ID , COMPRA_CLIE_ID , COMPRA_MEDIO_DE_PAGO , COMPRA_TARJETA_DE_CREDITO , COMPRA_MONTO , COMPRA_FECHA )" +
-                                        " VALUES ( '" + FormCompra1.viajeID + "' , '" + IDCliente + "' , '1' , null , '" + aux2 + "' , '" + aux + "')";
+                                        " VALUES ( '" + FormCompra1.viajeID + "' , '" + IDCliente + "' , '1' , null , '" + aux3 + "' , '" + aux + "')";
+
 
             
             Query qry1 = new Query(sql);
@@ -576,20 +578,85 @@ namespace AerolineaFrba.Compra
                             "WHERE COMPRA_ID = (SELECT MAX(COMPRA_ID) from DJML.COMPRAS)";
             Query qryc = new Query(sqlc);
             FormFormaDePago.codigoCompra = qryc.ObtenerUnicoCampo().ToString();
+
+            string sqlID = "SELECT COMPRA_ID FROM DJML.COMPRAS " +
+                     "WHERE COMPRA_ID = (SELECT MAX(COMPRA_ID) from DJML.COMPRAS)";
+            Query qryID = new Query(sqlID);
+            FormFormaDePago.IDCompra = qryID.ObtenerUnicoCampo().ToString();
         }
 
         private void registrarPasajes()
         {
+            for (int i = CargaDatos.tabla.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = CargaDatos.tabla.Rows[i];
+                string idCliente = dr["Id Cliente"].ToString();
+                string idButaca = dr["Id Butaca"].ToString();
+                string PPASAJE = dr["Precio"].ToString().Replace(",", ".");
 
-            
-            //TODO:
+                
+
+                string nuevoPasaje = " INSERT INTO [DJML].[PASAJES]" +
+                                      " ([PASA_ID]" + 
+                                      " ,[PASA_VIAJE_ID]" +
+                                      " ,[PASA_CLIE_ID]" +
+                                      " ,[PASA_COMPRA_ID]" +
+                                      " ,[PASA_BUTA_ID]" +
+                                      " ,[PASA_PRECIO])" +
+                                " VALUES" +
+                                      "  ( 5555599 " +
+                                       " , '" + FormCompra1.viajeID + "'" +
+                                      " , '" + idCliente + "'" +
+                                      " , '" + FormFormaDePago.IDCompra + "'" +
+                                      " , '" + idButaca + "'" +
+                                      " ,' " + PPASAJE + "')";
+
+
+                Query qry = new Query(nuevoPasaje);
+                qry.pComando = nuevoPasaje;
+                qry.Ejecutar();
+                
+
+            }
+
+
+
         }
 
         private void registrarEncomiendas()
         {
 
-            //TODO:
+            for (int i = CargaDatos.tabla2.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow dr = CargaDatos.tabla2.Rows[i];
+                string idCliente = dr["Id Cliente"].ToString();
+                string kilos = dr["Kgs"].ToString();
+                string PEncomienda = dr["Precio"].ToString().Replace(",", ".");
 
+               
+                
+                string nuevaEncomienda = " INSERT INTO [DJML].[ENCOMIENDAS] " +
+                                       " ([ENCO_ID]" +
+                                       " ,[ENCO_VIAJE_ID]" +
+                                       " ,[ENCO_CLIE_ID]" +
+                                       " ,[ENCO_COMPRA_ID]" +
+                                       " ,[ENCO_KG]" +
+                                       " ,[ENCO_PRECIO])" +
+                                " VALUES" +
+                                      "  ( 5555599 " +
+                                      " , '" + FormCompra1.viajeID + "'" +
+                                      " , '" + idCliente + "'" +
+                                      " , '" + FormFormaDePago.IDCompra + "'" +
+                                      " , '" + kilos + "'" +
+                                      " ,' " + PEncomienda + "')";
+
+
+                Query qry11 = new Query(nuevaEncomienda);
+                qry11.pComando = nuevaEncomienda;
+                qry11.Ejecutar();
+                
+
+            }
 
         }
 

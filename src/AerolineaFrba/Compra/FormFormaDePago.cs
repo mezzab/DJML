@@ -18,6 +18,7 @@ namespace AerolineaFrba.Compra
         public static Boolean pagoEnEfectivo;
 
         public static string codigoCompra;
+        public static string IDCompra;
 
 
         public FormFormaDePago()
@@ -96,11 +97,15 @@ namespace AerolineaFrba.Compra
 
         private void button2_Click(object sender, EventArgs e)
         {
+
+            FormCompra1.vuelve = true;
             CargaDatos t = new CargaDatos();
             t.StartPosition = FormStartPosition.CenterScreen;
             this.Hide();
             t.ShowDialog();
             t = (CargaDatos)this.ActiveMdiChild;
+
+
         }
     }
 }
