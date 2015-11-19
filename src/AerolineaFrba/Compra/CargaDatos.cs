@@ -251,7 +251,8 @@ namespace AerolineaFrba.Compra
             numero.Text != "" &&
             fechaNacimiento.Text != "" &&
             butaca != "" &&
-            tipoBucata != "")
+            tipoBucata != "" &&
+                tipo.Text != "" )
             {
                 estanTodos = true;
             }
@@ -270,7 +271,8 @@ namespace AerolineaFrba.Compra
             telefono.Text != "" &&
             numero.Text != "" &&
             fechaNacimiento.Text != "" &&
-            kilos.Text != "")
+            kilos.Text != ""&&
+                 tipo.Text != "")
             {
                 estanTodos = true;
             }
