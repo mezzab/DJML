@@ -169,9 +169,7 @@ namespace AerolineaFrba.Listado_Estadistico
         private void ejecutarSegundoFiltro() 
         {
             //Top 5 de los destinos con aeronaves más vacías.
-         
-
-            switch (comboBoxTrimestre.SelectedIndex)
+             switch (comboBoxTrimestre.SelectedIndex)
             {
                 //"Enero-Febrero-Marzo"
                 case 0:
@@ -264,6 +262,86 @@ namespace AerolineaFrba.Listado_Estadistico
         private void ejecutarCuartoFiltro()
         {
             //Top 5 de los destinos con pasajes cancelados.
+             switch (comboBoxTrimestre.SelectedIndex)
+            {
+                //"Enero-Febrero-Marzo"
+                case 0:
+                    string primerTrimestre = "SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN"
+                    +"JOIN DJML.COMPRAS COM ON CAN.CANC_COMPRA_ID = COM.COMPRA_ID"
+                    +"JOIN DJML.VIAJES V ON COM.COMPRA_VIAJE_ID = V.VIAJE_ID"
+                    +"JOIN DJML.RUTAS R ON V.VIAJE_ID = R.RUTA_CODIGO"
+                    +"JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID"
+                    +"JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID"
+                    +"WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 "
+                    +"AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 03 "
+                    +"AND YEAR(CAN.CANC_FECHA_DEVOLUCION)=  " + txtAnio.Text + " "
+                    +"GROUP BY C1.CIUD_DETALLE "
+                    +"ORDER BY 2 DESC";
+                      Query qry = new Query(primerTrimestre);
+                    datos.DataSource = qry.ObtenerDataTable();
+
+                    break;
+
+                //Abril-Mayo-Junio
+                case 1:
+                    string segundoTrimestre = "SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN"
+                    +"JOIN DJML.COMPRAS COM ON CAN.CANC_COMPRA_ID = COM.COMPRA_ID"
+                    +"JOIN DJML.VIAJES V ON COM.COMPRA_VIAJE_ID = V.VIAJE_ID"
+                    +"JOIN DJML.RUTAS R ON V.VIAJE_ID = R.RUTA_CODIGO"
+                    +"JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID"
+                    +"JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID"
+                    +"WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 "
+                    +"AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 04"
+                    +"AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 06 "
+                    +"AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= " + txtAnio.Text + ""
+                    +"GROUP BY C1.CIUD_DETALLE "
+                    +"ORDER BY 2 DESC";
+                    Query qry2 = new Query(segundoTrimestre);
+                    datos.DataSource = qry2.ObtenerDataTable();
+
+                    break;
+
+                //Julio-Agosto-Septiembre
+                case 2:
+                    string tercerTrimestre = " SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN"
+                    + "JOIN DJML.COMPRAS COM ON CAN.CANC_COMPRA_ID = COM.COMPRA_ID"
+                    + "JOIN DJML.VIAJES V ON COM.COMPRA_VIAJE_ID = V.VIAJE_ID"
+                    + "JOIN DJML.RUTAS R ON V.VIAJE_ID = R.RUTA_CODIGO"
+                    + "JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID"
+                    + "JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID"
+                    + "WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 "
+                    + "AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 07"
+                    + "AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 09 "
+                    + "AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= " + txtAnio.Text + ""
+                    + "GROUP BY C1.CIUD_DETALLE "
+                    + "ORDER BY 2 DESC";
+
+                    Query qry3 = new Query(tercerTrimestre);
+                    datos.DataSource = qry3.ObtenerDataTable();
+                    break;
+
+                //Octubre-Noviembre-Diciembre
+                case 3:
+                    string cuartoTrimestre = "SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN"
+                    +"JOIN DJML.COMPRAS COM ON CAN.CANC_COMPRA_ID = COM.COMPRA_ID"
+                    +"JOIN DJML.VIAJES V ON COM.COMPRA_VIAJE_ID = V.VIAJE_ID"
+                    +"JOIN DJML.RUTAS R ON V.VIAJE_ID = R.RUTA_CODIGO"
+                    +"JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID"
+                    +"JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID"
+                    +"WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 "
+                    +"AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 10"
+                    +"AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 12 "
+                    +"AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= " + txtAnio.Text + ""
+                    +"GROUP BY C1.CIUD_DETALLE "
+                    +"ORDER BY 2 DESC";
+                    Query qry4 = new Query(cuartoTrimestre);
+                    datos.DataSource = qry4.ObtenerDataTable();
+
+                    break;
+
+            }
+
+
         }
 
 

@@ -175,7 +175,7 @@ namespace AerolineaFrba.Login_Usuario
         private void iniciaAplicacion()
         {
             //MENSAJE INICIO SESION
-            MessageBox.Show("Ha iniciado sesion con exito.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Ha iniciado sesion con exito.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //PONE EN 0 LOGIN FALLIDOS Y CONTINUA CON EL INGRESO
             new Query("UPDATE DJML.USUARIOS SET USUA_LOGIN_FALLIDOS = 0 WHERE USUA_ID = " + idUsuario).Ejecutar();
             FormInicioFuncionalidades func = new FormInicioFuncionalidades();
