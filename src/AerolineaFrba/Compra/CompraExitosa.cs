@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba.Inicio_Aplicacion;
 
 namespace AerolineaFrba.Compra
 {
@@ -55,6 +56,16 @@ namespace AerolineaFrba.Compra
         private void label2_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormInicioFuncionalidades FormInicioFuncionalidades = new FormInicioFuncionalidades();
+            this.Hide();
+            FormInicioFuncionalidades.StartPosition = FormStartPosition.CenterScreen;
+
+            FormInicioFuncionalidades.ShowDialog();
+            FormInicioFuncionalidades = (FormInicioFuncionalidades)this.ActiveMdiChild;
         }
     }
 }
