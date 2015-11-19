@@ -36,8 +36,9 @@
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.label3 = new System.Windows.Forms.Label();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -116,17 +117,9 @@
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.lineShape2,
             this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(425, 253);
+            this.shapeContainer1.Size = new System.Drawing.Size(425, 295);
             this.shapeContainer1.TabIndex = 9;
             this.shapeContainer1.TabStop = false;
-            // 
-            // lineShape1
-            // 
-            this.lineShape1.Name = "lineShape1";
-            this.lineShape1.X1 = 17;
-            this.lineShape1.X2 = 407;
-            this.lineShape1.Y1 = 65;
-            this.lineShape1.Y2 = 65;
             // 
             // lineShape2
             // 
@@ -136,11 +129,30 @@
             this.lineShape2.Y1 = 145;
             this.lineShape2.Y2 = 145;
             // 
+            // lineShape1
+            // 
+            this.lineShape1.Name = "lineShape1";
+            this.lineShape1.X1 = 17;
+            this.lineShape1.X2 = 407;
+            this.lineShape1.Y1 = 65;
+            this.lineShape1.Y2 = 65;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(133, 250);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(149, 33);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "Volver al inicio";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // CompraExitosa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(425, 253);
+            this.ClientSize = new System.Drawing.Size(425, 295);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.codigo);
             this.Controls.Add(this.label2);
@@ -169,5 +181,6 @@
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape2;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
+        private System.Windows.Forms.Button button1;
     }
 }

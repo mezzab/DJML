@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba.Inicio_Aplicacion;
 
 namespace AerolineaFrba.Devolucion
 {
@@ -15,6 +16,16 @@ namespace AerolineaFrba.Devolucion
         public Devolucion2()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormInicioFuncionalidades FormInicioFuncionalidades = new FormInicioFuncionalidades();
+            this.Hide();
+            FormInicioFuncionalidades.StartPosition = FormStartPosition.CenterScreen;
+
+            FormInicioFuncionalidades.ShowDialog();
+            FormInicioFuncionalidades = (FormInicioFuncionalidades)this.ActiveMdiChild;
         }
     }
 }
