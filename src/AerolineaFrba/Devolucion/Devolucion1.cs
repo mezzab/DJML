@@ -12,6 +12,9 @@ namespace AerolineaFrba.Devolucion
 {
     public partial class Devolucion1 : Form
     {
+
+        public static string codigo_devolucion;
+
         public Devolucion1()
         {
             InitializeComponent();
@@ -28,5 +31,25 @@ namespace AerolineaFrba.Devolucion
             FormInicioFuncionalidades.ShowDialog();
             FormInicioFuncionalidades = (Devolucion0)this.ActiveMdiChild;
         }
+
+        private void Devolucion1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Siguiente_Click(object sender, EventArgs e)
+        {
+            // insert a djml.cancelaciones
+            // guardo el id y el codigo
+            
+            // agrego campo devolucion_id a cada pasaje seleccionado y cada precio su precio a 
+            decimal sumaPreciosPasajesEncomiendasDevueltos;
+            // agrego campo devolucion_id a cada encomienda seleccionada y sumo cada precio a 
+            //modifico el precio de la compra: le reso esa variable al precio de la compra. 
+
+
+        }
+
+
     }
 }

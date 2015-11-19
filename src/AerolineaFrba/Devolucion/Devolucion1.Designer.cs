@@ -47,7 +47,7 @@
             // motivo
             // 
             this.motivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.motivo.Location = new System.Drawing.Point(16, 41);
+            this.motivo.Location = new System.Drawing.Point(17, 41);
             this.motivo.Name = "motivo";
             this.motivo.Size = new System.Drawing.Size(291, 151);
             this.motivo.TabIndex = 1;
@@ -62,6 +62,7 @@
             this.Siguiente.TabIndex = 2;
             this.Siguiente.Text = "Finalizar devolución";
             this.Siguiente.UseVisualStyleBackColor = true;
+            this.Siguiente.Click += new System.EventHandler(this.Siguiente_Click);
             // 
             // button1
             // 
@@ -86,6 +87,7 @@
             this.Name = "Devolucion1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Devolución de pasaje/encomienda";
+            this.Load += new System.EventHandler(this.Devolucion1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
