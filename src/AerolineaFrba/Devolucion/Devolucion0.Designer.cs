@@ -46,7 +46,7 @@
             // Siguiente
             // 
             this.Siguiente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.Siguiente.Location = new System.Drawing.Point(359, 455);
+            this.Siguiente.Location = new System.Drawing.Point(488, 455);
             this.Siguiente.Name = "Siguiente";
             this.Siguiente.Size = new System.Drawing.Size(301, 49);
             this.Siguiente.TabIndex = 7;
@@ -58,7 +58,7 @@
             this.groupBox1.Controls.Add(this.pasajes1);
             this.groupBox1.Location = new System.Drawing.Point(13, 72);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(647, 178);
+            this.groupBox1.Size = new System.Drawing.Size(788, 178);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lista de pasajes a devolver";
@@ -68,7 +68,7 @@
             this.pasajes1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.pasajes1.Location = new System.Drawing.Point(11, 19);
             this.pasajes1.Name = "pasajes1";
-            this.pasajes1.Size = new System.Drawing.Size(630, 149);
+            this.pasajes1.Size = new System.Drawing.Size(771, 149);
             this.pasajes1.TabIndex = 3;
             this.pasajes1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.pasajes1_CellClick);
             this.pasajes1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.pasajes1_CellContentClick);
@@ -76,7 +76,7 @@
             // Agregar
             // 
             this.Agregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Agregar.Location = new System.Drawing.Point(359, 16);
+            this.Agregar.Location = new System.Drawing.Point(467, 18);
             this.Agregar.Name = "Agregar";
             this.Agregar.Size = new System.Drawing.Size(301, 49);
             this.Agregar.TabIndex = 2;
@@ -87,16 +87,16 @@
             // codigo
             // 
             this.codigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.codigo.Location = new System.Drawing.Point(209, 30);
+            this.codigo.Location = new System.Drawing.Point(245, 30);
             this.codigo.Name = "codigo";
-            this.codigo.Size = new System.Drawing.Size(144, 23);
+            this.codigo.Size = new System.Drawing.Size(182, 23);
             this.codigo.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label1.Location = new System.Drawing.Point(12, 31);
+            this.label1.Location = new System.Drawing.Point(48, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(191, 17);
             this.label1.TabIndex = 4;
@@ -118,7 +118,7 @@
             this.groupBox2.Controls.Add(this.encomiendas);
             this.groupBox2.Location = new System.Drawing.Point(13, 256);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(647, 178);
+            this.groupBox2.Size = new System.Drawing.Size(782, 178);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de pasajes a devolver";
@@ -128,7 +128,7 @@
             this.encomiendas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.encomiendas.Location = new System.Drawing.Point(11, 19);
             this.encomiendas.Name = "encomiendas";
-            this.encomiendas.Size = new System.Drawing.Size(630, 149);
+            this.encomiendas.Size = new System.Drawing.Size(765, 149);
             this.encomiendas.TabIndex = 3;
             this.encomiendas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.encomiendas_CellClick);
             this.encomiendas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.encomiendas_CellContentClick);
@@ -137,7 +137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(672, 516);
+            this.ClientSize = new System.Drawing.Size(813, 516);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Siguiente);

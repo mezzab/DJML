@@ -58,8 +58,8 @@ namespace AerolineaFrba.Devolucion
             if (existeCompra())
               {
 
-                    string qry = "SELECT P.PASA_ID ID, D.CIUD_DETALLE DESTINO, V.VIAJE_FECHA_SALIDA FECHA_SALIDA, C.CLIE_NOMBRE NOMBRE,  C.CLIE_APELLIDO APELLIDO, B.BUTA_ID BUTA_NUM, T.DESCRIPCION BUTA_TIPO" +
-                                    " FROM DJML.PASAJES P, DJML.VIAJES V, DJML.CLIENTES C, DJML.BUTACA_AERO X, DJML.BUTACAS B, DJML.TIPO_BUTACA T, DJML.RUTAS R, DJML.TRAMOS Y, DJML.CIUDADES D" +
+                     string qry = "SELECT P.PASA_ID ID, D1.CIUD_DETALLE ORIGEN, D2.CIUD_DETALLE DESTINO, V.VIAJE_FECHA_SALIDA FECHA_SALIDA, C.CLIE_NOMBRE NOMBRE,  C.CLIE_APELLIDO APELLIDO, B.BUTA_ID BUTA_NUM, T.DESCRIPCION BUTA_TIPO" +
+                                    " FROM DJML.PASAJES P, DJML.VIAJES V, DJML.CLIENTES C, DJML.BUTACA_AERO X, DJML.BUTACAS B, DJML.TIPO_BUTACA T, DJML.RUTAS R, DJML.TRAMOS Y, DJML.CIUDADES D1, DJML.CIUDADES D2" +
                                     " WHERE P.PASA_VIAJE_ID = V.VIAJE_ID" +
                                     " AND P.PASA_CLIE_ID = C.CLIE_ID" +
                                     " AND P.PASA_BUTA_ID = X.BXA_ID " +
@@ -67,7 +67,7 @@ namespace AerolineaFrba.Devolucion
                                     " AND B.BUTA_TIPO_ID = T.TIPO_BUTACA_ID" +
                                     " AND V.VIAJE_RUTA_ID = R.RUTA_CODIGO" +
                                     " AND R.RUTA_TRAMO = Y.TRAMO_ID" +
-                                    " AND D.CIUD_ID = Y.TRAMO_CIUDAD_DESTINO" +
+                                    " AND D2.CIUD_ID = Y.TRAMO_CIUDAD_DESTINO AND D1.CIUD_ID = Y.TRAMO_CIUDAD_ORIGEN" +
                                     " AND PASA_COMPRA_ID = '"+ id_compra +"'";
 
 
@@ -85,7 +85,7 @@ namespace AerolineaFrba.Devolucion
                     }
 
                     //pasajes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                    /*DataGridViewColumn column = pasajes1.Columns[0];
+                    DataGridViewColumn column = pasajes1.Columns[0];
                     column.Width = 55;
                     DataGridViewColumn column1 = pasajes1.Columns[1];
                     column1.Width = 90;
@@ -97,18 +97,23 @@ namespace AerolineaFrba.Devolucion
                     column5.Width = 75;
                     DataGridViewColumn column4 = pasajes1.Columns[6];
                     column4.Width = 75;
-                    */
+                    DataGridViewColumn column7 = pasajes1.Columns[7];
+                    column7.Width = 75;
+                    DataGridViewColumn column8 = pasajes1.Columns[8];
+                    column8.Width = 75;
+                    
+                    
 
 
                     //ENCOMIENDAS
-                
-                    string qry0 = "SELECT E.ENCO_ID ID, D.CIUD_DETALLE DESTINO, V.VIAJE_FECHA_SALIDA FECHA_SALIDA, C.CLIE_NOMBRE NOMBRE,  C.CLIE_APELLIDO APELLIDO, E.ENCO_KG KILOS" +
-                                    " FROM DJML.ENCOMIENDAS E, DJML.VIAJES V, DJML.CLIENTES C, DJML.RUTAS R, DJML.TRAMOS Y, DJML.CIUDADES D" +
+
+                    string qry0 = "SELECT E.ENCO_ID ID,  D1.CIUD_DETALLE ORIGEN, D2.CIUD_DETALLE DESTINO, V.VIAJE_FECHA_SALIDA FECHA_SALIDA, C.CLIE_NOMBRE NOMBRE,  C.CLIE_APELLIDO APELLIDO, E.ENCO_KG KILOS" +
+                                    " FROM DJML.ENCOMIENDAS E, DJML.VIAJES V, DJML.CLIENTES C, DJML.RUTAS R, DJML.TRAMOS Y, DJML.CIUDADES D1, DJML.CIUDADES D2" +
                                     " WHERE E.ENCO_VIAJE_ID = V.VIAJE_ID" +
                                     " AND E.ENCO_CLIE_ID = C.CLIE_ID" +
                                     " AND V.VIAJE_RUTA_ID = R.RUTA_CODIGO" +
                                     " AND R.RUTA_TRAMO = Y.TRAMO_ID" +
-                                    " AND D.CIUD_ID = Y.TRAMO_CIUDAD_DESTINO" +
+                                    " AND D2.CIUD_ID = Y.TRAMO_CIUDAD_DESTINO AND D1.CIUD_ID = Y.TRAMO_CIUDAD_ORIGEN" +
                                     " AND ENCO_COMPRA_ID = '" + id_compra + "'";
 
 
@@ -120,7 +125,7 @@ namespace AerolineaFrba.Devolucion
                     DataGridViewColumn column0 = encomiendas.Columns[0];
                     column0.Width = 55;
 
-                    /* DataGridViewColumn column10 = encomiendas.Columns[1];
+                     DataGridViewColumn column10 = encomiendas.Columns[1];
                     column10.Width = 80;
                     DataGridViewColumn column20 = encomiendas.Columns[3];
                     column20.Width = 75;
@@ -129,7 +134,10 @@ namespace AerolineaFrba.Devolucion
                     DataGridViewColumn column50 = encomiendas.Columns[5];
                     column50.Width = 70;
                     DataGridViewColumn column40 = encomiendas.Columns[6];
-                    column40.Width = 70;*/
+                    column40.Width = 70;
+                 
+             
+
 
                     if (yaBuscoE == false)
                     {
@@ -139,7 +147,8 @@ namespace AerolineaFrba.Devolucion
                         encomiendas.Columns.Add(chk);
                         yaBuscoE = true;
                     }
-
+                    DataGridViewColumn column41 = encomiendas.Columns[7];
+                    column41.Width = 70;
                 
                 }
 
@@ -169,14 +178,14 @@ namespace AerolineaFrba.Devolucion
         {
             if (e.ColumnIndex > 0)
             {
-                if (encomiendas.Rows[e.RowIndex].Cells[6].Value != null)
+                if (encomiendas.Rows[e.RowIndex].Cells[7].Value != null)
                 {
 
-                    if ((Boolean)encomiendas.Rows[e.RowIndex].Cells[6].Value == true)
+                    if ((Boolean)encomiendas.Rows[e.RowIndex].Cells[7].Value == true)
                     {
                         MessageBox.Show("ID = " + encomiendas.Rows[e.RowIndex].Cells[0].Value.ToString() + " CHECK CON TIC");
                     }
-                    if ((Boolean)encomiendas.Rows[e.RowIndex].Cells[6].Value == false)
+                    if ((Boolean)encomiendas.Rows[e.RowIndex].Cells[7].Value == false)
                     {
                         MessageBox.Show("ID = " + encomiendas.Rows[e.RowIndex].Cells[0].Value.ToString() + " CHECK SIN TIC");
                     }
@@ -189,14 +198,14 @@ namespace AerolineaFrba.Devolucion
         {
             if (e.ColumnIndex > 0)
             {
-                if (pasajes1.Rows[e.RowIndex].Cells[7].Value != null)
+                if (pasajes1.Rows[e.RowIndex].Cells[8].Value != null)
                 {
 
-                    if ((Boolean)pasajes1.Rows[e.RowIndex].Cells[7].Value == true)
+                    if ((Boolean)pasajes1.Rows[e.RowIndex].Cells[8].Value == true)
                     {
                         MessageBox.Show("ID = " + pasajes1.Rows[e.RowIndex].Cells[0].Value.ToString() + " CHECK CON TIC");
                     }
-                    if ((Boolean)pasajes1.Rows[e.RowIndex].Cells[7].Value == false)
+                    if ((Boolean)pasajes1.Rows[e.RowIndex].Cells[8].Value == false)
                     {
                         MessageBox.Show("ID = " + pasajes1.Rows[e.RowIndex].Cells[0].Value.ToString() + " CHECK SIN TIC");
                     }
