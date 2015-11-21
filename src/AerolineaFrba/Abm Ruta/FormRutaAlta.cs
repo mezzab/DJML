@@ -28,8 +28,9 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button_guardar_Click(object sender, EventArgs e)
         {          
-            Int32 ciudad_origen_id = (Int32)comboBox_origen.SelectedValue;  //ToDo: pasar a id
-            var hola = comboBox_origen.SelectedItem;
+            //Int32 ciudad_origen_id = comboBox_origen.SelectedValue;  //ToDo: pasar a id
+            //int ciudad_origen_id = Convert.ToInt32(comboBox_origen.SelectedValue);
+            string ciudad_origen_id = comboBox_origen.Text.Trim();//ToDo: pasar a id 
             string ciudad_destino_id = comboBox_destino.Text.Trim();//ToDo: pasar a id 
             string servicio_id = comboBox_servicio.Text.Trim();     //ToDo: pasar a id
             string precio_pasaje = text_precio_pasaje.Text.Trim();
@@ -37,31 +38,40 @@ namespace AerolineaFrba.Abm_Ruta
 
             string error_message = "";
 
+            label_message.Text = ciudad_origen_id + Environment.NewLine + ciudad_destino_id + Environment.NewLine + servicio_id + Environment.NewLine + precio_pasaje + Environment.NewLine + precio_encomienda;
+            label_message.Visible = true;
+            
             //Validate: No vacios en el formulario
-            if (ciudad_origen_id == 0 || ciudad_destino_id == string.Empty || servicio_id == string.Empty || precio_pasaje == string.Empty || precio_encomienda == string.Empty)
+            if (ciudad_origen_id == string.Empty || ciudad_destino_id == string.Empty || servicio_id == string.Empty || precio_pasaje == string.Empty || precio_encomienda == string.Empty)
             {
                 error_message += "Los campos del formulario no pueden estar vacios." + Environment.NewLine + Environment.NewLine;
             }
-            //Validate: precios sean numeros
-            float output1;
-            double output2;
-            bool a = float.TryParse(precio_pasaje, out output1);
-            bool b = double.TryParse(precio_encomienda, out output2);
-            if (true)
+            else
             {
-                error_message += "Los campos Precio deben ser numericos." + Environment.NewLine + Environment.NewLine;
-            }
-            //Validate: origen y destino diferentes
-            if (ciudad_origen_id != 0 && ciudad_destino_id != string.Empty) //&& ciudad_origen_id == ciudad_destino_id
-            {
-                error_message += "Los campos Ciudad Origen y Ciudad Destino deben ser diferentes." + Environment.NewLine + Environment.NewLine;
-            }
-            //Validate: No guardar un ruta identica a otra
-            //if (ruta_repetida(ciudad_origen_id, ciudad_destino_id, servicio_id))
-            if (ruta_repetida("29", "21", "1"))
-            {
-                error_message += "Ya exite una ruta identica a la ingresada." ;
-            }
+                //Validate: precios sean numeros
+                float output1;
+                double output2;
+                bool a = float.TryParse(precio_pasaje, out output1);
+                bool b = double.TryParse(precio_encomienda, out output2);
+                if (false)
+                {
+                    error_message += "Los campos Precio deben ser numericos." + Environment.NewLine + Environment.NewLine;
+                }
+
+                //Validate: origen y destino diferentes
+                if (ciudad_origen_id == ciudad_destino_id)
+                {
+                    error_message += "Los campos Ciudad Origen y Ciudad Destino deben ser diferentes." + Environment.NewLine + Environment.NewLine;
+                }
+                else
+                {
+                    //Validate: No guardar un ruta identica a otra
+                    if (ruta_repetida(ciudad_origen_id, ciudad_destino_id, servicio_id))
+                    {
+                        error_message += "Ya exite una ruta identica a la ingresada.";
+                    }
+                }
+            }            
 
             if (error_message != string.Empty) 
             {
@@ -77,15 +87,15 @@ namespace AerolineaFrba.Abm_Ruta
             // if (validate_data not empty) {
             
 
-            string insert_query = "INSERT INTO DJML.RUTAS (RUTA_CODIGO_REAL, RUTA_CIUDAD_ORIGEN, RUTA_CIUDAD_DESTINO, RUTA_SERVICIO_ID, RUTA_PRECIO_BASE_PASAJE, RUTA_PRECIO_BASE_KILO)" +
-                                    "VALUES (123456789, " + ciudad_origen_id + ", " + ciudad_destino_id + ", " + servicio_id + ", " + precio_pasaje + ", " + precio_encomienda + ")";
+            //string insert_query = "INSERT INTO DJML.RUTAS (RUTA_CODIGO_REAL, RUTA_CIUDAD_ORIGEN, RUTA_CIUDAD_DESTINO, RUTA_SERVICIO_ID, RUTA_PRECIO_BASE_PASAJE, RUTA_PRECIO_BASE_KILO)" +
+            //                        "VALUES (123456789, " + ciudad_origen_id + ", " + ciudad_destino_id + ", " + servicio_id + ", " + precio_pasaje + ", " + precio_encomienda + ")";
             //Success message (?)
             //"Limpiar" comboboxes y textboxes
 
             //} else {
-            label_message.Text = "Ruta no creada, existe una identica";
-            label_message.Visible = true;
-            //}*/
+            //label_message.Text = "Ruta no creada, existe una identica";
+            //label_message.Visible = true;
+            //}
         }
 
         private void button_volver_Click(object sender, EventArgs e)
@@ -148,23 +158,24 @@ namespace AerolineaFrba.Abm_Ruta
             comboBox_servicio.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        private bool ruta_repetida(string origen_id, string destino_id, string servicio_id)
+        private bool ruta_repetida(string origen, string destino, string servicio)
         {
             SqlConnection conexion = new SqlConnection();
             conexion.ConnectionString = Settings.Default.CadenaDeConexion;
 
-            string qry_validate = "SELECT RUTA_CODIGO FROM DJML.RUTAS" +
-                                  "WHERE RUTA_CIUDAD_ORIGEN = " + origen_id +
-                                  ", RUTA_CIUDAD_DESTINO = " + destino_id +
-                                  ", RUTA_SERVICIO_ID = " + servicio_id;
-
-            DataSet ds_validate = new DataSet();
-            SqlDataAdapter da_validate = new SqlDataAdapter(qry_validate, conexion);
-            da_validate.Fill(ds_validate, "DJML.RUTAS");
-
-            var response = ds_validate.Tables[0].DefaultView;
-
-            return false;
+            string qry = "select RUTA_CODIGO ruta_codigo, co.CIUD_DETALLE origen, cd.CIUD_DETALLE destino, s.SERV_DESCRIPCION servicio, r.RUTA_PRECIO_BASE_KILO precio_base_kilo, r.RUTA_PRECIO_BASE_PASAJE precio_base_pasaje" +
+                        " from djml.RUTAS r" +
+                        " join djml.TRAMOS t on r.RUTA_TRAMO = t.TRAMO_ID" +
+                        " join djml.CIUDADES co on co.CIUD_ID = t.TRAMO_CIUDAD_ORIGEN" +
+                        " join djml.CIUDADES cd on cd.CIUD_ID = t.TRAMO_CIUDAD_DESTINO" +
+                        " join djml.SERVICIOS s on r.RUTA_SERVICIO = s.SERV_ID" +
+                        " where co.CIUD_DETALLE like '%" + origen + "'" +
+                        " and cd.CIUD_DETALLE like '%" + destino + "'" +
+                        " and s.SERV_DESCRIPCION like '%" + servicio + "'";
+                      
+            var result = new Query(qry).ObtenerDataTable();
+            MessageBox.Show(result.Rows.Count.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return (result.Rows.Count != 0);
         }
         
     }

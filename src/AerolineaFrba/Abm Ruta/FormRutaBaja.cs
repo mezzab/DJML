@@ -119,12 +119,15 @@ namespace AerolineaFrba.Abm_Ruta
             string qry = "select RUTA_CODIGO ruta_codigo, co.CIUD_DETALLE origen, cd.CIUD_DETALLE destino, s.SERV_DESCRIPCION servicio, r.RUTA_PRECIO_BASE_KILO precio_base_kilo, r.RUTA_PRECIO_BASE_PASAJE precio_base_pasaje" +
                         " from djml.RUTAS r" +
                         " join djml.TRAMOS t on r.RUTA_TRAMO = t.TRAMO_ID" +
-                        " join djml.CIUDADES co on co.CIUD_DETALLE ='" + origen + "'" +
-                        " join djml.CIUDADES cd on cd.CIUD_DETALLE ='" + destino + "'" +
-                        " join djml.SERVICIOS s on s.SERV_DESCRIPCION = '" + servicio + "'";
+                        " join djml.CIUDADES co on co.CIUD_ID = t.TRAMO_CIUDAD_ORIGEN" +
+                        " join djml.CIUDADES cd on cd.CIUD_ID = t.TRAMO_CIUDAD_DESTINO" +
+                        " join djml.SERVICIOS s on r.RUTA_SERVICIO = s.SERV_ID" +
+                        " where co.CIUD_DETALLE like '%" + origen + "'" +
+                        " and cd.CIUD_DETALLE like '%" + destino + "'" +
+                        " and s.SERV_DESCRIPCION like '%" + servicio + "'";
 
             var result = new Query(qry).ObtenerDataTable();
-            if (result.Rows.Count != 0)
+            if (result.Rows.Count != 0 && origen != string.Empty &&  destino != string.Empty && servicio != string.Empty)
             {
                 dataGrid.DataSource = result;
             }
