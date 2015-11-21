@@ -390,6 +390,7 @@
             this.verificacion.Name = "verificacion";
             this.verificacion.Size = new System.Drawing.Size(706, 117);
             this.verificacion.TabIndex = 18;
+            this.verificacion.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.verificacion_CellContentClick_1);
             // 
             // button1
             // 

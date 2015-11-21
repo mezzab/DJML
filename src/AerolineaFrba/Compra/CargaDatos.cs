@@ -508,6 +508,7 @@ namespace AerolineaFrba.Compra
                 new Query(qry).Ejecutar();
 
                 seCambioAlgo = true;
+
             }
 
             if (FechaNacimiento.ToString("yyyy-dd-MM") != fechaNacimiento.Text)
@@ -1164,6 +1165,11 @@ namespace AerolineaFrba.Compra
             }
 
             return existeEnTabla;         
+
+        }
+
+        private void verificacion_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
         
