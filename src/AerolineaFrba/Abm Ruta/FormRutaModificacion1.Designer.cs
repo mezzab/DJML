@@ -30,7 +30,6 @@
         {
             this.button_volver = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.message = new System.Windows.Forms.Label();
             this.button_siguiente = new System.Windows.Forms.Button();
             this.button_buscar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -56,7 +55,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.message);
             this.groupBox1.Controls.Add(this.button_siguiente);
             this.groupBox1.Controls.Add(this.button_buscar);
             this.groupBox1.Controls.Add(this.label3);
@@ -72,19 +70,6 @@
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rutas Aereas";
-            // 
-            // message
-            // 
-            this.message.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.message.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.message.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.message.Location = new System.Drawing.Point(179, 16);
-            this.message.Name = "message";
-            this.message.Size = new System.Drawing.Size(365, 40);
-            this.message.TabIndex = 16;
-            this.message.Text = "No hay rutas que cumplan con su descripción";
-            this.message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.message.Visible = false;
             // 
             // button_siguiente
             // 
@@ -188,7 +173,6 @@
 
         private System.Windows.Forms.Button button_volver;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label message;
         private System.Windows.Forms.Button button_siguiente;
         private System.Windows.Forms.Button button_buscar;
         private System.Windows.Forms.Label label3;
