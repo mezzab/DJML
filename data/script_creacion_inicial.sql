@@ -197,7 +197,7 @@ BEGIN
 	---MIGRACION DATOS TABLA SERVICIOS---
 	
 	insert into djml.SERVICIOS(SERV_DESCRIPCION, SERV_PORCENTAJE)
-	select Tipo_Servicio,convert(numeric(18,2),MAX(Ruta_Precio_BasePasaje / Pasaje_Precio))
+	select Tipo_Servicio,convert(numeric(18,2),MAX(((Pasaje_Precio * 100 / Ruta_Precio_BasePasaje) - 100)/100))
 	from gd_esquema.Maestra m
 	where Pasaje_Precio <> 0
 	group by Tipo_Servicio
