@@ -37,6 +37,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.encomiendas = new System.Windows.Forms.DataGridView();
+            this.chkb = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.chkb1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pasajes1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -66,6 +68,8 @@
             // pasajes1
             // 
             this.pasajes1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.pasajes1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.chkb});
             this.pasajes1.Location = new System.Drawing.Point(11, 19);
             this.pasajes1.Name = "pasajes1";
             this.pasajes1.Size = new System.Drawing.Size(771, 149);
@@ -126,12 +130,24 @@
             // encomiendas
             // 
             this.encomiendas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.encomiendas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.chkb1});
             this.encomiendas.Location = new System.Drawing.Point(11, 19);
             this.encomiendas.Name = "encomiendas";
             this.encomiendas.Size = new System.Drawing.Size(765, 149);
             this.encomiendas.TabIndex = 3;
             this.encomiendas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.encomiendas_CellClick);
             this.encomiendas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.encomiendas_CellContentClick);
+            // 
+            // chkb
+            // 
+            this.chkb.HeaderText = "Seleccionar";
+            this.chkb.Name = "chkb";
+            // 
+            // chkb1
+            // 
+            this.chkb1.HeaderText = "Seleccionar";
+            this.chkb1.Name = "chkb1";
             // 
             // Devolucion0
             // 
@@ -169,5 +185,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView encomiendas;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn chkb;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn chkb1;
     }
 }
