@@ -176,10 +176,14 @@ namespace AerolineaFrba.Devolucion
 
         private void encomiendas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+           
             if (e.ColumnIndex > 0)
             {
+
+              MessageBox.Show("ENTRO 1");
                 if (encomiendas.Rows[e.RowIndex].Cells[7].Value != null)
                 {
+                    MessageBox.Show("ENTRO 2");
 
                     if ((Boolean)encomiendas.Rows[e.RowIndex].Cells[7].Value == true)
                     {
@@ -190,7 +194,10 @@ namespace AerolineaFrba.Devolucion
                         MessageBox.Show("ID = " + encomiendas.Rows[e.RowIndex].Cells[0].Value.ToString() + " CHECK SIN TIC");
                     }
                 }
-
+                if (encomiendas.Rows[e.RowIndex].Cells[7].Value == null)
+                {
+                    MessageBox.Show("ID = " + encomiendas.Rows[e.RowIndex].Cells[0].Value.ToString() + " CHECK CON TIC");
+                }
             }
         }
 
@@ -209,6 +216,10 @@ namespace AerolineaFrba.Devolucion
                     {
                         MessageBox.Show("ID = " + pasajes1.Rows[e.RowIndex].Cells[0].Value.ToString() + " CHECK SIN TIC");
                     }
+                }
+                if (pasajes1.Rows[e.RowIndex].Cells[8].Value == null)
+                {
+                    MessageBox.Show("ID = " + pasajes1.Rows[e.RowIndex].Cells[0].Value.ToString() + " CHECK CON TIC");
                 }
 
             }
