@@ -607,6 +607,22 @@ BEGIN
 	
 	PRINT 'SE MIGRO LA TABLA ENCOMIENDA CORRECTAMENTE'
 	
+	--============================================================
+						--TABLA CLAVES
+	--============================================================
+	CREATE TABLE DJML.CLAVES (
+	CLAVE_ID INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
+	CLAVE_DESCRIPCION VARCHAR(30) NOT NULL,
+	CLAVE_ULTIMO_ID INT NOT NULL
+	)
+	
+	PRINT 'SE CREO LA TABLA CLAVES CORRECTAMENTE'
+	
+	INSERT INTO DJML.CLAVES VALUES ('Pasajes', (select top 1 PASA_ID from DJML.PASAJES order by PASA_ID desc));
+	INSERT INTO DJML.CLAVES VALUES ('Encomiendas',(select top 1 ENCO_ID from DJML.ENCOMIENDAS order by ENCO_ID desc));
+	
+	PRINT 'SE MIGRO LA TABLA CLAVES CORRECTAMENTE'
+	
 END
 GO
 
