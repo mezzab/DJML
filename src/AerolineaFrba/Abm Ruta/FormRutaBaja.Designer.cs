@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.message = new System.Windows.Forms.Label();
             this.button_buscar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,15 +37,14 @@
             this.comboBox_destino = new System.Windows.Forms.ComboBox();
             this.comboBox_origen = new System.Windows.Forms.ComboBox();
             this.dataGrid = new System.Windows.Forms.DataGridView();
-            this.button_volver = new System.Windows.Forms.Button();
             this.ELIMINAR = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.button_volver = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.message);
             this.groupBox1.Controls.Add(this.button_buscar);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -61,19 +59,6 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rutas Aereas";
-            // 
-            // message
-            // 
-            this.message.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.message.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.message.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.message.Location = new System.Drawing.Point(179, 16);
-            this.message.Name = "message";
-            this.message.Size = new System.Drawing.Size(365, 40);
-            this.message.TabIndex = 16;
-            this.message.Text = "No hay rutas que cumplan con su descripción";
-            this.message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.message.Visible = false;
             // 
             // button_buscar
             // 
@@ -147,6 +132,11 @@
             this.dataGrid.TabIndex = 0;
             this.dataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_CellContentClick);
             // 
+            // ELIMINAR
+            // 
+            this.ELIMINAR.HeaderText = "ELIMINAR";
+            this.ELIMINAR.Name = "ELIMINAR";
+            // 
             // button_volver
             // 
             this.button_volver.Location = new System.Drawing.Point(329, 267);
@@ -156,11 +146,6 @@
             this.button_volver.Text = "Volver";
             this.button_volver.UseVisualStyleBackColor = true;
             this.button_volver.Click += new System.EventHandler(this.button_volver_Click);
-            // 
-            // ELIMINAR
-            // 
-            this.ELIMINAR.HeaderText = "ELIMINAR";
-            this.ELIMINAR.Name = "ELIMINAR";
             // 
             // FormRutaBaja
             // 
@@ -184,7 +169,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGrid;
         private System.Windows.Forms.Button button_volver;
-        private System.Windows.Forms.Label message;
         private System.Windows.Forms.Button button_buscar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;

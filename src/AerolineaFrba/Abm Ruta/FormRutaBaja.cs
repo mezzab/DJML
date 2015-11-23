@@ -116,15 +116,25 @@ namespace AerolineaFrba.Abm_Ruta
             string destino = comboBox_destino.Text;
             string servicio = comboBox_servicio.Text;
 
-            string qry = "select RUTA_CODIGO ruta_codigo, t.TRAMO_CIUDAD_ORIGEN origen, t.TRAMO_CIUDAD_DESTINO destino, r.RUTA_PRECIO_BASE_KILO precio_base_kilo, r.RUTA_PRECIO_BASE_PASAJE precio_base_pasaje  from djml.RUTAS r, djml.TRAMOS t, djml.SERVICIOS s" +
-                        " where r.RUTA_TRAMO = t.TRAMO_ID" +
-                        " and r.RUTA_SERVICIO = s.SERV_ID" +
-                        " and t.TRAMO_CIUDAD_ORIGEN =  (select CIUD_ID from djml.CIUDADES WHERE CIUD_DETALLE ='" + origen + "')" +
-                        " and t.TRAMO_CIUDAD_DESTINO = (select CIUD_ID from djml.CIUDADES WHERE CIUD_DETALLE ='" + destino + "')" +
-                        " and s.SERV_DESCRIPCION = '" + servicio + "'";
+            string qry = "select RUTA_CODIGO ruta_codigo, co.CIUD_DETALLE origen, cd.CIUD_DETALLE destino, s.SERV_DESCRIPCION servicio, r.RUTA_PRECIO_BASE_KILO precio_base_kilo, r.RUTA_PRECIO_BASE_PASAJE precio_base_pasaje" +
+                        " from djml.RUTAS r" +
+                        " join djml.TRAMOS t on r.RUTA_TRAMO = t.TRAMO_ID" +
+                        " join djml.CIUDADES co on co.CIUD_ID = t.TRAMO_CIUDAD_ORIGEN" +
+                        " join djml.CIUDADES cd on cd.CIUD_ID = t.TRAMO_CIUDAD_DESTINO" +
+                        " join djml.SERVICIOS s on r.RUTA_SERVICIO = s.SERV_ID" +
+                        " where co.CIUD_DETALLE like '%" + origen + "'" +
+                        " and cd.CIUD_DETALLE like '%" + destino + "'" +
+                        " and s.SERV_DESCRIPCION like '%" + servicio + "'";
 
-
-            dataGrid.DataSource = new Query(qry).ObtenerDataTable();
+            var result = new Query(qry).ObtenerDataTable();
+            if (result.Rows.Count != 0 && origen != string.Empty &&  destino != string.Empty && servicio != string.Empty)
+            {
+                dataGrid.DataSource = result;
+            }
+            else
+            {
+                MessageBox.Show("Ninguna ruta coincide con su descripción.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }       
         }
 
         private void button_volver_Click(object sender, EventArgs e)

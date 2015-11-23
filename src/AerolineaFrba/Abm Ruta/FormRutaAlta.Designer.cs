@@ -30,7 +30,6 @@
         {
             this.button_volver = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.button_guardar = new System.Windows.Forms.Button();
             this.label_message = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -58,7 +57,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.button_guardar);
             this.groupBox1.Controls.Add(this.label_message);
             this.groupBox1.Controls.Add(this.label5);
@@ -77,19 +75,6 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rutas Aereas";
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Red;
-            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label6.Location = new System.Drawing.Point(259, 26);
-            this.label6.Name = "label6";
-            this.label6.Padding = new System.Windows.Forms.Padding(10);
-            this.label6.Size = new System.Drawing.Size(41, 61);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "errores";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button_guardar
             // 
@@ -231,6 +216,5 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label6;
     }
 }

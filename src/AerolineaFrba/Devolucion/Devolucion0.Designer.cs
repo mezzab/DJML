@@ -30,17 +30,17 @@
         {
             this.Siguiente = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.pasajes = new System.Windows.Forms.DataGridView();
-            this.Devolver = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.pasajes1 = new System.Windows.Forms.DataGridView();
             this.Agregar = new System.Windows.Forms.Button();
             this.codigo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.encomiendas = new System.Windows.Forms.DataGridView();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.chkb = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.chkb1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pasajes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pasajes1)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.encomiendas)).BeginInit();
             this.SuspendLayout();
@@ -48,7 +48,7 @@
             // Siguiente
             // 
             this.Siguiente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.Siguiente.Location = new System.Drawing.Point(359, 455);
+            this.Siguiente.Location = new System.Drawing.Point(488, 455);
             this.Siguiente.Name = "Siguiente";
             this.Siguiente.Size = new System.Drawing.Size(301, 49);
             this.Siguiente.TabIndex = 7;
@@ -57,33 +57,30 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.pasajes);
+            this.groupBox1.Controls.Add(this.pasajes1);
             this.groupBox1.Location = new System.Drawing.Point(13, 72);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(647, 178);
+            this.groupBox1.Size = new System.Drawing.Size(788, 178);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lista de pasajes a devolver";
             // 
-            // pasajes
+            // pasajes1
             // 
-            this.pasajes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.pasajes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Devolver});
-            this.pasajes.Location = new System.Drawing.Point(11, 19);
-            this.pasajes.Name = "pasajes";
-            this.pasajes.Size = new System.Drawing.Size(630, 149);
-            this.pasajes.TabIndex = 3;
-            // 
-            // Devolver
-            // 
-            this.Devolver.HeaderText = "Devolver";
-            this.Devolver.Name = "Devolver";
+            this.pasajes1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.pasajes1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.chkb});
+            this.pasajes1.Location = new System.Drawing.Point(11, 19);
+            this.pasajes1.Name = "pasajes1";
+            this.pasajes1.Size = new System.Drawing.Size(771, 149);
+            this.pasajes1.TabIndex = 3;
+            this.pasajes1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.pasajes1_CellClick);
+            this.pasajes1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.pasajes1_CellContentClick);
             // 
             // Agregar
             // 
             this.Agregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Agregar.Location = new System.Drawing.Point(359, 16);
+            this.Agregar.Location = new System.Drawing.Point(467, 18);
             this.Agregar.Name = "Agregar";
             this.Agregar.Size = new System.Drawing.Size(301, 49);
             this.Agregar.TabIndex = 2;
@@ -94,16 +91,16 @@
             // codigo
             // 
             this.codigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.codigo.Location = new System.Drawing.Point(209, 30);
+            this.codigo.Location = new System.Drawing.Point(245, 30);
             this.codigo.Name = "codigo";
-            this.codigo.Size = new System.Drawing.Size(144, 23);
+            this.codigo.Size = new System.Drawing.Size(182, 23);
             this.codigo.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label1.Location = new System.Drawing.Point(12, 31);
+            this.label1.Location = new System.Drawing.Point(48, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(191, 17);
             this.label1.TabIndex = 4;
@@ -125,7 +122,7 @@
             this.groupBox2.Controls.Add(this.encomiendas);
             this.groupBox2.Location = new System.Drawing.Point(13, 256);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(647, 178);
+            this.groupBox2.Size = new System.Drawing.Size(782, 178);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de pasajes a devolver";
@@ -134,22 +131,29 @@
             // 
             this.encomiendas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.encomiendas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewCheckBoxColumn1});
+            this.chkb1});
             this.encomiendas.Location = new System.Drawing.Point(11, 19);
             this.encomiendas.Name = "encomiendas";
-            this.encomiendas.Size = new System.Drawing.Size(630, 149);
+            this.encomiendas.Size = new System.Drawing.Size(765, 149);
             this.encomiendas.TabIndex = 3;
+            this.encomiendas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.encomiendas_CellClick);
+            this.encomiendas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.encomiendas_CellContentClick);
             // 
-            // dataGridViewCheckBoxColumn1
+            // chkb
             // 
-            this.dataGridViewCheckBoxColumn1.HeaderText = "Devolver";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.chkb.HeaderText = "Seleccionar";
+            this.chkb.Name = "chkb";
+            // 
+            // chkb1
+            // 
+            this.chkb1.HeaderText = "Seleccionar";
+            this.chkb1.Name = "chkb1";
             // 
             // Devolucion0
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(672, 516);
+            this.ClientSize = new System.Drawing.Size(813, 516);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Siguiente);
@@ -162,7 +166,7 @@
             this.Text = "Devolución";
             this.Load += new System.EventHandler(this.Devolucion0_Load);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pasajes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pasajes1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.encomiendas)).EndInit();
             this.ResumeLayout(false);
@@ -174,14 +178,14 @@
 
         private System.Windows.Forms.Button Siguiente;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView pasajes;
+        private System.Windows.Forms.DataGridView pasajes1;
         private System.Windows.Forms.Button Agregar;
         private System.Windows.Forms.TextBox codigo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Devolver;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView encomiendas;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn chkb;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn chkb1;
     }
 }
