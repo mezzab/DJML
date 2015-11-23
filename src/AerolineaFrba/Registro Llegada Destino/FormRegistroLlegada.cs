@@ -38,14 +38,14 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
 
             Query qry7 = new Query("select v.viaje_id  from djml.viajes v "
-            +"join djml.rutas r on v.viaje_ruta_id = r.ruta_codigo"
-            +"join djml.tramos t on r.ruta_tramo = t.tramo_id "
-            +"join djml.ciudades c1 on t.tramo_ciudad_origen = c1.ciud_id"
-            +"join djml.ciudades c2 on t.tramo_ciudad_destino = c2.ciud_id"
-            +"where v.viaje_aero_id = '" + comboBoxAeronaves.SelectedValue + "'"
-            +"and c1.ciud_detalle = '" + comboBoxCiudadOrigen.SelectedValue + "'"
-            +"and c2.ciud_detalle = '" + comboBoxCiudadDestino.SelectedValue + "'"
-            +"and v.viaje_id not in (select rd_viaje_id from djml.registro_destino");
+            +" join djml.rutas r on v.viaje_ruta_id = r.ruta_codigo"
+            +" join djml.tramos t on r.ruta_tramo = t.tramo_id "
+            +" join djml.ciudades c1 on t.tramo_ciudad_origen = c1.ciud_id"
+            +" join djml.ciudades c2 on t.tramo_ciudad_destino = c2.ciud_id"
+            +" where v.viaje_aero_id = '" + comboBoxAeronaves.Text + "' "
+            +" and c1.ciud_detalle = (select CIUD_ID from djml.CIUDADES WHERE CIUD_DETALLE ='" + comboBoxCiudadOrigen.Text + "') " 
+            +" and c2.ciud_detalle = (select CIUD_ID from djml.CIUDADES WHERE CIUD_DETALLE ='" + comboBoxCiudadDestino.Text + "') " 
+            +" and v.viaje_id not in (select rd_viaje_id from djml.registro_destino");
 
             datos.DataSource = qry7.ObtenerDataTable();
 
