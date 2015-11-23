@@ -18,6 +18,7 @@ using AerolineaFrba.Abm_Ruta;
 using AerolineaFrba.Devolucion;
 using AerolineaFrba.Listado_Estadistico;
 using AerolineaFrba.Abm_Aeronave;
+using AerolineaFrba.Registro_Llegada_Destino;
 
 
 namespace AerolineaFrba.Inicio_Aplicacion
@@ -216,11 +217,11 @@ namespace AerolineaFrba.Inicio_Aplicacion
                     frm7 = (FormGenerarViaje)this.ActiveMdiChild;
                     break;
                 case "REGISTRO DE LLEGADA A DESTINO":
-                    /*
+                    
                     this.Visible = false;
-                    Form frm8 = new FormRol();
+                    Form frm8 = new FormRegistroLlegada();
                     frm8.ShowDialog();
-                    frm8 = (FormRol)this.ActiveMdiChild;*/
+                    frm8 = (FormRegistroLlegada)this.ActiveMdiChild;
                     break;
                 case "COMPRA PASAJE/ENCOMIENDA":
                     this.Visible = false;

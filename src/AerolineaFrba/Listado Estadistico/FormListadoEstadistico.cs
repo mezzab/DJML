@@ -21,7 +21,7 @@ namespace AerolineaFrba.Listado_Estadistico
 
         private void button1_Click(object sender, EventArgs e)
         {
-             FormInicioFuncionalidades inicioF = new FormInicioFuncionalidades();
+            FormInicioFuncionalidades inicioF = new FormInicioFuncionalidades();
             this.Hide();
             inicioF.ShowDialog();
             inicioF = (FormInicioFuncionalidades)this.ActiveMdiChild;

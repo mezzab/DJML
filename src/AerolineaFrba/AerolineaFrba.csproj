@@ -275,11 +275,11 @@
     <Compile Include="Login Usuario\FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro Llegada Destino\Form1.cs">
+    <Compile Include="Registro Llegada Destino\FormRegistroLlegada.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro Llegada Destino\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Registro Llegada Destino\FormRegistroLlegada.Designer.cs">
+      <DependentUpon>FormRegistroLlegada.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Abm Aeronave\FormAeronave.resx">
       <DependentUpon>FormAeronave.cs</DependentUpon>
@@ -392,6 +392,9 @@
     </Compile>
     <EmbeddedResource Include="Login Usuario\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro Llegada Destino\FormRegistroLlegada.resx">
+      <DependentUpon>FormRegistroLlegada.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

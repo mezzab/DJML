@@ -43,3 +43,4 @@ C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\Aerol
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.pdb
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.csprojResolveAssemblyReference.cache
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.CompraExitosa.resources
+C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Registro_Llegada_Destino.FormRegistroLlegada.resources
