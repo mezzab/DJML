@@ -36,8 +36,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_encomienda = new System.Windows.Forms.TextBox();
+            this.textBox_pasaje = new System.Windows.Forms.TextBox();
             this.comboBox_servicio = new System.Windows.Forms.ComboBox();
             this.comboBox_destino = new System.Windows.Forms.ComboBox();
             this.comboBox_origen = new System.Windows.Forms.ComboBox();
@@ -54,8 +54,8 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.textBox_encomienda);
+            this.groupBox1.Controls.Add(this.textBox_pasaje);
             this.groupBox1.Controls.Add(this.comboBox_servicio);
             this.groupBox1.Controls.Add(this.comboBox_destino);
             this.groupBox1.Controls.Add(this.comboBox_origen);
@@ -74,6 +74,7 @@
             this.button_guardar.TabIndex = 6;
             this.button_guardar.Text = "Guardar";
             this.button_guardar.UseVisualStyleBackColor = true;
+            this.button_guardar.Click += new System.EventHandler(this.button_guardar_Click);
             // 
             // label_message
             // 
@@ -134,19 +135,19 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Ciudad Origen";
             // 
-            // textBox2
+            // textBox_encomienda
             // 
-            this.textBox2.Location = new System.Drawing.Point(179, 127);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 4;
+            this.textBox_encomienda.Location = new System.Drawing.Point(179, 127);
+            this.textBox_encomienda.Name = "textBox_encomienda";
+            this.textBox_encomienda.Size = new System.Drawing.Size(121, 20);
+            this.textBox_encomienda.TabIndex = 4;
             // 
-            // textBox1
+            // textBox_pasaje
             // 
-            this.textBox1.Location = new System.Drawing.Point(179, 101);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 20);
-            this.textBox1.TabIndex = 3;
+            this.textBox_pasaje.Location = new System.Drawing.Point(179, 101);
+            this.textBox_pasaje.Name = "textBox_pasaje";
+            this.textBox_pasaje.Size = new System.Drawing.Size(121, 20);
+            this.textBox_pasaje.TabIndex = 3;
             // 
             // comboBox_servicio
             // 
@@ -180,6 +181,7 @@
             this.button_volver.TabIndex = 6;
             this.button_volver.Text = "Volver";
             this.button_volver.UseVisualStyleBackColor = true;
+            this.button_volver.Click += new System.EventHandler(this.button_volver_Click);
             // 
             // FormRutaModificacion2
             // 
@@ -207,8 +209,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_encomienda;
+        private System.Windows.Forms.TextBox textBox_pasaje;
         private System.Windows.Forms.ComboBox comboBox_servicio;
         private System.Windows.Forms.ComboBox comboBox_destino;
         private System.Windows.Forms.ComboBox comboBox_origen;

@@ -82,6 +82,7 @@
             this.button_siguiente.TabIndex = 15;
             this.button_siguiente.Text = "Siguiente";
             this.button_siguiente.UseVisualStyleBackColor = false;
+            this.button_siguiente.Click += new System.EventHandler(this.button_siguiente_Click);
             // 
             // button_buscar
             // 

@@ -14,6 +14,15 @@ namespace AerolineaFrba.Abm_Ruta
 {
     public partial class FormRutaModificacion1 : Form
     {
+
+        public static string origen;
+        public static string destino;
+        public static string servicio;
+        public static string precio_encomienda;
+        public static string precio_pasaje;
+        public static string ruta_id;
+
+
         public FormRutaModificacion1()
         {
             InitializeComponent();
@@ -89,9 +98,9 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button_buscar_Click(object sender, EventArgs e)
         {
-            string origen = comboBox_origen.Text;
-            string destino = comboBox_destino.Text;
-            string servicio = comboBox_servicio.Text;
+            origen = comboBox_origen.Text;
+            destino = comboBox_destino.Text;
+            servicio = comboBox_servicio.Text;
 
             string qry = "select RUTA_CODIGO ruta_codigo, co.CIUD_DETALLE origen, cd.CIUD_DETALLE destino, s.SERV_DESCRIPCION servicio, r.RUTA_PRECIO_BASE_KILO precio_base_kilo, r.RUTA_PRECIO_BASE_PASAJE precio_base_pasaje" +
                         " from djml.RUTAS r" +
@@ -107,10 +116,22 @@ namespace AerolineaFrba.Abm_Ruta
             if (result.Rows.Count != 0 && origen != string.Empty && destino != string.Empty && servicio != string.Empty)
             {
                 dataGrid.DataSource = result;
+                button_siguiente.Enabled = true;
+                ruta_id = result.Rows[0][0].ToString();
+                precio_encomienda = result.Rows[0][4].ToString();
+                precio_pasaje = result.Rows[0][5].ToString();
             }
             else {
                 MessageBox.Show("Ninguna ruta coincide con su descripción.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }            
+        }
+
+        private void button_siguiente_Click(object sender, EventArgs e)
+        {
+            FormRutaModificacion2 ruta = new FormRutaModificacion2();
+            this.Hide();
+            ruta.ShowDialog();
+            ruta = (FormRutaModificacion2)this.ActiveMdiChild;
         }
     }
 }

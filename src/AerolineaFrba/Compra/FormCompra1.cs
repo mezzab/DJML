@@ -38,6 +38,7 @@ namespace AerolineaFrba.Compra
         private void FormCompra1_Load(object sender, EventArgs e)
         {
 
+
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
 
             button3.Enabled = false;
