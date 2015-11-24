@@ -161,7 +161,8 @@ namespace AerolineaFrba.Abm_Ruta
                         " join djml.SERVICIOS s on r.RUTA_SERVICIO = s.SERV_ID" +
                         " where co.CIUD_DETALLE like '%" + origen + "'" +
                         " and cd.CIUD_DETALLE like '%" + destino + "'" +
-                        " and s.SERV_DESCRIPCION like '%" + servicio + "'";
+                        " and s.SERV_DESCRIPCION like '%" + servicio + "'" +
+                        " and r.RUTA_IS_ACTIVE = 1";
                       
             var result = new Query(qry).ObtenerDataTable();
             return (result.Rows.Count != 0);

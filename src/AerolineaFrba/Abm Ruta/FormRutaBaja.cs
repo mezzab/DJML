@@ -20,24 +20,13 @@ namespace AerolineaFrba.Abm_Ruta
         }
 
         private void FormRutaBaja_Load(object sender, EventArgs e)
-        {   /*
-            //comboBox_origen
-            string qry_origen = "SELECT CIUD_DETALLE, CIUD_ID FROM DJML.CIUDADES ORDER BY 1";
-            DataTable origen_data = new Query(qry_origen).ObtenerDataTable();
-            //comboBox_destino
-            string qry_destino = "SELECT CIUD_DETALLE, CIUD_ID FROM DJML.CIUDADES ORDER BY 1";
-            DataTable destino_data = new Query(qry_destino).ObtenerDataTable();
-            //comboBox_servicio
-            string qry_servicio = "SELECT SERV_DESCRIPCION, SERV_ID FROM DJML.SERVICIOS ORDER BY 1";
-            DataTable servicio_data = new Query(qry_servicio).ObtenerDataTable();
-            */
+        {
             LlenarCombo_Origen();
             comboBox_origen.DropDownStyle = ComboBoxStyle.DropDownList;
             LlenarCombo_Destino();
             comboBox_destino.DropDownStyle = ComboBoxStyle.DropDownList;
             LlenarCombo_Servicio();
             comboBox_servicio.DropDownStyle = ComboBoxStyle.DropDownList;
-
         }
 
         public void LlenarCombo_Origen()
@@ -124,7 +113,8 @@ namespace AerolineaFrba.Abm_Ruta
                         " join djml.SERVICIOS s on r.RUTA_SERVICIO = s.SERV_ID" +
                         " where co.CIUD_DETALLE like '%" + origen + "'" +
                         " and cd.CIUD_DETALLE like '%" + destino + "'" +
-                        " and s.SERV_DESCRIPCION like '%" + servicio + "'";
+                        " and s.SERV_DESCRIPCION like '%" + servicio + "'" +
+                        " and r.RUTA_IS_ACTIVE = 1";
 
             var result = new Query(qry).ObtenerDataTable();
             if (result.Rows.Count != 0 && origen != string.Empty &&  destino != string.Empty && servicio != string.Empty)
