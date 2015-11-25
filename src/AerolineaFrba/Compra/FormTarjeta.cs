@@ -738,7 +738,6 @@ namespace AerolineaFrba.Compra
             }
 
 
-
         }
 
         private void registrarEncomiendas()
@@ -750,6 +749,7 @@ namespace AerolineaFrba.Compra
                 string idCliente = dr["Id Cliente"].ToString();
                 string kilos = dr["Kgs"].ToString();
                 string PEncomienda = dr["Precio"].ToString().Replace(",", ".");
+                
                 sumarUnoClaveEnco();
                 guardarUltimoIdEnco();
 
@@ -992,7 +992,7 @@ namespace AerolineaFrba.Compra
 
         private void sumarUnoClaveEnco()
         {
-            string sql = "UPDATE [DJML].[CLAVES] SET [CLAVE_ULTIMO_ID] = ((select clave_ultimo_id from djml.claves where clave_descripcion = 'Pasajes') + 1 ) WHERE clave_id = 2 ";
+            string sql = "UPDATE [DJML].[CLAVES] SET [CLAVE_ULTIMO_ID] = ((select clave_ultimo_id from djml.claves where clave_descripcion = 'Encomiendas') + 1 ) WHERE clave_id = 2 ";
             Query qry = new Query(sql);
             qry.Ejecutar();
         }
