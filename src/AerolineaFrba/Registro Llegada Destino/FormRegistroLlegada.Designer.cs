@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.fechaLlegada = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
-            this.bnGuardar = new System.Windows.Forms.Button();
             this.comboBoxAeronaves = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,13 +51,13 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Ingrese la fecha y hora en que llego la Aeronave:";
             // 
-            // dateTimePicker1
+            // fechaLlegada
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(452, 29);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(239, 20);
-            this.dateTimePicker1.TabIndex = 1;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.fechaLlegada.Location = new System.Drawing.Point(452, 29);
+            this.fechaLlegada.Name = "fechaLlegada";
+            this.fechaLlegada.Size = new System.Drawing.Size(239, 20);
+            this.fechaLlegada.TabIndex = 1;
+            this.fechaLlegada.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // label2
             // 
@@ -68,16 +67,6 @@
             this.label2.Size = new System.Drawing.Size(195, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Seleccione la Matricula de la Aeronave:";
-            // 
-            // bnGuardar
-            // 
-            this.bnGuardar.Location = new System.Drawing.Point(369, 260);
-            this.bnGuardar.Name = "bnGuardar";
-            this.bnGuardar.Size = new System.Drawing.Size(75, 23);
-            this.bnGuardar.TabIndex = 3;
-            this.bnGuardar.Text = "Guardar";
-            this.bnGuardar.UseVisualStyleBackColor = true;
-            this.bnGuardar.Click += new System.EventHandler(this.bnGuardar_Click);
             // 
             // comboBoxAeronaves
             // 
@@ -128,7 +117,7 @@
             // 
             // bnVolver
             // 
-            this.bnVolver.Location = new System.Drawing.Point(194, 260);
+            this.bnVolver.Location = new System.Drawing.Point(316, 261);
             this.bnVolver.Name = "bnVolver";
             this.bnVolver.Size = new System.Drawing.Size(75, 23);
             this.bnVolver.TabIndex = 9;
@@ -166,9 +155,8 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBoxAeronaves);
-            this.Controls.Add(this.bnGuardar);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.fechaLlegada);
             this.Controls.Add(this.label1);
             this.Name = "FormRegistroLlegada";
             this.Text = "Registro Llegada";
@@ -182,9 +170,8 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker fechaLlegada;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button bnGuardar;
         private System.Windows.Forms.ComboBox comboBoxAeronaves;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
