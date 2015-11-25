@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Inicio_Aplicacion;
 
+
 namespace AerolineaFrba.Consulta_Millas
 {
     public partial class ConsultarMillas : Form
@@ -82,6 +83,11 @@ namespace AerolineaFrba.Consulta_Millas
             this.Hide();
             FormInicioFuncionalidades.ShowDialog();
             FormInicioFuncionalidades = (FormInicioFuncionalidades)this.ActiveMdiChild;
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

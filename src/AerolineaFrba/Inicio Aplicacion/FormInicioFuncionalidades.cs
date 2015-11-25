@@ -19,6 +19,8 @@ using AerolineaFrba.Devolucion;
 using AerolineaFrba.Listado_Estadistico;
 using AerolineaFrba.Abm_Aeronave;
 using AerolineaFrba.Registro_Llegada_Destino;
+using AerolineaFrba.Consulta_Millas;
+using AerolineaFrba.Canje_Millas;
 
 
 namespace AerolineaFrba.Inicio_Aplicacion
@@ -236,18 +238,17 @@ namespace AerolineaFrba.Inicio_Aplicacion
                     frm10 = (Devolucion0)this.ActiveMdiChild;
                     break;
                 case "CONSULTA MILLAS PASAJERO":
-                    /*
+                    
                     this.Visible = false;
-                    Form frm11 = new FormRol();
+                    Form frm11 = new ConsultarMillas();
                     frm11.ShowDialog();
-                    frm11 = (FormRol)this.ActiveMdiChild;*/
+                    frm11 = (ConsultarMillas)this.ActiveMdiChild;
                     break;
                 case "CANJE MILLAS":
-                    /*
                     this.Visible = false;
-                    Form frm12 = new FormRol();
+                    Form frm12 = new canjeMillas();
                     frm12.ShowDialog();
-                    frm12 = (FormRol)this.ActiveMdiChild;*/
+                    frm12 = (canjeMillas)this.ActiveMdiChild;
                     break;
                 case "LISTADO ESTADISTICO":
                     this.Visible = false;

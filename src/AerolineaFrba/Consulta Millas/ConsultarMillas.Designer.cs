@@ -45,7 +45,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label1.Location = new System.Drawing.Point(12, 53);
+            this.label1.Location = new System.Drawing.Point(9, 53);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(154, 17);
             this.label1.TabIndex = 0;
@@ -54,14 +54,14 @@
             // textBoxDNI
             // 
             this.textBoxDNI.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.textBoxDNI.Location = new System.Drawing.Point(15, 73);
+            this.textBoxDNI.Location = new System.Drawing.Point(12, 73);
             this.textBoxDNI.Name = "textBoxDNI";
-            this.textBoxDNI.Size = new System.Drawing.Size(142, 23);
+            this.textBoxDNI.Size = new System.Drawing.Size(171, 23);
             this.textBoxDNI.TabIndex = 1;
             // 
             // botonLimpiar
             // 
-            this.botonLimpiar.Location = new System.Drawing.Point(173, 19);
+            this.botonLimpiar.Location = new System.Drawing.Point(217, 27);
             this.botonLimpiar.Name = "botonLimpiar";
             this.botonLimpiar.Size = new System.Drawing.Size(87, 23);
             this.botonLimpiar.TabIndex = 2;
@@ -72,9 +72,9 @@
             // botonConsultar
             // 
             this.botonConsultar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.botonConsultar.Location = new System.Drawing.Point(172, 48);
+            this.botonConsultar.Location = new System.Drawing.Point(216, 56);
             this.botonConsultar.Name = "botonConsultar";
-            this.botonConsultar.Size = new System.Drawing.Size(88, 48);
+            this.botonConsultar.Size = new System.Drawing.Size(88, 40);
             this.botonConsultar.TabIndex = 3;
             this.botonConsultar.Text = "Consultar";
             this.botonConsultar.UseVisualStyleBackColor = true;
@@ -83,9 +83,9 @@
             // dataGridConsultaMillas
             // 
             this.dataGridConsultaMillas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridConsultaMillas.Location = new System.Drawing.Point(15, 102);
+            this.dataGridConsultaMillas.Location = new System.Drawing.Point(12, 114);
             this.dataGridConsultaMillas.Name = "dataGridConsultaMillas";
-            this.dataGridConsultaMillas.Size = new System.Drawing.Size(244, 150);
+            this.dataGridConsultaMillas.Size = new System.Drawing.Size(292, 150);
             this.dataGridConsultaMillas.TabIndex = 4;
             // 
             // label2
@@ -93,24 +93,26 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(31, 273);
+            this.label2.Location = new System.Drawing.Point(150, 277);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 17);
+            this.label2.Size = new System.Drawing.Size(48, 17);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Total de millas";
+            this.label2.Text = "Total :";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // textBoxTotal
             // 
+            this.textBoxTotal.BackColor = System.Drawing.SystemColors.Menu;
             this.textBoxTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.textBoxTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.textBoxTotal.Location = new System.Drawing.Point(136, 270);
+            this.textBoxTotal.Location = new System.Drawing.Point(204, 274);
             this.textBoxTotal.Name = "textBoxTotal";
             this.textBoxTotal.Size = new System.Drawing.Size(100, 23);
             this.textBoxTotal.TabIndex = 6;
             // 
             // botonVolver
             // 
-            this.botonVolver.Location = new System.Drawing.Point(94, 299);
+            this.botonVolver.Location = new System.Drawing.Point(117, 318);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(92, 43);
             this.botonVolver.TabIndex = 7;
@@ -121,16 +123,16 @@
             // tipoDeDocumento
             // 
             this.tipoDeDocumento.FormattingEnabled = true;
-            this.tipoDeDocumento.Location = new System.Drawing.Point(15, 29);
+            this.tipoDeDocumento.Location = new System.Drawing.Point(12, 29);
             this.tipoDeDocumento.Name = "tipoDeDocumento";
-            this.tipoDeDocumento.Size = new System.Drawing.Size(142, 21);
+            this.tipoDeDocumento.Size = new System.Drawing.Size(171, 21);
             this.tipoDeDocumento.TabIndex = 8;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label3.Location = new System.Drawing.Point(12, 9);
+            this.label3.Location = new System.Drawing.Point(9, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(132, 17);
             this.label3.TabIndex = 9;
@@ -140,7 +142,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(266, 350);
+            this.ClientSize = new System.Drawing.Size(321, 373);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tipoDeDocumento);
             this.Controls.Add(this.botonVolver);
@@ -152,6 +154,7 @@
             this.Controls.Add(this.textBoxDNI);
             this.Controls.Add(this.label1);
             this.Name = "ConsultarMillas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulte Millas";
             this.Load += new System.EventHandler(this.ConsultarMillas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConsultaMillas)).EndInit();
