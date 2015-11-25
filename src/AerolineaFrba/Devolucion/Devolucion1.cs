@@ -92,7 +92,8 @@ namespace AerolineaFrba.Devolucion
         }
 
         private void Siguiente_Click(object sender, EventArgs e)
-        {
+        {   
+            //INSERT DE LA NUEVA CANCELACION
             DateTime fechaHoy = DateTime.Now;
             string eugenia = fechaHoy.ToString("yyyy-dd-MM") + " 00:00:00.000";
 
@@ -104,25 +105,39 @@ namespace AerolineaFrba.Devolucion
 
             guardarCodigoEId();
 
+            // LE AGREGO EL CODIGO DE DEVOLUCION A LOS PASAJES
             for (int i = 0; i <= Devolucion0.IDsPasajes.Count - 1; i++)
             {
                 cargarDevolucionPasa(Devolucion0.IDsPasajes[i].ToString());
                 sumarPrecioPasa(Devolucion0.IDsPasajes[i].ToString());
             }
 
+            // LE AGREGO EL CODIGO DE DEVOLUCION A LAS ENCOMIENDAS
             for (int i = 0; i <= Devolucion0.IDsEncomiendas.Count - 1; i++)
             {
                 cargarDevolucionEnco(Devolucion0.IDsEncomiendas[i].ToString());
                 sumarPrecioEnco(Devolucion0.IDsEncomiendas[i].ToString());
             }
 
+            //MODIFICO EL PRECIO DE COMPRA (LE RESTO EL PRECIO DE LOS PASAJES Y ENCOMIENDAS CANCELADAS)
             modificarPrecioCompra();
+
+            //LIBERO BUTACAS DE LOS PASAJES CANCELADOS
+            for (int i = 0; i <= Devolucion0.butacasALiberar.Count - 1; i++)
+            {
+                //avisar("Se da alta de butaca: " + butacasCargadas[i].ToString());
+
+                darBajaAltaButaca(Devolucion0.butacasALiberar[i].ToString(), 1);
+            }
+            //LIBERO KILOS DE LA AERONAVE DE LAS ENCOMIENDAS CANCELADAS
+            restarKilosAeronave(Devolucion0.pesoALiberar.ToString());
 
             Devolucion2 m = new Devolucion2();
             this.Hide();
             m.StartPosition = FormStartPosition.CenterScreen;
             m.ShowDialog();
             m = (Devolucion2)this.ActiveMdiChild;
+
 
         }
 
@@ -160,6 +175,38 @@ namespace AerolineaFrba.Devolucion
 
         private void motivo_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void darBajaAltaButaca(string aeroButacaID, int bajaAlta)
+        {
+            //DAR DE BAJA BUTACA
+            // MessageBox.Show("se ha dado de baja la butaca de id= " + aeroButacaID);
+
+            string qry = " update DJML.BUTACA_AERO " +
+                            " set BXA_ESTADO = " + bajaAlta + "" +
+                            " where BXA_ID = '" + aeroButacaID + "'";
+
+            new Query(qry).Ejecutar();
+        }
+
+        private void restarKilosAeronave(string kilosIngresados)
+        {
+            
+            string sql = " select VIAJE_AERO_ID from djml.VIAJES where viaje_id = (SELECT COMPRA_VIAJE_ID FROM DJML.COMPRAS where compra_id =" + Devolucion0.id_compra + ")";
+            Query qry = new Query(sql);
+            string aeroID = qry.ObtenerUnicoCampo().ToString();
+
+            string aux = "+ 0";
+
+            
+            aux = "- " + kilosIngresados;
+
+            string qry2000 = "update djml.AERONAVES " +
+                       "set AERO_KILOS_DISPONIBLES = AERO_KILOS_DISPONIBLES" + aux +
+                       "where AERO_MATRICULA = '" + aeroID + "'";
+
+            new Query(qry2000).Ejecutar();
 
         }
     }

@@ -102,7 +102,7 @@
             // 
             // textBoxTotal
             // 
-            this.textBoxTotal.BackColor = System.Drawing.SystemColors.Menu;
+            this.textBoxTotal.BackColor = System.Drawing.Color.MintCream;
             this.textBoxTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.textBoxTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.textBoxTotal.Location = new System.Drawing.Point(204, 274);
@@ -142,6 +142,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(321, 373);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tipoDeDocumento);

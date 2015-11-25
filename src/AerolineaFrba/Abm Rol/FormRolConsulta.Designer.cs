@@ -124,13 +124,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 355);
+            this.BackColor = System.Drawing.Color.MintCream;
+            this.ClientSize = new System.Drawing.Size(282, 355);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FormRolConsulta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormRolConsulta";
+            this.Text = "Consulta de rol";
             this.Load += new System.EventHandler(this.FormRolConsulta_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

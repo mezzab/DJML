@@ -305,7 +305,7 @@
             // 
             this.LimpiarCliente.Location = new System.Drawing.Point(295, 116);
             this.LimpiarCliente.Name = "LimpiarCliente";
-            this.LimpiarCliente.Size = new System.Drawing.Size(144, 50);
+            this.LimpiarCliente.Size = new System.Drawing.Size(144, 32);
             this.LimpiarCliente.TabIndex = 15;
             this.LimpiarCliente.Text = "Limpiar todo";
             this.LimpiarCliente.UseVisualStyleBackColor = true;
@@ -375,11 +375,12 @@
             // 
             // Volver
             // 
+            this.Volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Volver.Location = new System.Drawing.Point(38, 632);
             this.Volver.Name = "Volver";
-            this.Volver.Size = new System.Drawing.Size(148, 54);
+            this.Volver.Size = new System.Drawing.Size(183, 54);
             this.Volver.TabIndex = 3;
-            this.Volver.Text = "Cancelar Compra";
+            this.Volver.Text = "Cancelar compra";
             this.Volver.UseVisualStyleBackColor = true;
             this.Volver.Click += new System.EventHandler(this.Volver_Click);
             // 
@@ -409,9 +410,9 @@
             this.groupBox4.Controls.Add(this.kilos);
             this.groupBox4.Controls.Add(this.label12);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.groupBox4.Location = new System.Drawing.Point(289, 178);
+            this.groupBox4.Location = new System.Drawing.Point(289, 167);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(160, 153);
+            this.groupBox4.Size = new System.Drawing.Size(160, 164);
             this.groupBox4.TabIndex = 20;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "ENCOMIENDA";
@@ -508,6 +509,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(733, 698);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);

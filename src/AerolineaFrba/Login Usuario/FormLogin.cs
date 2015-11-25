@@ -164,7 +164,7 @@ namespace AerolineaFrba.Login_Usuario
                     {
                         if (!usuarioHabilitado(txtUsu.Text))
                         {
-                            MessageBox.Show("Usuario bloqueado contacte al Administrador", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Usuario bloqueado, contacte al Administrador.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 
@@ -175,7 +175,7 @@ namespace AerolineaFrba.Login_Usuario
         private void iniciaAplicacion()
         {
             //MENSAJE INICIO SESION
-            MessageBox.Show("Ha iniciado sesion con exito.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Ha iniciado sesion con exito!", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.None);
             //PONE EN 0 LOGIN FALLIDOS Y CONTINUA CON EL INGRESO
             new Query("UPDATE DJML.USUARIOS SET USUA_LOGIN_FALLIDOS = 0 WHERE USUA_ID = " + idUsuario).Ejecutar();
             FormInicioFuncionalidades func = new FormInicioFuncionalidades();
@@ -191,13 +191,23 @@ namespace AerolineaFrba.Login_Usuario
             if (loginInvalido == 3)
             {
                 new Query("UPDATE DJML.USUARIOS SET USUA_HABILITADO = 0 WHERE USUA_ID = " + idUsuario).Ejecutar();
-                MessageBox.Show("Usuario bloqueado contacte al administrador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Usuario bloqueado, contacte al administrador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             //SI NO ES 3 ADVIERTE AL USUARIO
             else
             {
                 new Query("UPDATE DJML.USUARIOS SET USUA_LOGIN_FALLIDOS= " + loginInvalido + " WHERE USUA_ID = " + idUsuario).Ejecutar();
-                MessageBox.Show("Intento " + loginInvalido + " veces a la tercera vez quedara inhabilitada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                if (loginInvalido == 1)
+                {
+                    MessageBox.Show("Ya intentó 1 vez, a la tercera vez la cuenta quedara inhabilitada", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                if (loginInvalido != 1)
+                {
+                    MessageBox.Show("Ya intentó " + loginInvalido + " veces, a la tercera vez la cuenta quedara inhabilitada", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
+               
 
             }
         }

@@ -77,7 +77,7 @@ namespace AerolineaFrba.Abm_Rol
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(96, 219);
+            this.button1.Location = new System.Drawing.Point(96, 253);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -87,7 +87,8 @@ namespace AerolineaFrba.Abm_Rol
             // 
             // FormRol
             // 
-            this.ClientSize = new System.Drawing.Size(284, 288);
+            this.BackColor = System.Drawing.Color.MintCream;
+            this.ClientSize = new System.Drawing.Size(276, 288);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.bnModificacion);
             this.Controls.Add(this.bnListado);
@@ -95,7 +96,7 @@ namespace AerolineaFrba.Abm_Rol
             this.Controls.Add(this.bnAlta);
             this.Name = "FormRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ABM ROL";
+            this.Text = "ABM Rol";
             this.Load += new System.EventHandler(this.FormRol_Load);
             this.ResumeLayout(false);
 

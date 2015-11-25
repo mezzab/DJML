@@ -78,7 +78,6 @@
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cliente";
-//            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // BuscarPorCliente
             // 
@@ -358,6 +357,7 @@
             // 
             // Volver
             // 
+            this.Volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Volver.Location = new System.Drawing.Point(25, 333);
             this.Volver.Name = "Volver";
             this.Volver.Size = new System.Drawing.Size(99, 41);
@@ -370,6 +370,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(515, 386);
             this.Controls.Add(this.LimpiarTodo);
             this.Controls.Add(this.Comprar);

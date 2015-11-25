@@ -72,7 +72,7 @@
             // 
             // codigo
             // 
-            this.codigo.BackColor = System.Drawing.SystemColors.Menu;
+            this.codigo.BackColor = System.Drawing.Color.MintCream;
             this.codigo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.codigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
             this.codigo.Location = new System.Drawing.Point(212, 97);
@@ -96,7 +96,7 @@
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.lineShape1,
             this.lineShape2});
-            this.shapeContainer1.Size = new System.Drawing.Size(467, 313);
+            this.shapeContainer1.Size = new System.Drawing.Size(467, 330);
             this.shapeContainer1.TabIndex = 14;
             this.shapeContainer1.TabStop = false;
             // 
@@ -110,9 +110,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(155, 266);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(165, 274);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(149, 33);
+            this.button1.Size = new System.Drawing.Size(129, 44);
             this.button1.TabIndex = 15;
             this.button1.Text = "Volver al inicio";
             this.button1.UseVisualStyleBackColor = true;
@@ -142,7 +143,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 313);
+            this.BackColor = System.Drawing.Color.MintCream;
+            this.ClientSize = new System.Drawing.Size(467, 330);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button1);

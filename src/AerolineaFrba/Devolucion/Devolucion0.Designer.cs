@@ -154,6 +154,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(813, 516);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button1);
@@ -164,7 +165,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Devolucion0";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Devolución";
+            this.Text = "Devolución de pasajes y/o encomiendas";
             this.Load += new System.EventHandler(this.Devolucion0_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pasajes1)).EndInit();

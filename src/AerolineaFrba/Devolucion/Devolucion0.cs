@@ -21,6 +21,9 @@ namespace AerolineaFrba.Devolucion
         public static List<int> IDsEncomiendas = new List<int>();
         public static List<int> IDsPasajes = new List<int>();
 
+        public static int pesoALiberar = 0;
+        public static List<int> butacasALiberar = new List<int>();
+
         public Devolucion0()
         {
             InitializeComponent();
@@ -65,7 +68,7 @@ namespace AerolineaFrba.Devolucion
             if (existeCompra())
               {
 
-                     string qry = "SELECT P.PASA_ID ID, D1.CIUD_DETALLE ORIGEN, D2.CIUD_DETALLE DESTINO, V.VIAJE_FECHA_SALIDA FECHA_SALIDA, C.CLIE_NOMBRE NOMBRE,  C.CLIE_APELLIDO APELLIDO, B.BUTA_ID BUTA_NUM, T.DESCRIPCION BUTA_TIPO, P.PASA_PRECIO PRECIO" +
+                     string qry = "SELECT P.PASA_ID ID, D1.CIUD_DETALLE ORIGEN, D2.CIUD_DETALLE DESTINO, V.VIAJE_FECHA_SALIDA FECHA_SALIDA, C.CLIE_NOMBRE NOMBRE,  C.CLIE_APELLIDO APELLIDO, B.BUTA_ID BUTA_NUM, T.DESCRIPCION BUTA_TIPO, P.PASA_PRECIO PRECIO, X.BXA_ID BUT_ID" +
                                     " FROM DJML.PASAJES P, DJML.VIAJES V, DJML.CLIENTES C, DJML.BUTACA_AERO X, DJML.BUTACAS B, DJML.TIPO_BUTACA T, DJML.RUTAS R, DJML.TRAMOS Y, DJML.CIUDADES D1, DJML.CIUDADES D2" +
                                     " WHERE P.PASA_VIAJE_ID = V.VIAJE_ID" +
                                     " AND P.PASA_CLIE_ID = C.CLIE_ID" +
@@ -82,6 +85,7 @@ namespace AerolineaFrba.Devolucion
                     pasajes1.DataSource = new Query(qry).ObtenerDataTable();
              
                     pasajes1.Columns["ID"].Visible = false;
+                   // pasajes1.Columns["BUT_ID"].Visible = false;
 
                     /*if(yaBuscoP == false) 
                     {
@@ -117,7 +121,7 @@ namespace AerolineaFrba.Devolucion
 
                     //ENCOMIENDAS
 
-                    string qry0 = "SELECT E.ENCO_ID ID,  D1.CIUD_DETALLE ORIGEN, D2.CIUD_DETALLE DESTINO, V.VIAJE_FECHA_SALIDA FECHA_SALIDA, C.CLIE_NOMBRE NOMBRE,  C.CLIE_APELLIDO APELLIDO, E.ENCO_KG KILOS, E.ENCO_PRECIO PRECIO" +
+                    string qry0 = "SELECT E.ENCO_ID ID,  D1.CIUD_DETALLE ORIGEN, D2.CIUD_DETALLE DESTINO, V.VIAJE_FECHA_SALIDA FECHA_SALIDA, C.CLIE_NOMBRE NOMBRE,  C.CLIE_APELLIDO APELLIDO, E.ENCO_KG KILOS, E.ENCO_PRECIO PRECIO, ENCO_KG PESO" +
                                     " FROM DJML.ENCOMIENDAS E, DJML.VIAJES V, DJML.CLIENTES C, DJML.RUTAS R, DJML.TRAMOS Y, DJML.CIUDADES D1, DJML.CIUDADES D2" +
                                     " WHERE E.ENCO_VIAJE_ID = V.VIAJE_ID" +
                                     " AND E.ENCO_CLIE_ID = C.CLIE_ID" +
@@ -131,6 +135,7 @@ namespace AerolineaFrba.Devolucion
                     encomiendas.DataSource = new Query(qry0).ObtenerDataTable();
 
                     encomiendas.Columns["ID"].Visible = false;
+                    encomiendas.Columns["PESO"].Visible = false;
 
                     //encomiendas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                     DataGridViewColumn column0 = encomiendas.Columns[0];
@@ -199,10 +204,12 @@ namespace AerolineaFrba.Devolucion
                 //MessageBox.Show("ID = " + pasajes1.Rows[e.RowIndex].Cells[1].Value.ToString() + " Y CHECK CON TIC");
 
                 int idSeleccionado = Convert.ToInt32(pasajes1.Rows[e.RowIndex].Cells[1].Value);
+                int idButaca = Convert.ToInt32(pasajes1.Rows[e.RowIndex].Cells[10].Value);
 
                 if (estaEnLaLista(IDsPasajes, idSeleccionado) == false)
                 {
                     IDsPasajes.Add(idSeleccionado);
+                    butacasALiberar.Add(idButaca);
                 }
                 if (estaEnLaLista(IDsPasajes, idSeleccionado) == true)
                 {
@@ -217,10 +224,12 @@ namespace AerolineaFrba.Devolucion
                // MessageBox.Show("ID = " + pasajes1.Rows[e.RowIndex].Cells[1].Value.ToString() + " Y CHECK SIN TIC");
 
                 int idSeleccionado = Convert.ToInt32(pasajes1.Rows[e.RowIndex].Cells[1].Value);
+                int idButaca = Convert.ToInt32(pasajes1.Rows[e.RowIndex].Cells[10].Value);
 
                 if (estaEnLaLista(IDsPasajes, idSeleccionado) == true)
                 {
                     borrarDeLista(IDsPasajes, idSeleccionado);
+                    borrarDeLista(butacasALiberar, idButaca);
                 }
                 if (estaEnLaLista(IDsPasajes, idSeleccionado) == false)
                 {
@@ -254,10 +263,13 @@ namespace AerolineaFrba.Devolucion
                 //MessageBox.Show("ID = " + encomiendas.Rows[e.RowIndex].Cells[1].Value.ToString() + " CHECK CON TIC");
 
                 int idSeleccionado = Convert.ToInt32(encomiendas.Rows[e.RowIndex].Cells[1].Value);
+                int pesoSeleccionado = Convert.ToInt32(encomiendas.Rows[e.RowIndex].Cells[9].Value);
+
 
                 if (estaEnLaLista(IDsEncomiendas,idSeleccionado) == false)
                 {
                     IDsEncomiendas.Add(idSeleccionado);
+                    pesoALiberar = pesoALiberar + pesoSeleccionado;
                 }
                 if (estaEnLaLista(IDsEncomiendas,idSeleccionado) == true)
                 {
@@ -273,10 +285,13 @@ namespace AerolineaFrba.Devolucion
                 //MessageBox.Show("ID = " + encomiendas.Rows[e.RowIndex].Cells[1].Value.ToString() + " CHECK SIN TIC");
            
                 int idSeleccionado = Convert.ToInt32(encomiendas.Rows[e.RowIndex].Cells[1].Value);
+                int pesoSeleccionado = Convert.ToInt32(encomiendas.Rows[e.RowIndex].Cells[9].Value);
+
 
                 if (estaEnLaLista(IDsEncomiendas,idSeleccionado) == true)
                 {
                     borrarDeLista(IDsEncomiendas, idSeleccionado);
+                    pesoALiberar = pesoALiberar - pesoSeleccionado;
                 }
                  if (estaEnLaLista(IDsEncomiendas,idSeleccionado) == false)
                 {

@@ -89,6 +89,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(279, 261);
             this.Controls.Add(this.volver);
             this.Controls.Add(this.listado);
@@ -97,7 +98,7 @@
             this.Controls.Add(this.alta);
             this.Name = "FormCiudades";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormCiudades";
+            this.Text = "ABM Ciudades";
             this.Load += new System.EventHandler(this.FormCiudades_Load);
             this.ResumeLayout(false);
 

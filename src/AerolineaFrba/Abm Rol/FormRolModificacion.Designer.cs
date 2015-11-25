@@ -63,13 +63,13 @@
             this.comboBoxRol.FormattingEnabled = true;
             this.comboBoxRol.Location = new System.Drawing.Point(115, 10);
             this.comboBoxRol.Name = "comboBoxRol";
-            this.comboBoxRol.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxRol.Size = new System.Drawing.Size(134, 21);
             this.comboBoxRol.TabIndex = 2;
             this.comboBoxRol.SelectedIndexChanged += new System.EventHandler(this.comboBoxRol_SelectedIndexChanged);
             // 
             // bnBuscar
             // 
-            this.bnBuscar.Location = new System.Drawing.Point(161, 37);
+            this.bnBuscar.Location = new System.Drawing.Point(174, 37);
             this.bnBuscar.Name = "bnBuscar";
             this.bnBuscar.Size = new System.Drawing.Size(75, 23);
             this.bnBuscar.TabIndex = 3;
@@ -81,7 +81,7 @@
             // 
             this.txtRol.Location = new System.Drawing.Point(115, 76);
             this.txtRol.Name = "txtRol";
-            this.txtRol.Size = new System.Drawing.Size(121, 20);
+            this.txtRol.Size = new System.Drawing.Size(134, 20);
             this.txtRol.TabIndex = 4;
             this.txtRol.TextChanged += new System.EventHandler(this.txtRol_TextChanged);
             // 
@@ -101,13 +101,13 @@
             this.Funcionalidades.FormattingEnabled = true;
             this.Funcionalidades.Location = new System.Drawing.Point(12, 145);
             this.Funcionalidades.Name = "Funcionalidades";
-            this.Funcionalidades.Size = new System.Drawing.Size(224, 94);
+            this.Funcionalidades.Size = new System.Drawing.Size(237, 94);
             this.Funcionalidades.TabIndex = 6;
             this.Funcionalidades.SelectedIndexChanged += new System.EventHandler(this.Funcionalidades_SelectedIndexChanged);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(16, 253);
+            this.button2.Location = new System.Drawing.Point(12, 253);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 7;
@@ -117,7 +117,7 @@
             // 
             // bnVolver
             // 
-            this.bnVolver.Location = new System.Drawing.Point(97, 253);
+            this.bnVolver.Location = new System.Drawing.Point(93, 253);
             this.bnVolver.Name = "bnVolver";
             this.bnVolver.Size = new System.Drawing.Size(75, 23);
             this.bnVolver.TabIndex = 8;
@@ -127,7 +127,7 @@
             // 
             // bnAceptar
             // 
-            this.bnAceptar.Location = new System.Drawing.Point(178, 253);
+            this.bnAceptar.Location = new System.Drawing.Point(174, 253);
             this.bnAceptar.Name = "bnAceptar";
             this.bnAceptar.Size = new System.Drawing.Size(75, 23);
             this.bnAceptar.TabIndex = 9;
@@ -139,6 +139,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(259, 288);
             this.Controls.Add(this.bnAceptar);
             this.Controls.Add(this.bnVolver);
@@ -152,7 +153,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FormRolModificacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormRolModificacion";
+            this.Text = "Modificacion de rol";
             this.Load += new System.EventHandler(this.FormRolModificacion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

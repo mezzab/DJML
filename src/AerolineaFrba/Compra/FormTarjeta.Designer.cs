@@ -208,6 +208,7 @@
             // 
             // Volver
             // 
+            this.Volver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Volver.Location = new System.Drawing.Point(23, 456);
             this.Volver.Name = "Volver";
             this.Volver.Size = new System.Drawing.Size(99, 41);
@@ -503,6 +504,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(511, 509);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);

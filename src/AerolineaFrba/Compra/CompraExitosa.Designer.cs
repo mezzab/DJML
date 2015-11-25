@@ -86,13 +86,14 @@
             // 
             // codigo
             // 
-            this.codigo.BackColor = System.Drawing.SystemColors.Menu;
+            this.codigo.BackColor = System.Drawing.Color.MintCream;
             this.codigo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.codigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
             this.codigo.Location = new System.Drawing.Point(185, 93);
             this.codigo.Name = "codigo";
             this.codigo.Size = new System.Drawing.Size(175, 22);
             this.codigo.TabIndex = 7;
+            this.codigo.TextChanged += new System.EventHandler(this.codigo_TextChanged);
             // 
             // printDialog1
             // 
@@ -117,7 +118,7 @@
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.lineShape2,
             this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(425, 295);
+            this.shapeContainer1.Size = new System.Drawing.Size(425, 304);
             this.shapeContainer1.TabIndex = 9;
             this.shapeContainer1.TabStop = false;
             // 
@@ -139,9 +140,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(133, 250);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.button1.Location = new System.Drawing.Point(144, 254);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(149, 33);
+            this.button1.Size = new System.Drawing.Size(128, 38);
             this.button1.TabIndex = 16;
             this.button1.Text = "Volver al inicio";
             this.button1.UseVisualStyleBackColor = true;
@@ -151,7 +153,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(425, 295);
+            this.BackColor = System.Drawing.Color.MintCream;
+            this.ClientSize = new System.Drawing.Size(425, 304);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.codigo);

@@ -67,6 +67,11 @@ namespace AerolineaFrba.Compra
             FormInicioFuncionalidades.ShowDialog();
             FormInicioFuncionalidades = (FormInicioFuncionalidades)this.ActiveMdiChild;
         }
+
+        private void codigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

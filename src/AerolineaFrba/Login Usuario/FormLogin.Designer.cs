@@ -39,7 +39,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 24);
+            this.label1.Location = new System.Drawing.Point(13, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 0;
@@ -48,7 +48,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 57);
+            this.label2.Location = new System.Drawing.Point(13, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 1;
@@ -57,25 +57,25 @@
             // 
             // txtUsu
             // 
-            this.txtUsu.Location = new System.Drawing.Point(105, 21);
+            this.txtUsu.Location = new System.Drawing.Point(16, 25);
             this.txtUsu.Name = "txtUsu";
-            this.txtUsu.Size = new System.Drawing.Size(100, 20);
+            this.txtUsu.Size = new System.Drawing.Size(136, 20);
             this.txtUsu.TabIndex = 2;
             this.txtUsu.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // txtPassw
             // 
-            this.txtPassw.Location = new System.Drawing.Point(105, 57);
+            this.txtPassw.Location = new System.Drawing.Point(16, 70);
             this.txtPassw.Name = "txtPassw";
-            this.txtPassw.Size = new System.Drawing.Size(100, 20);
+            this.txtPassw.Size = new System.Drawing.Size(138, 20);
             this.txtPassw.TabIndex = 3;
             this.txtPassw.TextChanged += new System.EventHandler(this.txtPassw_TextChanged);
             // 
             // bnSalir
             // 
-            this.bnSalir.Location = new System.Drawing.Point(38, 120);
+            this.bnSalir.Location = new System.Drawing.Point(16, 110);
             this.bnSalir.Name = "bnSalir";
-            this.bnSalir.Size = new System.Drawing.Size(75, 23);
+            this.bnSalir.Size = new System.Drawing.Size(57, 33);
             this.bnSalir.TabIndex = 5;
             this.bnSalir.Text = "Salir";
             this.bnSalir.UseVisualStyleBackColor = true;
@@ -83,9 +83,9 @@
             // 
             // bnAceptar
             // 
-            this.bnAceptar.Location = new System.Drawing.Point(130, 120);
+            this.bnAceptar.Location = new System.Drawing.Point(79, 110);
             this.bnAceptar.Name = "bnAceptar";
-            this.bnAceptar.Size = new System.Drawing.Size(75, 23);
+            this.bnAceptar.Size = new System.Drawing.Size(75, 33);
             this.bnAceptar.TabIndex = 6;
             this.bnAceptar.Text = "Aceptar";
             this.bnAceptar.UseVisualStyleBackColor = true;
@@ -95,7 +95,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(226, 152);
+            this.BackColor = System.Drawing.Color.MintCream;
+            this.ClientSize = new System.Drawing.Size(164, 156);
             this.Controls.Add(this.bnAceptar);
             this.Controls.Add(this.bnSalir);
             this.Controls.Add(this.txtPassw);
@@ -103,7 +104,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormLogin";
-            this.Text = "FormLogin";
+            this.Text = "Login";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

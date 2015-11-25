@@ -54,16 +54,17 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // Form1
+            // Bienvenida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MintCream;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(603, 381);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.Name = "Form1";
+            this.Name = "Bienvenida";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Aerolinea Frba V.0.1";
             this.Load += new System.EventHandler(this.Form1_Load);
