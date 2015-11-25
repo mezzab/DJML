@@ -115,7 +115,7 @@
             // 
             // rolTextBox
             // 
-            this.rolTextBox.BackColor = System.Drawing.SystemColors.Menu;
+            this.rolTextBox.BackColor = System.Drawing.Color.MintCream;
             this.rolTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rolTextBox.Location = new System.Drawing.Point(4, 87);
             this.rolTextBox.Name = "rolTextBox";
