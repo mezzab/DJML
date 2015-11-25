@@ -34,6 +34,9 @@ namespace AerolineaFrba.Compra
 
         public static decimal precioTotal;
 
+        public static int IdEnco;
+        public static int IdPasa;
+
 
         public PagoConTarjeta()
         {
@@ -707,6 +710,9 @@ namespace AerolineaFrba.Compra
                 string idCliente = dr["Id Cliente"].ToString();
                 string idButaca = dr["Id Butaca"].ToString();
                 string PPASAJE = dr["Precio"].ToString().Replace(",", ".");
+                sumarUnoClavePasa();
+                guardarUltimoIdPasa();
+
 
                 string nuevoPasaje = " INSERT INTO [DJML].[PASAJES]" +
                                       " ([PASA_ID]" +
@@ -716,8 +722,8 @@ namespace AerolineaFrba.Compra
                                       " ,[PASA_BUTA_ID]" +
                                       " ,[PASA_PRECIO])" +
                                 " VALUES" +
-                                      "  ( 5555556 " +
-                                       " , '" + FormCompra1.viajeID + "'" +
+                                      "  ( " + IdPasa +
+                                      " , '" + FormCompra1.viajeID + "'" +
                                       " , '" + idCliente + "'" +
                                       " , '" + FormFormaDePago.IDCompra + "'" +
                                       " , '" + idButaca + "'" +
@@ -744,7 +750,8 @@ namespace AerolineaFrba.Compra
                 string idCliente = dr["Id Cliente"].ToString();
                 string kilos = dr["Kgs"].ToString();
                 string PEncomienda = dr["Precio"].ToString().Replace(",", ".");
-
+                sumarUnoClaveEnco();
+                guardarUltimoIdEnco();
 
 
                 string nuevaEncomienda = " INSERT INTO [DJML].[ENCOMIENDAS] " +
@@ -755,7 +762,7 @@ namespace AerolineaFrba.Compra
                                        " ,[ENCO_KG]" +
                                        " ,[ENCO_PRECIO])" +
                                 " VALUES" +
-                                      "  ( 5555556 " +
+                                      "  ( " + IdEnco +
                                       " , '" + FormCompra1.viajeID + "'" +
                                       " , '" + idCliente + "'" +
                                       " , '" + FormFormaDePago.IDCompra + "'" +
@@ -959,10 +966,36 @@ namespace AerolineaFrba.Compra
         {
 
 
-            
-
         }
 
+        private void guardarUltimoIdPasa()
+        {
+            string sqlc = "select clave_ultimo_id from djml.claves where clave_descripcion = 'Pasajes'";
+            Query qryc = new Query(sqlc);
+            IdPasa = Convert.ToInt32(qryc.ObtenerUnicoCampo());
+
+        }
+        
+        private void guardarUltimoIdEnco()
+        {
+            string sqlc = "select clave_ultimo_id from djml.claves where clave_descripcion = 'Encomiendas'";
+            Query qryc = new Query(sqlc);
+            IdEnco = Convert.ToInt32(qryc.ObtenerUnicoCampo());
+        }
+        
+        private void sumarUnoClavePasa()
+        {
+            string sql = "UPDATE [DJML].[CLAVES] SET [CLAVE_ULTIMO_ID] = ((select clave_ultimo_id from djml.claves where clave_descripcion = 'Pasajes') + 1 ) WHERE clave_id = 1 ";
+            Query qry = new Query(sql);
+               qry.Ejecutar();
+        }
+
+        private void sumarUnoClaveEnco()
+        {
+            string sql = "UPDATE [DJML].[CLAVES] SET [CLAVE_ULTIMO_ID] = ((select clave_ultimo_id from djml.claves where clave_descripcion = 'Pasajes') + 1 ) WHERE clave_id = 2 ";
+            Query qry = new Query(sql);
+            qry.Ejecutar();
+        }
 
     }
 
