@@ -15,6 +15,10 @@ namespace AerolineaFrba.Devolucion
 
         public static string codigo_devolucion;
 
+        public static int id_devolucion;
+
+        public static decimal sumaPreciosPasajesEncomiendasDevueltos = 0;
+
         public Devolucion1()
         {
             InitializeComponent();
@@ -37,19 +41,126 @@ namespace AerolineaFrba.Devolucion
 
         }
 
-        private void Siguiente_Click(object sender, EventArgs e)
+        private void cargarDevolucionPasa(string id)
         {
-            // insert a djml.cancelaciones
-            // guardo el id y el codigo
-            
-            // agrego campo devolucion_id a cada pasaje seleccionado y cada precio su precio a 
-            decimal sumaPreciosPasajesEncomiendasDevueltos;
-            // agrego campo devolucion_id a cada encomienda seleccionada y sumo cada precio a 
-            //modifico el precio de la compra: le reso esa variable al precio de la compra. 
-
+            string Q = " UPDATE [DJML].[PASAJES] SET [CANCELACION_ID] = " + id_devolucion + " WHERE PASA_ID = '" + id + "'";
+            Query qry = new Query(Q);
+            qry.Ejecutar();
 
         }
 
 
+        private void cargarDevolucionEnco(string id)
+        {
+            string Q = " UPDATE [DJML].[ENCOMIENDAS] SET [CANCELACION_ID] = " + id_devolucion + " WHERE ENCO_ID = '" + id + "'";
+            Query qry = new Query(Q);
+            qry.Ejecutar();
+        }
+
+        private void sumarPrecioPasa(string id)
+        {
+            string Q = " SELECT [PASA_PRECIO] FROM [DJML].[PASAJES] WHERE PASA_ID = '" + id + "'";
+            Query qry = new Query(Q);
+            decimal precioPasa = Convert.ToDecimal(qry.ObtenerUnicoCampo());
+
+           
+            sumaPreciosPasajesEncomiendasDevueltos = precioPasa + sumaPreciosPasajesEncomiendasDevueltos;
+           // avisarBien(" SUMA: " + sumaPreciosPasajesEncomiendasDevueltos + "Y precioEnco: " + precioPasa);
+
+        }
+
+        private void sumarPrecioEnco(string id)
+        {
+            string Q = " SELECT [ENCO_PRECIO] FROM [DJML].[ENCOMIENDAS] WHERE ENCO_ID = '" + id + "'";
+            Query qry = new Query(Q);
+            decimal precioEnco = Convert.ToDecimal(qry.ObtenerUnicoCampo());
+
+            sumaPreciosPasajesEncomiendasDevueltos = precioEnco + sumaPreciosPasajesEncomiendasDevueltos;
+
+            //avisarBien(" SUMA: " + sumaPreciosPasajesEncomiendasDevueltos + "Y precioEnco: " + precioEnco);
+        }
+        
+        private void avisarBien(string quePaso)
+        {
+            MessageBox.Show(quePaso, "SE INFORMA QUE:", MessageBoxButtons.OK, MessageBoxIcon.None);
+        }
+
+
+        private void avisar(string quePaso)
+        {
+            MessageBox.Show(quePaso, "AVISO! ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void Siguiente_Click(object sender, EventArgs e)
+        {
+            DateTime fechaHoy = DateTime.Now;
+            string eugenia = fechaHoy.ToString("yyyy-dd-MM") + " 00:00:00.000";
+
+            string nuevoPasaje = " INSERT INTO [DJML].[CANCELACIONES] ([CANC_FECHA_DEVOLUCION] , [CANC_COMPRA_ID] , [CANC_MOTIVO])" +
+                                 " VALUES ('" + eugenia + "' , '" + Devolucion0.id_compra + "' , '" + motivo.Text + "' )";
+            Query qry = new Query(nuevoPasaje);
+            qry.pComando = nuevoPasaje;
+            qry.Ejecutar();
+
+            guardarCodigoEId();
+
+            for (int i = 0; i <= Devolucion0.IDsPasajes.Count - 1; i++)
+            {
+                cargarDevolucionPasa(Devolucion0.IDsPasajes[i].ToString());
+                sumarPrecioPasa(Devolucion0.IDsPasajes[i].ToString());
+            }
+
+            for (int i = 0; i <= Devolucion0.IDsEncomiendas.Count - 1; i++)
+            {
+                cargarDevolucionEnco(Devolucion0.IDsEncomiendas[i].ToString());
+                sumarPrecioEnco(Devolucion0.IDsEncomiendas[i].ToString());
+            }
+
+            modificarPrecioCompra();
+
+            Devolucion2 m = new Devolucion2();
+            this.Hide();
+            m.StartPosition = FormStartPosition.CenterScreen;
+            m.ShowDialog();
+            m = (Devolucion2)this.ActiveMdiChild;
+
+        }
+
+        private void modificarPrecioCompra()
+        {
+
+            string sqlc = "select compra_monto from djml.compras where compra_id = '" + Devolucion0.id_compra + "'";
+            Query qryc = new Query(sqlc);
+            decimal montoViejo = Convert.ToDecimal(qryc.ObtenerUnicoCampo());
+
+            decimal montoNuevo = montoViejo - sumaPreciosPasajesEncomiendasDevueltos;
+
+            string aux = montoNuevo.ToString().Replace(",", ".");
+
+            string x = " UPDATE [DJML].[COMPRAS] SET [COMPRA_MONTO] = '" + aux + "' WHERE COMPRA_ID = '" + Devolucion0.id_compra + "'";
+            Query qry = new Query(x);
+            qry.Ejecutar();
+
+        }
+
+        private void guardarCodigoEId()
+        {
+         
+            string sqlc = "select top 1 CANC_ID from djml.CANCELACIONES order by CANC_ID desc";
+            Query qryc = new Query(sqlc);
+            id_devolucion = Convert.ToInt32(qryc.ObtenerUnicoCampo());
+
+
+            string sql = "select canc_codigo from djml.CANCELACIONES where canc_id =" + id_devolucion ;
+            Query qry = new Query(sql);
+            codigo_devolucion = qry.ObtenerUnicoCampo().ToString();
+
+        
+        }
+
+        private void motivo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

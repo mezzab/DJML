@@ -27,5 +27,10 @@ namespace AerolineaFrba.Devolucion
             FormInicioFuncionalidades.ShowDialog();
             FormInicioFuncionalidades = (FormInicioFuncionalidades)this.ActiveMdiChild;
         }
+
+        private void Devolucion2_Load(object sender, EventArgs e)
+        {
+            codigo.Text = Devolucion1.codigo_devolucion;
+        }
     }
 }

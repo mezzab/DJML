@@ -31,13 +31,13 @@
             this.Siguiente = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pasajes1 = new System.Windows.Forms.DataGridView();
+            this.chkb = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Agregar = new System.Windows.Forms.Button();
             this.codigo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.encomiendas = new System.Windows.Forms.DataGridView();
-            this.chkb = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.chkb1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pasajes1)).BeginInit();
@@ -54,6 +54,7 @@
             this.Siguiente.TabIndex = 7;
             this.Siguiente.Text = "Devolver los pasajes/encomiendas marcados";
             this.Siguiente.UseVisualStyleBackColor = true;
+            this.Siguiente.Click += new System.EventHandler(this.Siguiente_Click);
             // 
             // groupBox1
             // 
@@ -76,6 +77,11 @@
             this.pasajes1.TabIndex = 3;
             this.pasajes1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.pasajes1_CellClick);
             this.pasajes1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.pasajes1_CellContentClick);
+            // 
+            // chkb
+            // 
+            this.chkb.HeaderText = "Seleccionar";
+            this.chkb.Name = "chkb";
             // 
             // Agregar
             // 
@@ -138,11 +144,6 @@
             this.encomiendas.TabIndex = 3;
             this.encomiendas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.encomiendas_CellClick);
             this.encomiendas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.encomiendas_CellContentClick);
-            // 
-            // chkb
-            // 
-            this.chkb.HeaderText = "Seleccionar";
-            this.chkb.Name = "chkb";
             // 
             // chkb1
             // 

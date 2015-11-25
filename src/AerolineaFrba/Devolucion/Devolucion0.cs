@@ -65,7 +65,7 @@ namespace AerolineaFrba.Devolucion
             if (existeCompra())
               {
 
-                     string qry = "SELECT P.PASA_ID ID, D1.CIUD_DETALLE ORIGEN, D2.CIUD_DETALLE DESTINO, V.VIAJE_FECHA_SALIDA FECHA_SALIDA, C.CLIE_NOMBRE NOMBRE,  C.CLIE_APELLIDO APELLIDO, B.BUTA_ID BUTA_NUM, T.DESCRIPCION BUTA_TIPO" +
+                     string qry = "SELECT P.PASA_ID ID, D1.CIUD_DETALLE ORIGEN, D2.CIUD_DETALLE DESTINO, V.VIAJE_FECHA_SALIDA FECHA_SALIDA, C.CLIE_NOMBRE NOMBRE,  C.CLIE_APELLIDO APELLIDO, B.BUTA_ID BUTA_NUM, T.DESCRIPCION BUTA_TIPO, P.PASA_PRECIO PRECIO" +
                                     " FROM DJML.PASAJES P, DJML.VIAJES V, DJML.CLIENTES C, DJML.BUTACA_AERO X, DJML.BUTACAS B, DJML.TIPO_BUTACA T, DJML.RUTAS R, DJML.TRAMOS Y, DJML.CIUDADES D1, DJML.CIUDADES D2" +
                                     " WHERE P.PASA_VIAJE_ID = V.VIAJE_ID" +
                                     " AND P.PASA_CLIE_ID = C.CLIE_ID" +
@@ -75,12 +75,13 @@ namespace AerolineaFrba.Devolucion
                                     " AND V.VIAJE_RUTA_ID = R.RUTA_CODIGO" +
                                     " AND R.RUTA_TRAMO = Y.TRAMO_ID" +
                                     " AND D2.CIUD_ID = Y.TRAMO_CIUDAD_DESTINO AND D1.CIUD_ID = Y.TRAMO_CIUDAD_ORIGEN" +
-                                    " AND PASA_COMPRA_ID = '"+ id_compra +"'";
+                                    " AND PASA_COMPRA_ID = '"+ id_compra +"'" +
+                                    " AND P.CANCELACION_ID IS NULL" ;
 
 
                     pasajes1.DataSource = new Query(qry).ObtenerDataTable();
              
-                    //pasajes1.Columns["ID"].Visible = false;
+                    pasajes1.Columns["ID"].Visible = false;
 
                     /*if(yaBuscoP == false) 
                     {
@@ -116,19 +117,20 @@ namespace AerolineaFrba.Devolucion
 
                     //ENCOMIENDAS
 
-                    string qry0 = "SELECT E.ENCO_ID ID,  D1.CIUD_DETALLE ORIGEN, D2.CIUD_DETALLE DESTINO, V.VIAJE_FECHA_SALIDA FECHA_SALIDA, C.CLIE_NOMBRE NOMBRE,  C.CLIE_APELLIDO APELLIDO, E.ENCO_KG KILOS" +
+                    string qry0 = "SELECT E.ENCO_ID ID,  D1.CIUD_DETALLE ORIGEN, D2.CIUD_DETALLE DESTINO, V.VIAJE_FECHA_SALIDA FECHA_SALIDA, C.CLIE_NOMBRE NOMBRE,  C.CLIE_APELLIDO APELLIDO, E.ENCO_KG KILOS, E.ENCO_PRECIO PRECIO" +
                                     " FROM DJML.ENCOMIENDAS E, DJML.VIAJES V, DJML.CLIENTES C, DJML.RUTAS R, DJML.TRAMOS Y, DJML.CIUDADES D1, DJML.CIUDADES D2" +
                                     " WHERE E.ENCO_VIAJE_ID = V.VIAJE_ID" +
                                     " AND E.ENCO_CLIE_ID = C.CLIE_ID" +
                                     " AND V.VIAJE_RUTA_ID = R.RUTA_CODIGO" +
                                     " AND R.RUTA_TRAMO = Y.TRAMO_ID" +
                                     " AND D2.CIUD_ID = Y.TRAMO_CIUDAD_DESTINO AND D1.CIUD_ID = Y.TRAMO_CIUDAD_ORIGEN" +
-                                    " AND ENCO_COMPRA_ID = '" + id_compra + "'";
+                                    " AND ENCO_COMPRA_ID = '" + id_compra + "'" +
+                                    " AND E.CANCELACION_ID IS NULL";
 
 
                     encomiendas.DataSource = new Query(qry0).ObtenerDataTable();
 
-                    //encomiendas.Columns["ID"].Visible = false;
+                    encomiendas.Columns["ID"].Visible = false;
 
                     //encomiendas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                     DataGridViewColumn column0 = encomiendas.Columns[0];
@@ -206,8 +208,8 @@ namespace AerolineaFrba.Devolucion
                 {
                     //MessageBox.Show("ESTO NUNCA DEBERIA OCURRIR");
                 }
-                var message = string.Join(Environment.NewLine, IDsPasajes);
-                MessageBox.Show("La lista de pasajes a dar de baja ahora es: " + message);
+                //var message = string.Join(Environment.NewLine, IDsPasajes);
+                //MessageBox.Show("La lista de pasajes a dar de baja ahora es: " + message);
             }
 
             if (ch1.Value.ToString() == "False")
@@ -225,8 +227,8 @@ namespace AerolineaFrba.Devolucion
                   //  MessageBox.Show("ESTO NUNCA DEBERIA OCURRIR");
                 }
                 
-                var message = string.Join(Environment.NewLine, IDsPasajes);
-                MessageBox.Show("La lista de pasajes a dar de baja ahora es: " + message);
+                //var message = string.Join(Environment.NewLine, IDsPasajes);
+                //MessageBox.Show("La lista de pasajes a dar de baja ahora es: " + message);
             }
         }
 
@@ -262,8 +264,8 @@ namespace AerolineaFrba.Devolucion
                  //  MessageBox.Show("ESTO NUNCA DEBERIA OCURRIR");
                 }
 
-                var message = string.Join(Environment.NewLine, IDsEncomiendas);
-                MessageBox.Show("La lista de encomiendas a dar de baja ahora es: " + message);
+                // var message = string.Join(Environment.NewLine, IDsEncomiendas);
+                // MessageBox.Show("La lista de encomiendas a dar de baja ahora es: " + message);
             }
 
             if (ch.Value.ToString() == "False")
@@ -280,8 +282,8 @@ namespace AerolineaFrba.Devolucion
                 {
                   // MessageBox.Show("ESTO NUNCA DEBERIA OCURRIR");
                 }
-                 var message = string.Join(Environment.NewLine, IDsEncomiendas);
-                 MessageBox.Show("La lista de encomiendas a dar de baja ahora es: " + message);
+                // var message = string.Join(Environment.NewLine, IDsEncomiendas);
+                // MessageBox.Show("La lista de encomiendas a dar de baja ahora es: " + message);
             }
 
         }
@@ -360,6 +362,16 @@ namespace AerolineaFrba.Devolucion
                 }
 
             }*/
+        }
+
+        private void Siguiente_Click(object sender, EventArgs e)
+        {
+            Devolucion1 m = new Devolucion1();
+            this.Hide();
+            m.StartPosition = FormStartPosition.CenterScreen;
+
+            m.ShowDialog();
+            m = (Devolucion1)this.ActiveMdiChild;
         }
     
     }

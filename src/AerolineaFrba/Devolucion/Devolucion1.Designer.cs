@@ -48,10 +48,12 @@
             // 
             this.motivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.motivo.Location = new System.Drawing.Point(17, 41);
+            this.motivo.MaxLength = 255;
             this.motivo.Name = "motivo";
             this.motivo.Size = new System.Drawing.Size(291, 151);
             this.motivo.TabIndex = 1;
             this.motivo.Text = "";
+            this.motivo.TextChanged += new System.EventHandler(this.motivo_TextChanged);
             // 
             // Siguiente
             // 
