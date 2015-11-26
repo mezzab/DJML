@@ -28,9 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // FormBajaFueraServicio
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MintCream;
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "FormBajaFueraServicio";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormBajaFueraServicio";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

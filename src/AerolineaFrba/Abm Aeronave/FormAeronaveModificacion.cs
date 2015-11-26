@@ -47,5 +47,10 @@ namespace AerolineaFrba.Abm_Aeronave
         {
 
         }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

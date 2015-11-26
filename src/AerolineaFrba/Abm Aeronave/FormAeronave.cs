@@ -36,7 +36,7 @@ namespace AerolineaFrba.Abm_Aeronave
             // 
             // bnAlta
             // 
-            this.bnAlta.Location = new System.Drawing.Point(36, 42);
+            this.bnAlta.Location = new System.Drawing.Point(101, 23);
             this.bnAlta.Name = "bnAlta";
             this.bnAlta.Size = new System.Drawing.Size(75, 23);
             this.bnAlta.TabIndex = 0;
@@ -46,7 +46,7 @@ namespace AerolineaFrba.Abm_Aeronave
             // 
             // bnBaja
             // 
-            this.bnBaja.Location = new System.Drawing.Point(174, 42);
+            this.bnBaja.Location = new System.Drawing.Point(101, 63);
             this.bnBaja.Name = "bnBaja";
             this.bnBaja.Size = new System.Drawing.Size(75, 23);
             this.bnBaja.TabIndex = 1;
@@ -56,16 +56,17 @@ namespace AerolineaFrba.Abm_Aeronave
             // 
             // bnModif
             // 
-            this.bnModif.Location = new System.Drawing.Point(36, 90);
+            this.bnModif.Location = new System.Drawing.Point(101, 103);
             this.bnModif.Name = "bnModif";
             this.bnModif.Size = new System.Drawing.Size(75, 23);
             this.bnModif.TabIndex = 2;
             this.bnModif.Text = "Modificacion";
             this.bnModif.UseVisualStyleBackColor = true;
+            this.bnModif.Click += new System.EventHandler(this.bnModif_Click);
             // 
             // bnVolver
             // 
-            this.bnVolver.Location = new System.Drawing.Point(102, 187);
+            this.bnVolver.Location = new System.Drawing.Point(101, 217);
             this.bnVolver.Name = "bnVolver";
             this.bnVolver.Size = new System.Drawing.Size(75, 23);
             this.bnVolver.TabIndex = 3;
@@ -75,7 +76,7 @@ namespace AerolineaFrba.Abm_Aeronave
             // 
             // bnListado
             // 
-            this.bnListado.Location = new System.Drawing.Point(174, 90);
+            this.bnListado.Location = new System.Drawing.Point(101, 145);
             this.bnListado.Name = "bnListado";
             this.bnListado.Size = new System.Drawing.Size(75, 23);
             this.bnListado.TabIndex = 9;
@@ -85,6 +86,7 @@ namespace AerolineaFrba.Abm_Aeronave
             // 
             // FormAeronave
             // 
+            this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Controls.Add(this.bnListado);
             this.Controls.Add(this.bnVolver);
@@ -118,11 +120,7 @@ namespace AerolineaFrba.Abm_Aeronave
             aero = (FormInicioFuncionalidades)this.ActiveMdiChild;
         }
 
-        private void bnAlta_Click(object sender, EventArgs e)
-        {
-            
 
-        }
 
         private void bnBaja_Click(object sender, EventArgs e)
         {
@@ -132,6 +130,22 @@ namespace AerolineaFrba.Abm_Aeronave
             this.Visible = true;
         }
 
+        private void bnModif_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Form frm = new FormAeronaveModificacion_();
+            frm.ShowDialog();
+            frm = (FormAeronaveModificacion_)this.ActiveMdiChild;
+        }
+
+        private void bnAlta_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            FormAeronaveAlta frm = new FormAeronaveAlta();
+            frm.ShowDialog();
+            this.Visible = true;
+        
+        }
         
     }
 }
