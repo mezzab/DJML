@@ -19,6 +19,7 @@ namespace AerolineaFrba.Consulta_Millas
         public ConsultarMillas()
         {
             InitializeComponent();
+            labelTotal.Text = "0";
         }
 
         private void ConsultarMillas_Load(object sender, EventArgs e)
@@ -43,35 +44,66 @@ namespace AerolineaFrba.Consulta_Millas
 
         private void botonLimpiar_Click(object sender, EventArgs e)
         {
-
+            labelTotal.Text = "0";
             this.textBoxDNI.Clear();
             dataGridConsultaMillas.DataSource = null;
+
+            dataGridConsultaMillas.Visible = true;
+            emptyMillas.Visible = false;
+
+            dataGridConsultaCanjes.Visible = true;
+            emptyCanjes.Visible = false;
         }
 
         private void botonConsultar_Click(object sender, EventArgs e)
         {
-            String dni = this.textBoxDNI.Text;
-            if (dni != "")
-            {/*
-                DataTable tablaClientes = SqlConnector.obtenerTablaSegunConsultaString(@"select ID as Id 
-                from AERO.clientes where BAJA = 0 AND DNI = " + dni);
-                if (tablaClientes.Rows.Count > 0)
+            String dni = textBoxDNI.Text;
+            String tipo = tipoDeDocumento.Text;
+            if (dni != string.Empty && tipo != string.Empty)
+            {
+                //MILLAS CANT
+                labelTotal.Text = "1000";
+
+                //MILLAS GRID
+                string qryMillas = "SELECT COMPRA_FECHA as 'Fecha', COMPRA_ID as 'Compra', '$ ' + cast (COMPRA_MONTO as CHAR(100)) as 'Importe', FLOOR(COMPRA_MONTO / 10) AS 'Millas'" +
+                                   " FROM DJML.COMPRAS" +
+                                   " JOIN DJML.VIAJES on COMPRA_VIAJE_ID = VIAJE_ID" +
+                                   " JOIN DJML.CLIENTES on COMPRA_CLIE_ID = CLIE_ID" +
+                                   " JOIN DJML.TIPO_DOCUMENTO td on CLIE_TIPO_DOC = ID_TIPO_DOC" +
+                                   " WHERE CLIE_DNI = '" + dni + "'" +
+                                   " AND td.DESCRIPCION = '" + tipo + "'" +
+                                   " AND VIAJE_FECHA_SALIDA < GETDATE()";
+
+                var resultMillas = new Query(qryMillas).ObtenerDataTable();
+                if (resultMillas.Rows.Count != 0)
                 {
-                    List<string> lista = new List<string>();
-                    lista.Add("@dni");
-                    DataTable resultado = SqlConnector.obtenerTablaSegunProcedure("AERO.consultarMillas", lista, dni);
-                    dataGridConsultaMillas.DataSource = resultado;
-                    Int32 millas = 0;
-                    foreach (DataRow row in resultado.Rows)
-                    {
-                        millas += Int32.Parse(row.ItemArray[2].ToString());
-                    }
-                    textBoxTotal.Text = millas.ToString();
+                    dataGridConsultaMillas.DataSource = resultMillas;
                 }
                 else
                 {
-                    MessageBox.Show("No se encuentra el cliente. Por favor ingrese nuevamente el DNI");
-                }*/
+                    dataGridConsultaMillas.Visible = false;
+                    emptyMillas.Visible = true;
+                }
+
+                //CANJES GRID
+                string qryCanjes = "SELECT CANJ_FECHA_CANJE as 'Fecha', PROD_NOMBRE as 'Producto',	CANJ_CANTIDAD as 'Cantidad', CANJ_MILLAS_USADAS as 'Millas Gastadas'" +
+                                   " FROM DJML.CANJES" +
+                                   " JOIN DJML.PRODUCTO on CANJ_PRODUCTO_ID = PROD_ID" +
+                                   " JOIN DJML.CLIENTES on CANJ_CLIE_ID = CLIE_ID" +
+                                   " JOIN DJML.TIPO_DOCUMENTO td on CLIE_TIPO_DOC = ID_TIPO_DOC" +
+                                   " WHERE CLIE_DNI = '" + dni + "'" +
+                                   " AND td.DESCRIPCION = '" + tipo + "'";
+
+                var resultCanjes = new Query(qryCanjes).ObtenerDataTable();
+                if (resultCanjes.Rows.Count != 0)
+                {
+                    dataGridConsultaCanjes.DataSource = resultCanjes;
+                }
+                else
+                {
+                    dataGridConsultaCanjes.Visible = false;
+                    emptyCanjes.Visible = true;
+                }
             }
             else
                 MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -85,7 +117,7 @@ namespace AerolineaFrba.Consulta_Millas
             FormInicioFuncionalidades = (FormInicioFuncionalidades)this.ActiveMdiChild;
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void emptyMillas_Click(object sender, EventArgs e)
         {
 
         }
