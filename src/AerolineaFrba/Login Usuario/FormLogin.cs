@@ -164,7 +164,7 @@ namespace AerolineaFrba.Login_Usuario
                     {
                         if (!usuarioHabilitado(txtUsu.Text))
                         {
-                            MessageBox.Show("Usuario inhabilitado contacte al Administrador", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Usuario erroneo o inhabilitado contacte al Administrador", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 

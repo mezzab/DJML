@@ -173,21 +173,33 @@ namespace AerolineaFrba.Registro_Llegada_Destino
                 Query qry4 = new Query("SELECT CIUD_ID FROM DJML.CIUDADES WHERE CIUD_DETALLE = '" + comboBoxCiudadOrigen.Text + "'");
                 ciudadDestino = (int)qry4.ObtenerUnicoCampo();
                
+                DateTime fechaViaje;   
+                //obtener datos viaje
+               
+                Query qry5 = new Query("SELECT VIAJE_FECHA_SALIDA FROM DJML.VIAJES WHERE VIAJE_ID = '" + viajeId + "'");
+                fechaViaje = (DateTime)qry5.ObtenerUnicoCampo();
 
 
-               //hace la insercion en la base de datos del nuevo registro generado
-                string sql1 = "INSERT INTO DJML.REGISTRO_DESTINO(RD_VIAJE_ID, RD_AERO_ID, RD_FECHA_LLEGADA, RD_CIUDAD_ORIGEN_ID, RD_CIUDAD_DESTINO_ID)"
-                                + "values (" + viajeId + " ,'" + comboBoxAeronaves.SelectedValue.ToString() + "', '"+fechaLlegada.Value.ToShortDateString() + "' , " + ciudadOrigen + ", " + ciudadDestino + " )";
-                Query qry = new Query(sql1);
-                qry.pComando = sql1;
-                qry.Ejecutar();
+                if ( fechaViaje < fechaLlegada.Value)
+                {
+                    //hace la insercion en la base de datos del nuevo registro generado
+                    string sql1 = "INSERT INTO DJML.REGISTRO_DESTINO(RD_VIAJE_ID, RD_AERO_ID, RD_FECHA_LLEGADA, RD_CIUDAD_ORIGEN_ID, RD_CIUDAD_DESTINO_ID)"
+                                    + "values (" + viajeId + " ,'" + comboBoxAeronaves.SelectedValue.ToString() + "', '" + fechaLlegada.Value.ToShortDateString() + "' , " + ciudadOrigen + ", " + ciudadDestino + " )";
+                    Query qry = new Query(sql1);
+                    qry.pComando = sql1;
+                    qry.Ejecutar();
 
-                fechaLlegada.Text = "";
-                comboBoxAeronaves.Text = "";
-                comboBoxCiudadDestino.Text = "";
-                comboBoxCiudadOrigen.Text = "";
-                cargarGrid();
-                MessageBox.Show("Registro destino Generado Correctamente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    fechaLlegada.Text = "";
+                    comboBoxAeronaves.Text = "";
+                    comboBoxCiudadDestino.Text = "";
+                    comboBoxCiudadOrigen.Text = "";
+                    cargarGrid();
+                    MessageBox.Show("Registro destino Generado Correctamente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("La fecha de llegada no puede ser anterior a la del viaje", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             else
             {
