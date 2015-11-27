@@ -30,18 +30,14 @@
         {
             this.tipoDeDocumento = new System.Windows.Forms.ComboBox();
             this.botonVolver = new System.Windows.Forms.Button();
-            this.dataGridCliente = new System.Windows.Forms.DataGridView();
-            this.botonConsultar = new System.Windows.Forms.Button();
             this.textBoxDNI = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.canjear = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridProductos = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.checkBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridCliente)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProductos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,31 +52,13 @@
             // botonVolver
             // 
             this.botonVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonVolver.Location = new System.Drawing.Point(12, 375);
+            this.botonVolver.Location = new System.Drawing.Point(12, 317);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(129, 43);
             this.botonVolver.TabIndex = 17;
             this.botonVolver.Text = "Atras";
             this.botonVolver.UseVisualStyleBackColor = true;
             this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
-            // 
-            // dataGridCliente
-            // 
-            this.dataGridCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridCliente.Location = new System.Drawing.Point(12, 83);
-            this.dataGridCliente.Name = "dataGridCliente";
-            this.dataGridCliente.Size = new System.Drawing.Size(595, 129);
-            this.dataGridCliente.TabIndex = 14;
-            // 
-            // botonConsultar
-            // 
-            this.botonConsultar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.botonConsultar.Location = new System.Drawing.Point(335, 16);
-            this.botonConsultar.Name = "botonConsultar";
-            this.botonConsultar.Size = new System.Drawing.Size(88, 40);
-            this.botonConsultar.TabIndex = 13;
-            this.botonConsultar.Text = "Consultar";
-            this.botonConsultar.UseVisualStyleBackColor = true;
             // 
             // textBoxDNI
             // 
@@ -113,32 +91,27 @@
             // canjear
             // 
             this.canjear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.canjear.Location = new System.Drawing.Point(485, 375);
+            this.canjear.Location = new System.Drawing.Point(479, 317);
             this.canjear.Name = "canjear";
             this.canjear.Size = new System.Drawing.Size(122, 43);
             this.canjear.TabIndex = 12;
             this.canjear.Text = "Canjear";
             this.canjear.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.dataGridProductos);
-            this.groupBox1.Location = new System.Drawing.Point(12, 233);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(595, 124);
-            this.groupBox1.TabIndex = 20;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Productos Disponibles";
-            // 
             // dataGridProductos
             // 
             this.dataGridProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.checkBox});
-            this.dataGridProductos.Location = new System.Drawing.Point(6, 19);
+            this.dataGridProductos.Location = new System.Drawing.Point(12, 110);
             this.dataGridProductos.Name = "dataGridProductos";
-            this.dataGridProductos.Size = new System.Drawing.Size(583, 99);
+            this.dataGridProductos.Size = new System.Drawing.Size(583, 164);
             this.dataGridProductos.TabIndex = 21;
+            // 
+            // checkBox
+            // 
+            this.checkBox.HeaderText = "Seleccionar";
+            this.checkBox.Name = "checkBox";
             // 
             // button1
             // 
@@ -150,24 +123,29 @@
             this.button1.Text = "Ver canjes disponibles";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // checkBox
+            // label2
             // 
-            this.checkBox.HeaderText = "Seleccionar";
-            this.checkBox.Name = "checkBox";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(12, 77);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(81, 17);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "Productos";
             // 
             // canjeMillas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MintCream;
-            this.ClientSize = new System.Drawing.Size(619, 430);
+            this.ClientSize = new System.Drawing.Size(619, 377);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dataGridProductos);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tipoDeDocumento);
             this.Controls.Add(this.botonVolver);
-            this.Controls.Add(this.dataGridCliente);
-            this.Controls.Add(this.botonConsultar);
             this.Controls.Add(this.canjear);
             this.Controls.Add(this.textBoxDNI);
             this.Controls.Add(this.label1);
@@ -175,8 +153,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Canje Millas";
             this.Load += new System.EventHandler(this.canjeMillas_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridCliente)).EndInit();
-            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProductos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -187,15 +163,13 @@
 
         private System.Windows.Forms.ComboBox tipoDeDocumento;
         private System.Windows.Forms.Button botonVolver;
-        private System.Windows.Forms.DataGridView dataGridCliente;
-        private System.Windows.Forms.Button botonConsultar;
         private System.Windows.Forms.TextBox textBoxDNI;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button canjear;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGridProductos;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn checkBox;
+        private System.Windows.Forms.Label label2;
     }
 }
