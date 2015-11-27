@@ -328,7 +328,7 @@
             // 
             // butacaSeleccionada
             // 
-            this.butacaSeleccionada.BackColor = System.Drawing.SystemColors.Menu;
+            this.butacaSeleccionada.BackColor = System.Drawing.Color.MintCream;
             this.butacaSeleccionada.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.butacaSeleccionada.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.butacaSeleccionada.Location = new System.Drawing.Point(6, 236);
