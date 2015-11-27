@@ -21,11 +21,11 @@ namespace AerolineaFrba.Abm_Aeronave
         public static string MATRICULAPOSTA;
 
         public static string MATR;
-        public static string MODEL;
+        public static string MODE;
         public static int C_BUTA;
         public static int KG_DISP;
         public static string FABR;
-        //TODO: AGREGAR LAS VARILES QUE FALTAN
+        //TODO: AGREGAR LAS VARIABLES QUE FALTAN
 
 
         public FormAeronaveModificacion_()
@@ -90,8 +90,6 @@ namespace AerolineaFrba.Abm_Aeronave
 
         }
 
-
-
         private void FormAeronaveModificacion__Load(object sender, EventArgs e)
         {
             llenarComboTservicio();
@@ -106,9 +104,25 @@ namespace AerolineaFrba.Abm_Aeronave
             cargarAeronaves();
             comboBoxAeronaves.DropDownStyle = ComboBoxStyle.DropDownList;
 
-
         }
 
+        private bool controlarQueEsteTodoCompletado()
+        { //TODO: cambiar datos por los de este form
+
+            bool estanTodos = false;
+
+            if ( matricula.Text != "" /*&&
+            modelo.Text != "" &&
+            txtKg_disp.Text != "" &&
+            txtC_but.Text != "" &&
+            comboFab.Text != "" &&
+            comboT_serv.Text != ""*/)
+            {
+                estanTodos = true;
+            }
+
+            return estanTodos;
+        }
 
 
         private void cargarAeronaves()
@@ -161,30 +175,31 @@ namespace AerolineaFrba.Abm_Aeronave
 
         }
 
-        private void buscarDatos(string matricula) //completarDatos
+        private void buscarDatos(string matricu )
         {
-            MATR = matricula;
 
-            string sql2 = "SELECT AERO_KILOS_DISPONIBLES FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "'";
+            string sql2 = "SELECT AERO_KILOS_DISPONIBLES FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricu + "'";
             Query qry2 = new Query(sql2);
-            KG_DISP = Convert.ToInt32(qry2.ObtenerUnicoCampo());
-            /*
-            string sql3 = "SELECT AERO_MODELO FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "'";
+            KG_DISP = Convert.ToInt32(qry2.ObtenerUnicoCampo()); //******************
+
+            /*//TODO: AGREGAR LAS BUSQUEDAS QUE FALTAN Y GUARDAR LOS DATOS EN VARIABLES PUBLIC STATIC EN MAYUSCULA PARA DESPUES CARGAR Y COMPARAR 
+    
+             * string sql3 = " SELECT AERO_MODELO FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricu + "'";
             Query qry3 = new Query(sql3);
-            MODEL = qry3.ObtenerUnicoCampo().ToString();
-            
+            MODE = qry3.ObtenerUnicoCampo().ToString();
+             * 
+             * 
             string sql1 = "SELECT DESCRIPCION FROM DJML.FABRICANTES WHERE ID_FABRICANTE = (SELECT AERO_FABRICANTE FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "' ) ";
             Query qry1 = new Query(sql1);
             FABR = qry1.ObtenerUnicoCampo().ToString();
              */
 
 
-
-           // PARA CANTIDAD DE BUTACAS, POR EJEMPLO
+            // PARA CANTIDAD DE BUTACAS, POR EJEMPLO
             // tendrias que hacer un count de djml.aero_butacas filtrando por la matricula y guardarlo en C_BUTA
           
             // y asi con las demas
-            //TODO: AGREGAR LOS QUE FALTAN
+            
 
         }
 
@@ -192,7 +207,9 @@ namespace AerolineaFrba.Abm_Aeronave
         {
 
             matricula.Text = MATR;
-            kg_disponibles.Text = KG_DISP.ToString();
+            kg_disponibles.Text = KG_DISP.ToString();//************************
+            // Aca metes todas las variables que buscaste y guardaste (las mayusculas) en los textbox y combos
+
             // c_butacas.Text = C_BUTA.ToString();
             //TODO:AGREGAR LOS QUE FALTAN
         
@@ -201,12 +218,16 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void comboBoxAeronaves_SelectedIndexChanged(object sender, EventArgs e)
         {
+            MATR = comboBoxAeronaves.Text;
+            MATRICULAPOSTA = comboBoxAeronaves.Text;
+            // Cuando cambias el box, busca los datos y los carga
             buscarDatos(comboBoxAeronaves.Text);
             completarDatos();
         }
 
         private void button3_Click_1(object sender, EventArgs e)
         {
+            
             actualizarDatos();
         }
 
@@ -214,26 +235,47 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             bool seCambioAlgo = false;
 
-            if (KG_DISP.ToString() != kg_disponibles.Text )
+            if (MATR != matricula.Text)
             {
-                string qry = "update [DJML].[AERONAVES] set [AERO_KILOS_DISPONIBLES] = " + kg_disponibles.Text + " where AERO_MATRICULA = '" + MATRICULAPOSTA + "'";
+                if (existeAeronave(matricula.Text))
+                {
+                    avisar("No se pudieron actualizar los nuevos datos ingresados. Ya hay una aeronave con esa matricula.");
 
-                new Query(qry).Ejecutar();
+                    matricula.Text = MATR;
 
+                }
+
+                if (existeAeronave(matricula.Text)==false)
+                {
+                    string query = " update [DJML].[AERONAVES] set [AERO_KILOS_DISPONIBLES] = '" + kg_disponibles.Text + "' where AERO_MATRICULA = '" + MATRICULAPOSTA + "'";
+
+                    new Query(query).Ejecutar();
+                    seCambioAlgo = true;
+                }
+            }
+
+            if (KG_DISP.ToString() != kg_disponibles.Text ) //*****************
+            {
+                string query = " update [DJML].[AERONAVES] set [AERO_KILOS_DISPONIBLES] = '" + kg_disponibles.Text + "' where AERO_MATRICULA = '" + MATRICULAPOSTA + "'";
+                
+                new Query(query).Ejecutar();
                 seCambioAlgo = true;
             }
-            /*.......IF............IF .............IF......... TODO: AGREGAR LOS QUE FALTAN
-            if (MODEL != modelo.Text) 
-            {
-                string qry = "update DJML.AERONAVES set AERO_MODELO = " + modelo.Text + " where AERO_MATRICULA = '" + MATRICULAPOSTA + "'";
 
-                new Query(qry).Ejecutar();
+         
 
-                seCambioAlgo = true;
-            }*/
+            /*TODO: AGREGAR TODOS LOS IF QUE FALTAN
+           
+             */
 
             //ACA VAN TODOS LOS IF, EN DONDE PREGUNTAS SI LO QUE ESTA EN CADA TEXTBOX ES DISTINTO A LO QUE BUSCASTE (QUE LO TENES GUARDADO EN LAS VARIABLES EN MAYUSCYLA)
             //EN EL CASO DE LA MATRICULA TENES QUE PREGUNTAR TAMBIEN QUE LA QUE INGRESES, NO ESTE CARGADA YA EN EL SISTEMA... 
+
+
+
+
+
+
 
             if (seCambioAlgo)
             {
@@ -241,6 +283,16 @@ namespace AerolineaFrba.Abm_Aeronave
                 avisarBien(cambio);
             }
 
+        }
+
+        private bool existeAeronave(string matricul)
+        {
+            string sql = "SELECT AERO_MATRICULA FROM DJML.AERONAVES" +
+                          "WHERE AERO_MATRICULA = '" + matricul +"'";
+            Query qry1 = new Query(sql);
+            object obj = qry1.ObtenerUnicoCampo();
+
+            return (obj != null);
         }
 
         private void avisarBien(string quePaso)
