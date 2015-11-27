@@ -47,6 +47,7 @@ namespace AerolineaFrba.Consulta_Millas
             labelTotal.Text = "0";
             this.textBoxDNI.Clear();
             dataGridConsultaMillas.DataSource = null;
+            dataGridConsultaCanjes.DataSource = null;
 
             dataGridConsultaMillas.Visible = true;
             emptyMillas.Visible = false;
@@ -62,17 +63,20 @@ namespace AerolineaFrba.Consulta_Millas
             if (dni != string.Empty && tipo != string.Empty)
             {
                 //MILLAS CANT
-                labelTotal.Text = "1000";
+                string qryCant = "SELECT  DJML.CALCULAR_MILLAS('" + dni + "', '" + tipo + "')";
+                var resultCant = new Query(qryCant).ObtenerDataTable();
+                labelTotal.Text = resultCant.Rows[0][0].ToString();
 
                 //MILLAS GRID
-                string qryMillas = "SELECT COMPRA_FECHA as 'Fecha', COMPRA_CODIGO as 'Compra', '$ ' + cast (COMPRA_MONTO as VARCHAR(100)) as 'Importe', FLOOR(COMPRA_MONTO / 10) AS 'Millas'" +
+                string qryMillas = "SELECT COMPRA_FECHA as 'Fecha', COMPRA_CODIGO as 'Compra', '$ ' + cast (COMPRA_MONTO as VARCHAR(100)) as 'Importe', CAST(FLOOR(COMPRA_MONTO / 10) AS int) AS 'Millas'" +
                                    " FROM DJML.COMPRAS" +
                                    " JOIN DJML.VIAJES on COMPRA_VIAJE_ID = VIAJE_ID" +
                                    " JOIN DJML.CLIENTES on COMPRA_CLIE_ID = CLIE_ID" +
                                    " JOIN DJML.TIPO_DOCUMENTO td on CLIE_TIPO_DOC = ID_TIPO_DOC" +
                                    " WHERE CLIE_DNI = '" + dni + "'" +
                                    " AND td.DESCRIPCION = '" + tipo + "'" +
-                                   " AND VIAJE_FECHA_SALIDA < GETDATE()";
+                                   " AND VIAJE_FECHA_SALIDA < GETDATE()" +
+                                   " ORDER BY 1 ASC;";
 
                 var resultMillas = new Query(qryMillas).ObtenerDataTable();
                 if (resultMillas.Rows.Count != 0)
@@ -92,7 +96,8 @@ namespace AerolineaFrba.Consulta_Millas
                                    " JOIN DJML.CLIENTES on CANJ_CLIE_ID = CLIE_ID" +
                                    " JOIN DJML.TIPO_DOCUMENTO td on CLIE_TIPO_DOC = ID_TIPO_DOC" +
                                    " WHERE CLIE_DNI = '" + dni + "'" +
-                                   " AND td.DESCRIPCION = '" + tipo + "'";
+                                   " AND td.DESCRIPCION = '" + tipo + "'" +
+                                   " ORDER BY 1 ASC;";
 
                 var resultCanjes = new Query(qryCanjes).ObtenerDataTable();
                 if (resultCanjes.Rows.Count != 0)
