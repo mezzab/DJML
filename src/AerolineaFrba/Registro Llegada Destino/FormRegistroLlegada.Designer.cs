@@ -138,15 +138,17 @@
             // 
             // boton
             // 
-            this.boton.HeaderText = "Seleccionar";
+            this.boton.HeaderText = "Registrar Llegada";
             this.boton.Name = "boton";
             this.boton.ReadOnly = true;
             this.boton.Text = "Seleccionar";
+            this.boton.Width = 111;
             // 
             // FormRegistroLlegada
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(703, 325);
             this.Controls.Add(this.datos);
             this.Controls.Add(this.bnVolver);
