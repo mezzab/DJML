@@ -326,7 +326,8 @@ BEGIN
 	SELECT distinct Aeronave_Fabricante from gd_esquema.Maestra
 	where (Paquete_Codigo = 0 and Pasaje_Codigo <> 0) or (Pasaje_Codigo = 0 and Paquete_Codigo <> 0) 
 	
-	
+
+
 --============================================================
 						--TABLA AERONAVE
 --============================================================
@@ -357,6 +358,25 @@ BEGIN
 	join djml.FABRICANTES f on f.DESCRIPCION = m.Aeronave_Fabricante
 	ORDER BY 1 
 	
+--==========================================================================
+						--TABLA PERIODOS DE FUERA DE SERVICIO AERONAVES
+--==========================================================================
+
+	CREATE TABLE DJML.PERIODOS_DE_INACTIVIDAD (
+    PERI_ID    INT     IDENTITY(1,1)    PRIMARY KEY,
+    PERI_FECHA_INICIO        DATETIME			NOT NULL,
+    PERI_FECHA_FIN        DATETIME			NOT NULL
+)
+
+--========================================================================
+						--TABLA AERONAVES X PERIODOS
+--========================================================================
+
+CREATE TABLE DJML.AERONAVES_POR_PERIODOS (
+    AXP_MATRI_AERONAVE NVARCHAR(7) NOT NULL FOREIGN KEY REFERENCES DJML.AERONAVES(AERO_MATRICULA),
+    AXP_ID_PERIODO  INT NOT NULL FOREIGN KEY REFERENCES DJML.PERIODOS_DE_INACTIVIDAD(PERI_ID),
+    PRIMARY KEY(AXP_MATRI_AERONAVE,AXP_ID_PERIODO)
+)
 	
 --============================================================
 							--TABLA BUTACA
@@ -1064,6 +1084,8 @@ DROP TABLE DJML.REGISTRO_DESTINO
 DROP TABLE DJML.VIAJES
 DROP TABLE DJML.BUTACA_AERO
 DROP TABLE DJML.BUTACAS
+DROP TABLE DJML.AERONAVES_POR_PERIODOS
+DROP TABLE DJML.PERIODOS_DE_INACTIVIDAD
 DROP TABLE DJML.AERONAVES
 DROP TABLE DJML.FABRICANTES
 DROP TABLE DJML.TIPO_BUTACA
