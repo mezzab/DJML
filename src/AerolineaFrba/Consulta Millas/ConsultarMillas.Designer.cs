@@ -37,14 +37,14 @@
             this.botonVolver = new System.Windows.Forms.Button();
             this.tipoDeDocumento = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridConsultaCanjes = new System.Windows.Forms.DataGridView();
             this.labelTotal = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.emptyCanjes = new System.Windows.Forms.Label();
             this.emptyMillas = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConsultaMillas)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridConsultaCanjes)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -104,7 +104,6 @@
             this.labelDetalle.Size = new System.Drawing.Size(55, 17);
             this.labelDetalle.TabIndex = 5;
             this.labelDetalle.Text = "Total :";
-            this.labelDetalle.Click += new System.EventHandler(this.label2_Click);
             // 
             // botonVolver
             // 
@@ -134,13 +133,13 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "Tipo de Documento";
             // 
-            // dataGridView1
+            // dataGridConsultaCanjes
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(412, 140);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(292, 150);
-            this.dataGridView1.TabIndex = 10;
+            this.dataGridConsultaCanjes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridConsultaCanjes.Location = new System.Drawing.Point(412, 140);
+            this.dataGridConsultaCanjes.Name = "dataGridConsultaCanjes";
+            this.dataGridConsultaCanjes.Size = new System.Drawing.Size(292, 150);
+            this.dataGridConsultaCanjes.TabIndex = 10;
             // 
             // labelTotal
             // 
@@ -149,10 +148,8 @@
             this.labelTotal.ForeColor = System.Drawing.Color.Black;
             this.labelTotal.Location = new System.Drawing.Point(586, 26);
             this.labelTotal.Name = "labelTotal";
-            this.labelTotal.Size = new System.Drawing.Size(97, 31);
+            this.labelTotal.Size = new System.Drawing.Size(0, 31);
             this.labelTotal.TabIndex = 11;
-            this.labelTotal.Text = "Total :";
-            this.labelTotal.Visible = false;
             // 
             // label2
             // 
@@ -179,24 +176,27 @@
             // emptyCanjes
             // 
             this.emptyCanjes.AutoSize = true;
-            this.emptyCanjes.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold);
+            this.emptyCanjes.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
             this.emptyCanjes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.emptyCanjes.Location = new System.Drawing.Point(513, 195);
+            this.emptyCanjes.Location = new System.Drawing.Point(457, 201);
             this.emptyCanjes.Name = "emptyCanjes";
-            this.emptyCanjes.Size = new System.Drawing.Size(0, 31);
+            this.emptyCanjes.Size = new System.Drawing.Size(213, 25);
             this.emptyCanjes.TabIndex = 15;
+            this.emptyCanjes.Text = "Nunca realizo canjes";
             this.emptyCanjes.Visible = false;
             // 
             // emptyMillas
             // 
             this.emptyMillas.AutoSize = true;
-            this.emptyMillas.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold);
+            this.emptyMillas.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
             this.emptyMillas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.emptyMillas.Location = new System.Drawing.Point(132, 195);
+            this.emptyMillas.Location = new System.Drawing.Point(44, 201);
             this.emptyMillas.Name = "emptyMillas";
-            this.emptyMillas.Size = new System.Drawing.Size(0, 31);
+            this.emptyMillas.Size = new System.Drawing.Size(275, 25);
             this.emptyMillas.TabIndex = 16;
+            this.emptyMillas.Text = "No tiene millas acumuladas";
             this.emptyMillas.Visible = false;
+            this.emptyMillas.Click += new System.EventHandler(this.emptyMillas_Click);
             // 
             // ConsultarMillas
             // 
@@ -209,7 +209,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.labelTotal);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridConsultaCanjes);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tipoDeDocumento);
             this.Controls.Add(this.botonVolver);
@@ -224,7 +224,7 @@
             this.Text = "Consulte Millas";
             this.Load += new System.EventHandler(this.ConsultarMillas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConsultaMillas)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridConsultaCanjes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,7 +241,7 @@
         private System.Windows.Forms.Button botonVolver;
         private System.Windows.Forms.ComboBox tipoDeDocumento;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridConsultaCanjes;
         private System.Windows.Forms.Label labelTotal;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
