@@ -32,11 +32,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBoxAeronaves = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ffin = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.finicio = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +44,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(31, 215);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 34);
+            this.button2.Size = new System.Drawing.Size(75, 42);
             this.button2.TabIndex = 7;
             this.button2.Text = "Volver";
             this.button2.UseVisualStyleBackColor = true;
@@ -61,12 +61,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(163, 215);
+            this.button1.Location = new System.Drawing.Point(147, 215);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 34);
+            this.button1.Size = new System.Drawing.Size(91, 42);
             this.button1.TabIndex = 5;
-            this.button1.Text = "Aceptar";
+            this.button1.Text = "Dar de baja";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // comboBoxAeronaves
             // 
@@ -75,16 +76,33 @@
             this.comboBoxAeronaves.Name = "comboBoxAeronaves";
             this.comboBoxAeronaves.Size = new System.Drawing.Size(207, 21);
             this.comboBoxAeronaves.TabIndex = 4;
+            this.comboBoxAeronaves.SelectedIndexChanged += new System.EventHandler(this.comboBoxAeronaves_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 62);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Fecha Fin ";
+            // 
+            // ffin
+            // 
+            this.ffin.Location = new System.Drawing.Point(7, 78);
+            this.ffin.Name = "ffin";
+            this.ffin.Size = new System.Drawing.Size(200, 20);
+            this.ffin.TabIndex = 3;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dateTimePicker2);
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
+            this.groupBox1.Controls.Add(this.ffin);
+            this.groupBox1.Controls.Add(this.finicio);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(31, 81);
+            this.groupBox1.Location = new System.Drawing.Point(24, 81);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(210, 112);
+            this.groupBox1.Size = new System.Drawing.Size(221, 112);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Periodo";
@@ -98,35 +116,19 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Fecha inicio";
             // 
-            // label3
+            // finicio
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 62);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Fecha Fin ";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(7, 36);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 2;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(7, 78);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 3;
+            this.finicio.Location = new System.Drawing.Point(7, 36);
+            this.finicio.Name = "finicio";
+            this.finicio.Size = new System.Drawing.Size(200, 20);
+            this.finicio.TabIndex = 2;
             // 
             // FormBajaFueraServicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MintCream;
-            this.ClientSize = new System.Drawing.Size(278, 261);
+            this.ClientSize = new System.Drawing.Size(272, 276);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
@@ -134,7 +136,7 @@
             this.Controls.Add(this.comboBoxAeronaves);
             this.Name = "FormBajaFueraServicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormBajaFueraServicio";
+            this.Text = "Baja fuera de servicio";
             this.Load += new System.EventHandler(this.FormBajaFueraServicio_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -149,10 +151,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBoxAeronaves;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker ffin;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DateTimePicker finicio;
         private System.Windows.Forms.Label label2;
     }
 }

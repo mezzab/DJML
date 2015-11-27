@@ -44,11 +44,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(161, 103);
+            this.button1.Location = new System.Drawing.Point(146, 103);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(79, 42);
+            this.button1.Size = new System.Drawing.Size(94, 42);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Aceptar";
+            this.button1.Text = "Dar de baja";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -83,7 +83,7 @@
             this.Controls.Add(this.comboBoxAeronaves);
             this.Name = "FormBajaCompletoVidaUtil";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Baja";
+            this.Text = "Baja fin de vida util";
             this.Load += new System.EventHandler(this.FormBajaCompletoVidaUtil_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

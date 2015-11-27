@@ -31,12 +31,11 @@ namespace AerolineaFrba.Abm_Aeronave
             this.bnBaja = new System.Windows.Forms.Button();
             this.bnModif = new System.Windows.Forms.Button();
             this.bnVolver = new System.Windows.Forms.Button();
-            this.bnListado = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bnAlta
             // 
-            this.bnAlta.Location = new System.Drawing.Point(101, 23);
+            this.bnAlta.Location = new System.Drawing.Point(101, 44);
             this.bnAlta.Name = "bnAlta";
             this.bnAlta.Size = new System.Drawing.Size(75, 23);
             this.bnAlta.TabIndex = 0;
@@ -46,7 +45,7 @@ namespace AerolineaFrba.Abm_Aeronave
             // 
             // bnBaja
             // 
-            this.bnBaja.Location = new System.Drawing.Point(101, 63);
+            this.bnBaja.Location = new System.Drawing.Point(101, 84);
             this.bnBaja.Name = "bnBaja";
             this.bnBaja.Size = new System.Drawing.Size(75, 23);
             this.bnBaja.TabIndex = 1;
@@ -56,7 +55,7 @@ namespace AerolineaFrba.Abm_Aeronave
             // 
             // bnModif
             // 
-            this.bnModif.Location = new System.Drawing.Point(101, 103);
+            this.bnModif.Location = new System.Drawing.Point(101, 124);
             this.bnModif.Name = "bnModif";
             this.bnModif.Size = new System.Drawing.Size(75, 23);
             this.bnModif.TabIndex = 2;
@@ -74,21 +73,10 @@ namespace AerolineaFrba.Abm_Aeronave
             this.bnVolver.UseVisualStyleBackColor = true;
             this.bnVolver.Click += new System.EventHandler(this.bnVolver_Click);
             // 
-            // bnListado
-            // 
-            this.bnListado.Location = new System.Drawing.Point(101, 145);
-            this.bnListado.Name = "bnListado";
-            this.bnListado.Size = new System.Drawing.Size(75, 23);
-            this.bnListado.TabIndex = 9;
-            this.bnListado.Text = "Listado";
-            this.bnListado.UseVisualStyleBackColor = true;
-            this.bnListado.Click += new System.EventHandler(this.bnListado_Click);
-            // 
             // FormAeronave
             // 
             this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Controls.Add(this.bnListado);
             this.Controls.Add(this.bnVolver);
             this.Controls.Add(this.bnModif);
             this.Controls.Add(this.bnBaja);
@@ -100,8 +88,6 @@ namespace AerolineaFrba.Abm_Aeronave
             this.ResumeLayout(false);
 
         }
-
-        private Button bnListado;
 
         private void FormAeronave_Load(object sender, EventArgs e)
         {

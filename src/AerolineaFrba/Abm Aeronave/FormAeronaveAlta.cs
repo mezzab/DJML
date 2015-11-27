@@ -120,8 +120,6 @@ namespace AerolineaFrba.Abm_Aeronave
                                             "AERO_SERVICIO_ID, " +
                                             "AERO_BAJA_FUERA_SERVICIO, " +
                                             "AERO_BAJA_VIDA_UTIL, " +
-                                            "AERO_FECHA_FUERA_SERVICIO, " +
-                                            "AERO_FECHA_REINICIO_SERVICIO, " +
                                             "AERO_FECHA_BAJA_DEF, " +
                                             "AERO_FECHA_ALTA ) " +
                                     "VALUES ('" + matricula.Text + "', " +
@@ -129,7 +127,7 @@ namespace AerolineaFrba.Abm_Aeronave
                                             "( select ID_FABRICANTE from djml.FABRICANTES where DESCRIPCION = '" + comboFab.Text + "'), " +
                                             "'" + txtKg_disp.Text + "', " +
                                             "( select serv_id from djml.servicios where SERV_DESCRIPCION = '" + comboT_serv.Text + "'), " +
-                                            " 0, 0, NULL ,NULL, NULL, ' " + aux + "' )";
+                                            " 0, 0, NULL, ' " + aux + "' )";
 
 
                         Query qry1 = new Query(sql);
