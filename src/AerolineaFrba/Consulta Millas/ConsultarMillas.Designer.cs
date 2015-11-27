@@ -33,12 +33,18 @@
             this.botonLimpiar = new System.Windows.Forms.Button();
             this.botonConsultar = new System.Windows.Forms.Button();
             this.dataGridConsultaMillas = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxTotal = new System.Windows.Forms.TextBox();
+            this.labelDetalle = new System.Windows.Forms.Label();
             this.botonVolver = new System.Windows.Forms.Button();
             this.tipoDeDocumento = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.labelTotal = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.emptyCanjes = new System.Windows.Forms.Label();
+            this.emptyMillas = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConsultaMillas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -83,36 +89,26 @@
             // dataGridConsultaMillas
             // 
             this.dataGridConsultaMillas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridConsultaMillas.Location = new System.Drawing.Point(12, 114);
+            this.dataGridConsultaMillas.Location = new System.Drawing.Point(36, 140);
             this.dataGridConsultaMillas.Name = "dataGridConsultaMillas";
             this.dataGridConsultaMillas.Size = new System.Drawing.Size(292, 150);
             this.dataGridConsultaMillas.TabIndex = 4;
             // 
-            // label2
+            // labelDetalle
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(150, 277);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 17);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Total :";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // textBoxTotal
-            // 
-            this.textBoxTotal.BackColor = System.Drawing.Color.MintCream;
-            this.textBoxTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.textBoxTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.textBoxTotal.Location = new System.Drawing.Point(204, 274);
-            this.textBoxTotal.Name = "textBoxTotal";
-            this.textBoxTotal.Size = new System.Drawing.Size(100, 23);
-            this.textBoxTotal.TabIndex = 6;
+            this.labelDetalle.AutoSize = true;
+            this.labelDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold);
+            this.labelDetalle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.labelDetalle.Location = new System.Drawing.Point(525, 38);
+            this.labelDetalle.Name = "labelDetalle";
+            this.labelDetalle.Size = new System.Drawing.Size(55, 17);
+            this.labelDetalle.TabIndex = 5;
+            this.labelDetalle.Text = "Total :";
+            this.labelDetalle.Click += new System.EventHandler(this.label2_Click);
             // 
             // botonVolver
             // 
-            this.botonVolver.Location = new System.Drawing.Point(117, 318);
+            this.botonVolver.Location = new System.Drawing.Point(320, 318);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(92, 43);
             this.botonVolver.TabIndex = 7;
@@ -138,17 +134,86 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "Tipo de Documento";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(412, 140);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(292, 150);
+            this.dataGridView1.TabIndex = 10;
+            // 
+            // labelTotal
+            // 
+            this.labelTotal.AutoSize = true;
+            this.labelTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold);
+            this.labelTotal.ForeColor = System.Drawing.Color.Black;
+            this.labelTotal.Location = new System.Drawing.Point(586, 26);
+            this.labelTotal.Name = "labelTotal";
+            this.labelTotal.Size = new System.Drawing.Size(97, 31);
+            this.labelTotal.TabIndex = 11;
+            this.labelTotal.Text = "Total :";
+            this.labelTotal.Visible = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(33, 120);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 17);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Millas";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold);
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(409, 120);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(57, 17);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Canjes";
+            // 
+            // emptyCanjes
+            // 
+            this.emptyCanjes.AutoSize = true;
+            this.emptyCanjes.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold);
+            this.emptyCanjes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.emptyCanjes.Location = new System.Drawing.Point(513, 195);
+            this.emptyCanjes.Name = "emptyCanjes";
+            this.emptyCanjes.Size = new System.Drawing.Size(0, 31);
+            this.emptyCanjes.TabIndex = 15;
+            this.emptyCanjes.Visible = false;
+            // 
+            // emptyMillas
+            // 
+            this.emptyMillas.AutoSize = true;
+            this.emptyMillas.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold);
+            this.emptyMillas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.emptyMillas.Location = new System.Drawing.Point(132, 195);
+            this.emptyMillas.Name = "emptyMillas";
+            this.emptyMillas.Size = new System.Drawing.Size(0, 31);
+            this.emptyMillas.TabIndex = 16;
+            this.emptyMillas.Visible = false;
+            // 
             // ConsultarMillas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MintCream;
-            this.ClientSize = new System.Drawing.Size(321, 373);
+            this.ClientSize = new System.Drawing.Size(727, 373);
+            this.Controls.Add(this.emptyMillas);
+            this.Controls.Add(this.emptyCanjes);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelTotal);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tipoDeDocumento);
             this.Controls.Add(this.botonVolver);
-            this.Controls.Add(this.textBoxTotal);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelDetalle);
             this.Controls.Add(this.dataGridConsultaMillas);
             this.Controls.Add(this.botonConsultar);
             this.Controls.Add(this.botonLimpiar);
@@ -159,6 +224,7 @@
             this.Text = "Consulte Millas";
             this.Load += new System.EventHandler(this.ConsultarMillas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConsultaMillas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,10 +237,15 @@
         private System.Windows.Forms.Button botonLimpiar;
         private System.Windows.Forms.Button botonConsultar;
         private System.Windows.Forms.DataGridView dataGridConsultaMillas;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxTotal;
+        private System.Windows.Forms.Label labelDetalle;
         private System.Windows.Forms.Button botonVolver;
         private System.Windows.Forms.ComboBox tipoDeDocumento;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label labelTotal;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label emptyCanjes;
+        private System.Windows.Forms.Label emptyMillas;
     }
 }

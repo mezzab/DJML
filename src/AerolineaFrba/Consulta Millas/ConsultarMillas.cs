@@ -43,35 +43,35 @@ namespace AerolineaFrba.Consulta_Millas
 
         private void botonLimpiar_Click(object sender, EventArgs e)
         {
-
             this.textBoxDNI.Clear();
             dataGridConsultaMillas.DataSource = null;
         }
 
         private void botonConsultar_Click(object sender, EventArgs e)
         {
-            String dni = this.textBoxDNI.Text;
-            if (dni != "")
-            {/*
-                DataTable tablaClientes = SqlConnector.obtenerTablaSegunConsultaString(@"select ID as Id 
-                from AERO.clientes where BAJA = 0 AND DNI = " + dni);
-                if (tablaClientes.Rows.Count > 0)
+            String dni = textBoxDNI.Text;
+            String tipo = tipoDeDocumento.Text;
+            if (dni != string.Empty && tipo != string.Empty)
+            {
+                //MILLAS
+                string qry = "SELECT COMPRA_FECHA as 'Fecha', COMPRA_ID as 'Compra', '$ ' + cast (COMPRA_MONTO as CHAR(100)) as 'Importe', FLOOR(COMPRA_MONTO / 10) AS 'Millas'" +
+                        " FROM DJML.COMPRAS" +
+                        " JOIN DJML.VIAJES on COMPRA_VIAJE_ID = VIAJE_ID" +
+                        " JOIN DJML.CLIENTES on COMPRA_CLIE_ID = CLIE_ID" +
+                        " JOIN DJML.TIPO_DOCUMENTO on CLIE_TIPO_DOC = CLIE_ID" +
+                        " WHERE CLIE_DNI = " + dni + "'" +
+                        " AND CLIE_TIPO_DOC =" + tipo + "'" +
+                        " AND VIAJE_FECHA_SALIDA < GETDATE()";
+
+                var result = new Query(qry).ObtenerDataTable();
+                if (false)
                 {
-                    List<string> lista = new List<string>();
-                    lista.Add("@dni");
-                    DataTable resultado = SqlConnector.obtenerTablaSegunProcedure("AERO.consultarMillas", lista, dni);
-                    dataGridConsultaMillas.DataSource = resultado;
-                    Int32 millas = 0;
-                    foreach (DataRow row in resultado.Rows)
-                    {
-                        millas += Int32.Parse(row.ItemArray[2].ToString());
-                    }
-                    textBoxTotal.Text = millas.ToString();
+                    
                 }
                 else
                 {
-                    MessageBox.Show("No se encuentra el cliente. Por favor ingrese nuevamente el DNI");
-                }*/
+                    MessageBox.Show("Ninguna ruta coincide con su descripción.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
                 MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
