@@ -84,7 +84,7 @@
             this.Controls.Add(this.button1);
             this.Name = "FormAeronaveBaja";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormAeronaveBaja";
+            this.Text = "Baja de aeronave";
             this.Load += new System.EventHandler(this.FormAeronaveBaja_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

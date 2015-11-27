@@ -14,6 +14,7 @@ namespace AerolineaFrba.Abm_Aeronave
 {
     public partial class FormAeronaveBaja : Form
     {
+
         public FormAeronaveBaja()
         {
             InitializeComponent();
@@ -37,7 +38,7 @@ namespace AerolineaFrba.Abm_Aeronave
         private void FormAeronaveBaja_Load(object sender, EventArgs e)
         {
             comboBoxTipoBaja.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxTipoBaja.Items.Add("COMPLETO VIDA UTIL");
+            comboBoxTipoBaja.Items.Add("COMPLETÓ VIDA UTIL");
             comboBoxTipoBaja.Items.Add("FUERA DE SERVICIO");
             
         }
@@ -46,7 +47,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(comboBoxTipoBaja.Text == "COMPLETO VIDA UTIL")
+            if(comboBoxTipoBaja.Text == "COMPLETÓ VIDA UTIL")
             {
                 this.Visible = false;
                 FormBajaCompletoVidaUtil frm = new FormBajaCompletoVidaUtil();
@@ -67,7 +68,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void comboBoxTipoBaja_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
