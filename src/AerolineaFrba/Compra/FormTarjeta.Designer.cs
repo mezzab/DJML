@@ -481,7 +481,7 @@
             // 
             // total
             // 
-            this.total.BackColor = System.Drawing.SystemColors.Menu;
+            this.total.BackColor = System.Drawing.Color.MintCream;
             this.total.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.total.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F);
             this.total.Location = new System.Drawing.Point(225, 19);

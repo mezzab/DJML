@@ -315,12 +315,12 @@
             // 
             // total
             // 
-            this.total.BackColor = System.Drawing.SystemColors.Menu;
+            this.total.BackColor = System.Drawing.Color.MintCream;
             this.total.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.total.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F);
             this.total.Location = new System.Drawing.Point(225, 19);
             this.total.Name = "total";
-            this.total.Size = new System.Drawing.Size(100, 16);
+            this.total.Size = new System.Drawing.Size(109, 16);
             this.total.TabIndex = 1;
             this.total.TextChanged += new System.EventHandler(this.total_TextChanged);
             // 

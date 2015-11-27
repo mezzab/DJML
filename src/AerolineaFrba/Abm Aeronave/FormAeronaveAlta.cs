@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using AerolineaFrba.Properties;
+using System.Globalization;
+using System.Text.RegularExpressions;
+
 
 
 namespace AerolineaFrba.Abm_Aeronave
@@ -39,6 +42,10 @@ namespace AerolineaFrba.Abm_Aeronave
             llenarComboFabricante();
             comboFab.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            f_alta.Format = DateTimePickerFormat.Custom;
+            f_alta.CustomFormat = "yyyy-dd-MM";
+            
+
 
         }
 
@@ -66,8 +73,8 @@ namespace AerolineaFrba.Abm_Aeronave
         }
         private void limpiar()
         {
-            this.txtMatri.Clear();
-            this.txtModelo.Clear();
+            this.matricula.Clear();
+            this.modelo.Clear();
             this.txtKg_disp.Clear();
             this.comboFab = null;
             this.comboT_serv = null;
@@ -77,82 +84,110 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Int32 c_butacas = 0;
-            Int32 kg_disp = 0;
-            String modelo = txtModelo.Text;
-            String matricula = txtMatri.Text;
-            Int32 fabricante = 0;
-            Int32 servicio = 0;
-
-
-            if (!faltanDatos())
+            if (controlarQueEsteTodoCompletado() == false)
             {
-                if (txtC_but.Text != ""){ 
-                    c_butacas = Int32.Parse(txtC_but.Text);
-                }
-                if (txtKg_disp.Text != ""){
-                    kg_disp = Int32.Parse(txtKg_disp.Text);
-                }
-                if (comboFab.SelectedValue != null){
-                    fabricante = (Int32)comboFab.SelectedValue;
-                }
-                if (comboT_serv.SelectedValue != null){
-                    servicio = (Int32)comboT_serv.SelectedValue;
+                MessageBox.Show("Primero debes completar todos los datos. ");
+
+            }
+
+            if (controlarQueEsteTodoCompletado()) // controla que no haya ningun dato en null
+            {
+                if (controlarNumeroDeButacasIngresado() == false)
+                {
+                    MessageBox.Show("El existen aeronaves con mas de 100 butacas.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // todo: agregar esto a la estrategia?
                 }
 
-                bool cumpleCondiciones = (c_butacas > 0 && kg_disp > 0 && fabricante > 0 && servicio > 0 && txtModelo.Text != "" && txtMatri.Text != "");
-                if (cumpleCondiciones){
+                if (controlarNumeroDeButacasIngresado()) // controla que no ingrese mas de 99 en el textbox butacas
+                {
+
+                    if (matriculaExistente())
+                    {
+                        MessageBox.Show("La matricula ya existe. Debe dar de baja la aeronave vieja, o bien puede modificarla.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
                     if (!matriculaExistente())
                     {
-                        //Inserta nueva matricula aeronave
-                        string sql_matricula = "INSERT INTO DJML.(AERO_MATRICULA, AERO_MODELO, AERO_FABRICANTE, AERO_KILOS_DISPONIBLES," +
-                            "AERO_SERVICIO_ID, AERO_BAJA_FUERA_SERVICIO, AERO_BAJA_VIDA_UTIL, AERO_FECHA_FUERA_SERVICIO, AERO_FECHA_REINICIO_SERVICIO," +
-                            "AERO_FECHA_BAJA_DEF, AERO_FECHA_ALTA ) VALUES ('" + txtMatri.Text + "', '" + txtModelo.Text + "', '" + txtKg_disp.Text + "', 0, 0, 0, NULL ,NULL NULL NULL ')";
-                        {
-                            //da el alta de la aeronave y limpia los campos para agregar otra aeronave de ser conveniente
-                            MessageBox.Show("Alta Aeronave correcta");
-                            limpiar();
-                        }
-                    }
 
+                        //variable auxiliar para ingresar bien la fecha 
+                        string aux = f_alta.Text + " 00:00:00.000";
+
+                        //Inserta nueva matricula aeronave
+                        string sql = "INSERT INTO [DJML].[AERONAVES] (AERO_MATRICULA, " +
+                                            "AERO_MODELO, " +
+                                            "AERO_FABRICANTE, " +
+                                            "AERO_KILOS_DISPONIBLES," +
+                                            "AERO_SERVICIO_ID, " +
+                                            "AERO_BAJA_FUERA_SERVICIO, " +
+                                            "AERO_BAJA_VIDA_UTIL, " +
+                                            "AERO_FECHA_FUERA_SERVICIO, " +
+                                            "AERO_FECHA_REINICIO_SERVICIO, " +
+                                            "AERO_FECHA_BAJA_DEF, " +
+                                            "AERO_FECHA_ALTA ) " +
+                                    "VALUES ('" + matricula.Text + "', " +
+                                            "'" + modelo.Text + "', " +
+                                            "( select ID_FABRICANTE from djml.FABRICANTES where DESCRIPCION = '" + comboFab.Text + "'), " +
+                                            "'" + txtKg_disp.Text + "', " +
+                                            "( select serv_id from djml.servicios where SERV_DESCRIPCION = '" + comboT_serv.Text + "'), " +
+                                            " 0, 0, NULL ,NULL, NULL, ' " + aux + "' )";
+
+
+                        Query qry1 = new Query(sql);
+                        qry1.pComando = sql;
+                        qry1.Ejecutar();
+
+                        //insert en aero_butacas de las butacas 
+                        darDeAltaButacasParaLaNuevaAeronave();
+
+                        MessageBox.Show("Se ha cargado correctamente la nueva aeronave! ", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        limpiar();
+
+                    }
                 }
+
             }
-            else
-            { 
-                
+
+          }
+
+
+        private bool controlarNumeroDeButacasIngresado()
+        {
+
+            bool variable = false;
+            if (Convert.ToInt32(txtC_but.Text) < 100)
+            {
+                variable = true;
             }
+            return variable;
         }
+
+        private void darDeAltaButacasParaLaNuevaAeronave()
+        {
+            
+            for (int i = (Convert.ToInt32(txtC_but.Text)+1); i >= 1; i--) // lo hago hasta 1, por que los ids empiezan de 1
+            {
+                string sql1 = "INSERT INTO [DJML].[BUTACA_AERO] ([BXA_BUTA_ID],[BXA_AERO_MATRICULA] ,[BXA_ESTADO]) VALUES (" + i + ", '" + matricula.Text + "' , 1 ) " ;
+              
+                Query qry1 = new Query(sql1);
+                qry1.pComando = sql1;
+                qry1.Ejecutar();
+            
+            }
+         
+        }
+
+
 
         private bool matriculaExistente()
         {
-            SqlConnection conexion = new SqlConnection();
-            conexion.ConnectionString = Settings.Default.CadenaDeConexion;
-            string mat = ("SELECT COUNT(1) AERO_MATRICULA FROM DJML.USUARIOS WHERE AERO_MATRICULA = '" + txtMatri.Text + "'");
-            if (mat.Equals(1))
-            {
-                MessageBox.Show("Matricula ya habilitada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return false;
+
+            string sql = "SELECT AERO_MATRICULA FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula.Text + "'";
+            Query qry = new Query(sql);
+            object matric = qry.ObtenerUnicoCampo();
+
+            return (matric != null);
         }
 
-        private bool faltanDatos()
-        {
-            bool condiciones = (txtMatri.Text.Length.Equals(0) || txtModelo.Text.Length.Equals(0) || txtKg_disp.Text.Length.Equals(0) || txtC_but.Text.Length.Equals(0) /* falta f_alta ts y fabricante (combos)*/);
-            string matricula;
-
-            if (!condiciones.Equals(true))
-            {
-                MessageBox.Show("Complete todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return true;
-            }
-            else
-            {
-
-            }
-
-            return false;
-
-        }
 
         private void llenarComboFabricante()
         {
@@ -186,7 +221,7 @@ namespace AerolineaFrba.Abm_Aeronave
         
         private void kg_TextChanged(object sender, EventArgs e)
         {
-
+            txtKg_disp.Text = Regex.Replace(txtKg_disp.Text, @"[^\d]", "");
         }
 
         private void matri_TextChanged(object sender, EventArgs e)
@@ -200,6 +235,52 @@ namespace AerolineaFrba.Abm_Aeronave
         }
 
         private void txtC_but_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtKg_disp_TextChanged(object sender, EventArgs e)
+        {
+         
+            //solo deja ingresar numeros
+            txtKg_disp.Text = Regex.Replace(txtKg_disp.Text, @"[^\d]", "");
+        }
+
+        private void txtC_but_TextChanged_1(object sender, EventArgs e)
+        {
+            // solo deja ingresar numeros
+            txtC_but.Text = Regex.Replace(txtC_but.Text, @"[^\d]", "");
+        }
+
+        private bool controlarQueEsteTodoCompletado()
+        {
+
+            bool estanTodos = false;
+
+            if (matricula.Text != "" &&
+            modelo.Text != "" &&
+            txtKg_disp.Text != "" &&
+            txtC_but.Text != "" &&
+            comboFab.Text != "" &&
+            comboT_serv.Text != "")
+            {
+                estanTodos = true;
+            }
+
+            return estanTodos;
+        }
+
+        private void matricula_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboT_serv_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void f_alta_ValueChanged_1(object sender, EventArgs e)
         {
 
         }
