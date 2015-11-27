@@ -38,7 +38,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(15, 86);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 41);
             this.button1.TabIndex = 0;
             this.button1.Text = "Volver";
             this.button1.UseVisualStyleBackColor = true;
@@ -48,7 +48,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(155, 86);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(75, 41);
             this.button2.TabIndex = 1;
             this.button2.Text = "Aceptar";
             this.button2.UseVisualStyleBackColor = true;
@@ -77,7 +77,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MintCream;
-            this.ClientSize = new System.Drawing.Size(246, 126);
+            this.ClientSize = new System.Drawing.Size(246, 147);
             this.Controls.Add(this.comboBoxTipoBaja);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);

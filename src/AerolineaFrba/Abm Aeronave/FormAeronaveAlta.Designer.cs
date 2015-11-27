@@ -60,9 +60,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(151, 304);
+            this.button3.Location = new System.Drawing.Point(30, 298);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(75, 39);
             this.button3.TabIndex = 9;
             this.button3.Text = "Volver";
             this.button3.UseVisualStyleBackColor = true;
@@ -70,9 +70,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(243, 304);
+            this.button1.Location = new System.Drawing.Point(264, 298);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(92, 39);
             this.button1.TabIndex = 10;
             this.button1.Text = "Dar de alta";
             this.button1.UseVisualStyleBackColor = true;
@@ -80,9 +80,9 @@
             // 
             // bn
             // 
-            this.bn.Location = new System.Drawing.Point(55, 304);
+            this.bn.Location = new System.Drawing.Point(124, 298);
             this.bn.Name = "bn";
-            this.bn.Size = new System.Drawing.Size(75, 23);
+            this.bn.Size = new System.Drawing.Size(75, 39);
             this.bn.TabIndex = 11;
             this.bn.Text = "Limpiar";
             this.bn.UseVisualStyleBackColor = true;
