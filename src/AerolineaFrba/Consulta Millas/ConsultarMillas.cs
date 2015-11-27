@@ -65,7 +65,7 @@ namespace AerolineaFrba.Consulta_Millas
                 labelTotal.Text = "1000";
 
                 //MILLAS GRID
-                string qryMillas = "SELECT COMPRA_FECHA as 'Fecha', COMPRA_ID as 'Compra', '$ ' + cast (COMPRA_MONTO as CHAR(100)) as 'Importe', FLOOR(COMPRA_MONTO / 10) AS 'Millas'" +
+                string qryMillas = "SELECT COMPRA_FECHA as 'Fecha', COMPRA_CODIGO as 'Compra', '$ ' + cast (COMPRA_MONTO as VARCHAR(100)) as 'Importe', FLOOR(COMPRA_MONTO / 10) AS 'Millas'" +
                                    " FROM DJML.COMPRAS" +
                                    " JOIN DJML.VIAJES on COMPRA_VIAJE_ID = VIAJE_ID" +
                                    " JOIN DJML.CLIENTES on COMPRA_CLIE_ID = CLIE_ID" +
@@ -118,6 +118,11 @@ namespace AerolineaFrba.Consulta_Millas
         }
 
         private void emptyMillas_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelDetalle_Click(object sender, EventArgs e)
         {
 
         }

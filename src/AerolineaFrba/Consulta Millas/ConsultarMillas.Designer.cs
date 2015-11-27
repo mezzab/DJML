@@ -91,7 +91,7 @@
             this.dataGridConsultaMillas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridConsultaMillas.Location = new System.Drawing.Point(36, 140);
             this.dataGridConsultaMillas.Name = "dataGridConsultaMillas";
-            this.dataGridConsultaMillas.Size = new System.Drawing.Size(292, 150);
+            this.dataGridConsultaMillas.Size = new System.Drawing.Size(507, 165);
             this.dataGridConsultaMillas.TabIndex = 4;
             // 
             // labelDetalle
@@ -99,15 +99,16 @@
             this.labelDetalle.AutoSize = true;
             this.labelDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold);
             this.labelDetalle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.labelDetalle.Location = new System.Drawing.Point(525, 38);
+            this.labelDetalle.Location = new System.Drawing.Point(341, 53);
             this.labelDetalle.Name = "labelDetalle";
             this.labelDetalle.Size = new System.Drawing.Size(55, 17);
             this.labelDetalle.TabIndex = 5;
             this.labelDetalle.Text = "Total :";
+            this.labelDetalle.Click += new System.EventHandler(this.labelDetalle_Click);
             // 
             // botonVolver
             // 
-            this.botonVolver.Location = new System.Drawing.Point(320, 318);
+            this.botonVolver.Location = new System.Drawing.Point(231, 519);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(92, 43);
             this.botonVolver.TabIndex = 7;
@@ -136,9 +137,9 @@
             // dataGridConsultaCanjes
             // 
             this.dataGridConsultaCanjes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridConsultaCanjes.Location = new System.Drawing.Point(412, 140);
+            this.dataGridConsultaCanjes.Location = new System.Drawing.Point(36, 352);
             this.dataGridConsultaCanjes.Name = "dataGridConsultaCanjes";
-            this.dataGridConsultaCanjes.Size = new System.Drawing.Size(292, 150);
+            this.dataGridConsultaCanjes.Size = new System.Drawing.Size(507, 150);
             this.dataGridConsultaCanjes.TabIndex = 10;
             // 
             // labelTotal
@@ -146,7 +147,7 @@
             this.labelTotal.AutoSize = true;
             this.labelTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold);
             this.labelTotal.ForeColor = System.Drawing.Color.Black;
-            this.labelTotal.Location = new System.Drawing.Point(586, 26);
+            this.labelTotal.Location = new System.Drawing.Point(402, 39);
             this.labelTotal.Name = "labelTotal";
             this.labelTotal.Size = new System.Drawing.Size(0, 31);
             this.labelTotal.TabIndex = 11;
@@ -167,7 +168,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(409, 120);
+            this.label4.Location = new System.Drawing.Point(33, 332);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(57, 17);
             this.label4.TabIndex = 13;
@@ -176,11 +177,11 @@
             // emptyCanjes
             // 
             this.emptyCanjes.AutoSize = true;
-            this.emptyCanjes.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
+            this.emptyCanjes.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold);
             this.emptyCanjes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.emptyCanjes.Location = new System.Drawing.Point(457, 201);
+            this.emptyCanjes.Location = new System.Drawing.Point(107, 396);
             this.emptyCanjes.Name = "emptyCanjes";
-            this.emptyCanjes.Size = new System.Drawing.Size(213, 25);
+            this.emptyCanjes.Size = new System.Drawing.Size(354, 39);
             this.emptyCanjes.TabIndex = 15;
             this.emptyCanjes.Text = "Nunca realizo canjes";
             this.emptyCanjes.Visible = false;
@@ -188,11 +189,11 @@
             // emptyMillas
             // 
             this.emptyMillas.AutoSize = true;
-            this.emptyMillas.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
+            this.emptyMillas.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold);
             this.emptyMillas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.emptyMillas.Location = new System.Drawing.Point(44, 201);
+            this.emptyMillas.Location = new System.Drawing.Point(56, 197);
             this.emptyMillas.Name = "emptyMillas";
-            this.emptyMillas.Size = new System.Drawing.Size(275, 25);
+            this.emptyMillas.Size = new System.Drawing.Size(460, 39);
             this.emptyMillas.TabIndex = 16;
             this.emptyMillas.Text = "No tiene millas acumuladas";
             this.emptyMillas.Visible = false;
@@ -203,7 +204,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MintCream;
-            this.ClientSize = new System.Drawing.Size(727, 373);
+            this.ClientSize = new System.Drawing.Size(578, 574);
             this.Controls.Add(this.emptyMillas);
             this.Controls.Add(this.emptyCanjes);
             this.Controls.Add(this.label4);
