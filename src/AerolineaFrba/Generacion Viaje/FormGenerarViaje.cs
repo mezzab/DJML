@@ -156,7 +156,7 @@ namespace AerolineaFrba.Generacion_Viaje
             conexion.ConnectionString = Settings.Default.CadenaDeConexion;
 
             DataSet ds = new DataSet();
-            SqlDataAdapter da = new SqlDataAdapter("select distinct AERO_MATRICULA from DJML.AERONAVES a where a.AERO_BAJA_FUERA_SERVICIO = 0 and a.AERO_BAJA_VIDA_UTIL = 0 and a.AERO_MATRICULA not in (select v.VIAJE_AERO_ID from DJML.VIAJES v where datepart(YEAR,VIAJE_FECHA_SALIDA) = '" + fechaSalida.Value.Year + "' and DATEPART(MONTH,VIAJE_FECHA_SALIDA) = '" + fechaSalida.Value.Month + "' and DATEPART(DAY,VIAJE_FECHA_SALIDA) =  '" + fechaSalida.Value.Day + "' and DATEPART(YEAR,VIAJE_FECHA_LLEGADA) = '" + fechaSalida.Value.Year + "' and DATEPART(MONTH,VIAJE_FECHA_LLEGADA) = '" + fechaSalida.Value.Month + "'  and DATEPART(DAY,VIAJE_FECHA_LLEGADA) =  '" + fechaSalida.Value.Day + "')", conexion);
+            SqlDataAdapter da = new SqlDataAdapter("select distinct AERO_MATRICULA from DJML.AERONAVES a where a.AERO_BAJA_FUERA_SERVICIO = 0 and a.AERO_BAJA_VIDA_UTIL = 0 and a.AERO_MATRICULA not in (select v.VIAJE_AERO_ID from DJML.VIAJES v where datepart(YEAR,VIAJE_FECHA_SALIDA) = '" + fechaSalida.Value.Year + "' and DATEPART(MONTH,VIAJE_FECHA_SALIDA) = '" + fechaSalida.Value.Month + "' and DATEPART(DAY,VIAJE_FECHA_SALIDA) =  '" + fechaSalida.Value.Day + "' and DATEPART(YEAR,VIAJE_FECHA_LLEGADA) = '" + fechaLlegada.Value.Year + "' and DATEPART(MONTH,VIAJE_FECHA_LLEGADA) = '" + fechaLlegada.Value.Month + "'  and DATEPART(DAY,VIAJE_FECHA_LLEGADA) =  '" + fechaLlegada.Value.Day + "')", conexion);
             da.Fill(ds, "DJML.AERONAVES");
 
             comboBoxAeronaves.DataSource = ds.Tables[0].DefaultView;

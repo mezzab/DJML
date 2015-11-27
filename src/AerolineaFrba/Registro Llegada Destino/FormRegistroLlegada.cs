@@ -37,7 +37,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             conexion.ConnectionString = Settings.Default.CadenaDeConexion;
 
 
-            Query qry7 = new Query("select v.viaje_id  from djml.viajes v "
+            Query qry7 = new Query("select v.viaje_id as Codigo_Viaje, c1.ciud_detalle as Ciudad_Origen, c2.ciud_detalle as Ciudad_Destino from djml.viajes v "
             + " join djml.rutas r on v.viaje_ruta_id = r.ruta_codigo"
             + " join djml.tramos t on r.ruta_tramo = t.tramo_id "
             + " join djml.ciudades c1 on t.tramo_ciudad_origen = c1.ciud_id"
@@ -48,7 +48,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             + " and v.viaje_id not in (select rd_viaje_id from djml.registro_destino)");
 
             datos.DataSource = qry7.ObtenerDataTable();
-
+            
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -177,14 +177,16 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
                //hace la insercion en la base de datos del nuevo registro generado
                 string sql1 = "INSERT INTO DJML.REGISTRO_DESTINO(RD_VIAJE_ID, RD_AERO_ID, RD_FECHA_LLEGADA, RD_CIUDAD_ORIGEN_ID, RD_CIUDAD_DESTINO_ID)"
-                                + "values (" + viajeId +" ,'" + comboBoxAeronaves.SelectedValue.ToString() + "', "+ciudadOrigen+", "+ciudadDestino+" )";
+                                + "values (" + viajeId + " ,'" + comboBoxAeronaves.SelectedValue.ToString() + "', '"+fechaLlegada.Value.ToShortDateString() + "' , " + ciudadOrigen + ", " + ciudadDestino + " )";
                 Query qry = new Query(sql1);
                 qry.pComando = sql1;
                 qry.Ejecutar();
-                
 
-
-
+                fechaLlegada.Text = "";
+                comboBoxAeronaves.Text = "";
+                comboBoxCiudadDestino.Text = "";
+                comboBoxCiudadOrigen.Text = "";
+                cargarGrid();
                 MessageBox.Show("Registro destino Generado Correctamente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
