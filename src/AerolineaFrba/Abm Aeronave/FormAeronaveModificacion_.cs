@@ -306,6 +306,20 @@ namespace AerolineaFrba.Abm_Aeronave
             MessageBox.Show(quePaso, "AVISO! ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
+        private void kg_disponibles_TextChanged(object sender, EventArgs e)
+        {
+
+            //solo deja ingresar numeros
+            kg_disponibles.Text = Regex.Replace(kg_disponibles.Text, @"[^\d]", "");
+        }
+
+        private void c_butacas_TextChanged(object sender, EventArgs e)
+        {
+
+            //solo deja ingresar numeros
+            c_butacas.Text = Regex.Replace(c_butacas.Text, @"[^\d]", "");
+        }
+
 
 
     }

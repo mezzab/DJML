@@ -134,6 +134,7 @@
             this.c_butacas.Name = "c_butacas";
             this.c_butacas.Size = new System.Drawing.Size(121, 20);
             this.c_butacas.TabIndex = 14;
+            this.c_butacas.TextChanged += new System.EventHandler(this.c_butacas_TextChanged);
             // 
             // t_servicio
             // 
@@ -150,6 +151,7 @@
             this.kg_disponibles.Name = "kg_disponibles";
             this.kg_disponibles.Size = new System.Drawing.Size(121, 20);
             this.kg_disponibles.TabIndex = 16;
+            this.kg_disponibles.TextChanged += new System.EventHandler(this.kg_disponibles_TextChanged);
             // 
             // label9
             // 
