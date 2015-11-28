@@ -38,6 +38,11 @@ namespace AerolineaFrba.Canje_Millas
     {
 
         public static string producto;
+        public static string producto_id;
+        public static int millas;
+        public static int stock;
+        public static string dni;
+        public static string tipo;
 
         public canjeMillas()
         {
@@ -72,7 +77,7 @@ namespace AerolineaFrba.Canje_Millas
 
         public void LlenarGridProductos() 
         {
-            string qry = "SELECT PROD_NOMBRE as 'Producto', PROD_MILLAS_REQUERIDAS as 'Millas Requeridas', PROD_STOCK as 'Stock'" +
+            string qry = "SELECT PROD_ID as 'Codigo', PROD_NOMBRE as 'Producto', PROD_MILLAS_REQUERIDAS as 'Millas Requeridas', PROD_STOCK as 'Stock'" +
                          " FROM DJML.PRODUCTO";
 
             var result = new Query(qry).ObtenerDataTable();
@@ -87,62 +92,93 @@ namespace AerolineaFrba.Canje_Millas
             FormInicioFuncionalidades = (FormInicioFuncionalidades)this.ActiveMdiChild;
         }
 
-        private void botonConsultar_Click(object sender, EventArgs e)
-        {
-            String dni = textBoxDNI.Text;
-            String tipo = tipoDeDocumento.Text;
+        private void button1_Click(object sender, EventArgs e)
+        {   
+            //Limpio datos para el canje
+            producto = null;
+            producto_id = null;
+            millas = 0;
+            stock = 0;
+            canjear.Enabled = false;
+
+            dni = textBoxDNI.Text;
+            tipo = tipoDeDocumento.Text;
             if (dni != string.Empty && tipo != string.Empty)
             {
-               string qryMillas = "SELECT COMPRA_FECHA as 'Fecha', COMPRA_CODIGO as 'Compra', '$ ' + cast (COMPRA_MONTO as VARCHAR(100)) as 'Importe', FLOOR(COMPRA_MONTO / 10) AS 'Millas'" +
-                                   " FROM DJML.COMPRAS" +
-                                   " JOIN DJML.VIAJES on COMPRA_VIAJE_ID = VIAJE_ID" +
-                                   " JOIN DJML.CLIENTES on COMPRA_CLIE_ID = CLIE_ID" +
-                                   " JOIN DJML.TIPO_DOCUMENTO td on CLIE_TIPO_DOC = ID_TIPO_DOC" +
-                                   " WHERE CLIE_DNI = '" + dni + "'" +
-                                   " AND td.DESCRIPCION = '" + tipo + "'" +
-                                   " AND VIAJE_FECHA_SALIDA < GETDATE()";
+                string qry = "SELECT PROD_ID as 'Codigo', PROD_NOMBRE as 'Producto', PROD_MILLAS_REQUERIDAS as 'Millas Requeridas', PROD_STOCK as 'Stock'" +
+                          " FROM DJML.PRODUCTO" +
+                          " WHERE PROD_MILLAS_REQUERIDAS < DJML.CALCULAR_MILLAS('" + dni + "', '" + tipo + "')";
 
-                var resultMillas = new Query(qryMillas).ObtenerDataTable();
-                dataGridProductos.DataSource = resultMillas;
+                var result = new Query(qry).ObtenerDataTable();
+                if (result.Rows.Count != 0)
+                {
+                    dataGridProductos.DataSource = result;
+                }
+                else
+                {
+                    MessageBox.Show("Usted no posee millas suficientes para ningun canje", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
             else
                 MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
+        }  
 
         private void dataGridProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // le puse .Cells[0] por que supuse que el nombre esta en la primer columna, pero si esta en otra cambialo
-            producto = dataGridProductos.Rows[e.RowIndex].Cells[0].Value.ToString();
-            // aca lo ideal es que te guardes el ide tambien
+            producto_id = dataGridProductos.Rows[e.RowIndex].Cells[1].Value.ToString();
+            producto = dataGridProductos.Rows[e.RowIndex].Cells[2].Value.ToString();
+            millas = Int32.Parse(dataGridProductos.Rows[e.RowIndex].Cells[3].Value.ToString());
+            stock = Int32.Parse(dataGridProductos.Rows[e.RowIndex].Cells[4].Value.ToString());
 
-            //muestro abajo del grid el que selecciono
-            productoSeleccionado.Text = "Seleccionaste el producto " + productoSeleccionado+ "  " ;
+            productoSeleccionado.Text = "Seleccionaste el producto " + producto + "  " ;
             productoSeleccionado.Visible = true;
             cantidad.Visible = true;
             cantidadLabel.Visible = true;
 
-
             canjear.Enabled = true;
-
-        }
-
-        private void productoSeleccionado_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void canjear_Click(object sender, EventArgs e)
         {
 
-            if ( cantidad.Text == "") 
-            { 
-                    //messagebox "debe ingresar una cantidad"
-            }
-            if ( cantidad.Text == "") 
+            if ( cantidad.Text == string.Empty) 
             {
-                //todo lo demas
-            
+                MessageBox.Show("Debe ingresar una cantidad", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else
+            {
+                string qryCant = "SELECT  DJML.CALCULAR_MILLAS('" + dni + "', '" + tipo + "')";
+                var resultCant = new Query(qryCant).ObtenerDataTable();
+                int resultado = Int32.Parse(resultCant.Rows[0][0].ToString());
+                int cant = Int32.Parse(cantidad.Text);
+                if (stock < cant){
+                    MessageBox.Show("Lo sentimos pero no disponemos de stock suficiente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } 
+                else if (resultado < millas*cant) {
+                    MessageBox.Show("Lo sentimos pero no dispone de suficientes millas para canjear", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } else {
+
+                    string insert_canje = "INSERT INTO DJML.CANJES (CANJ_CLIE_ID, CANJ_PRODUCTO_ID, CANJ_CANTIDAD, CANJ_FECHA_CANJE, CANJ_MILLAS_USADAS)" +
+                                     " SELECT CLIE_ID, " + producto_id + ", " + cantidad.Text + ", GETDATE(), " + (millas*cant) +
+                                     " FROM DJML.CLIENTES" +
+                                     " JOIN DJML.TIPO_DOCUMENTO td on CLIE_TIPO_DOC = ID_TIPO_DOC" +
+                                     " WHERE CLIE_DNI = '" + dni + "'" +
+                                     " AND td.DESCRIPCION = '" + tipo + "'";
+                    new Query(insert_canje).Ejecutar();
+
+                    string update_productos = "UPDATE DJML.PRODUCTO SET PROD_STOCK = PROD_STOCK - " + cant +  "WHERE PROD_ID = " + producto_id;
+                    new Query(update_productos).Ejecutar();
+
+                    MessageBox.Show("Felicitaciones! Pase por la ventanilla de al lado para retirar sus productos", "Felicitaciones!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    FormInicioFuncionalidades FormInicioFuncionalidades = new FormInicioFuncionalidades();
+                    this.Hide();
+                    FormInicioFuncionalidades.ShowDialog();
+                    FormInicioFuncionalidades = (FormInicioFuncionalidades)this.ActiveMdiChild;
+                }
+            }
+
 
         }
 
@@ -152,11 +188,5 @@ namespace AerolineaFrba.Canje_Millas
            cantidad.Text = Regex.Replace(cantidad.Text, @"[^\d]", "");
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-
-
-        }
     }
 }
