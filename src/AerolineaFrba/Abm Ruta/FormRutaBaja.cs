@@ -79,23 +79,31 @@ namespace AerolineaFrba.Abm_Ruta
             string RutaCodigo = dataGrid.Rows[e.RowIndex].Cells[1].Value.ToString();
 
             darBajaRuta(RutaCodigo);
-
-            MessageBox.Show("Se ha dado de baja la ruta de codigo " + RutaCodigo + " correctamente", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            button_volver_Click(sender, e);
-
         }
 
         private void darBajaRuta(string codigo)
-        {
+        {   
+            string qry = "SELECT 1 FROM DJML.VIAJES" +
+                        " JOIN DJML.RUTAS ON VIAJE_RUTA_ID = RUTA_CODIGO" +
+                        " WHERE where r.RUTA_CODIGO = " + codigo +
+                        " AND GETDATE() BETWEEN VIAJE_FECHA_SALIDA AND v.VIAJE_FECHA_LLEGADA_ESTIMADA";
 
-            string qry = "update DJML.RUTAS" +
+            var result = new Query(qry).ObtenerDataTable();
+            if (result.Rows.Count != 0)
+            {
+                MessageBox.Show("Esta ruta esta en uso, no se puede dar de baja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                //CANCELACIONES -- TODO
+
+                string qry_update = "update DJML.RUTAS" +
                           " set RUTA_IS_ACTIVE = 0 " +
                           " where RUTA_CODIGO = " + codigo;
+                new Query(qry_update).Ejecutar();
 
-
-            new Query(qry).Ejecutar();
-
+                MessageBox.Show("Se ha dado de baja la ruta de codigo " + codigo + " correctamente", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void button_buscar_Click(object sender, EventArgs e)
