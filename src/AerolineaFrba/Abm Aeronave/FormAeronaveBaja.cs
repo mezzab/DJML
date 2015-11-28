@@ -14,6 +14,7 @@ namespace AerolineaFrba.Abm_Aeronave
 {
     public partial class FormAeronaveBaja : Form
     {
+        public static string tipo;
 
         public FormAeronaveBaja()
         {
@@ -49,6 +50,8 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             if(comboBoxTipoBaja.Text == "COMPLETÓ VIDA UTIL")
             {
+
+                tipo = "VIDA";
                 this.Visible = false;
                 FormBajaCompletoVidaUtil frm = new FormBajaCompletoVidaUtil();
                 frm.ShowDialog();
@@ -57,6 +60,7 @@ namespace AerolineaFrba.Abm_Aeronave
             else
             if(comboBoxTipoBaja.Text == "FUERA DE SERVICIO")
             {
+                tipo = "SERVICIO";
                 this.Visible = false;
                 FormBajaFueraServicio frm = new FormBajaFueraServicio();
                 frm.ShowDialog();

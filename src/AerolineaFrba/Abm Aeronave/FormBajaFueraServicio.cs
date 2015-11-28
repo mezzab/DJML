@@ -16,7 +16,9 @@ namespace AerolineaFrba.Abm_Aeronave
 {
     public partial class FormBajaFueraServicio : Form
     {
-        public static string MATRICULASELECCIONADA;
+        public static string MATRICULASERVICIO;
+        public static string inicio;
+        public static string fin;
 
         public FormBajaFueraServicio()
         {
@@ -68,8 +70,8 @@ namespace AerolineaFrba.Abm_Aeronave
         {
          if (comboBoxAeronaves.Text != "")
             {
-                string inicio = finicio.Text + " 00:00:00.000";
-                string fin = ffin.Text + " 00:00:00.000";
+                 inicio = finicio.Text + " 00:00:00.000";
+                 fin = ffin.Text + " 00:00:00.000";
 
                 /*
                 TODO: FIJARSE SI LA AERONAVE TIENE RUTAS (O VIAJES, NOSE) PROGRAMADOS ENTRE LAS FECHAS (inicio y fin)
@@ -99,19 +101,18 @@ namespace AerolineaFrba.Abm_Aeronave
 
                 //relaciono el periodo con la aeronave
                 string qry3 = " INSERT INTO [DJML].[AERONAVES_POR_PERIODOS] ([AXP_MATRI_AERONAVE],[AXP_ID_PERIODO]) " +
-                                " VALUES('" + MATRICULASELECCIONADA + "' , " + periodo_id + ")";
+                                " VALUES('" + MATRICULASERVICIO + "' , " + periodo_id + ")";
                 new Query(qry3).Ejecutar();
 
-             
-                MessageBox.Show("Aeronave inhabilitada exitosamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
 
                 this.Visible = false;
 
-                FormInicioFuncionalidades funcionalidades = new FormInicioFuncionalidades();
+                Form funcionalidades = new FormBajaFinal();
                 this.Hide();
                 funcionalidades.ShowDialog();
-                funcionalidades = (FormInicioFuncionalidades)this.ActiveMdiChild;
-
+                funcionalidades = (FormBajaFinal)this.ActiveMdiChild;
 
             }
             else
@@ -124,7 +125,15 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void comboBoxAeronaves_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MATRICULASELECCIONADA = comboBoxAeronaves.Text;
+            MATRICULASERVICIO = comboBoxAeronaves.Text;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FormAeronaveBaja funcionalidades = new FormAeronaveBaja();
+            this.Hide();
+            funcionalidades.ShowDialog();
+            funcionalidades = (FormAeronaveBaja)this.ActiveMdiChild;
         }
     }
 }

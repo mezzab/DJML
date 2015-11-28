@@ -35,24 +35,25 @@
             this.label3 = new System.Windows.Forms.Label();
             this.ffin = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.finicio = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(31, 215);
+            this.button2.Location = new System.Drawing.Point(65, 217);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 42);
             this.button2.TabIndex = 7;
             this.button2.Text = "Volver";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 26);
+            this.label1.Location = new System.Drawing.Point(59, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(227, 13);
             this.label1.TabIndex = 6;
@@ -61,7 +62,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(147, 215);
+            this.button1.Location = new System.Drawing.Point(181, 217);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(91, 42);
             this.button1.TabIndex = 5;
@@ -72,7 +73,7 @@
             // comboBoxAeronaves
             // 
             this.comboBoxAeronaves.FormattingEnabled = true;
-            this.comboBoxAeronaves.Location = new System.Drawing.Point(31, 45);
+            this.comboBoxAeronaves.Location = new System.Drawing.Point(65, 47);
             this.comboBoxAeronaves.Name = "comboBoxAeronaves";
             this.comboBoxAeronaves.Size = new System.Drawing.Size(207, 21);
             this.comboBoxAeronaves.TabIndex = 4;
@@ -100,12 +101,19 @@
             this.groupBox1.Controls.Add(this.finicio);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(24, 81);
+            this.groupBox1.Location = new System.Drawing.Point(58, 83);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(221, 112);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Periodo";
+            // 
+            // finicio
+            // 
+            this.finicio.Location = new System.Drawing.Point(7, 36);
+            this.finicio.Name = "finicio";
+            this.finicio.Size = new System.Drawing.Size(200, 20);
+            this.finicio.TabIndex = 2;
             // 
             // label2
             // 
@@ -116,19 +124,12 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Fecha inicio";
             // 
-            // finicio
-            // 
-            this.finicio.Location = new System.Drawing.Point(7, 36);
-            this.finicio.Name = "finicio";
-            this.finicio.Size = new System.Drawing.Size(200, 20);
-            this.finicio.TabIndex = 2;
-            // 
             // FormBajaFueraServicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MintCream;
-            this.ClientSize = new System.Drawing.Size(272, 276);
+            this.ClientSize = new System.Drawing.Size(340, 276);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
