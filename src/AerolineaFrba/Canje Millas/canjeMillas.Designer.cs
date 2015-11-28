@@ -35,10 +35,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.canjear = new System.Windows.Forms.Button();
             this.dataGridProductos = new System.Windows.Forms.DataGridView();
-            this.checkBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.cantidad = new System.Windows.Forms.TextBox();
+            this.productoSeleccionado = new System.Windows.Forms.TextBox();
+            this.cantidadLabel = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProductos)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tipoDeDocumento
@@ -52,7 +56,7 @@
             // botonVolver
             // 
             this.botonVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonVolver.Location = new System.Drawing.Point(12, 317);
+            this.botonVolver.Location = new System.Drawing.Point(12, 348);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(129, 43);
             this.botonVolver.TabIndex = 17;
@@ -91,57 +95,92 @@
             // canjear
             // 
             this.canjear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.canjear.Location = new System.Drawing.Point(479, 317);
+            this.canjear.Location = new System.Drawing.Point(479, 348);
             this.canjear.Name = "canjear";
             this.canjear.Size = new System.Drawing.Size(122, 43);
             this.canjear.TabIndex = 12;
             this.canjear.Text = "Canjear";
             this.canjear.UseVisualStyleBackColor = true;
+            this.canjear.Click += new System.EventHandler(this.canjear_Click);
             // 
             // dataGridProductos
             // 
             this.dataGridProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.checkBox});
-            this.dataGridProductos.Location = new System.Drawing.Point(12, 110);
+            this.Seleccionar});
+            this.dataGridProductos.Location = new System.Drawing.Point(6, 21);
             this.dataGridProductos.Name = "dataGridProductos";
             this.dataGridProductos.Size = new System.Drawing.Size(583, 164);
             this.dataGridProductos.TabIndex = 21;
-            // 
-            // checkBox
-            // 
-            this.checkBox.HeaderText = "Seleccionar";
-            this.checkBox.Name = "checkBox";
+            this.dataGridProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridProductos_CellContentClick);
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.button1.Location = new System.Drawing.Point(429, 16);
+            this.button1.Location = new System.Drawing.Point(410, 16);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(172, 40);
             this.button1.TabIndex = 21;
             this.button1.Text = "Ver canjes disponibles";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label2
+            // Seleccionar
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold);
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(12, 77);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 17);
-            this.label2.TabIndex = 22;
-            this.label2.Text = "Productos";
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            // 
+            // cantidad
+            // 
+            this.cantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cantidad.Location = new System.Drawing.Point(466, 212);
+            this.cantidad.Name = "cantidad";
+            this.cantidad.Size = new System.Drawing.Size(123, 22);
+            this.cantidad.TabIndex = 23;
+            this.cantidad.TextChanged += new System.EventHandler(this.cantidad_TextChanged);
+            // 
+            // productoSeleccionado
+            // 
+            this.productoSeleccionado.BackColor = System.Drawing.Color.MintCream;
+            this.productoSeleccionado.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.productoSeleccionado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productoSeleccionado.Location = new System.Drawing.Point(25, 215);
+            this.productoSeleccionado.Name = "productoSeleccionado";
+            this.productoSeleccionado.Size = new System.Drawing.Size(288, 15);
+            this.productoSeleccionado.TabIndex = 24;
+            this.productoSeleccionado.TextChanged += new System.EventHandler(this.productoSeleccionado_TextChanged);
+            // 
+            // cantidadLabel
+            // 
+            this.cantidadLabel.AutoSize = true;
+            this.cantidadLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cantidadLabel.Location = new System.Drawing.Point(335, 215);
+            this.cantidadLabel.Name = "cantidadLabel";
+            this.cantidadLabel.Size = new System.Drawing.Size(125, 16);
+            this.cantidadLabel.TabIndex = 25;
+            this.cantidadLabel.Text = "Ingrese la cantidad:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cantidad);
+            this.groupBox1.Controls.Add(this.productoSeleccionado);
+            this.groupBox1.Controls.Add(this.dataGridProductos);
+            this.groupBox1.Controls.Add(this.cantidadLabel);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(12, 73);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(596, 256);
+            this.groupBox1.TabIndex = 26;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Productos";
             // 
             // canjeMillas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MintCream;
-            this.ClientSize = new System.Drawing.Size(619, 377);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.dataGridProductos);
+            this.ClientSize = new System.Drawing.Size(625, 406);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tipoDeDocumento);
@@ -154,6 +193,8 @@
             this.Text = "Canje Millas";
             this.Load += new System.EventHandler(this.canjeMillas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProductos)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,7 +210,10 @@
         private System.Windows.Forms.Button canjear;
         private System.Windows.Forms.DataGridView dataGridProductos;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn checkBox;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
+        private System.Windows.Forms.TextBox cantidad;
+        private System.Windows.Forms.TextBox productoSeleccionado;
+        private System.Windows.Forms.Label cantidadLabel;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

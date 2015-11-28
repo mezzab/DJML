@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using AerolineaFrba.Properties;
 using AerolineaFrba.Inicio_Aplicacion;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace AerolineaFrba.Canje_Millas
 {
@@ -30,8 +32,13 @@ namespace AerolineaFrba.Canje_Millas
      Producto elegido
      Cantidad del producto elegido
      Fecha de canje.*/
+
+
     public partial class canjeMillas : Form
     {
+
+        public static string producto;
+
         public canjeMillas()
         {
             InitializeComponent();
@@ -39,10 +46,14 @@ namespace AerolineaFrba.Canje_Millas
 
         private void canjeMillas_Load(object sender, EventArgs e)
         {
-
+            canjear.Enabled = false;
            LlenarComboBoxTipoDocumento();
            tipoDeDocumento.DropDownStyle = ComboBoxStyle.DropDownList;
            LlenarGridProductos();
+
+           cantidad.Visible = false;
+           cantidadLabel.Visible = false;
+
         }
 
         public void LlenarComboBoxTipoDocumento()
@@ -96,6 +107,56 @@ namespace AerolineaFrba.Canje_Millas
             }
             else
                 MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void dataGridProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // le puse .Cells[0] por que supuse que el nombre esta en la primer columna, pero si esta en otra cambialo
+            producto = dataGridProductos.Rows[e.RowIndex].Cells[0].Value.ToString();
+            // aca lo ideal es que te guardes el ide tambien
+
+            //muestro abajo del grid el que selecciono
+            productoSeleccionado.Text = "Seleccionaste el producto " + productoSeleccionado+ "  " ;
+            productoSeleccionado.Visible = true;
+            cantidad.Visible = true;
+            cantidadLabel.Visible = true;
+
+
+            canjear.Enabled = true;
+
+        }
+
+        private void productoSeleccionado_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void canjear_Click(object sender, EventArgs e)
+        {
+
+            if ( cantidad.Text == "") 
+            { 
+                    //messagebox "debe ingresar una cantidad"
+            }
+            if ( cantidad.Text == "") 
+            {
+                //todo lo demas
+            
+            }
+
+        }
+
+        private void cantidad_TextChanged(object sender, EventArgs e)
+        {
+            //solo deja ingresar numeros
+           cantidad.Text = Regex.Replace(cantidad.Text, @"[^\d]", "");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+
+
         }
     }
 }
