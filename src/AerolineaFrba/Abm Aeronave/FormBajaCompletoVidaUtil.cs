@@ -16,6 +16,9 @@ namespace AerolineaFrba.Abm_Aeronave
 {
     public partial class FormBajaCompletoVidaUtil : Form
     {
+
+        public static string MATRICULAVIDA;
+
         public FormBajaCompletoVidaUtil()
         {
             InitializeComponent();
@@ -64,14 +67,14 @@ namespace AerolineaFrba.Abm_Aeronave
                                 " where AERO_MATRICULA = '" + comboBoxAeronaves.Text.ToString() + "'";
                 new Query(qry).Ejecutar();
 
-                MessageBox.Show("Aeronave inhabilitada exitosamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               
 
                 this.Visible = false;
 
-                FormInicioFuncionalidades funcionalidades = new FormInicioFuncionalidades();
+                Form funcionalidades = new FormBajaFinal();
                 this.Hide();
                 funcionalidades.ShowDialog();
-                funcionalidades = (FormInicioFuncionalidades)this.ActiveMdiChild;
+                funcionalidades = (FormBajaFinal)this.ActiveMdiChild;
 
 
             }
@@ -88,6 +91,11 @@ namespace AerolineaFrba.Abm_Aeronave
             this.Hide();
             funcionalidades.ShowDialog();
             funcionalidades = (FormAeronaveBaja)this.ActiveMdiChild;
+        }
+
+        private void comboBoxAeronaves_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           MATRICULAVIDA = comboBoxAeronaves.Text;
         }
     }
 }
