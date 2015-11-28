@@ -35,8 +35,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.canjear = new System.Windows.Forms.Button();
             this.dataGridProductos = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.button1 = new System.Windows.Forms.Button();
             this.cantidad = new System.Windows.Forms.TextBox();
             this.productoSeleccionado = new System.Windows.Forms.TextBox();
             this.cantidadLabel = new System.Windows.Forms.Label();
@@ -56,7 +56,7 @@
             // botonVolver
             // 
             this.botonVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonVolver.Location = new System.Drawing.Point(12, 348);
+            this.botonVolver.Location = new System.Drawing.Point(19, 424);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(129, 43);
             this.botonVolver.TabIndex = 17;
@@ -95,7 +95,7 @@
             // canjear
             // 
             this.canjear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.canjear.Location = new System.Drawing.Point(479, 348);
+            this.canjear.Location = new System.Drawing.Point(486, 424);
             this.canjear.Name = "canjear";
             this.canjear.Size = new System.Drawing.Size(122, 43);
             this.canjear.TabIndex = 12;
@@ -114,6 +114,11 @@
             this.dataGridProductos.TabIndex = 21;
             this.dataGridProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridProductos_CellContentClick);
             // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
@@ -125,15 +130,10 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
-            // 
             // cantidad
             // 
             this.cantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cantidad.Location = new System.Drawing.Point(466, 212);
+            this.cantidad.Location = new System.Drawing.Point(134, 276);
             this.cantidad.Name = "cantidad";
             this.cantidad.Size = new System.Drawing.Size(123, 22);
             this.cantidad.TabIndex = 23;
@@ -143,18 +143,17 @@
             // 
             this.productoSeleccionado.BackColor = System.Drawing.Color.MintCream;
             this.productoSeleccionado.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.productoSeleccionado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productoSeleccionado.Location = new System.Drawing.Point(25, 215);
+            this.productoSeleccionado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productoSeleccionado.Location = new System.Drawing.Point(6, 233);
             this.productoSeleccionado.Name = "productoSeleccionado";
-            this.productoSeleccionado.Size = new System.Drawing.Size(288, 15);
+            this.productoSeleccionado.Size = new System.Drawing.Size(583, 15);
             this.productoSeleccionado.TabIndex = 24;
-            this.productoSeleccionado.TextChanged += new System.EventHandler(this.productoSeleccionado_TextChanged);
             // 
             // cantidadLabel
             // 
             this.cantidadLabel.AutoSize = true;
             this.cantidadLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cantidadLabel.Location = new System.Drawing.Point(335, 215);
+            this.cantidadLabel.Location = new System.Drawing.Point(3, 279);
             this.cantidadLabel.Name = "cantidadLabel";
             this.cantidadLabel.Size = new System.Drawing.Size(125, 16);
             this.cantidadLabel.TabIndex = 25;
@@ -169,7 +168,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 73);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(596, 256);
+            this.groupBox1.Size = new System.Drawing.Size(596, 327);
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Productos";
@@ -179,7 +178,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MintCream;
-            this.ClientSize = new System.Drawing.Size(625, 406);
+            this.ClientSize = new System.Drawing.Size(625, 488);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
