@@ -291,25 +291,21 @@ namespace AerolineaFrba.Compra
 
                 if (cantidadPasajesCargados < maxPasajes)
                 {
-                    if (elClienteNoEstaEnLaTabla() == false)
-                    {
-                        avisar("Ya cargo un pasaje para este cliente");
-                        LimpiarCliente_Click(sender, e);
-
-                    }
+                    
                     if (elClienteNoEstaEnLaTabla())
                     { // avisar("el cliente no esta en tabla"); //borrar
-                        if (elClienteYaTieneAsignadoUnViajeEseDia() == "tieneAsignado")
-                        {
-                            avisar("El cliente tiene un viaje asignado ese dia");
-                            LimpiarCliente_Click(sender, e);
-                        }
-                        if (elClienteYaTieneAsignadoUnViajeEseDia() == "yaExisteCliente")
+                        if (existeCliente() && esNuevo)
                         {
                             avisar("Ya existe cliente con ese tipo y numero de documento. Preciona el boton buscar");
-                  
+
                         }  
-                        if (elClienteYaTieneAsignadoUnViajeEseDia() == "noTieneAsignado")
+                        if (elClienteYaTieneAsignadoUnViajeEseDia() == true)
+                        {
+                            avisar("El cliente tiene un viaje asignado ese dia");
+                            //LimpiarCliente_Click(sender, e);
+                        }
+                    
+                        if (elClienteYaTieneAsignadoUnViajeEseDia() == false)
                         {  // avisar("no tiene asignado viaje"); //borrar
 
                             if (primerP) // si es el primero entonces crea las columnas
@@ -335,6 +331,7 @@ namespace AerolineaFrba.Compra
                          
                             butacaSeleccionada.Visible = false;
                             esNuevo = false;
+                            groupBox3.Enabled = false;
                             butaca = "";
                             tipoBucata = "";
 
@@ -364,7 +361,14 @@ namespace AerolineaFrba.Compra
                             DataGridViewColumn column12 = verificacion.Columns[12];
                             column6.Width = 82;
                         }
+                      
              
+
+                    }
+                    if (elClienteNoEstaEnLaTabla() == false)
+                    {
+                        avisar("Ya cargo un pasaje para este cliente");
+                        LimpiarCliente_Click(sender, e);
 
                     }
                     
@@ -397,7 +401,7 @@ namespace AerolineaFrba.Compra
 
         private bool elClienteNoEstaEnLaTabla() 
         {
-            return !buscarFilaDeTabla(IDC);
+            return (!buscarFilaDeTabla(IDC));
         }
 
         private bool elClienteNoTieneViajes()
@@ -434,37 +438,37 @@ namespace AerolineaFrba.Compra
         }
 
         
-        private string elClienteYaTieneAsignadoUnViajeEseDia() //TODO:
+        private bool elClienteYaTieneAsignadoUnViajeEseDia() //TODO:
         {
-            string quePaso = "nose";
+            //string quePaso = "nose";
+            bool tieneAsignado = true;
 
             if (esNuevo)
             {
-                if (existeCliente())
-                {
-                      quePaso = "yaExisteCliente";
-                }
-                if (existeCliente() == false)
-                {        
-                    cargarNuevoCliente(); //INSERT DE LOS CAMPOS
-                  //  avisar("Se guardo el nuevo cliente.");
+                      
+                cargarNuevoCliente(); //INSERT DE LOS CAMPOS
+                //  avisar("Se guardo el nuevo cliente.");
                   
-                    guardarIdCliente();
-                    quePaso = "tieneAsignado";
-                    if (elClienteNoTieneViajes())
-                    { quePaso = "noTieneAsignado"; }
+                guardarIdCliente();
+                //quePaso = "tieneAsignado";
+                tieneAsignado = true;
+                if (elClienteNoTieneViajes())
+                { 
+                    //quePaso = "noTieneAsignado";
+                    tieneAsignado = false;
                 }
+                
             }
             if (esNuevo == false) 
             {   
                 actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE 
                 guardarIdCliente();
-                quePaso = "tieneAsignado";
+                tieneAsignado = true;
                 if (elClienteNoTieneViajes())
-                { quePaso = "noTieneAsignado"; }
+                { tieneAsignado = false; }
             }
 
-            return quePaso;
+            return tieneAsignado;
         } 
     
         private void avisarBien(string quePaso)
@@ -666,7 +670,7 @@ namespace AerolineaFrba.Compra
                         completarDatos();
                         guardarIdCliente();
 
-                        
+                        groupBox3.Enabled = true;
                         // avisar("existe usuario");
                     }
                     else if( existeUsuario(dni, tipoDoc) ==false )
@@ -682,6 +686,7 @@ namespace AerolineaFrba.Compra
                         telefono.Text = "";
 
                         fechaNacimiento.ResetText();
+                        groupBox3.Enabled = true;
 
                     }
                 }
@@ -772,6 +777,8 @@ namespace AerolineaFrba.Compra
             
             t.ForeColor = Color.Red;
             t1.ForeColor = Color.Red;
+
+            groupBox3.Enabled = false;
             
             this.StartPosition = FormStartPosition.CenterScreen;
 
@@ -1071,6 +1078,11 @@ namespace AerolineaFrba.Compra
                         verificacion2.ReadOnly = true;
                         verificacion2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                         
+
+                        groupBox3.Enabled = false;
+                        esNuevo = false;
+
+
                         DataGridViewColumn column3 = verificacion2.Columns[1];
                         column3.Width = 75;
                         DataGridViewColumn column6 = verificacion2.Columns[4];
@@ -1202,7 +1214,9 @@ namespace AerolineaFrba.Compra
             {
                 DataRow dr = tabla.Rows[i];
                 if (dr["Tipo de Documento"].ToString() == tipo.Text && dr["Numero de Documento"].ToString() == dniNum.Text)
+                {
                     existeEnTabla = true;
+                }
 
             }
 
@@ -1211,6 +1225,11 @@ namespace AerolineaFrba.Compra
         }
 
         private void verificacion_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
         {
 
         }

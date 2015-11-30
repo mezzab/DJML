@@ -166,6 +166,7 @@
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Datos del Cliente";
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // tipo2
             // 
