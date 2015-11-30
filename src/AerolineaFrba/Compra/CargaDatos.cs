@@ -291,15 +291,21 @@ namespace AerolineaFrba.Compra
 
                 if (cantidadPasajesCargados < maxPasajes)
                 {
-                    if (elClienteNoEstaEnLaTabla() == false)
-                    {
-                        avisar("Ya cargo un pasaje para este cliente");
-                        LimpiarCliente_Click(sender, e);
-
-                    }
+                    
                     if (elClienteNoEstaEnLaTabla())
                     { // avisar("el cliente no esta en tabla"); //borrar
-                        if (elClienteYaTieneAsignadoUnViajeEseDia() == "noTieneAsignado")
+                        if (existeCliente() && esNuevo)
+                        {
+                            avisar("Ya existe cliente con ese tipo y numero de documento. Preciona el boton buscar");
+
+                        }  
+                        if (elClienteYaTieneAsignadoUnViajeEseDia() == true)
+                        {
+                            avisar("El cliente tiene un viaje asignado ese dia");
+                            //LimpiarCliente_Click(sender, e);
+                        }
+                    
+                        if (elClienteYaTieneAsignadoUnViajeEseDia() == false)
                         {  // avisar("no tiene asignado viaje"); //borrar
 
                             if (primerP) // si es el primero entonces crea las columnas
@@ -325,22 +331,44 @@ namespace AerolineaFrba.Compra
                          
                             butacaSeleccionada.Visible = false;
                             esNuevo = false;
+                            groupBox3.Enabled = false;
                             butaca = "";
                             tipoBucata = "";
-                        } 
-                        /* //TODO:arreglar la comparacion por string
-                        if(elClienteYaTieneAsignadoUnViajeEseDia() == "yaExisteCliente")
-                        {
-                            //cargar dni y tipo y borrar lo demas TODO:
-                            avisar("se borra todo y se carga el viejo tipo. falta implementar");
+
+
+                            verificacion.DataSource = tabla;
+
+                            verificacion.Show();
+
+                            verificacion.Columns["Id Butaca"].Visible = false;
+                            verificacion.Columns["Id Cliente"].Visible = false;
+                            verificacion.Columns["Mail"].Visible = false;
+                            verificacion.Columns["Telefono"].Visible = false;
+                            verificacion.Columns["Fecha de nacimiento"].Visible = false;
+                            verificacion.Columns["Direccion"].Visible = false;
+
+                            verificacion.ReadOnly = true;
+                            verificacion.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+                            //DataGridViewColumn column = verificacion.Columns[0];
+                            //column.Width = 50;                                    ELIMINAR
+                            DataGridViewColumn column2 = verificacion.Columns[1];
+                            column2.Width = 55;
+                            DataGridViewColumn column3 = verificacion.Columns[2];
+                            column3.Width = 75;
+                            DataGridViewColumn column6 = verificacion.Columns[6];
+                            column6.Width = 64;
+                            DataGridViewColumn column12 = verificacion.Columns[12];
+                            column6.Width = 82;
                         }
-                        
-                        if(elClienteYaTieneAsignadoUnViajeEseDia() == "tieneAsignado")
-                        {
-                        avisar("Un pasajero no puede viajar a mas de un destino a la vez.");
-                        
-                        }
-                        */
+                      
+             
+
+                    }
+                    if (elClienteNoEstaEnLaTabla() == false)
+                    {
+                        avisar("Ya cargo un pasaje para este cliente");
+                        LimpiarCliente_Click(sender, e);
 
                     }
                     
@@ -348,30 +376,7 @@ namespace AerolineaFrba.Compra
 
                 }
               
-                verificacion.DataSource = tabla;
                
-                verificacion.Show();
-             
-                verificacion.Columns["Id Butaca"].Visible = false;
-                verificacion.Columns["Id Cliente"].Visible = false;
-                verificacion.Columns["Mail"].Visible = false;
-                verificacion.Columns["Telefono"].Visible = false;
-                verificacion.Columns["Fecha de nacimiento"].Visible = false;
-                verificacion.Columns["Direccion"].Visible = false;
-
-                verificacion.ReadOnly = true;
-                verificacion.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-                //DataGridViewColumn column = verificacion.Columns[0];
-                //column.Width = 50;                                    ELIMINAR
-                DataGridViewColumn column2 = verificacion.Columns[1];
-                column2.Width = 55;
-                DataGridViewColumn column3 = verificacion.Columns[2];
-                column3.Width = 75;
-                DataGridViewColumn column6 = verificacion.Columns[6];
-                column6.Width = 64;
-                DataGridViewColumn column12 = verificacion.Columns[12];
-                column6.Width = 82;
 
                 groupBox1.Enabled = false;
                 groupBox2.Enabled = false;
@@ -396,38 +401,75 @@ namespace AerolineaFrba.Compra
 
         private bool elClienteNoEstaEnLaTabla() 
         {
-            return !buscarFilaDeTabla(IDC);
+            return (!buscarFilaDeTabla(IDC));
         }
 
-        private string elClienteYaTieneAsignadoUnViajeEseDia() //TODO:
+        private bool elClienteNoTieneViajes()
         {
-            string quePaso = "nose";
+
+
+            string sql = "select VIAJE_FECHA_SALIDA from djml.viajes where VIAJE_ID = '" + FormCompra1.viajeID + "'";
+            Query qry1 = new Query(sql);
+            DateTime fechaSalida = Convert.ToDateTime(qry1.ObtenerUnicoCampo());
+
+            DateTime fechaMasUno = fechaSalida.AddDays(1);
+
+            string aux = "1";
+            if (tipo.Text.ToString() == "DNI")
+            { aux = "1"; }
+            if (tipo.Text.ToString() == "LC")
+            { aux = "2"; }
+            if (tipo.Text.ToString() == "LE")
+            { aux = "3"; }
+
+            string sql1 = "select viaje_id from djml.pasajes p, djml.viajes v, djml.CLIENTES c " +
+                            "where v.VIAJE_ID = p.PASA_VIAJE_ID " +
+                            "and p.PASA_CLIE_ID =  c.CLIE_ID " +
+                            " and c.clie_dni = '" + dniNum.Text + "' " +
+                            " and c.clie_tipo_doc = '" + aux + "' " +
+                            " and v.VIAJE_FECHA_SALIDA between '" + fechaSalida.ToString() + "' and '" + fechaMasUno.ToString() + "' ";
+            Query qry11 = new Query(sql1);
+            object tieneViaje = qry11.ObtenerUnicoCampo();
+
+           // avisarBien(fechaSalida.ToString() + "     " + fechaMasUno.ToString());
+
+            return (tieneViaje == null);
+
+        }
+
+        
+        private bool elClienteYaTieneAsignadoUnViajeEseDia() //TODO:
+        {
+            //string quePaso = "nose";
+            bool tieneAsignado = true;
 
             if (esNuevo)
             {
-                if (existeCliente())
-                {
-                    avisar("Ya existe cliente con ese tipo y numero de documento. Preciona el boton buscar");
-                    quePaso = "yaExisteCliente";
+                      
+                cargarNuevoCliente(); //INSERT DE LOS CAMPOS
+                //  avisar("Se guardo el nuevo cliente.");
+                  
+                guardarIdCliente();
+                //quePaso = "tieneAsignado";
+                tieneAsignado = true;
+                if (elClienteNoTieneViajes())
+                { 
+                    //quePaso = "noTieneAsignado";
+                    tieneAsignado = false;
                 }
-                if (existeCliente() == false)
-                {        
-                    cargarNuevoCliente(); //INSERT DE LOS CAMPOS
-                    guardarIdCliente();
-                    quePaso = "noTieneAsignado";
-                    //TODO:controlar que tenga el dia libre
-                }
+                
             }
             if (esNuevo == false) 
             {   
                 actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE 
                 guardarIdCliente();
-                quePaso = "noTieneAsignado";
-                //TODO:Controlar que tenga el dia libre con el id;
+                tieneAsignado = true;
+                if (elClienteNoTieneViajes())
+                { tieneAsignado = false; }
             }
 
-            return quePaso;
-        }
+            return tieneAsignado;
+        } 
     
         private void avisarBien(string quePaso)
         {
@@ -585,7 +627,7 @@ namespace AerolineaFrba.Compra
                 { aux = "3"; }
 
                 string sql = "INSERT INTO DJML.CLIENTES(CLIE_DNI, CLIE_TIPO_DOC, CLIE_NOMBRE, CLIE_APELLIDO, CLIE_DIRECCION, CLIE_EMAIL, CLIE_TELEFONO, CLIE_FECHA_NACIMIENTO) " +
-                                                "VALUES(" + numero.Text + ", '" + aux + "', '" + nombre.Text + "', '" + apellido.Text + "', '" + direccion.Text + "', '" + mail.Text + "', " + telefono.Text + ", '" + fechaNacimiento.Text + "' )";
+                                                "VALUES('" + numero.Text + "' , '" + aux + "', '" + nombre.Text + "', '" + apellido.Text + "', '" + direccion.Text + "', '" + mail.Text + "', '" + telefono.Text + "', '" + fechaNacimiento.Text + "' )";
                 Query qry = new Query(sql);
                 //qry.pComando = sql;
                 qry.Ejecutar();
@@ -628,7 +670,7 @@ namespace AerolineaFrba.Compra
                         completarDatos();
                         guardarIdCliente();
 
-                        
+                        groupBox3.Enabled = true;
                         // avisar("existe usuario");
                     }
                     else if( existeUsuario(dni, tipoDoc) ==false )
@@ -644,6 +686,7 @@ namespace AerolineaFrba.Compra
                         telefono.Text = "";
 
                         fechaNacimiento.ResetText();
+                        groupBox3.Enabled = true;
 
                     }
                 }
@@ -663,32 +706,32 @@ namespace AerolineaFrba.Compra
         {
             string sql = "SELECT CLIE_NOMBRE FROM DJML.CLIENTES " +
                         "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipoDoc + "') " +
-                         "AND CLIE_DNI =" + dni;
+                         "AND CLIE_DNI = '" + dni + "'";
             Query qry = new Query(sql);
             Nombre = qry.ObtenerUnicoCampo().ToString();
 
             string sql1 = "SELECT CLIE_APELLIDO FROM DJML.CLIENTES " +
             "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipoDoc + "') " +
-             "AND CLIE_DNI =" + dni;
+             "AND CLIE_DNI = '" + dni + "'";
             Query qry1 = new Query(sql1);
             Apellido = qry1.ObtenerUnicoCampo().ToString();
 
             string sql2 = "SELECT CLIE_DIRECCION FROM DJML.CLIENTES " +
              "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipoDoc + "') " +
-             "AND CLIE_DNI =" + dni;
+             "AND CLIE_DNI = '" + dni + "'";
             Query qry2 = new Query(sql2);
             Direccion = qry2.ObtenerUnicoCampo().ToString();
 
             string sql3 = "SELECT CLIE_EMAIL FROM DJML.CLIENTES " +
              "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipoDoc + "') " +
-             "AND CLIE_DNI =" + dni;
+             "AND CLIE_DNI = '" + dni + "'";
             Query qry3 = new Query(sql3);
             Mail = qry3.ObtenerUnicoCampo().ToString();
 
 
             string sql4 = "SELECT CLIE_TELEFONO FROM DJML.CLIENTES " +
              "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipoDoc + "') " +
-             "AND CLIE_DNI =" + dni;
+             "AND CLIE_DNI = '" + dni + "'";
             Query qry4 = new Query(sql4);
             Telefono = qry4.ObtenerUnicoCampo().ToString();
 
@@ -698,7 +741,7 @@ namespace AerolineaFrba.Compra
             // MessageBox.Show("mmm" + TipoDNI + "MMM");
             string sql5 = "SELECT CLIE_FECHA_NACIMIENTO FROM DJML.CLIENTES " +
              "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipoDoc + "') " +
-             "AND CLIE_DNI =" + dni;
+             "AND CLIE_DNI = '" + dni + "'";
             Query qry5 = new Query(sql5);
             FechaNacimiento = (DateTime)qry5.ObtenerUnicoCampo();
 
@@ -722,7 +765,7 @@ namespace AerolineaFrba.Compra
         {
             string sql = "SELECT CLIE_DNI FROM DJML.CLIENTES " +
                          "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipoDoc + "') " +
-                         "AND CLIE_DNI =" + dni;
+                         "AND CLIE_DNI = '" + dni + "'";
             Query qry = new Query(sql);
             object ndni = qry.ObtenerUnicoCampo();
 
@@ -734,6 +777,8 @@ namespace AerolineaFrba.Compra
             
             t.ForeColor = Color.Red;
             t1.ForeColor = Color.Red;
+
+            groupBox3.Enabled = false;
             
             this.StartPosition = FormStartPosition.CenterScreen;
 
@@ -785,6 +830,9 @@ namespace AerolineaFrba.Compra
             if (FormCompra1.vuelve == false)
             {
                 button1.Enabled = false;
+                tabla.Clear();
+                tabla2.Clear();
+
             }
         }
 
@@ -1030,6 +1078,11 @@ namespace AerolineaFrba.Compra
                         verificacion2.ReadOnly = true;
                         verificacion2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                         
+
+                        groupBox3.Enabled = false;
+                        esNuevo = false;
+
+
                         DataGridViewColumn column3 = verificacion2.Columns[1];
                         column3.Width = 75;
                         DataGridViewColumn column6 = verificacion2.Columns[4];
@@ -1136,7 +1189,7 @@ namespace AerolineaFrba.Compra
 
             string sql = "SELECT CLIE_ID FROM DJML.CLIENTES " +
             "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipo.Text + "')" +
-             " AND CLIE_DNI =" + numero.Text;
+             " AND CLIE_DNI = '" + numero.Text +"'";
             Query qry1 = new Query(sql);
             IDC = qry1.ObtenerUnicoCampo().ToString();
 
@@ -1146,7 +1199,7 @@ namespace AerolineaFrba.Compra
         {
             string sql = "SELECT CLIE_ID FROM DJML.CLIENTES " +
                           "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipo.Text + "')" +
-                         " AND CLIE_DNI =" + numero.Text;
+                         " AND CLIE_DNI = '" + numero.Text + "'";
             Query qry1 = new Query(sql);
             object id_cliente = qry1.ObtenerUnicoCampo();
 
@@ -1160,8 +1213,11 @@ namespace AerolineaFrba.Compra
             for (int i = tabla.Rows.Count - 1; i >= 0; i--)
             {
                 DataRow dr = tabla.Rows[i];
-                if (dr["Id Cliente"].ToString() == idm)
+                if (dr["Tipo de Documento"].ToString() == tipo.Text && dr["Numero de Documento"].ToString() == dniNum.Text)
+                {
                     existeEnTabla = true;
+                }
+
             }
 
             return existeEnTabla;         
@@ -1169,6 +1225,11 @@ namespace AerolineaFrba.Compra
         }
 
         private void verificacion_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
         {
 
         }
