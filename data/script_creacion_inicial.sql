@@ -1134,9 +1134,10 @@ DROP PROCEDURE DJML.CREAR_CANJES
 
 DROP SCHEMA DJML
 			
-
+select * from djml.viajes
 select * from djml.compras
 select * from djml.cancelaciones
+select * from djml.registro_destino
 
 
 SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN
@@ -1151,3 +1152,5 @@ SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACI
                         AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= 2015
                         GROUP BY C1.CIUD_DETALLE 
                         ORDER BY 2 DESC
+
+

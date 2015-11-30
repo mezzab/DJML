@@ -37,7 +37,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             conexion.ConnectionString = Settings.Default.CadenaDeConexion;
 
 
-            Query qry7 = new Query("select v.viaje_id as Codigo_Viaje, c1.ciud_detalle as Ciudad_Origen, c2.ciud_detalle as Ciudad_Destino from djml.viajes v "
+            Query qry7 = new Query("select v.viaje_id as Codigo_Viaje, v.viaje_fecha_salida as Fecha_Salida, c1.ciud_detalle as Ciudad_Origen, c2.ciud_detalle as Ciudad_Destino from djml.viajes v "
             + " join djml.rutas r on v.viaje_ruta_id = r.ruta_codigo"
             + " join djml.tramos t on r.ruta_tramo = t.tramo_id "
             + " join djml.ciudades c1 on t.tramo_ciudad_origen = c1.ciud_id"
@@ -188,6 +188,14 @@ namespace AerolineaFrba.Registro_Llegada_Destino
                     Query qry = new Query(sql1);
                     qry.pComando = sql1;
                     qry.Ejecutar();
+
+                    //realizar el update en viajes con la fecha llegada 
+
+                    string sql2 = ("UPDATE DJML.VIAJES SET VIAJE_FECHA_LLEGADA = '" + fechaLlegada.Value.ToShortDateString() + "' WHERE VIAJE_ID =" + viajeId + " "); 
+                                   
+                    Query qry6 = new Query(sql2);
+                    qry6.pComando = sql2;
+                    qry6.Ejecutar();
 
                     fechaLlegada.Text = "";
                     comboBoxAeronaves.Text = "";

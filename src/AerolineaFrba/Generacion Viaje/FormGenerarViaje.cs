@@ -29,37 +29,32 @@ namespace AerolineaFrba.Generacion_Viaje
              //HACER: FALTA VALIDAR QUE FECHA SALIDA, FECHA LLEGADA Y FECHA LLEGADA ESTIMADA SEAN MAYORES A GETTIME!!
           
             DateTime fechaSistema = DateTime.Now;
-
-            
-            //valida que no supere 24 hs el vuelo y sean mayores a hoy
-            if ((fechaSalida.Value.Year == fechaLlegada.Value.Year) &&
-            (fechaSalida.Value.Month == fechaLlegada.Value.Month) &&
-            ((fechaLlegada.Value.Day - fechaSalida.Value.Day) <= 1) && 
-            ((fechaSalida.Value.Year == fechaLlegadaEstimada.Value.Year) &&
-            (fechaSalida.Value.Month == fechaLlegadaEstimada.Value.Month) &&
-            (fechaLlegadaEstimada.Value.Day - fechaSalida.Value.Day) <= 1) &&
-            (fechaSalida.Value.Year >= fechaSistema.Year) &&
-            (fechaSalida.Value.Month >= fechaSistema.Month) &&
-            (fechaSalida.Value.Day >= fechaSistema.Day) &&
-            (fechaLlegada.Value.Year >= fechaSistema.Year) &&
-            (fechaLlegada.Value.Month >= fechaSistema.Month) &&
-            (fechaLlegada.Value.Day >= fechaSistema.Day) &&
-            (fechaLlegadaEstimada.Value.Year >= fechaSistema.Year) &&
-            (fechaLlegadaEstimada.Value.Month >= fechaSistema.Month) &&
-            (fechaLlegadaEstimada.Value.Day >= fechaSistema.Day)) 
+            int diferenciaDias = fechaLlegadaEstimada.Value.Day - fechaSalida.Value.Day;  
             {
+                //valida que no supere 24 hs el vuelo y sean mayores a hoy
+                if ((fechaSalida.Value.Year == fechaLlegadaEstimada.Value.Year) &&
+                (fechaSalida.Value.Month == fechaLlegadaEstimada.Value.Month) &&
+                (diferenciaDias <= 1) &&
+                (fechaSalida.Value.Year >= fechaSistema.Year) &&
+                (fechaSalida.Value.Month >= fechaSistema.Month) &&
+                (fechaSalida.Value.Day >= fechaSistema.Day) &&
+                (fechaLlegadaEstimada.Value.Year >= fechaSistema.Year) &&
+                (fechaLlegadaEstimada.Value.Month >= fechaSistema.Month) &&
+                (fechaLlegadaEstimada.Value.Day >= fechaSistema.Day))
+                {
 
-                LlenarComboBoxAeronaves();
-                label4.Visible = true;
-                comboBoxAeronaves.Visible = true;
+                    LlenarComboBoxAeronaves();
+                    label4.Visible = true;
+                    comboBoxAeronaves.Visible = true;
+                }
+                else
+                {
+                    MessageBox.Show("Entre la Fecha Salida y Fecha Llegada Estimada no puede haber mas de 24 hs. Tampoco se puede generar un viaje con fecha anterior a " + fechaSistema + "", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    comboBoxAeronaves.Visible = false;
+                    datos.Visible = false;
+                    label4.Visible = false;
+                }
             }
-            else
-            {
-                MessageBox.Show("Entre la Fecha Salida y Fecha Llegada no puede haber mas de 24 hs. Tampoco se puede generar un viaje con fecha anterior a "+ fechaSistema+"", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                comboBoxAeronaves.Visible = false;
-                datos.Visible = false;
-                label4.Visible = false;
-           }
         }
 
         private void fechaLlegada_ValueChanged(object sender, EventArgs e)
@@ -138,7 +133,7 @@ namespace AerolineaFrba.Generacion_Viaje
 
                 //hace la insercion en la base de datos del nuevo viaje generado
                 string sql1 = "INSERT INTO DJML.VIAJES (VIAJE_FECHA_SALIDA, VIAJE_FECHA_LLEGADA, VIAJE_FECHA_LLEGADA_ESTIMADA, VIAJE_AERO_ID, VIAJE_RUTA_ID)"
-                                + "values ('" + fechaSalida.Value.ToShortDateString() + "', '" + fechaLlegada.Value.ToShortDateString() + "', '" + fechaLlegadaEstimada.Value.ToShortDateString() + "', '" + comboBoxAeronaves.SelectedValue.ToString() + "', " + rutaCodigo + ")";
+                                + "values ('" + fechaSalida.Value.ToShortDateString() + "','"+null+"' ,'" + fechaLlegadaEstimada.Value.ToShortDateString() + "', '" + comboBoxAeronaves.SelectedValue.ToString() + "', " + rutaCodigo + ")";
                 Query qry = new Query(sql1);
                 qry.pComando = sql1;
                 qry.Ejecutar();
@@ -168,7 +163,7 @@ namespace AerolineaFrba.Generacion_Viaje
             conexion.ConnectionString = Settings.Default.CadenaDeConexion;
 
             DataSet ds = new DataSet();
-            SqlDataAdapter da = new SqlDataAdapter("select distinct AERO_MATRICULA from DJML.AERONAVES a where a.AERO_BAJA_FUERA_SERVICIO = 0 and a.AERO_BAJA_VIDA_UTIL = 0 and a.AERO_MATRICULA not in (select v.VIAJE_AERO_ID from DJML.VIAJES v where datepart(YEAR,VIAJE_FECHA_SALIDA) = '" + fechaSalida.Value.Year + "' and DATEPART(MONTH,VIAJE_FECHA_SALIDA) = '" + fechaSalida.Value.Month + "' and DATEPART(DAY,VIAJE_FECHA_SALIDA) =  '" + fechaSalida.Value.Day + "' and DATEPART(YEAR,VIAJE_FECHA_LLEGADA) = '" + fechaLlegada.Value.Year + "' and DATEPART(MONTH,VIAJE_FECHA_LLEGADA) = '" + fechaLlegada.Value.Month + "'  and DATEPART(DAY,VIAJE_FECHA_LLEGADA) =  '" + fechaLlegada.Value.Day + "')", conexion);
+            SqlDataAdapter da = new SqlDataAdapter("select distinct AERO_MATRICULA from DJML.AERONAVES a where a.AERO_BAJA_FUERA_SERVICIO = 0 and a.AERO_BAJA_VIDA_UTIL = 0 and a.AERO_MATRICULA not in (select v.VIAJE_AERO_ID from DJML.VIAJES v where datepart(YEAR,VIAJE_FECHA_SALIDA) = '" + fechaSalida.Value.Year + "' and DATEPART(MONTH,VIAJE_FECHA_SALIDA) = '" + fechaSalida.Value.Month + "' and DATEPART(DAY,VIAJE_FECHA_SALIDA) =  '" + fechaSalida.Value.Day + "' and DATEPART(YEAR,VIAJE_FECHA_LLEGADA_ESTIMADA) = '" + fechaLlegadaEstimada.Value.Year + "' and DATEPART(MONTH,VIAJE_FECHA_LLEGADA_ESTIMADA) = '" + fechaLlegadaEstimada.Value.Month + "'  and DATEPART(DAY,VIAJE_FECHA_LLEGADA_ESTIMADA) =  '" + fechaLlegadaEstimada.Value.Day + "')", conexion);
             da.Fill(ds, "DJML.AERONAVES");
 
             comboBoxAeronaves.DataSource = ds.Tables[0].DefaultView;
