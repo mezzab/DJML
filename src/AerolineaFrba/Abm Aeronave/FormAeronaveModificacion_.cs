@@ -185,21 +185,23 @@ namespace AerolineaFrba.Abm_Aeronave
         private void buscarDatos(string matricula)
         {
             //BUSCA SERVICIO AERONAVE
+            /*
             string sql = "SELECT SERV_DESCRIPCION FROM DJML.SERVICIOS WHERE SERV_ID = (SELECT AERO_SERVICIO_ID FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "')";
             Query qr = new Query(sql);
-            A_SERV = qr.ObtenerUnicoCampo().ToString();
+            A_SERV = qr.ObtenerUnicoCampo().ToString(); */
 
             //LO hice de las dos formas, separando para no hacer un sub select, pero me tira una execpcion. Como recomendas, como 
             // esta arriba o esta forma comentada?
-            /* 
+            
             string _sql = "SELECT AERO_SERVICIO_ID FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "'";
             Query _qr = new Query(_sql);
             VALOR_SERVICIO = Convert.ToInt32(_qr.ObtenerUnicoCampo());
 
+            /*
             string sql_ = "SELECT SERV_DESCRIPCION FROM DJML.SERVICIOS WHERE SERV_ID = '" + VALOR_SERVICIO + "'";
             Query qr_ = new Query(sql_);
-            DESCRIPCION_SERVICIO = qr_.ObtenerUnicoCampo().ToString();
-            */
+            DESCRIPCION_SERVICIO = qr_.ObtenerUnicoCampo().ToString();*/
+            
 
             //BUSCA KG_DISPONIBLES DE AERONAVE
             string sql2 = "SELECT AERO_KILOS_DISPONIBLES FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "'";
@@ -212,9 +214,14 @@ namespace AerolineaFrba.Abm_Aeronave
             MODE = qry3.ObtenerUnicoCampo().ToString();
 
             //BUSCA FABRICANTE AERONAVE
-            string sql4 = " select descripcion from djml.fabricantes where id_fabricante = (SELECT AERO_FABRICANTE FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "')";
+            string sql4 = " SELECT AERO_FABRICANTE FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "'";
             Query qry4 = new Query(sql4);
-            FABR = qry4.ObtenerUnicoCampo().ToString();
+            string aux = qry4.ObtenerUnicoCampo().ToString();
+
+            string sql44 = " select descripcion from djml.fabricantes where id_fabricante = '" + aux + "'";
+            Query qry44 = new Query(sql44);
+            FABR = qry44.ObtenerUnicoCampo().ToString();
+            
 
             //BUSCA BUTACAS AERONAVE
             string sql5 = "SELECT COUNT(BXA_AERO_MATRICULA) FROM [DJML].[BUTACA_AERO] WHERE BXA_AERO_MATRICULA = '" + matricula + "'" +
@@ -233,7 +240,27 @@ namespace AerolineaFrba.Abm_Aeronave
             modelo.Text = MODE.ToString();
             c_butacas.Text = C_BUTA.ToString();
             fabricante.Text = FABR.ToString();
+
+
+            string aux = "1";
+            if (VALOR_SERVICIO == 1 )
+            {
+                aux = "Turista";
+                A_SERV = aux;
+            }
+            if (VALOR_SERVICIO == 2 )
+            { 
+                
+               aux = "Ejecutivo";
+               A_SERV = aux;
+            }
+            if (VALOR_SERVICIO == 3)
+            { 
+                aux = "Primera Clase";
+                A_SERV = aux;
+            }
             tipoServicio.Text = A_SERV.ToString();
+
             t_servicio.SelectedItem = A_SERV.ToString();
 
             //tipoServicio.Text = DESCRIPCION_SERVICIO.ToString();
