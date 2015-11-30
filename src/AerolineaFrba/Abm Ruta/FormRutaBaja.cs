@@ -143,12 +143,9 @@ namespace AerolineaFrba.Abm_Ruta
             volver = (FormRuta)this.ActiveMdiChild;
         }
 
-        public void cancelar_pasajes_y_encomiendas(string codigo) {
-            //BUSCO COMPRAS DE VIAJES FUTUROS QUE USEN ESTA RUTA
-            
+        public void cancelar_pasajes_y_encomiendas(string codigo) {           
             
             //INSERT DE LA NUEVA CANCELACION
-
             string insertCancelaciones = " INSERT INTO [DJML].[CANCELACIONES] ([CANC_FECHA_DEVOLUCION] , [CANC_COMPRA_ID] , [CANC_MOTIVO])" +
                                  " SELECT GETDATE(), COMPRA_ID, 'La ruta fue dada de baja'" +
                                  " FROM DJML.COMPRAS" +
@@ -207,7 +204,26 @@ namespace AerolineaFrba.Abm_Ruta
             new Query(qryButacas).Ejecutar();
 
             //LIBERO KILOS DE LA AERONAVE DE LAS ENCOMIENDAS CANCELADAS
-            //restarKilosAeronave(Devolucion0.pesoALiberar.ToString());
+            string stringAeronaves = "SELECT VIAJE_AERO_ID, MAX(SUMA) " +
+                                    " FROM ("+
+	                                        " SELECT VIAJE_AERO_ID, SUM(ENCO_KG) SUMA " +
+	                                        " FROM DJML.ENCOMIENDAS " +
+	                                        " JOIN DJML.VIAJES ON ENCO_VIAJE_ID = VIAJE_ID " +
+	                                        " JOIN DJML.RUTAS ON VIAJE_RUTA_ID = RUTA_CODIGO " +
+                                            " WHERE RUTA_CODIGO = " + codigo + " AND VIAJE_FECHA_SALIDA > GETDATE()" +
+	                                        " GROUP BY ENCO_VIAJE_ID, VIAJE_AERO_ID " +
+                                    " ) aux " +
+                                    " GROUP BY VIAJE_AERO_ID ";
+            var aeronaves = new Query(stringAeronaves).ObtenerDataTable();
+
+            for (int i = 0; i <= aeronaves.Rows.Count - 1; i++)
+            {
+                // ACTUALIZO KILOS DISPONIBLES
+                string kilos = " UPDATE [GD2C2015].[DJML].[AERONAVES] SET [AERO_KILOS_DISPONIBLES] = AERO_KILOS_DISPONIBLES + " + aeronaves.Rows[i][1].ToString() +
+                                 "WHERE AERO_MATRICULA = " + aeronaves.Rows[i][0].ToString();
+                Query qryKilos = new Query(kilos);
+                qryKilos.Ejecutar();
+            }         
         }
       
     }
