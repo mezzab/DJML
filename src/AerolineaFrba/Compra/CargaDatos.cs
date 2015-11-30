@@ -299,7 +299,8 @@ namespace AerolineaFrba.Compra
                     }
                     if (elClienteNoEstaEnLaTabla())
                     { // avisar("el cliente no esta en tabla"); //borrar
-                        if (elClienteYaTieneAsignadoUnViajeEseDia() == "noTieneAsignado")
+                                          
+                        if (elClienteNoTieneViajes())
                         {  // avisar("no tiene asignado viaje"); //borrar
 
                             if (primerP) // si es el primero entonces crea las columnas
@@ -327,20 +328,38 @@ namespace AerolineaFrba.Compra
                             esNuevo = false;
                             butaca = "";
                             tipoBucata = "";
-                        } 
-                        /* //TODO:arreglar la comparacion por string
-                        if(elClienteYaTieneAsignadoUnViajeEseDia() == "yaExisteCliente")
-                        {
-                            //cargar dni y tipo y borrar lo demas TODO:
-                            avisar("se borra todo y se carga el viejo tipo. falta implementar");
+
+
+                            verificacion.DataSource = tabla;
+
+                            verificacion.Show();
+
+                            verificacion.Columns["Id Butaca"].Visible = false;
+                            verificacion.Columns["Id Cliente"].Visible = false;
+                            verificacion.Columns["Mail"].Visible = false;
+                            verificacion.Columns["Telefono"].Visible = false;
+                            verificacion.Columns["Fecha de nacimiento"].Visible = false;
+                            verificacion.Columns["Direccion"].Visible = false;
+
+                            verificacion.ReadOnly = true;
+                            verificacion.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+                            //DataGridViewColumn column = verificacion.Columns[0];
+                            //column.Width = 50;                                    ELIMINAR
+                            DataGridViewColumn column2 = verificacion.Columns[1];
+                            column2.Width = 55;
+                            DataGridViewColumn column3 = verificacion.Columns[2];
+                            column3.Width = 75;
+                            DataGridViewColumn column6 = verificacion.Columns[6];
+                            column6.Width = 64;
+                            DataGridViewColumn column12 = verificacion.Columns[12];
+                            column6.Width = 82;
                         }
-                        
-                        if(elClienteYaTieneAsignadoUnViajeEseDia() == "tieneAsignado")
+                        if (elClienteNoTieneViajes() == false)
                         {
-                        avisar("Un pasajero no puede viajar a mas de un destino a la vez.");
-                        
-                        }
-                        */
+                            avisar("El cliente tiene un viaje asignado ese dia");
+                            LimpiarCliente_Click(sender, e);
+                        }  
 
                     }
                     
@@ -348,30 +367,7 @@ namespace AerolineaFrba.Compra
 
                 }
               
-                verificacion.DataSource = tabla;
                
-                verificacion.Show();
-             
-                verificacion.Columns["Id Butaca"].Visible = false;
-                verificacion.Columns["Id Cliente"].Visible = false;
-                verificacion.Columns["Mail"].Visible = false;
-                verificacion.Columns["Telefono"].Visible = false;
-                verificacion.Columns["Fecha de nacimiento"].Visible = false;
-                verificacion.Columns["Direccion"].Visible = false;
-
-                verificacion.ReadOnly = true;
-                verificacion.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-                //DataGridViewColumn column = verificacion.Columns[0];
-                //column.Width = 50;                                    ELIMINAR
-                DataGridViewColumn column2 = verificacion.Columns[1];
-                column2.Width = 55;
-                DataGridViewColumn column3 = verificacion.Columns[2];
-                column3.Width = 75;
-                DataGridViewColumn column6 = verificacion.Columns[6];
-                column6.Width = 64;
-                DataGridViewColumn column12 = verificacion.Columns[12];
-                column6.Width = 82;
 
                 groupBox1.Enabled = false;
                 groupBox2.Enabled = false;
@@ -399,6 +395,31 @@ namespace AerolineaFrba.Compra
             return !buscarFilaDeTabla(IDC);
         }
 
+        private bool elClienteNoTieneViajes()
+        {
+
+
+            string sql = "select VIAJE_FECHA_SALIDA from djml.viajes where VIAJE_ID = '" + FormCompra1.viajeID + "'";
+            Query qry1 = new Query(sql);
+            DateTime fechaSalida = Convert.ToDateTime(qry1.ObtenerUnicoCampo());
+
+            DateTime fechaMasUno = fechaSalida.AddDays(1);
+
+            string sql1 = "select viaje_id from djml.pasajes p, djml.viajes v, djml.CLIENTES c " +
+                            "where v.VIAJE_ID = p.PASA_VIAJE_ID " +
+                            "and p.PASA_CLIE_ID =  c.CLIE_ID " +
+                            "and clie_id = '" + IDC + "'" +
+                            "and v.VIAJE_FECHA_SALIDA between '" + fechaSalida + "' and '" + fechaMasUno + "' ";
+            Query qry11 = new Query(sql1);
+            object tieneViaje = qry11.ObtenerUnicoCampo();
+
+           // avisarBien(fechaSalida.ToString() + "     " + fechaMasUno.ToString());
+
+            return (tieneViaje == null);
+
+        }
+
+        /*
         private string elClienteYaTieneAsignadoUnViajeEseDia() //TODO:
         {
             string quePaso = "nose";
@@ -427,7 +448,7 @@ namespace AerolineaFrba.Compra
             }
 
             return quePaso;
-        }
+        } */
     
         private void avisarBien(string quePaso)
         {
