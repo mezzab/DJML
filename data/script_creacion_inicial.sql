@@ -849,7 +849,6 @@ GO
 ---------------------------------------------------
 ---------------------------------------------------
 
-
 ---------------------------------------------------
 			----PRIMER FILTRO----
 --Top 5 de los destinos con más pasajes comprados.
@@ -899,6 +898,8 @@ AND MONTH(COM.COMPRA_FECHA) <= 09
 AND YEAR(COM.COMPRA_FECHA ) = 2016
 AND COM.COMPRA_ID NOT IN (SELECT CANC_COMPRA_ID FROM DJML.CANCELACIONES) 
 group by c.CIUD_DETALLE ORDER BY 2 desc                    
+           
+           
                 
 --CUARTO TRIMESTRE
 select DISTINCT TOP 5  c.CIUD_DETALLE,COUNT(p.PASA_VIAJE_ID) AS CANTIDAD from djml.PASAJES p 
@@ -913,6 +914,7 @@ AND MONTH(COM.COMPRA_FECHA) <= 12
 AND YEAR(COM.COMPRA_FECHA ) =  2016 
 AND COM.COMPRA_ID NOT IN (SELECT CANC_COMPRA_ID FROM DJML.CANCELACIONES) 
 group by c.CIUD_DETALLE ORDER BY 2 desc     
+
 
 
 
@@ -1057,19 +1059,15 @@ JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID
 WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 
 AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 10
 AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 12 
-AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= 2016
+AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= 2015
 GROUP BY C1.CIUD_DETALLE 
 ORDER BY 2 DESC
 
 
 ---------------------------------------------------
 			----QUINTO FILTRO----
----Top 5 de los destinos con pasajes cancelados---
+---Top 5 de las aeronaves con mayor cantidad de días fuera de servicio---
 ---------------------------------------------------
-
-
-
-
 
 
 
@@ -1136,3 +1134,20 @@ DROP PROCEDURE DJML.CREAR_CANJES
 
 DROP SCHEMA DJML
 			
+
+select * from djml.compras
+select * from djml.cancelaciones
+
+
+SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN
+                        JOIN DJML.COMPRAS COM ON CAN.CANC_COMPRA_ID = COM.COMPRA_ID
+                        JOIN DJML.VIAJES V ON COM.COMPRA_VIAJE_ID = V.VIAJE_ID
+                        JOIN DJML.RUTAS R ON V.VIAJE_ID = R.RUTA_CODIGO
+                        JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID
+                        JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID
+                        WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 
+                        AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 10
+                        AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 12 
+                        AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= 2015
+                        GROUP BY C1.CIUD_DETALLE 
+                        ORDER BY 2 DESC
