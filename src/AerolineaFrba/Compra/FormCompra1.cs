@@ -37,8 +37,7 @@ namespace AerolineaFrba.Compra
 
         private void FormCompra1_Load(object sender, EventArgs e)
         {
-
-
+           
             NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
 
             button3.Enabled = false;
@@ -75,7 +74,8 @@ namespace AerolineaFrba.Compra
 
             comboBox1.DataSource = ds.Tables[0].DefaultView;
             comboBox1.ValueMember = "CIUD_DETALLE";
-            comboBox1.SelectedItem = null;
+           comboBox1.SelectedItem = null;
+           
         }
 
          public void LlenarComboBox2()
@@ -90,6 +90,8 @@ namespace AerolineaFrba.Compra
             comboBox2.DataSource = ds1.Tables[0].DefaultView;
             comboBox2.ValueMember = "CIUD_DETALLE";
             comboBox2.SelectedItem = null;
+            //comboBox1.Text = " Nueva York";
+            //comboBox1.SelectedValue = 21;
         }
         
         
