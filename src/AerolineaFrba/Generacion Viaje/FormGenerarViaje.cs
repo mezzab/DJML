@@ -27,14 +27,26 @@ namespace AerolineaFrba.Generacion_Viaje
         private void button3_Click(object sender, EventArgs e)
         {
              //HACER: FALTA VALIDAR QUE FECHA SALIDA, FECHA LLEGADA Y FECHA LLEGADA ESTIMADA SEAN MAYORES A GETTIME!!
+          
+            DateTime fechaSistema = DateTime.Now;
 
+            
             //valida que no supere 24 hs el vuelo y sean mayores a hoy
             if ((fechaSalida.Value.Year == fechaLlegada.Value.Year) &&
             (fechaSalida.Value.Month == fechaLlegada.Value.Month) &&
             ((fechaLlegada.Value.Day - fechaSalida.Value.Day) <= 1) && 
             ((fechaSalida.Value.Year == fechaLlegadaEstimada.Value.Year) &&
             (fechaSalida.Value.Month == fechaLlegadaEstimada.Value.Month) &&
-            (fechaLlegadaEstimada.Value.Day - fechaSalida.Value.Day) <= 1)) 
+            (fechaLlegadaEstimada.Value.Day - fechaSalida.Value.Day) <= 1) &&
+            (fechaSalida.Value.Year >= fechaSistema.Year) &&
+            (fechaSalida.Value.Month >= fechaSistema.Month) &&
+            (fechaSalida.Value.Day >= fechaSistema.Day) &&
+            (fechaLlegada.Value.Year >= fechaSistema.Year) &&
+            (fechaLlegada.Value.Month >= fechaSistema.Month) &&
+            (fechaLlegada.Value.Day >= fechaSistema.Day) &&
+            (fechaLlegadaEstimada.Value.Year >= fechaSistema.Year) &&
+            (fechaLlegadaEstimada.Value.Month >= fechaSistema.Month) &&
+            (fechaLlegadaEstimada.Value.Day >= fechaSistema.Day)) 
             {
 
                 LlenarComboBoxAeronaves();
@@ -43,7 +55,7 @@ namespace AerolineaFrba.Generacion_Viaje
             }
             else
             {
-                MessageBox.Show("Entre la Fecha Salida y Fecha Llegada no puede haber mas de 24 hs", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Entre la Fecha Salida y Fecha Llegada no puede haber mas de 24 hs. Tampoco se puede generar un viaje con fecha anterior a "+ fechaSistema+"", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 comboBoxAeronaves.Visible = false;
                 datos.Visible = false;
                 label4.Visible = false;
