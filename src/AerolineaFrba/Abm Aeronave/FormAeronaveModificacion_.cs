@@ -179,7 +179,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void t_servicio_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            tipoServicio.Text = t_servicio.Text;
         }
 
         private void buscarDatos(string matricula)
@@ -212,7 +212,7 @@ namespace AerolineaFrba.Abm_Aeronave
             MODE = qry3.ObtenerUnicoCampo().ToString();
 
             //BUSCA FABRICANTE AERONAVE
-            string sql4 = " SELECT AERO_FABRICANTE FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "'";
+            string sql4 = " select descripcion from djml.fabricantes where id_fabricante = (SELECT AERO_FABRICANTE FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "')";
             Query qry4 = new Query(sql4);
             FABR = qry4.ObtenerUnicoCampo().ToString();
 
@@ -412,9 +412,15 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            controlarQueEsteTodoCompleto();
-            actualizarDatos();
-            modificarDatos();
+            if (controlarQueEsteTodoCompleto())
+            {
+                actualizarDatos();
+                modificarDatos();
+            }
+            if (controlarQueEsteTodoCompleto() == false)
+            {
+                avisarBien("Deben estar todos los datos completados");
+            }
 
         }
 
@@ -426,12 +432,19 @@ namespace AerolineaFrba.Abm_Aeronave
         private void tipo_servicio_TextChanged(object sender, EventArgs e)
         {
             tipoServicio.Enabled = false;
+            t_servicio.Text = tipoServicio.Text;
 
         }
 
         private void fabricante_TextChanged(object sender, EventArgs e)
         {
             fabricante.Enabled = false;
+            fabricantes.Text = fabricante.Text;
+        }
+
+        private void fabricantes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fabricante.Text = fabricantes.Text;
         }
 
 
