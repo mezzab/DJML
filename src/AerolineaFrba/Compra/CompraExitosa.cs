@@ -60,6 +60,8 @@ namespace AerolineaFrba.Compra
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
+            
             FormInicioFuncionalidades FormInicioFuncionalidades = new FormInicioFuncionalidades();
             this.Hide();
             FormInicioFuncionalidades.StartPosition = FormStartPosition.CenterScreen;
