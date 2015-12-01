@@ -39,6 +39,11 @@ namespace AerolineaFrba.Abm_Aeronave
             llenarComboFabricante();
             fabricantes.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            cargarCombosBaja();
+            comboServicio.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboVida.DropDownStyle = ComboBoxStyle.DropDownList;
+
+
             f_alta.Format = DateTimePickerFormat.Custom;
             f_alta.CustomFormat = "yyyy-dd-MM";
 
@@ -280,9 +285,22 @@ namespace AerolineaFrba.Abm_Aeronave
 
             comboBoxAeronaves.DataSource = ds.Tables[0].DefaultView;
             comboBoxAeronaves.ValueMember = "AERO_MATRICULA";
-            comboBoxAeronaves.SelectedItem = 1;
+            comboBoxAeronaves.SelectedItem = null;
 
         }
+
+        private void cargarCombosBaja()
+        {
+            comboServicio.Items.Add("Si");
+            comboVida.Items.Add("Si");
+            comboServicio.Items.Add("No");
+            comboVida.Items.Add("No");
+
+            comboServicio.SelectedItem = null;
+            comboVida.SelectedItem = null;
+
+        }
+
 
         // LLENA COMBO FABRICANTE
         private void llenarComboFabricante()
@@ -377,6 +395,38 @@ namespace AerolineaFrba.Abm_Aeronave
 
         #region Eventos
 
+        private void periodo_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboServicio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboServicio.Text == "Si")
+            {
+                periodo.Enabled = true;
+                comboVida.Text = "No";
+            }
+            if (comboServicio.Text == "No")
+            {
+                periodo.Enabled = false;
+            }
+        }
+
+        private void comboVida_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboVida.Text == "Si")
+            {
+                comboServicio.Text = "No";
+                f_definitiva.Enabled = true;
+            }
+            if (comboVida.Text == "No")
+            {
+                f_definitiva.Enabled = false;
+            }
+
+        }
+
         private void comboBoxAeronaves_SelectedIndexChanged(object sender, EventArgs e)
         {
             groupBox1.Enabled = false;
@@ -448,6 +498,8 @@ namespace AerolineaFrba.Abm_Aeronave
         }
 
         #endregion
+
+     
 
         #region Funciones Descartadas(por el momento)
 
