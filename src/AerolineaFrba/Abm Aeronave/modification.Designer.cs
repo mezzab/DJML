@@ -54,10 +54,10 @@
             this.label10 = new System.Windows.Forms.Label();
             this.comboVida = new System.Windows.Forms.ComboBox();
             this.periodo = new System.Windows.Forms.GroupBox();
-            this.f_inicio = new System.Windows.Forms.DateTimePicker();
-            this.f_fin = new System.Windows.Forms.DateTimePicker();
-            this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.f_fin = new System.Windows.Forms.DateTimePicker();
+            this.f_inicio = new System.Windows.Forms.DateTimePicker();
             this.f_definitiva = new System.Windows.Forms.DateTimePicker();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
@@ -66,11 +66,18 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.f_definitiva);
             this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.periodo);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.comboVida);
             this.groupBox1.Controls.Add(this.fabricantes);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.comboServicio);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.button1);
@@ -83,7 +90,7 @@
             this.groupBox1.Controls.Add(this.t_servicio);
             this.groupBox1.Location = new System.Drawing.Point(27, 78);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(318, 212);
+            this.groupBox1.Size = new System.Drawing.Size(558, 212);
             this.groupBox1.TabIndex = 31;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de aeronave";
@@ -227,7 +234,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(24, 18);
+            this.label7.Location = new System.Drawing.Point(155, 23);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(200, 13);
             this.label7.TabIndex = 30;
@@ -236,7 +243,7 @@
             // comboBoxAeronaves
             // 
             this.comboBoxAeronaves.FormattingEnabled = true;
-            this.comboBoxAeronaves.Location = new System.Drawing.Point(27, 34);
+            this.comboBoxAeronaves.Location = new System.Drawing.Point(158, 39);
             this.comboBoxAeronaves.Name = "comboBoxAeronaves";
             this.comboBoxAeronaves.Size = new System.Drawing.Size(197, 21);
             this.comboBoxAeronaves.TabIndex = 29;
@@ -244,7 +251,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(246, 302);
+            this.button3.Location = new System.Drawing.Point(468, 302);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(99, 37);
             this.button3.TabIndex = 28;
@@ -264,7 +271,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(251, 12);
+            this.button4.Location = new System.Drawing.Point(369, 17);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(94, 49);
             this.button4.TabIndex = 32;
@@ -275,7 +282,7 @@
             // comboServicio
             // 
             this.comboServicio.FormattingEnabled = true;
-            this.comboServicio.Location = new System.Drawing.Point(573, 118);
+            this.comboServicio.Location = new System.Drawing.Point(490, 30);
             this.comboServicio.Name = "comboServicio";
             this.comboServicio.Size = new System.Drawing.Size(46, 21);
             this.comboServicio.TabIndex = 34;
@@ -285,7 +292,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(406, 119);
+            this.label8.Location = new System.Drawing.Point(323, 31);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(161, 16);
             this.label8.TabIndex = 35;
@@ -295,7 +302,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(406, 235);
+            this.label10.Location = new System.Drawing.Point(323, 147);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(160, 16);
             this.label10.TabIndex = 37;
@@ -304,7 +311,7 @@
             // comboVida
             // 
             this.comboVida.FormattingEnabled = true;
-            this.comboVida.Location = new System.Drawing.Point(572, 230);
+            this.comboVida.Location = new System.Drawing.Point(489, 142);
             this.comboVida.Name = "comboVida";
             this.comboVida.Size = new System.Drawing.Size(46, 21);
             this.comboVida.TabIndex = 36;
@@ -316,38 +323,13 @@
             this.periodo.Controls.Add(this.label11);
             this.periodo.Controls.Add(this.f_fin);
             this.periodo.Controls.Add(this.f_inicio);
-            this.periodo.Location = new System.Drawing.Point(409, 139);
+            this.periodo.Location = new System.Drawing.Point(326, 51);
             this.periodo.Name = "periodo";
             this.periodo.Size = new System.Drawing.Size(210, 89);
             this.periodo.TabIndex = 38;
             this.periodo.TabStop = false;
             this.periodo.Text = "Periodo";
             this.periodo.Enter += new System.EventHandler(this.periodo_Enter);
-            // 
-            // f_inicio
-            // 
-            this.f_inicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.f_inicio.Location = new System.Drawing.Point(76, 25);
-            this.f_inicio.Name = "f_inicio";
-            this.f_inicio.Size = new System.Drawing.Size(93, 20);
-            this.f_inicio.TabIndex = 0;
-            // 
-            // f_fin
-            // 
-            this.f_fin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.f_fin.Location = new System.Drawing.Point(76, 55);
-            this.f_fin.Name = "f_fin";
-            this.f_fin.Size = new System.Drawing.Size(93, 20);
-            this.f_fin.TabIndex = 1;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(38, 25);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(32, 13);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "Inicio";
             // 
             // label12
             // 
@@ -358,10 +340,35 @@
             this.label12.TabIndex = 3;
             this.label12.Text = "Fin";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(38, 25);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(32, 13);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Inicio";
+            // 
+            // f_fin
+            // 
+            this.f_fin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.f_fin.Location = new System.Drawing.Point(76, 55);
+            this.f_fin.Name = "f_fin";
+            this.f_fin.Size = new System.Drawing.Size(93, 20);
+            this.f_fin.TabIndex = 1;
+            // 
+            // f_inicio
+            // 
+            this.f_inicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.f_inicio.Location = new System.Drawing.Point(76, 25);
+            this.f_inicio.Name = "f_inicio";
+            this.f_inicio.Size = new System.Drawing.Size(93, 20);
+            this.f_inicio.TabIndex = 0;
+            // 
             // f_definitiva
             // 
             this.f_definitiva.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.f_definitiva.Location = new System.Drawing.Point(524, 259);
+            this.f_definitiva.Location = new System.Drawing.Point(441, 171);
             this.f_definitiva.Name = "f_definitiva";
             this.f_definitiva.Size = new System.Drawing.Size(93, 20);
             this.f_definitiva.TabIndex = 0;
@@ -369,7 +376,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(414, 263);
+            this.label13.Location = new System.Drawing.Point(331, 175);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(105, 13);
             this.label13.TabIndex = 39;
@@ -380,14 +387,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MintCream;
-            this.ClientSize = new System.Drawing.Size(646, 351);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.f_definitiva);
-            this.Controls.Add(this.periodo);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.comboVida);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.comboServicio);
+            this.ClientSize = new System.Drawing.Size(595, 351);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label7);
