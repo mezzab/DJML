@@ -46,15 +46,23 @@ namespace AerolineaFrba.Abm_Aeronave
 
 
             DataSet ds = new DataSet();
-            SqlDataAdapter da = new SqlDataAdapter("select AERO_MATRICULA from DJML.AERONAVES where AERO_BAJA_VIDA_UTIL = 0", conexion);
+            SqlDataAdapter da = new SqlDataAdapter("select AERO_MATRICULA from DJML.AERONAVES where  AND AERO_BAJA_FUERA_SERVICIO = 0 and AERO_BAJA_VIDA_UTIL = 0", conexion);
             da.Fill(ds, "DJML.ROLES");
 
             comboBoxAeronaves.DataSource = ds.Tables[0].DefaultView;
             comboBoxAeronaves.ValueMember = "AERO_MATRICULA";
             comboBoxAeronaves.SelectedItem = null;
         
-
         }
+
+
+
+
+
+        
+
+
+
 
         private void label1_Click(object sender, EventArgs e)
         {

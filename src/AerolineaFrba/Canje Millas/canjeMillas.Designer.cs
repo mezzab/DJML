@@ -33,7 +33,6 @@
             this.textBoxDNI = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.canjear = new System.Windows.Forms.Button();
             this.dataGridProductos = new System.Windows.Forms.DataGridView();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button1 = new System.Windows.Forms.Button();
@@ -41,6 +40,7 @@
             this.productoSeleccionado = new System.Windows.Forms.TextBox();
             this.cantidadLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.canje = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProductos)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -91,17 +91,6 @@
             this.label3.Size = new System.Drawing.Size(132, 17);
             this.label3.TabIndex = 19;
             this.label3.Text = "Tipo de Documento";
-            // 
-            // canjear
-            // 
-            this.canjear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.canjear.Location = new System.Drawing.Point(486, 424);
-            this.canjear.Name = "canjear";
-            this.canjear.Size = new System.Drawing.Size(122, 43);
-            this.canjear.TabIndex = 12;
-            this.canjear.Text = "Canjear";
-            this.canjear.UseVisualStyleBackColor = true;
-            this.canjear.Click += new System.EventHandler(this.canjear_Click);
             // 
             // dataGridProductos
             // 
@@ -173,18 +162,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Productos";
             // 
+            // canje
+            // 
+            this.canje.Location = new System.Drawing.Point(457, 424);
+            this.canje.Name = "canje";
+            this.canje.Size = new System.Drawing.Size(125, 42);
+            this.canje.TabIndex = 27;
+            this.canje.Text = "Canje";
+            this.canje.UseVisualStyleBackColor = true;
+            this.canje.Click += new System.EventHandler(this.canje_Click);
+            // 
             // canjeMillas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(625, 488);
+            this.Controls.Add(this.canje);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tipoDeDocumento);
             this.Controls.Add(this.botonVolver);
-            this.Controls.Add(this.canjear);
             this.Controls.Add(this.textBoxDNI);
             this.Controls.Add(this.label1);
             this.Name = "canjeMillas";
@@ -206,7 +205,7 @@
         private System.Windows.Forms.TextBox textBoxDNI;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button canjear;
+      //  private System.Windows.Forms.Button canjear;
         private System.Windows.Forms.DataGridView dataGridProductos;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
@@ -214,5 +213,6 @@
         private System.Windows.Forms.TextBox productoSeleccionado;
         private System.Windows.Forms.Label cantidadLabel;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button canje;
     }
 }
