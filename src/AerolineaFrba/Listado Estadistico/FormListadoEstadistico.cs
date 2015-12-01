@@ -276,6 +276,54 @@ namespace AerolineaFrba.Listado_Estadistico
         private void ejecutarQuintoFiltro()
         {
             //Top 5 de las aeronaves con mayor cantidad de días fuera de servicio.
+
+            if (comboBoxTrimestre.SelectedIndex != -1 && txtAnio.Text != "")
+            {
+                
+                switch (comboBoxTrimestre.SelectedIndex)
+                {
+                    //"Enero-Febrero-Marzo"
+                    case 0:
+                        string primerTrimestre = "select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva from djml.aeronaves_por_periodos ap join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id where a.aero_baja_fuera_servicio = 1 AND DAY(pdi.peri_fecha_inicio) >= 1 AND MONTH(pdi.peri_fecha_inicio) >= 1 AND MONTH(pdi.peri_fecha_inicio) <= 3 AND YEAR(pdi.peri_fecha_inicio) = " + txtAnio.Text + " group by ap.axp_matri_aeronave order by 2 desc";
+
+                        Query qry = new Query(primerTrimestre);
+                        datos.DataSource = qry.ObtenerDataTable();
+
+                        break;
+
+                    //Abril-Mayo-Junio
+                    case 1:
+                        string segundoTrimestre = "select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva from djml.aeronaves_por_periodos ap join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id where a.aero_baja_fuera_servicio = 1 AND DAY(pdi.peri_fecha_inicio) >= 1 AND MONTH(pdi.peri_fecha_inicio) >= 4 AND MONTH(pdi.peri_fecha_inicio) <= 6 AND YEAR(pdi.peri_fecha_inicio) = " + txtAnio.Text + " group by ap.axp_matri_aeronave order by 2 desc";
+
+                        Query qry2 = new Query(segundoTrimestre);
+                        datos.DataSource = qry2.ObtenerDataTable();
+
+                        break;
+
+                    //Julio-Agosto-Septiembre
+                    case 2:
+                        string tercerTrimestre = "select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva from djml.aeronaves_por_periodos ap join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id where a.aero_baja_fuera_servicio = 1 AND DAY(pdi.peri_fecha_inicio) >= 1 AND MONTH(pdi.peri_fecha_inicio) >= 7 AND MONTH(pdi.peri_fecha_inicio) <= 9 AND YEAR(pdi.peri_fecha_inicio) = " + txtAnio.Text + " group by ap.axp_matri_aeronave order by 2 desc";
+
+
+                        Query qry3 = new Query(tercerTrimestre);
+                        datos.DataSource = qry3.ObtenerDataTable();
+                        break;
+
+                    //Octubre-Noviembre-Diciembre
+                    case 3:
+                        string cuartoTrimestre = "select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva from djml.aeronaves_por_periodos ap join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id where a.aero_baja_fuera_servicio = 1 AND DAY(pdi.peri_fecha_inicio) >= 1  AND MONTH(pdi.peri_fecha_inicio) >= 10 AND MONTH(pdi.peri_fecha_inicio) <=12  AND YEAR(pdi.peri_fecha_inicio) = " + txtAnio.Text + " group by ap.axp_matri_aeronave order by 2 desc";
+
+
+                        Query qry4 = new Query(cuartoTrimestre);
+                        datos.DataSource = qry4.ObtenerDataTable();
+
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Complete Año y Trimestre", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 
