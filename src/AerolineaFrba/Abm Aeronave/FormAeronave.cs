@@ -119,9 +119,9 @@ namespace AerolineaFrba.Abm_Aeronave
         private void bnModif_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            Form frm = new FormAeronaveModificacion_();
+            Form frm = new modification();
             frm.ShowDialog();
-            frm = (FormAeronaveModificacion_)this.ActiveMdiChild;
+            frm = (modification)this.ActiveMdiChild;
         }
 
         private void bnAlta_Click(object sender, EventArgs e)

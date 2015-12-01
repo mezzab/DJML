@@ -211,7 +211,7 @@ namespace AerolineaFrba.Abm_Aeronave
             //BUSCA MODELO DE AERONAVE
             string sql3 = " SELECT AERO_MODELO FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "'";
             Query qry3 = new Query(sql3);
-            MODE = qry3.ObtenerUnicoCampo().ToString();
+             MODE = qry3.ObtenerUnicoCampo().ToString();
 
             //BUSCA FABRICANTE AERONAVE
             string sql4 = " SELECT AERO_FABRICANTE FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "'";
