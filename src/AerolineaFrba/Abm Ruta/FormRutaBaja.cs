@@ -13,7 +13,7 @@ using AerolineaFrba.Properties;
 namespace AerolineaFrba.Abm_Ruta
 {
     public partial class FormRutaBaja : Form
-    {
+    {        
         public FormRutaBaja()
         {
             InitializeComponent();
@@ -95,8 +95,7 @@ namespace AerolineaFrba.Abm_Ruta
             }
             else
             {
-                //CANCELACIONES -- TODO
-
+                cancelar_pasajes_y_encomiendas(codigo);
                 string qry_update = "update DJML.RUTAS" +
                           " set RUTA_IS_ACTIVE = 0 " +
                           " where RUTA_CODIGO = " + codigo;
@@ -143,5 +142,89 @@ namespace AerolineaFrba.Abm_Ruta
             volver.ShowDialog();
             volver = (FormRuta)this.ActiveMdiChild;
         }
+
+        public void cancelar_pasajes_y_encomiendas(string codigo) {           
+            
+            //INSERT DE LA NUEVA CANCELACION
+            string insertCancelaciones = " INSERT INTO [DJML].[CANCELACIONES] ([CANC_FECHA_DEVOLUCION] , [CANC_COMPRA_ID] , [CANC_MOTIVO])" +
+                                 " SELECT GETDATE(), COMPRA_ID, 'La ruta fue dada de baja'" +
+                                 " FROM DJML.COMPRAS" +
+                                 " JOIN DJML.VIAJES ON COMPRA_VIAJE_ID = VIAJE_ID" +
+                                 " JOIN DJML.RUTAS ON VIAJE_RUTA_ID = RUTA_CODIGO" +
+                                 " WHERE RUTA_CODIGO = " + codigo +
+                                 " AND VIAJE_FECHA_SALIDA > GETDATE()";
+            Query qryCancelaciones = new Query(insertCancelaciones);
+            qryCancelaciones.pComando = insertCancelaciones;
+            qryCancelaciones.Ejecutar();
+
+            string stringCancelaciones = " SELECT CANC_ID, CANC_COMPRA_ID" +
+                                 " FROM DJML.CANCELACIONES" +
+                                 " JOIN DJML.COMPRAS ON COMPRA_ID = CANC_COMPRA_ID" +
+                                 " JOIN DJML.VIAJES ON COMPRA_VIAJE_ID = VIAJE_ID" +
+                                 " JOIN DJML.RUTAS ON VIAJE_RUTA_ID = RUTA_CODIGO" +
+                                 " WHERE RUTA_CODIGO = " + codigo;
+            var cancelaciones = new Query(stringCancelaciones).ObtenerDataTable();
+
+            for (int i = 0; i <= cancelaciones.Rows.Count - 1; i++)
+            {
+                // LE AGREGO EL CODIGO DE DEVOLUCION A LOS PASAJES
+                string pasajes = " UPDATE [DJML].[PASAJES] SET [CANCELACION_ID] = " + cancelaciones.Rows[i][0].ToString() +
+                                 " WHERE PASA_COMPRA_ID = " + cancelaciones.Rows[i][1].ToString();
+                Query qryPasajes = new Query(pasajes);
+                qryPasajes.Ejecutar();
+
+                // LE AGREGO EL CODIGO DE DEVOLUCION A LAS ENCOMIENDAS
+                string encomiendas = " UPDATE [DJML].[ENCOMIENDAS] SET [CANCELACION_ID] = " + cancelaciones.Rows[i][0].ToString() +
+                                     " WHERE PASA_COMPRA_ID = " + cancelaciones.Rows[i][1].ToString();
+                Query qryEncomiendas = new Query(encomiendas);
+                qryEncomiendas.Ejecutar();
+            }            
+
+            //MODIFICO EL PRECIO DE COMPRA (LE RESTO EL PRECIO DE LOS PASAJES Y ENCOMIENDAS CANCELADAS)
+            string precios = " UPDATE [DJML].[COMPRAS] SET [COMPRA_MONTO] = 0" +
+                             " WHERE COMPRA_ID IN (CANC_COMPRA_ID" +
+                                 " FROM DJML.CANCELACIONES" +
+                                 " JOIN DJML.COMPRAS ON COMPRA_ID = CANC_COMPRA_ID" +
+                                 " JOIN DJML.VIAJES ON COMPRA_VIAJE_ID = VIAJE_ID" +
+                                 " JOIN DJML.RUTAS ON VIAJE_RUTA_ID = RUTA_CODIGO" +
+                                 " WHERE RUTA_CODIGO = " + codigo + ")";
+            Query qryPrecios = new Query(precios);
+            qryPrecios.Ejecutar();
+
+            //LIBERO BUTACAS DE LOS PASAJES CANCELADOS
+            string qryButacas = " UPDATE DJML.BUTACA_AERO SET BXA_ESTADO = 1" +
+                         " WHERE BXA_BUTA_ID IN (SELECT PASA_BUTA_ID " +
+                                                " FROM DJML.PASAJES" +
+                                                " WHERE PASA_COMPRA_ID IN (SELECT COMPRA_ID" +
+                                                                         " FROM DJML.COMPRAS" +
+						                                                 " JOIN DJML.VIAJES ON COMPRA_VIAJE_ID = VIAJE_ID" +
+						                                                 " JOIN DJML.RUTAS ON VIAJE_RUTA_ID = RUTA_CODIGO" +
+						                                                 " WHERE RUTA_CODIGO = " + codigo +
+						                                                 " AND VIAJE_FECHA_SALIDA > GETDATE()))";
+            new Query(qryButacas).Ejecutar();
+
+            //LIBERO KILOS DE LA AERONAVE DE LAS ENCOMIENDAS CANCELADAS
+            string stringAeronaves = "SELECT VIAJE_AERO_ID, MAX(SUMA) " +
+                                    " FROM ("+
+	                                        " SELECT VIAJE_AERO_ID, SUM(ENCO_KG) SUMA " +
+	                                        " FROM DJML.ENCOMIENDAS " +
+	                                        " JOIN DJML.VIAJES ON ENCO_VIAJE_ID = VIAJE_ID " +
+	                                        " JOIN DJML.RUTAS ON VIAJE_RUTA_ID = RUTA_CODIGO " +
+                                            " WHERE RUTA_CODIGO = " + codigo + " AND VIAJE_FECHA_SALIDA > GETDATE()" +
+	                                        " GROUP BY ENCO_VIAJE_ID, VIAJE_AERO_ID " +
+                                    " ) aux " +
+                                    " GROUP BY VIAJE_AERO_ID ";
+            var aeronaves = new Query(stringAeronaves).ObtenerDataTable();
+
+            for (int i = 0; i <= aeronaves.Rows.Count - 1; i++)
+            {
+                // ACTUALIZO KILOS DISPONIBLES
+                string kilos = " UPDATE [GD2C2015].[DJML].[AERONAVES] SET [AERO_KILOS_DISPONIBLES] = AERO_KILOS_DISPONIBLES + " + aeronaves.Rows[i][1].ToString() +
+                                 "WHERE AERO_MATRICULA = " + aeronaves.Rows[i][0].ToString();
+                Query qryKilos = new Query(kilos);
+                qryKilos.Ejecutar();
+            }         
+        }
+      
     }
 }

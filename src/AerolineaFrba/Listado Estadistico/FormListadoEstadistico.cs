@@ -184,18 +184,7 @@ namespace AerolineaFrba.Listado_Estadistico
                 {
                     //"Enero-Febrero-Marzo"
                     case 0:
-                        string primerTrimestre = "SELECT TOP 5 C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID, COUNT(BA.BXA_BUTA_ID) CANTIDAD FROM DJML.AERONAVES A "
-                        +"JOIN DJML.VIAJES V ON A.AERO_MATRICULA = V.VIAJE_AERO_ID " 
-                        +"JOIN DJML.RUTAS R ON R.RUTA_CODIGO = V.VIAJE_RUTA_ID "
-                        +" JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID "
-                        +" JOIN DJML.CIUDADES C ON T.TRAMO_CIUDAD_DESTINO = C.CIUD_ID "
-                        +" JOIN DJML.BUTACA_AERO BA ON A.AERO_MATRICULA = BA.BXA_AERO_MATRICULA"
-                        +" WHERE A.AERO_BAJA_VIDA_UTIL = 0 "
-                        +" AND  DAY(V.VIAJE_FECHA_SALIDA) >= 01"	
-                        +" AND MONTH(V.VIAJE_FECHA_SALIDA) <= 03 "
-                        +" AND YEAR(V.VIAJE_FECHA_SALIDA) =  " + txtAnio.Text + ""
-                        + " GROUP BY C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID "
-                        +" ORDER BY 4 ASC";
+                        string primerTrimestre = "SELECT TOP 5 C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID, COUNT(BA.BXA_BUTA_ID) CANTIDAD FROM DJML.AERONAVES A JOIN DJML.VIAJES V ON A.AERO_MATRICULA = V.VIAJE_AERO_ID JOIN DJML.RUTAS R ON R.RUTA_CODIGO = V.VIAJE_RUTA_ID JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID JOIN DJML.CIUDADES C ON T.TRAMO_CIUDAD_DESTINO = C.CIUD_ID JOIN DJML.BUTACA_AERO BA ON A.AERO_MATRICULA = BA.BXA_AERO_MATRICULA WHERE A.AERO_BAJA_VIDA_UTIL = 0 AND  DAY(V.VIAJE_FECHA_SALIDA) >= 01 AND MONTH(V.VIAJE_FECHA_SALIDA) >= 01  AND MONTH(V.VIAJE_FECHA_SALIDA) <= 03 AND YEAR(V.VIAJE_FECHA_SALIDA) =  " + txtAnio.Text + " GROUP BY C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID ORDER BY 4 ASC";
                         Query qry = new Query(primerTrimestre);
                         datos.DataSource = qry.ObtenerDataTable();
 
@@ -203,19 +192,7 @@ namespace AerolineaFrba.Listado_Estadistico
 
                     //Abril-Mayo-Junio
                     case 1:
-                        string segundoTrimestre = "SELECT TOP 5 C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID, COUNT(BA.BXA_BUTA_ID) CANTIDAD FROM DJML.AERONAVES A"
-                        +"JOIN DJML.VIAJES V ON A.AERO_MATRICULA = V.VIAJE_AERO_ID"
-                        +"JOIN DJML.RUTAS R ON R.RUTA_CODIGO = V.VIAJE_RUTA_ID"
-                        +"JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID"
-                        +"JOIN DJML.CIUDADES C ON T.TRAMO_CIUDAD_DESTINO = C.CIUD_ID"
-                        +"JOIN DJML.BUTACA_AERO BA ON A.AERO_MATRICULA = BA.BXA_AERO_MATRICULA"
-                        +"WHERE A.AERO_BAJA_VIDA_UTIL = 0 "
-                        +"AND  DAY(V.VIAJE_FECHA_SALIDA) >= 01"
-                        +"AND MONTH(V.VIAJE_FECHA_SALIDA) >= 04	"
-                        +"AND MONTH(V.VIAJE_FECHA_SALIDA) <= 06 "
-                        +"AND YEAR(V.VIAJE_FECHA_SALIDA) =  " + txtAnio.Text + ""
-                        +"GROUP BY C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID"
-                        +"ORDER BY 4 ASC";
+                        string segundoTrimestre = "SELECT TOP 5 C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID, COUNT(BA.BXA_BUTA_ID) CANTIDAD FROM DJML.AERONAVES A JOIN DJML.VIAJES V ON A.AERO_MATRICULA = V.VIAJE_AERO_ID  JOIN DJML.RUTAS R ON R.RUTA_CODIGO = V.VIAJE_RUTA_ID JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID JOIN DJML.CIUDADES C ON T.TRAMO_CIUDAD_DESTINO = C.CIUD_ID JOIN DJML.BUTACA_AERO BA ON A.AERO_MATRICULA = BA.BXA_AERO_MATRICULA WHERE A.AERO_BAJA_VIDA_UTIL = 0  AND  DAY(V.VIAJE_FECHA_SALIDA) >= 01 AND MONTH(V.VIAJE_FECHA_SALIDA) >= 04 AND MONTH(V.VIAJE_FECHA_SALIDA) <= 06 AND YEAR(V.VIAJE_FECHA_SALIDA) =  " + txtAnio.Text + " GROUP BY C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID ORDER BY 4 ASC";
                         Query qry2 = new Query(segundoTrimestre);
                         datos.DataSource = qry2.ObtenerDataTable();
 
@@ -223,38 +200,14 @@ namespace AerolineaFrba.Listado_Estadistico
 
                     //Julio-Agosto-Septiembre
                     case 2:
-                        string tercerTrimestre = " SELECT TOP 5 C.CIUD_DETALLE, A.AERO_MATRICULA, V.VIAJE_ID,COUNT(BA.BXA_BUTA_ID) CANTIDAD FROM DJML.AERONAVES A"
-                        +"JOIN DJML.VIAJES V ON A.AERO_MATRICULA = V.VIAJE_AERO_ID"
-                        +"JOIN DJML.RUTAS R ON R.RUTA_CODIGO = V.VIAJE_RUTA_ID"
-                        +"JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID"
-                        +"JOIN DJML.CIUDADES C ON T.TRAMO_CIUDAD_DESTINO = C.CIUD_ID"
-                        +"JOIN DJML.BUTACA_AERO BA ON A.AERO_MATRICULA = BA.BXA_AERO_MATRICULA"
-                        +"WHERE A.AERO_BAJA_VIDA_UTIL = 0 "
-                        +"AND  DAY(V.VIAJE_FECHA_SALIDA) >= 01"
-                        +" AND MONTH(V.VIAJE_FECHA_SALIDA) >= 07	"
-                        +" AND MONTH(V.VIAJE_FECHA_SALIDA) <= 09 "
-                        +" AND YEAR(V.VIAJE_FECHA_SALIDA) =  " + txtAnio.Text + " "
-                        + "GROUP BY C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID"
-                        +"ORDER BY 4 ASC";
+                        string tercerTrimestre = "SELECT TOP 5 C.CIUD_DETALLE, A.AERO_MATRICULA, V.VIAJE_ID,COUNT(BA.BXA_BUTA_ID) CANTIDAD FROM DJML.AERONAVES A JOIN DJML.VIAJES V ON A.AERO_MATRICULA = V.VIAJE_AERO_ID JOIN DJML.RUTAS R ON R.RUTA_CODIGO = V.VIAJE_RUTA_ID JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID JOIN DJML.CIUDADES C ON T.TRAMO_CIUDAD_DESTINO = C.CIUD_ID JOIN DJML.BUTACA_AERO BA ON A.AERO_MATRICULA = BA.BXA_AERO_MATRICULA WHERE A.AERO_BAJA_VIDA_UTIL = 0  AND  DAY(V.VIAJE_FECHA_SALIDA) >= 01 AND MONTH(V.VIAJE_FECHA_SALIDA) >= 07 AND MONTH(V.VIAJE_FECHA_SALIDA) <= 09  AND YEAR(V.VIAJE_FECHA_SALIDA) =  " + txtAnio.Text + " GROUP BY C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID ORDER BY 4 ASC";
                          Query qry3 = new Query(tercerTrimestre);
                         datos.DataSource = qry3.ObtenerDataTable();
                         break;
 
                     //Octubre-Noviembre-Diciembre
                     case 3:
-                        string cuartoTrimestre = "SELECT TOP 5 C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID, COUNT(BA.BXA_BUTA_ID) CANTIDAD FROM DJML.AERONAVES A"
-                        +"JOIN DJML.VIAJES V ON A.AERO_MATRICULA = V.VIAJE_AERO_ID"
-                        +"JOIN DJML.RUTAS R ON R.RUTA_CODIGO = V.VIAJE_RUTA_ID"
-                        +"JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID"
-                        +"JOIN DJML.CIUDADES C ON T.TRAMO_CIUDAD_DESTINO = C.CIUD_ID"
-                        +"JOIN DJML.BUTACA_AERO BA ON A.AERO_MATRICULA = BA.BXA_AERO_MATRICULA"
-                        +"WHERE A.AERO_BAJA_VIDA_UTIL = 0 "
-                        +"AND  DAY(V.VIAJE_FECHA_SALIDA) >= 01	"
-                        +"AND MONTH(V.VIAJE_FECHA_SALIDA) >= 10"
-                        +"AND MONTH(V.VIAJE_FECHA_SALIDA) <= 12"
-                        +"AND YEAR(V.VIAJE_FECHA_SALIDA) =  " + txtAnio.Text + " "
-                        + "GROUP BY C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID"
-                        +"ORDER BY 4 ASC";
+                        string cuartoTrimestre = "SELECT TOP 5 C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID, COUNT(BA.BXA_BUTA_ID) CANTIDAD FROM DJML.AERONAVES A JOIN DJML.VIAJES V ON A.AERO_MATRICULA = V.VIAJE_AERO_ID JOIN DJML.RUTAS R ON R.RUTA_CODIGO = V.VIAJE_RUTA_ID JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID JOIN DJML.CIUDADES C ON T.TRAMO_CIUDAD_DESTINO = C.CIUD_ID JOIN DJML.BUTACA_AERO BA ON A.AERO_MATRICULA = BA.BXA_AERO_MATRICULA WHERE A.AERO_BAJA_VIDA_UTIL = 0  AND  DAY(V.VIAJE_FECHA_SALIDA) >= 01	 AND MONTH(V.VIAJE_FECHA_SALIDA) >= 10 AND MONTH(V.VIAJE_FECHA_SALIDA) <= 12 AND YEAR(V.VIAJE_FECHA_SALIDA) =  " + txtAnio.Text + "  GROUP BY C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID ORDER BY 4 ASC";
                         Query qry4 = new Query(cuartoTrimestre);
                         datos.DataSource = qry4.ObtenerDataTable();
 
@@ -282,17 +235,7 @@ namespace AerolineaFrba.Listado_Estadistico
                 {
                     //"Enero-Febrero-Marzo"
                     case 0:
-                        string primerTrimestre = "SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN"
-                        +"JOIN DJML.COMPRAS COM ON CAN.CANC_COMPRA_ID = COM.COMPRA_ID"
-                        +"JOIN DJML.VIAJES V ON COM.COMPRA_VIAJE_ID = V.VIAJE_ID"
-                        +"JOIN DJML.RUTAS R ON V.VIAJE_ID = R.RUTA_CODIGO"
-                        +"JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID"
-                        +"JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID"
-                        +"WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 "
-                        +"AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 03 "
-                        +"AND YEAR(CAN.CANC_FECHA_DEVOLUCION)=  " + txtAnio.Text + " "
-                        +"GROUP BY C1.CIUD_DETALLE "
-                        +"ORDER BY 2 DESC";
+                        string primerTrimestre = "SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN JOIN DJML.COMPRAS COM ON CAN.CANC_COMPRA_ID = COM.COMPRA_ID JOIN DJML.VIAJES V ON COM.COMPRA_VIAJE_ID = V.VIAJE_ID JOIN DJML.RUTAS R ON V.VIAJE_ID = R.RUTA_CODIGO JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1  AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 01  AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 03  AND YEAR(CAN.CANC_FECHA_DEVOLUCION)=  " + txtAnio.Text + " GROUP BY C1.CIUD_DETALLE  ORDER BY 2 DESC";
                           Query qry = new Query(primerTrimestre);
                         datos.DataSource = qry.ObtenerDataTable();
 
@@ -300,18 +243,7 @@ namespace AerolineaFrba.Listado_Estadistico
 
                     //Abril-Mayo-Junio
                     case 1:
-                        string segundoTrimestre = "SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN"
-                        +"JOIN DJML.COMPRAS COM ON CAN.CANC_COMPRA_ID = COM.COMPRA_ID"
-                        +"JOIN DJML.VIAJES V ON COM.COMPRA_VIAJE_ID = V.VIAJE_ID"
-                        +"JOIN DJML.RUTAS R ON V.VIAJE_ID = R.RUTA_CODIGO"
-                        +"JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID"
-                        +"JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID"
-                        +"WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 "
-                        +"AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 04"
-                        +"AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 06 "
-                        +"AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= " + txtAnio.Text + ""
-                        +"GROUP BY C1.CIUD_DETALLE "
-                        +"ORDER BY 2 DESC";
+                        string segundoTrimestre ="select c1.Ciud_detalle, COUNT(canc_id) as cantidad  from djml.ciudades c1 join djml.tramos t on c1.ciud_id = t.tramo_ciudad_destino join djml.rutas r on  t.tramo_id = r.ruta_tramo join djml.viajes v on v.viaje_ruta_id = r.ruta_codigo join djml.compras com on v.viaje_id = com.compra_viaje_id join djml.cancelaciones can on can.canc_compra_id = com.compra_id WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1  AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 04 AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 06  AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= " + txtAnio.Text + " GROUP BY C1.CIUD_DETALLE  ORDER BY 2 DESC";
                         Query qry2 = new Query(segundoTrimestre);
                         datos.DataSource = qry2.ObtenerDataTable();
 
@@ -319,18 +251,7 @@ namespace AerolineaFrba.Listado_Estadistico
 
                     //Julio-Agosto-Septiembre
                     case 2:
-                        string tercerTrimestre = " SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN"
-                        + "JOIN DJML.COMPRAS COM ON CAN.CANC_COMPRA_ID = COM.COMPRA_ID"
-                        + "JOIN DJML.VIAJES V ON COM.COMPRA_VIAJE_ID = V.VIAJE_ID"
-                        + "JOIN DJML.RUTAS R ON V.VIAJE_ID = R.RUTA_CODIGO"
-                        + "JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID"
-                        + "JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID"
-                        + "WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 "
-                        + "AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 07"
-                        + "AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 09 "
-                        + "AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= " + txtAnio.Text + ""
-                        + "GROUP BY C1.CIUD_DETALLE "
-                        + "ORDER BY 2 DESC";
+                        string tercerTrimestre = "select c1.Ciud_detalle, COUNT(canc_id) as cantidad  from djml.ciudades c1 join djml.tramos t on c1.ciud_id = t.tramo_ciudad_destino join djml.rutas r on  t.tramo_id = r.ruta_tramo join djml.viajes v on v.viaje_ruta_id = r.ruta_codigo join djml.compras com on v.viaje_id = com.compra_viaje_id join djml.cancelaciones can on can.canc_compra_id = com.compra_id WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1  AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 07 AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 09  AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= "+ txtAnio.Text +" GROUP BY C1.CIUD_DETALLE  ORDER BY 2 DESC";
 
                         Query qry3 = new Query(tercerTrimestre);
                         datos.DataSource = qry3.ObtenerDataTable();
@@ -338,18 +259,8 @@ namespace AerolineaFrba.Listado_Estadistico
 
                     //Octubre-Noviembre-Diciembre
                     case 3:
-                        string cuartoTrimestre = "SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN"
-                        +"JOIN DJML.COMPRAS COM ON CAN.CANC_COMPRA_ID = COM.COMPRA_ID"
-                        +"JOIN DJML.VIAJES V ON COM.COMPRA_VIAJE_ID = V.VIAJE_ID"
-                        +"JOIN DJML.RUTAS R ON V.VIAJE_ID = R.RUTA_CODIGO"
-                        +"JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID"
-                        +"JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID"
-                        +"WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 "
-                        +"AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 10"
-                        +"AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 12 "
-                        +"AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= " + txtAnio.Text + ""
-                        +"GROUP BY C1.CIUD_DETALLE "
-                        +"ORDER BY 2 DESC";
+                        string cuartoTrimestre = "select c1.Ciud_detalle, COUNT(canc_id) as cantidad  from djml.ciudades c1 join djml.tramos t on c1.ciud_id = t.tramo_ciudad_destino join djml.rutas r on  t.tramo_id = r.ruta_tramo join djml.viajes v on v.viaje_ruta_id = r.ruta_codigo join djml.compras com on v.viaje_id = com.compra_viaje_id join djml.cancelaciones can on can.canc_compra_id = com.compra_id WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 1 AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 12 AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= 2015 GROUP BY C1.CIUD_DETALLE ORDER BY 2 DESC";
+
                         Query qry4 = new Query(cuartoTrimestre);
                         datos.DataSource = qry4.ObtenerDataTable();
 

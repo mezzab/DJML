@@ -1135,19 +1135,25 @@ DROP PROCEDURE DJML.CREAR_CANJES
 DROP SCHEMA DJML
 			
 
-select * from djml.compras
-select * from djml.cancelaciones
+----------------------------
+--CONSULTAS PERIODOS
+----------------------------
+
+select * from djml.aeronaves
+select * from DJML.AERONAVES_POR_PERIODOS
+select * from DJML.PERIODOS_DE_INACTIVIDAD
 
 
-SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN
-                        JOIN DJML.COMPRAS COM ON CAN.CANC_COMPRA_ID = COM.COMPRA_ID
-                        JOIN DJML.VIAJES V ON COM.COMPRA_VIAJE_ID = V.VIAJE_ID
-                        JOIN DJML.RUTAS R ON V.VIAJE_ID = R.RUTA_CODIGO
-                        JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID
-                        JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID
-                        WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 
-                        AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 10
-                        AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 12 
-                        AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= 2015
-                        GROUP BY C1.CIUD_DETALLE 
-                        ORDER BY 2 DESC
+select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Cantidad_Dias from djml.aeronaves_por_periodos ap
+join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula
+join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id
+where a.aero_baja_fuera_servicio = 1
+AND DAY() >= 1 
+AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 10
+AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 12 
+AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= 2015
+
+group by ap.axp_matri_aeronave
+order by 2 desc
+
+--------------

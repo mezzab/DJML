@@ -197,13 +197,8 @@ namespace AerolineaFrba.Devolucion
             Query qry = new Query(sql);
             string aeroID = qry.ObtenerUnicoCampo().ToString();
 
-            string aux = "+ 0";
-
-            
-            aux = "- " + kilosIngresados;
-
             string qry2000 = "update djml.AERONAVES " +
-                       "set AERO_KILOS_DISPONIBLES = AERO_KILOS_DISPONIBLES" + aux +
+                       "set AERO_KILOS_DISPONIBLES = AERO_KILOS_DISPONIBLES" + kilosIngresados +
                        "where AERO_MATRICULA = '" + aeroID + "'";
 
             new Query(qry2000).Ejecutar();

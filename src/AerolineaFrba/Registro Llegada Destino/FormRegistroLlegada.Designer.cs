@@ -117,7 +117,7 @@
             // 
             // bnVolver
             // 
-            this.bnVolver.Location = new System.Drawing.Point(316, 261);
+            this.bnVolver.Location = new System.Drawing.Point(301, 292);
             this.bnVolver.Name = "bnVolver";
             this.bnVolver.Size = new System.Drawing.Size(75, 23);
             this.bnVolver.TabIndex = 9;
@@ -130,9 +130,9 @@
             this.datos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.datos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.boton});
-            this.datos.Location = new System.Drawing.Point(15, 72);
+            this.datos.Location = new System.Drawing.Point(12, 124);
             this.datos.Name = "datos";
-            this.datos.Size = new System.Drawing.Size(679, 150);
+            this.datos.Size = new System.Drawing.Size(687, 150);
             this.datos.TabIndex = 10;
             this.datos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datos_CellContentClick);
             // 
@@ -149,7 +149,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MintCream;
-            this.ClientSize = new System.Drawing.Size(703, 325);
+            this.ClientSize = new System.Drawing.Size(728, 363);
             this.Controls.Add(this.datos);
             this.Controls.Add(this.bnVolver);
             this.Controls.Add(this.comboBoxCiudadDestino);

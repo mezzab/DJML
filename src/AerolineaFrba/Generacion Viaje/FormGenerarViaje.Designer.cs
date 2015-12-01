@@ -30,10 +30,8 @@
         {
             this.button2 = new System.Windows.Forms.Button();
             this.fechaSalida = new System.Windows.Forms.DateTimePicker();
-            this.fechaLlegada = new System.Windows.Forms.DateTimePicker();
             this.fechaLlegadaEstimada = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxAeronaves = new System.Windows.Forms.ComboBox();
@@ -66,17 +64,9 @@
             this.fechaSalida.TabIndex = 2;
             this.fechaSalida.ValueChanged += new System.EventHandler(this.fechaSalida_ValueChanged);
             // 
-            // fechaLlegada
-            // 
-            this.fechaLlegada.Location = new System.Drawing.Point(182, 68);
-            this.fechaLlegada.Name = "fechaLlegada";
-            this.fechaLlegada.Size = new System.Drawing.Size(218, 20);
-            this.fechaLlegada.TabIndex = 3;
-            this.fechaLlegada.ValueChanged += new System.EventHandler(this.fechaLlegada_ValueChanged);
-            // 
             // fechaLlegadaEstimada
             // 
-            this.fechaLlegadaEstimada.Location = new System.Drawing.Point(182, 94);
+            this.fechaLlegadaEstimada.Location = new System.Drawing.Point(182, 72);
             this.fechaLlegadaEstimada.Name = "fechaLlegadaEstimada";
             this.fechaLlegadaEstimada.Size = new System.Drawing.Size(218, 20);
             this.fechaLlegadaEstimada.TabIndex = 4;
@@ -91,19 +81,10 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Fecha Salida";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 67);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Fecha Llegada";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(31, 94);
+            this.label3.Location = new System.Drawing.Point(31, 72);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(128, 13);
             this.label3.TabIndex = 7;
@@ -202,10 +183,8 @@
             this.Controls.Add(this.comboBoxAeronaves);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.fechaLlegadaEstimada);
-            this.Controls.Add(this.fechaLlegada);
             this.Controls.Add(this.fechaSalida);
             this.Controls.Add(this.button2);
             this.Name = "FormGenerarViaje";
@@ -222,10 +201,8 @@
 
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DateTimePicker fechaSalida;
-        private System.Windows.Forms.DateTimePicker fechaLlegada;
         private System.Windows.Forms.DateTimePicker fechaLlegadaEstimada;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBoxAeronaves;
