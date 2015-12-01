@@ -116,7 +116,6 @@ namespace AerolineaFrba.Canje_Millas
             guardarIdCliente();
 
 
-
             dni = textBoxDNI.Text;
             tipo = tipoDeDocumento.Text;
             if (dni != string.Empty && tipo != string.Empty)
@@ -157,7 +156,7 @@ namespace AerolineaFrba.Canje_Millas
 
         private void canjear_Click(object sender, EventArgs e)
         {
-
+            /*
             if (cantidad.Text == string.Empty)
             {
                 MessageBox.Show("Debe ingresar una cantidad", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -197,7 +196,7 @@ namespace AerolineaFrba.Canje_Millas
                     FormInicioFuncionalidades.ShowDialog();
                     FormInicioFuncionalidades = (FormInicioFuncionalidades)this.ActiveMdiChild;
                 }
-            }
+            }*/
         }
         private void cantidad_TextChanged(object sender, EventArgs e)
         {
@@ -208,13 +207,13 @@ namespace AerolineaFrba.Canje_Millas
         private void canjear(int cantidad, string id_cliente)
         {
             int cantMillasEnPeriodo = obtenerMillasEnPeriodo(id_cliente);
-            int millasRequeridas = millas;
+            int millasRequeridas = millas * cantidad;
 
             if (cantMillasEnPeriodo < millasRequeridas)
             {
                 MessageBox.Show("No posee las millas necesarias para realizar el canje");
             }
-            if (cantMillasEnPeriodo > millasRequeridas)
+            else
             {
                int millasAux = millasRequeridas;
                
@@ -292,13 +291,47 @@ namespace AerolineaFrba.Canje_Millas
 
         private void canje_Click(object sender, EventArgs e)
         {
-             if (cantidad.Text == string.Empty)
+
+            if (cantidad.Text == string.Empty)
             {
                 MessageBox.Show("Debe ingresar una cantidad", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                 canjear(Convert.ToInt32(cantidad.Text), IDC );
+                string qryCant = "SELECT  DJML.CALCULAR_MILLAS('" + dni + "', '" + tipo + "')";
+                var resultCant = new Query(qryCant).ObtenerDataTable();
+                int resultado = Int32.Parse(resultCant.Rows[0][0].ToString());
+                int cant = Int32.Parse(cantidad.Text);
+                if (stock < cant)
+                {
+                    MessageBox.Show("Lo sentimos pero no disponemos de stock suficiente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (resultado < millas * cant)
+                {
+                    MessageBox.Show("Lo sentimos pero no dispone de suficientes millas para canjear", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    canjear(cant, IDC);
+
+                    string insert_canje = "INSERT INTO DJML.CANJES (CANJ_CLIE_ID, CANJ_PRODUCTO_ID, CANJ_CANTIDAD, CANJ_FECHA_CANJE, CANJ_MILLAS_USADAS)" +
+                                     " SELECT CLIE_ID, " + producto_id + ", " + cantidad.Text + ", GETDATE(), " + (millas * cant) +
+                                     " FROM DJML.CLIENTES" +
+                                     " JOIN DJML.TIPO_DOCUMENTO td on CLIE_TIPO_DOC = ID_TIPO_DOC" +
+                                     " WHERE CLIE_DNI = '" + dni + "'" +
+                                     " AND td.DESCRIPCION = '" + tipo + "'";
+                    new Query(insert_canje).Ejecutar();
+
+                    string update_productos = "UPDATE DJML.PRODUCTO SET PROD_STOCK = PROD_STOCK - " + cant + "WHERE PROD_ID = " + producto_id;
+                    new Query(update_productos).Ejecutar();
+
+                    MessageBox.Show("Felicitaciones! Pase por la ventanilla de al lado para retirar sus productos", "Felicitaciones!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    FormInicioFuncionalidades FormInicioFuncionalidades = new FormInicioFuncionalidades();
+                    this.Hide();
+                    FormInicioFuncionalidades.ShowDialog();
+                    FormInicioFuncionalidades = (FormInicioFuncionalidades)this.ActiveMdiChild;
+                }
             }
         }
     }
