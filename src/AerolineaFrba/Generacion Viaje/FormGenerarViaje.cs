@@ -26,15 +26,16 @@ namespace AerolineaFrba.Generacion_Viaje
   
         private void button3_Click(object sender, EventArgs e)
         {
-             //HACER: FALTA VALIDAR QUE FECHA SALIDA, FECHA LLEGADA Y FECHA LLEGADA ESTIMADA SEAN MAYORES A GETTIME!!
-          
             DateTime fechaSistema = DateTime.Now;
-            int diferenciaDias = fechaLlegadaEstimada.Value.Day - fechaSalida.Value.Day;  
+
+            //CANTIDAD DIAS
+            //int qryCant = "SELECT  DJML.calculoFecha('" + fechaLlegadaEstimada.Value.ToShortDateString() + "', '" + fechaLlegadaEstimada.Value+"')";
+                
+
+            int diferenciaDias = ((fechaLlegadaEstimada.Value) - (fechaSalida.Value)).Days;  
             {
                 //valida que no supere 24 hs el vuelo y sean mayores a hoy
-                if ((fechaSalida.Value.Year == fechaLlegadaEstimada.Value.Year) &&
-                (fechaSalida.Value.Month == fechaLlegadaEstimada.Value.Month) &&
-                (diferenciaDias <= 1) &&
+                if ((diferenciaDias <= 1 && diferenciaDias >=0)&&
                 (fechaSalida.Value.Year >= fechaSistema.Year) &&
                 (fechaSalida.Value.Month >= fechaSistema.Month) &&
                 (fechaSalida.Value.Day >= fechaSistema.Day) &&
