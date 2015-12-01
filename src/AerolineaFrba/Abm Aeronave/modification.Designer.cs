@@ -164,7 +164,9 @@
             // 
             // f_alta
             // 
+            this.f_alta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.f_alta.Location = new System.Drawing.Point(168, 131);
+            this.f_alta.MinDate = new System.DateTime(1755, 1, 1, 0, 0, 0, 0);
             this.f_alta.Name = "f_alta";
             this.f_alta.Size = new System.Drawing.Size(121, 20);
             this.f_alta.TabIndex = 18;
@@ -192,6 +194,7 @@
             this.c_butacas.Name = "c_butacas";
             this.c_butacas.Size = new System.Drawing.Size(121, 20);
             this.c_butacas.TabIndex = 14;
+            this.c_butacas.TextChanged += new System.EventHandler(this.c_butacas_TextChanged);
             // 
             // kg_disponibles
             // 
@@ -199,6 +202,7 @@
             this.kg_disponibles.Name = "kg_disponibles";
             this.kg_disponibles.Size = new System.Drawing.Size(121, 20);
             this.kg_disponibles.TabIndex = 16;
+            this.kg_disponibles.TextChanged += new System.EventHandler(this.kg_disponibles_TextChanged);
             // 
             // t_servicio
             // 
@@ -269,6 +273,7 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Name = "modification";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificacion de Aeronave";
             this.Load += new System.EventHandler(this.modification_Load);
             this.groupBox1.ResumeLayout(false);

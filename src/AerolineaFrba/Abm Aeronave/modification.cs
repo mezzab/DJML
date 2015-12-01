@@ -24,7 +24,7 @@ namespace AerolineaFrba.Abm_Aeronave
         public static int KG_DISP;
         public static string FABR;
         public static string T_SERV;
-        public static string FECHA;
+        public static DateTime FECHA;
       
         public modification()
         {
@@ -42,6 +42,7 @@ namespace AerolineaFrba.Abm_Aeronave
             f_alta.Format = DateTimePickerFormat.Custom;
             f_alta.CustomFormat = "yyyy-dd-MM";
 
+            matricula.Enabled = false;
             cargarAeronaves();
             comboBoxAeronaves.DropDownStyle = ComboBoxStyle.DropDownList;
 
@@ -75,7 +76,7 @@ namespace AerolineaFrba.Abm_Aeronave
             Query qry4 = new Query(sql4);
             string aux = qry4.ObtenerUnicoCampo().ToString();
 
-            string sql44 = " select descripcion from djml.fabricantes where id_fabricante = '" + aux + "'";
+            string sql44 = " select descripcion from djml.fabricantes where id_fabricante = '" + aux + "'" ;
             Query qry44 = new Query(sql44);
             FABR = qry44.ObtenerUnicoCampo().ToString();
 
@@ -87,23 +88,26 @@ namespace AerolineaFrba.Abm_Aeronave
             C_BUTA = (Convert.ToInt32(qry5.ObtenerUnicoCampo()) - 1);
 
             // FECHA
-            //string sql6 = "ACA VA EL SELECT A FECHA";
-            //Query qry6 = new Query(sql6);
-            //FECHA = qry6.ObtenerDataTable().ToString() + " 00:00:00.000";
+            string sql6 = "SELECT AERO_FECHA_ALTA FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "'";
+            Query qry6 = new Query(sql6);
+            object auxiliar = qry6.ObtenerUnicoCampo();
 
+            if (auxiliar == System.DBNull.Value )
+            { FECHA = Convert.ToDateTime("1777-7-7"); }
+            if (auxiliar != System.DBNull.Value )
+            { FECHA = Convert.ToDateTime(auxiliar); }
             
             //*************************************************************************************
-            //TODO: Falta la fecha
-            //O 'LAS' fechas, depende si agregas las de baja, que a mi entender hay que ponerlas
+            //TODO: Agregar las demas fechas??
+            //
             //*************************************************************************************
         }
 
         private void modificarDatos()
         {
-           
-            if (existeAeronave(matricula.Text).Equals(false))
-            {
 
+            if (matricula.Text != MATR)
+            {
                 if (existeAeronave(matricula.Text))
                 {
                     avisar("No se pudieron actualizar los nuevos datos ingresados. Ya hay una aeronave con esa matricula.");
@@ -111,57 +115,140 @@ namespace AerolineaFrba.Abm_Aeronave
                     matricula.Text = MATR; //Esto carga en el textbox la matricula antes seleccionada.
 
                 }
-                if (existeAeronave(matricula.Text)==false)
-                {
-                     string sqm = "UPDATE [DJML].[AERONAVES] " + 
-                                " ,[AERO_MATRICULA] = '" + matricula.Text + "'" +
-                                " WHERE AERO_MATRICULA = '" + MATR + "'";
-                     Query qry = new Query(sqm);
-                     qry.pComando = sqm;
-                     qry.Ejecutar();
+                if (existeAeronave(matricula.Text) == false)
+                {   /*no anda
+                    string Q = "UPDATE [DJML].[BUTACA_AERO] " +
+                               " SET [BXA_AERO_MATRICULA] = '" + matricula.Text + "'" +
+                               " where BXA_AERO_MATRICULA ='" + MATR + "'";
+                    Query QW = new Query(Q);
+                    QW.pComando = Q;
+                    QW.Ejecutar();
 
-                     string nuevaMatricula = matricula.Text;
+
+                    string Q1 = "UPDATE [DJML].[AERONAVES_POR_PERIODOS ] " +
+                              " SET [AXP_MATRI_AERONAVE] = '" + matricula.Text + "'" +
+                              " where AXP_MATRI_AERONAVE ='" + MATR + "'";
+                    Query QW1 = new Query(Q1);
+                    QW1.pComando = Q1;
+                    QW.Ejecutar();
+
+                    string Q2 = "UPDATE [DJML].[VIAJES] " +
+                          " SET [VIAJE_AERO_ID] = '" + matricula.Text + "'" +
+                          " where VIAJE_AERO_ID ='" + MATR + "'";
+                    Query QW2 = new Query(Q2);
+                    QW2.pComando = Q2;
+                    QW2.Ejecutar();
+
+                    string Q3 = "UPDATE [DJML].[REGISTRO_DESTINO] " +
+                       " SET [RD_AERO_ID] = '" + matricula.Text + "'" +
+                       " where RD_AERO_ID ='" + MATR + "'";
+                    Query QW3 = new Query(Q3);
+                    QW3.pComando = Q3;
+                    QW3.Ejecutar();
+
+                    string sqm = "UPDATE [DJML].[AERONAVES] " +
+                               " SET [AERO_MATRICULA] = '" + matricula.Text + "'" +
+                               " WHERE AERO_MATRICULA = '" + MATR + "'";
+                    Query qry = new Query(sqm);
+                    qry.pComando = sqm;
+                    qry.Ejecutar();
+
+                    string nuevaMatricula = matricula.Text;*/
+                    modificarDatos1();
 
                 }
-                //busco el id del servicio
-                string sql = "SELECT SERV_ID FROM DJML.SERVICIOS WHERE SERV_DESCRIPCION = '" + t_servicio.Text + "'";
-                Query qr = new Query(sql);
-                object marc = qr.ObtenerUnicoCampo();
-                string id_servicio = marc.ToString();
-
-                //vas a tener que hacer algo igual a lo de arriva (servicio) para fabricante
-
-                //variable auxiliar para ingresar bien la fecha 
-                string aux = f_alta.Text + " 00:00:00.000";
-
-                //Modifica la aeronave
-                string sq = "UPDATE [DJML].[AERONAVES] " + 
-                             " ,[AERO_MODELO] = '" + modelo.Text + "'" +
-                             " ,[AERO_FABRICANTE] = '" + "'" + //completar
-                             " ,[AERO_KILOS_DISPONIBLES] = '" + "'" + //completar
-                             " ,[AERO_SERVICIO_ID] = '" + id_servicio + "'" +
-                             " ,[AERO_BAJA_FUERA_SERVICIO] ='" + "'" + //decidir
-                             " ,[AERO_BAJA_VIDA_UTIL] = '" + "'" + //decidir
-                             " ,[AERO_FECHA_BAJA_DEF] = '" + "'" + //decidir
-                             " ,[AERO_FECHA_ALTA] = '" + aux +"'" + //controlar que guarde bien
-                             " WHERE AERO_MATRICULA = '" + matricula.Text + "'";
-
-                //*************************************************************************************
-                //TODO: COMPLETAR DATOS DEL UPDATE ...  Cuidado con fabricante y servicio que son ids
-                // Tambien tenes que terminar la funcionalidad y agregar las fechas los dos tipos de baja... Esto te lo dejo para que lo hagas como creas mas correcto
-                // tenes dos maneras: 1) o lo dejas asi y borras los campos de baja y fechas de bajas en el update de arriba 
-                //                    2) agregas las fechas de baja en el form y trabajas con las tablas periodos_de_inactividad y aeronaves_por_periodos.
-
-                //*************************************************************************************
-
-                Query qry1 = new Query(sq);
-                qry1.pComando = sq;
-                qry1.Ejecutar();
-
-                MessageBox.Show("Se ha modificado correctamente la aeronave! ", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.None);
-                limpiar();
-
             }
+
+            if (matricula.Text == MATR)
+            {
+
+                modificarDatos1();
+               
+            }
+
+        }
+
+        private void modificarDatos1()
+        {
+
+            if (c_butacas.Text != C_BUTA.ToString())
+            {
+                string borrar = "DELETE FROM [DJML].[BUTACA_AERO] WHERE BXA_AERO_MATRICULA = '" + matricula.Text + "'";
+                Query qry = new Query(borrar);
+                qry.pComando = borrar;
+                qry.Ejecutar();
+
+                for (int i = (Convert.ToInt32(c_butacas.Text) + 1); i >= 1; i--) // lo hago hasta 1, por que los ids empiezan de 1
+                {
+                    string sql1 = "INSERT INTO [DJML].[BUTACA_AERO] ([BXA_BUTA_ID],[BXA_AERO_MATRICULA] ,[BXA_ESTADO]) VALUES (" + i + ", '" + matricula.Text + "' , 1 ) ";
+
+                    Query qry1 = new Query(sql1);
+                    qry1.pComando = sql1;
+                    qry1.Ejecutar();
+                }
+
+                modificarDatos2();
+
+            } 
+            if (c_butacas.Text == C_BUTA.ToString())
+            {
+                modificarDatos2();
+            }
+
+        }
+
+        private void modificarDatos2()
+        {
+
+          
+            //busco el id del servicio
+            string sql = "SELECT SERV_ID FROM DJML.SERVICIOS WHERE SERV_DESCRIPCION = '" + t_servicio.Text + "'";
+            Query qr = new Query(sql);
+            object marc = qr.ObtenerUnicoCampo();
+            string id_servicio = marc.ToString();
+            
+            // busco el fabricante 
+            string sqld = "SELECT ID_FABRICANTE FROM DJML.FABRICANTES WHERE DESCRIPCION = '" + fabricantes.Text + "'";
+            Query qrd = new Query(sqld);
+            object marcd = qrd.ObtenerUnicoCampo();
+            string id_fabricante = marcd.ToString();
+
+            string aux = f_alta.Text + " 00:00:00.000";
+
+            string sq = "UPDATE [DJML].[AERONAVES] " +
+                     " SET [AERO_FABRICANTE] = '" + id_fabricante + "' " +
+                     " , [AERO_KILOS_DISPONIBLES] = " + kg_disponibles.Text  +
+                     " , [AERO_SERVICIO_ID] = '" + id_servicio + "'" +
+                     " , [AERO_MODELO] ='" + modelo.Text  + "'" +
+                     " , [AERO_FECHA_ALTA] = '" + aux + "'" +
+                     " WHERE AERO_MATRICULA = '" + matricula.Text + "'";
+
+            bool esNull = false;
+            if (f_alta.Text == "1777-07-07")
+            {
+                esNull = true; 
+            }
+             if (f_alta.Text != "1777-07-07")
+            {
+                esNull = false;
+            }        
+            if (esNull)
+            {
+                sq = "UPDATE [DJML].[AERONAVES] " +
+                       " SET [AERO_MODELO] = '" + modelo.Text + "'" +
+                       " ,[AERO_FABRICANTE] = '" + id_fabricante + "'" +
+                       " ,[AERO_KILOS_DISPONIBLES] = " + kg_disponibles.Text + 
+                       " ,[AERO_SERVICIO_ID] = '" + id_servicio + "'" +
+                       " , [AERO_MODELO] ='" + modelo.Text + "'" +
+                       " WHERE AERO_MATRICULA = '" + matricula.Text + "'";
+            }
+            Query qry1 = new Query(sq);
+            qry1.pComando = sq;
+            qry1.Ejecutar();
+
+            MessageBox.Show("Se ha modificado correctamente la aeronave! ", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.None);
+           
+
         }
 
         private void completarDatos()
@@ -173,9 +260,8 @@ namespace AerolineaFrba.Abm_Aeronave
             c_butacas.Text = C_BUTA.ToString();
             fabricantes.Text = FABR;
             t_servicio.Text = T_SERV;
-
-
-            //tipoServicio.Text = DESCRIPCION_SERVICIO.ToString();
+            f_alta.Value = FECHA;
+           
 
         }
 
@@ -240,7 +326,7 @@ namespace AerolineaFrba.Abm_Aeronave
             Query qry1 = new Query(sql);
             object obj = qry1.ObtenerUnicoCampo();
 
-            return (obj != null);
+            return (obj !=null);
         }
 
         private void avisarBien(string quePaso)
@@ -280,7 +366,7 @@ namespace AerolineaFrba.Abm_Aeronave
             this.modelo.Clear();
             this.c_butacas.Clear();
             this.kg_disponibles.Clear();
-            this.f_alta = null;
+            f_alta.Value = Convert.ToDateTime("1777-7-7");
             this.t_servicio.SelectedItem = null;
             this.fabricantes.SelectedItem = null;
 
@@ -293,7 +379,8 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void comboBoxAeronaves_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+            groupBox1.Enabled = false;
+            limpiar();
         }
 
 
@@ -302,6 +389,17 @@ namespace AerolineaFrba.Abm_Aeronave
 
             button3.Enabled = true;
         }
+
+        private void kg_disponibles_TextChanged(object sender, EventArgs e)
+        {
+            kg_disponibles.Text = Regex.Replace(kg_disponibles.Text, @"[^\d]", "");
+        }
+
+        private void c_butacas_TextChanged(object sender, EventArgs e)
+        {
+            c_butacas.Text = Regex.Replace(c_butacas.Text, @"[^\d]", "");
+        }
+
 
         #endregion
 
@@ -317,25 +415,29 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button3_Click(object sender, EventArgs e)
         {
-         
-            if (controlarQueEsteTodoCompleto())
-            {
-                modificarDatos();
-            }
             if (controlarQueEsteTodoCompleto() == false)
             {
                 avisarBien("Deben estar todos los datos completados");
             }
+            if (controlarQueEsteTodoCompleto())
+            {
+                modificarDatos();
+            }
+          
 
             
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+
+            groupBox1.Enabled = true;
+
             MATR = comboBoxAeronaves.Text;
 
-            buscarDatos(comboBoxAeronaves.Text);
+            buscarDatos(MATR);
             completarDatos();
+        
         }
 
   
@@ -346,8 +448,6 @@ namespace AerolineaFrba.Abm_Aeronave
         }
 
         #endregion
-
-  
 
         #region Funciones Descartadas(por el momento)
 
