@@ -57,7 +57,7 @@ namespace AerolineaFrba.Abm_Aeronave
             }
 
             if (comboBoxTipoBaja.Text == "Suplantar la aeronave por otra.")
-            {
+            {/* POR EL MOMENTO SUPLANTO SIEMPRE. 
                 if (existeAeronaveSimiliar())
                 {
                     asignarViajesA(matriculaSimilar);
@@ -69,7 +69,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 }
                 
                 if (existeAeronaveSimiliar() == false )
-                {
+                {*/
                     string nuevaMatric = crearAeronaveSimilar();
                     
                     asignarViajesA(nuevaMatric);
@@ -77,7 +77,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
                     darDeBaja();
                     avisarBien("Aeronave inhabilitada exitosamente. Se creo dio de alta una aeronave del mismo modelo, fabricante, y tipo de servicio (de matricula = "+  nuevaMatric + " ).");
-                }
+                //}
             }
         }
 
