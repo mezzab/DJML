@@ -183,6 +183,8 @@ namespace AerolineaFrba.Abm_Aeronave
                 qry.pComando = borrar;
                 qry.Ejecutar();
 
+                //  TODO: ESTO EN EL NUEVO BRANCH TIENE QUE SER BAJA LOGICA
+
                 for (int i = (Convert.ToInt32(c_butacas.Text) + 1); i >= 1; i--) // lo hago hasta 1, por que los ids empiezan de 1
                 {
                     string sql1 = "INSERT INTO [DJML].[BUTACA_AERO] ([BXA_BUTA_ID],[BXA_AERO_MATRICULA] ,[BXA_ESTADO]) VALUES (" + i + ", '" + matricula.Text + "' , 1 ) ";
