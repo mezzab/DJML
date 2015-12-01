@@ -64,12 +64,6 @@
     <Compile Include="Abm Aeronave\FormAeronaveBaja.Designer.cs">
       <DependentUpon>FormAeronaveBaja.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Aeronave\FormAeronaveModificacion_.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Aeronave\FormAeronaveModificacion_.Designer.cs">
-      <DependentUpon>FormAeronaveModificacion_.cs</DependentUpon>
-    </Compile>
     <Compile Include="Abm Aeronave\FormBajaCompletoVidaUtil.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +81,12 @@
     </Compile>
     <Compile Include="Abm Aeronave\FormBajaFueraServicio.Designer.cs">
       <DependentUpon>FormBajaFueraServicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Aeronave\modification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\modification.Designer.cs">
+      <DependentUpon>modification.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Ciudad\FormCiudades_List.cs">
       <SubType>Form</SubType>
@@ -299,14 +299,14 @@
     <EmbeddedResource Include="Abm Aeronave\FormAeronaveBaja.resx">
       <DependentUpon>FormAeronaveBaja.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Aeronave\FormAeronaveModificacion_.resx">
-      <DependentUpon>FormAeronaveModificacion_.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Abm Aeronave\FormBajaCompletoVidaUtil.resx">
       <DependentUpon>FormBajaCompletoVidaUtil.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Aeronave\FormBajaFinal.resx">
       <DependentUpon>FormBajaFinal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\modification.resx">
+      <DependentUpon>modification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ciudad\FormCiudades_Baja.resx">
       <DependentUpon>FormCiudades_Baja.cs</DependentUpon>

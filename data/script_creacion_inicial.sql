@@ -778,6 +778,16 @@ GO
 
 
 --============================================================
+						--CREAR TABLA MILLAS
+--============================================================
+
+
+
+
+
+
+
+--============================================================
 						--EJECUTAR PROCEDURES
 --============================================================
 
@@ -842,6 +852,26 @@ begin
 	return @millas_parcial
 end 
 GO
+
+--------------------------------------------			
+--Funcion para calcular diferencia de fechas
+--------------------------------------------
+create function  djml.calculoFecha(@fechaSalida smalldatetime, @fechaLlegadaEstimada smalldatetime)
+returns int 
+as
+begin 
+	declare @diferencia int 
+	select @diferencia  = datediff(day,@fechaLlegadaEstimada, @fechaSalida)
+	
+	return @diferencia
+end
+GO
+
+
+
+
+
+
 
 ---------------------------------------------------
 ---------------------------------------------------
@@ -1069,10 +1099,56 @@ ORDER BY 2 DESC
 ---Top 5 de las aeronaves con mayor cantidad de días fuera de servicio---
 ---------------------------------------------------
 
+--PRIMER TRIMESTRE
+select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva 
+from djml.aeronaves_por_periodos ap 
+join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula 
+join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id 
+where a.aero_baja_fuera_servicio = 1 
+AND DAY(pdi.peri_fecha_inicio) >= 1 
+AND MONTH(pdi.peri_fecha_inicio) >= 1 
+AND MONTH(pdi.peri_fecha_inicio) <= 3 
+AND YEAR(pdi.peri_fecha_inicio) = 2016 
+group by ap.axp_matri_aeronave order by 2 desc
 
 
+--SEGUNDO TRIMESTRE
+select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva 
+from djml.aeronaves_por_periodos ap 
+join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula 
+join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id 
+where a.aero_baja_fuera_servicio = 1 
+AND DAY(pdi.peri_fecha_inicio) >= 1 
+AND MONTH(pdi.peri_fecha_inicio) >= 4 
+AND MONTH(pdi.peri_fecha_inicio) <= 6 
+AND YEAR(pdi.peri_fecha_inicio) = 2016 
+group by ap.axp_matri_aeronave order by 2 desc
 
 
+--TERCER TRIMESTRE
+select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva 
+from djml.aeronaves_por_periodos ap 
+join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula 
+join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id 
+where a.aero_baja_fuera_servicio = 1 
+AND DAY(pdi.peri_fecha_inicio) >= 1 
+AND MONTH(pdi.peri_fecha_inicio) >= 7 
+AND MONTH(pdi.peri_fecha_inicio) <= 9 
+AND YEAR(pdi.peri_fecha_inicio) = 2016 
+group by ap.axp_matri_aeronave order by 2 desc
+
+
+--CUARTO TRIMESTRE
+select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva 
+from djml.aeronaves_por_periodos ap 
+join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula 
+join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id 
+where a.aero_baja_fuera_servicio = 1 
+AND DAY(pdi.peri_fecha_inicio) >= 1  
+AND MONTH(pdi.peri_fecha_inicio) >= 10 
+AND MONTH(pdi.peri_fecha_inicio) <=12  
+AND YEAR(pdi.peri_fecha_inicio) = 2015
+group by ap.axp_matri_aeronave order by 2 desc
 
 
 
@@ -1118,6 +1194,8 @@ DROP TABLE DJML.ROLES
 drop view DJML.v_rutas
 drop function DJML.CALCULAR_MILLAS
 
+drop function djml.calculoFecha
+
 DROP PROCEDURE DJML.CREAR_AERONAVES
 DROP PROCEDURE DJML.CREAR_CIUDADES
 DROP PROCEDURE DJML.CREAR_CLIENTES
@@ -1133,25 +1211,38 @@ DROP PROCEDURE DJML.CREAR_CANJES
 
 
 DROP SCHEMA DJML
-			
-
-------------------------------------------------------------------------------------
---CONSULTAS PERIODOS Top 5 de las aeronaves con mayor cantidad de días fuera de servicio
-------------------------------------------------------------------------------------
 
 
---PRIMER TRIMESTRE
-select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva from djml.aeronaves_por_periodos ap join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id where a.aero_baja_fuera_servicio = 1 AND DAY(pdi.peri_fecha_inicio) >= 1 AND MONTH(pdi.peri_fecha_inicio) >= 1 AND MONTH(pdi.peri_fecha_inicio) <= 3 AND YEAR(pdi.peri_fecha_inicio) = 2016 group by ap.axp_matri_aeronave order by 2 desc
+create procedure djml.Proc_Aeronaves
+AS
 
+declare @viajeId int 
+declare @aeroModelo nvarchar(50)
+declare @aeroFabricante int
+declare @aeroServicioId int
 
---SEGUNDO TRIMESTRE
-select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva from djml.aeronaves_por_periodos ap join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id where a.aero_baja_fuera_servicio = 1 AND DAY(pdi.peri_fecha_inicio) >= 1 AND MONTH(pdi.peri_fecha_inicio) >= 4 AND MONTH(pdi.peri_fecha_inicio) <= 6 AND YEAR(pdi.peri_fecha_inicio) = 2016 group by ap.axp_matri_aeronave order by 2 desc
+declare cursorAeronaves cursor 
+for select v.viaje_id, a1.aero_modelo, a1.aero_fabricante, a1.aero_servicio_id  from djml.viajes v 
+join djml.aeronaves a1 on v.viaje_aero_id = a1.aero_matricula   
+where v.viaje_aero_id  = 'ASQ-169'
+open cursorAeronaves
+fetch  from cursorAeronaves into @viajeId, @aeroModelo, @aeroFabricante, @aeroServicioId
+while @@fetch_status=0 
 
+select  a.aero_matricula from djml.aeronaves a
+join viajes v1 on a.aero_matricula = v1.viaje_aero_id  
+where v1.viaje_id not in (@viajeId)
+and a.aero_baja_vida_util = 0
+and a.aero_baja_fuera_servicio = 0
+and a.aero_modelo = @aeroModelo 
+and a.aero_fabricante = @aeroFabricante
+and a.aero_servicio_id = @aeroServicioId
 
---TERCER TRIMESTRE
-select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva from djml.aeronaves_por_periodos ap join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id where a.aero_baja_fuera_servicio = 1 AND DAY(pdi.peri_fecha_inicio) >= 1 AND MONTH(pdi.peri_fecha_inicio) >= 7 AND MONTH(pdi.peri_fecha_inicio) <= 9 AND YEAR(pdi.peri_fecha_inicio) = 2016 group by ap.axp_matri_aeronave order by 2 desc
+fetch next from cursorAeronaves into @viajeId,@aeroModelo, @aeroFabricante, @aeroServicioId
 
+close cursorAeronaves 
+deallocate cursorAeronaves
 
---CUARTO TRIMESTRE
-select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva from djml.aeronaves_por_periodos ap join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id where a.aero_baja_fuera_servicio = 1 AND DAY(pdi.peri_fecha_inicio) >= 1  AND MONTH(pdi.peri_fecha_inicio) >= 10 AND MONTH(pdi.peri_fecha_inicio) <=12  AND YEAR(pdi.peri_fecha_inicio) = 2015 group by ap.axp_matri_aeronave order by 2 desc
+exec djml.Proc_Aeronaves
 
+drop procedure djml.Proc_Aeronaves
