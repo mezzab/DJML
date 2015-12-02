@@ -95,7 +95,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             conexion.ConnectionString = Settings.Default.CadenaDeConexion;
 
             DataSet ds = new DataSet();
-            SqlDataAdapter da = new SqlDataAdapter("select AERO_MATRICULA from DJML.AERONAVES", conexion);
+            SqlDataAdapter da = new SqlDataAdapter("select AERO_MATRICULA from DJML.AERONAVES WHERE AERO_BAJA_FUERA_SERVICIO = 0 AND AERO_BAJA_VIDA_UTIL = 0", conexion);
             da.Fill(ds, "DJML.AERONAVES");
 
             comboBoxAeronaves.DataSource = ds.Tables[0].DefaultView;
