@@ -70,12 +70,12 @@ namespace AerolineaFrba.Abm_Aeronave
                 //POR EL MOMENTO SUPLANTO SIEMPRE. 
                 if (existeAeronaveSimiliar())
                 {
-                   // asignarViajesA(matriculaSimilar);
-                    //asignarButacasA(matriculaSimilar);
-
                     darDeBaja();
-                    avisarBien("Aeronave inhabilitada exitosamente. Se asignaros los viajes a una Aeronave de la misma flota (de matricula = "+  matriculaSimilar + " ).");
-               
+                    avisarBien("Aeronave inhabilitada exitosamente. Se asignaros los viajes a una Aeronave de la misma flota.");
+                    FormInicioFuncionalidades aero = new FormInicioFuncionalidades();
+                    this.Hide();
+                    aero.ShowDialog();
+                    aero = (FormInicioFuncionalidades)this.ActiveMdiChild;
                 }
                 
                 else
@@ -87,6 +87,10 @@ namespace AerolineaFrba.Abm_Aeronave
 
                     darDeBaja();
                     avisarBien("Aeronave inhabilitada exitosamente. Se creo dio de alta una aeronave del mismo modelo, fabricante, y tipo de servicio (de matricula = "+  nuevaMatric + " ).");
+                    FormInicioFuncionalidades aero = new FormInicioFuncionalidades();
+                    this.Hide();
+                    aero.ShowDialog();
+                    aero = (FormInicioFuncionalidades)this.ActiveMdiChild;
                 }
             }
         }
@@ -182,8 +186,6 @@ namespace AerolineaFrba.Abm_Aeronave
 
             return nuevaMatricula;
 
-
-
         }
 
         private void asignarViajesA( string matriculaNueva)
@@ -216,7 +218,7 @@ namespace AerolineaFrba.Abm_Aeronave
             
             }
 
-            if (FormAeronaveBaja.tipo == "SERVICIO") //EN ESTE CASO HACEN LO MISMO PERO VAMOS A TENER QUE CAMBIARLO
+            if (FormAeronaveBaja.tipo == "SERVICIO") //bxv
             {       
                 string up = "UPDATE [DJML].[BUTACA_AERO] SET  [BXA_AERO_MATRICULA] = '" + matriculaNueva + "'  WHERE BXA_AERO_MATRICULA = '" + FormBajaFueraServicio.MATRICULASERVICIO + "'";
                 Query qry = new Query(up);
