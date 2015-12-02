@@ -223,6 +223,51 @@ namespace AerolineaFrba.Listado_Estadistico
         private void ejecutarTercerFiltro()
         {
             //Top 5 de los Clientes con más puntos acumulados a la fecha
+            if (comboBoxTrimestre.SelectedIndex != -1 && txtAnio.Text != "")
+            {
+
+
+                switch (comboBoxTrimestre.SelectedIndex)
+                {
+                    //"Enero-Febrero-Marzo"
+                    case 0:
+                        string primerTrimestre = "SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD) AS CANTIDAD_MILLAS FROM DJML.MILLAS M JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC WHERE DAY(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) <= 03 AND YEAR(M.MILLAS_FECHA) = " + txtAnio.Text + "  GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE ORDER BY 5 DESC";
+                        Query qry = new Query(primerTrimestre);
+                        datos.DataSource = qry.ObtenerDataTable();
+
+                        break;
+
+                    //Abril-Mayo-Junio
+                    case 1:
+                        string segundoTrimestre = "SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD) AS CANTIDAD_MILLAS FROM DJML.MILLAS M JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC WHERE DAY(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 04 AND MONTH(M.MILLAS_FECHA) <= 06 AND YEAR(M.MILLAS_FECHA) = " + txtAnio.Text + " GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE ORDER BY 5 desc";
+                        Query qry2 = new Query(segundoTrimestre);
+                        datos.DataSource = qry2.ObtenerDataTable();
+
+                        break;
+
+                    //Julio-Agosto-Septiembre
+                    case 2:
+                        string tercerTrimestre = "SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD) AS CANTIDAD_MILLAS FROM DJML.MILLAS M JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC WHERE DAY(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 07 AND MONTH(M.MILLAS_FECHA) <= 09 AND YEAR(M.MILLAS_FECHA) = " + txtAnio.Text + " GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE ORDER BY 5 DESC";
+                        Query qry3 = new Query(tercerTrimestre);
+                        datos.DataSource = qry3.ObtenerDataTable();
+                        break;
+
+                    //Octubre-Noviembre-Diciembre
+                    case 3:
+                        string cuartoTrimestre = "SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD) AS CANTIDAD_MILLAS FROM DJML.MILLAS M  JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC WHERE DAY(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 10 AND MONTH(M.MILLAS_FECHA) <= 12 AND YEAR(M.MILLAS_FECHA) = " + txtAnio.Text + " GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE ORDER BY 5 DESC";
+                        Query qry4 = new Query(cuartoTrimestre);
+                        datos.DataSource = qry4.ObtenerDataTable();
+
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Complete Año y Trimestre", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+
+
         }
 
 
