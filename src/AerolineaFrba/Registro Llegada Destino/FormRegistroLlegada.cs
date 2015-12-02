@@ -22,6 +22,10 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            fechaLlegada.Format = DateTimePickerFormat.Custom;
+            fechaLlegada.CustomFormat = "yyyy-dd-MM";
+
             LlenarComboBoxAeronaves();
             LlenarComboBoxCiudadOrigen();
             LlenarComboBoxCiudadDestino();
