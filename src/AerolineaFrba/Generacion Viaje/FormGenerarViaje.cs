@@ -93,7 +93,10 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private void FormGenerarViaje_Load_1(object sender, EventArgs e)
         {
-            
+            fechaSalida.Format = DateTimePickerFormat.Custom;
+            fechaSalida.CustomFormat = "yyyy-dd-MM";
+            fechaLlegadaEstimada.Format = DateTimePickerFormat.Custom;
+            fechaLlegadaEstimada.CustomFormat = "yyyy-dd-MM";
             comboBoxAeronaves.DropDownStyle = ComboBoxStyle.DropDownList;
             label4.Visible = false;
             comboBoxAeronaves.Visible = false;

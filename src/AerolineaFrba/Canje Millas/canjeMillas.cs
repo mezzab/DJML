@@ -298,28 +298,25 @@ namespace AerolineaFrba.Canje_Millas
             }
             else
             {
-                string qryCant = "SELECT  DJML.CALCULAR_MILLAS('" + dni + "', '" + tipo + "')";
-                var resultCant = new Query(qryCant).ObtenerDataTable();
-                int resultado = Int32.Parse(resultCant.Rows[0][0].ToString());
+                //string qryCant = "SELECT  DJML.CALCULAR_MILLAS('" + dni + "', '" + tipo + "')";
+                //var resultCant = new Query(qryCant).ObtenerDataTable();
+                //int resultado = Int32.Parse(resultCant.Rows[0][0].ToString());
+                
                 int cant = Int32.Parse(cantidad.Text);
                 if (stock < cant)
                 {
                     MessageBox.Show("Lo sentimos pero no disponemos de stock suficiente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else if (resultado < millas * cant)
-                {
-                    MessageBox.Show("Lo sentimos pero no dispone de suficientes millas para canjear", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
+                    else
                 {
                     canjear(cant, IDC);
 
                     string insert_canje = "INSERT INTO DJML.CANJES (CANJ_CLIE_ID, CANJ_PRODUCTO_ID, CANJ_CANTIDAD, CANJ_FECHA_CANJE, CANJ_MILLAS_USADAS)" +
-                                     " SELECT CLIE_ID, " + producto_id + ", " + cantidad.Text + ", GETDATE(), " + (millas * cant) +
-                                     " FROM DJML.CLIENTES" +
-                                     " JOIN DJML.TIPO_DOCUMENTO td on CLIE_TIPO_DOC = ID_TIPO_DOC" +
-                                     " WHERE CLIE_DNI = '" + dni + "'" +
-                                     " AND td.DESCRIPCION = '" + tipo + "'";
+                                         " SELECT CLIE_ID, " + producto_id + ", " + cantidad.Text + ", GETDATE(), " + (millas * cant) +
+                                         " FROM DJML.CLIENTES" +
+                                         " JOIN DJML.TIPO_DOCUMENTO td on CLIE_TIPO_DOC = ID_TIPO_DOC" +
+                                         " WHERE CLIE_DNI = '" + dni + "'" +
+                                         " AND td.DESCRIPCION = '" + tipo + "'";
                     new Query(insert_canje).Ejecutar();
 
                     string update_productos = "UPDATE DJML.PRODUCTO SET PROD_STOCK = PROD_STOCK - " + cant + "WHERE PROD_ID = " + producto_id;
