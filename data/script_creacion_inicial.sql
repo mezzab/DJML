@@ -880,6 +880,86 @@ GO
 
 
 
+--------------------------------------------------------------------------
+--Procedimiento Buscar Aeronaves para remplazar similar a la dada de baja
+--------------------------------------------------------------------------
+
+
+create procedure djml.Proc_Aeronaves @idaeronave nvarchar(7), @resultado int output
+AS
+
+declare @viajeId int 
+declare @aeroModelo nvarchar(50)
+declare @aeroFabricante int
+declare @aeroServicioId int
+declare @idaeronavenueva nvarchar(7)
+declare @habemusaeronave int, @fecha_llegada_nueva as datetime, @fecha_salida_nueva as datetime
+declare @fecha_llegada_vieja as datetime , @fecha_salida_vieja as datetime
+
+select @aeromodelo = a1.aero_modelo, @aerofabricante = a1.aero_fabricante, 
+@aeroservicioid = a1.aero_servicio_id  from djml.aeronaves a1
+where a1.aero_matricula = @idaeronave
+
+declare cAeroNaves cursor for 
+select a.aero_matricula from djml.aeronaves a
+where a.aero_modelo = @aeroModelo and a.aero_fabricante = @aeroFabricante 
+and a.aero_servicio_id = @aeroServicioId and a.AERO_BAJA_FUERA_SERVICIO = 0
+and a.AERO_BAJA_VIDA_UTIL = 0
+	open cAeroNaves
+	fetch cAeroNaves into @idaeronavenueva
+	
+	while(@@FETCH_STATUS = 0)
+	begin
+		set @habemusaeronave = 1
+		
+		declare cViajesAeroNaveNueva cursor for
+		select viaje_fecha_salida,viaje_fecha_llegada_estimada from djml.viajes where viaje_aero_id = @idaeronavenueva
+		
+		open cViajesAeroNaveNueva
+		fetch cViajesAeroNaveNueva into @fecha_salida_nueva,@fecha_llegada_nueva
+		
+		while(@@FETCH_STATUS = 0)
+		begin
+			declare cViajesAeroNaveVieja cursor for
+			select viaje_fecha_salida,viaje_fecha_llegada_estimada from djml.viajes where viaje_aero_id = @idaeronave
+			open cViajesAeroNaveVieja
+			fetch cViajesAeroNaveVieja into @fecha_salida_vieja,@fecha_llegada_vieja
+			
+			while(@@FETCH_STATUS = 0)
+			begin
+				if not (@fecha_salida_vieja < @fecha_salida_nueva and @fecha_salida_vieja > @fecha_llegada_nueva)
+					set @habemusaeronave = 0
+				fetch cViajesAeroNaveVieja into @fecha_salida_vieja,@fecha_llegada_vieja
+			end
+			
+			close cViajesAeroNaveVieja
+			deallocate cViajesAeroNaveVieja
+			
+			fetch cViajesAeroNaveNueva into @fecha_salida_nueva,@fecha_llegada_nueva
+		end
+		close cViajesAeroNaveNueva
+		deallocate cViajesAeroNaveNueva
+		if @habemusaeronave = 0
+			fetch cAeroNaves into @idAeroNaveNueva
+		else
+			break
+	end
+	close cAeroNaves
+	deallocate cAeroNaves
+	
+if @idaeronavenueva is not null and @habemusaeronave = 1
+begin
+	update djml.viajes set VIAJE_AERO_ID = @idaeronavenueva where VIAJE_AERO_ID = @idaeronave
+	update djml.butaca_aero set BXA_AERO_MATRICULA = @idaeronavenueva where BXA_AERO_MATRICULA = @idaeronave
+	set @resultado = 1;
+end 
+else
+	set @resultado = 0;
+	
+select @resultado
+
+
+
 
 ---------------------------------------------------
 ---------------------------------------------------
@@ -1027,43 +1107,16 @@ ORDER BY 4 ASC
 ----------------------------------------------------------------
 
 --PRIMER TRIMESTRE
-SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD) FROM DJML.MILLAS M
-JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID
-JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC
-WHERE DAY(M.MILLAS_FECHA) >= 01	
-AND MONTH(M.MILLAS_FECHA) >= 01
-AND MONTH(M.MILLAS_FECHA) <= 03
-AND YEAR(M.MILLAS_FECHA) = 2015   
-GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE
-ORDER BY 5 DESC 
---SEGUNDO TRIMESTRE
-SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD) FROM DJML.MILLAS M JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC WHERE DAY(M.M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 04 AND MONTH(M.MILLAS_FECHA) <= 06 AND YEAR(M.MILLAS_FECHA) = 2015 GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE ORDER BY 5 desc
-
-
---TERCER TRIMESTRE
-SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD) FROM DJML.MILLAS M JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC WHERE DAY(M.M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 07 AND MONTH(M.MILLAS_FECHA) <= 09 AND YEAR(M.MILLAS_FECHA) = 2015 GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE order by 5 desc
-
---CUARTO TRIMESTRE
-SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD) FROM DJML.MILLAS M  JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC WHERE DAY(M.M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 10 AND MONTH(M.MILLAS_FECHA) <= 12 AND YEAR(M.MILLAS_FECHA) = 2015 GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE order by 5 desc
-
-
-MILLAS_ID INT IDENTITY(1,1) PRIMARY KEY,
-	MILLAS_CLIE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.CLIENTES(CLIE_ID),
-    MILLAS_INFORMACION NVARCHAR(100),
-    MILLAS_COMPRA_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.COMPRAS(COMPRA_ID),
-    MILLAS_CANTIDAD INT NOT NULL,
-    MILLAS_FECHA SMALLDATETIME NOT NULL)
-
-
+SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD) AS CANTIDAD_MILLAS FROM DJML.MILLAS M JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC WHERE DAY(M.MILLAS_FECHA) >= 01	 AND MONTH(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) <= 03 AND YEAR(M.MILLAS_FECHA) = 2015 GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE ORDER BY 5 DESC 
 
 --SEGUNDO TRIMESTRE
-
+SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD) AS CANTIDAD_MILLAS FROM DJML.MILLAS M JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC WHERE DAY(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 04 AND MONTH(M.MILLAS_FECHA) <= 06 AND YEAR(M.MILLAS_FECHA) = 2015 GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE ORDER BY 5 desc
 
 --TERCER TRIMESTRE
-
+SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD)AS CANTIDAD_MILLAS FROM DJML.MILLAS M JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC WHERE DAY(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 07 AND MONTH(M.MILLAS_FECHA) <= 09 AND YEAR(M.MILLAS_FECHA) = 2015 GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE order by 5 desc
 
 --CUARTO TRIMESTRE
-
+SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD) as CANTIDAD_MILLAS FROM DJML.MILLAS M  JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC WHERE DAY(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 01 AND MONTH(M.MILLAS_FECHA) >= 10 AND MONTH(M.MILLAS_FECHA) <= 12 AND YEAR(M.MILLAS_FECHA) = 2015 GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE order by 5 desc
 
 
 ---------------------------------------------------
@@ -1269,42 +1322,3 @@ DROP SCHEMA DJML
 
 
 
-
-
-
-
-
-
-create procedure djml.Proc_Aeronaves
-AS
-
-declare @viajeId int 
-declare @aeroModelo nvarchar(50)
-declare @aeroFabricante int
-declare @aeroServicioId int
-
-declare cursorAeronaves cursor 
-for select v.viaje_id, a1.aero_modelo, a1.aero_fabricante, a1.aero_servicio_id  from djml.viajes v 
-join djml.aeronaves a1 on v.viaje_aero_id = a1.aero_matricula   
-where v.viaje_aero_id  = 'ASQ-169'
-open cursorAeronaves
-fetch  from cursorAeronaves into @viajeId, @aeroModelo, @aeroFabricante, @aeroServicioId
-while @@fetch_status=0 
-
-select  a.aero_matricula from djml.aeronaves a
-join viajes v1 on a.aero_matricula = v1.viaje_aero_id  
-where v1.viaje_id not in (@viajeId)
-and a.aero_baja_vida_util = 0
-and a.aero_baja_fuera_servicio = 0
-and a.aero_modelo = @aeroModelo 
-and a.aero_fabricante = @aeroFabricante
-and a.aero_servicio_id = @aeroServicioId
-
-fetch next from cursorAeronaves into @viajeId,@aeroModelo, @aeroFabricante, @aeroServicioId
-
-close cursorAeronaves 
-deallocate cursorAeronaves
-
-exec djml.Proc_Aeronaves
-
-drop procedure djml.Proc_Aeronaves

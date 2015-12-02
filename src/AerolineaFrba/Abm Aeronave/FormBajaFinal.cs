@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using AerolineaFrba.Properties;
+using AerolineaFrba.Inicio_Aplicacion;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
@@ -54,22 +57,29 @@ namespace AerolineaFrba.Abm_Aeronave
                 darDeBaja();
 
                 MessageBox.Show("Aeronave inhabilitada exitosamente y se cancelaron todos los viajes de la aeronave", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //Lo envia a form Funcionalidades
+                FormInicioFuncionalidades inicioF = new FormInicioFuncionalidades();
+                this.Hide();
+                inicioF.ShowDialog();
+                inicioF = (FormInicioFuncionalidades)this.ActiveMdiChild;
             }
 
             if (comboBoxTipoBaja.Text == "Suplantar la aeronave por otra.")
-            {/* POR EL MOMENTO SUPLANTO SIEMPRE. 
+            {
+                //POR EL MOMENTO SUPLANTO SIEMPRE. 
                 if (existeAeronaveSimiliar())
                 {
-                    asignarViajesA(matriculaSimilar);
-                    asignarButacasA(matriculaSimilar);
+                   // asignarViajesA(matriculaSimilar);
+                    //asignarButacasA(matriculaSimilar);
 
                     darDeBaja();
                     avisarBien("Aeronave inhabilitada exitosamente. Se asignaros los viajes a una Aeronave de la misma flota (de matricula = "+  matriculaSimilar + " ).");
                
                 }
                 
-                if (existeAeronaveSimiliar() == false )
-                {*/
+                else
+                {
                     string nuevaMatric = crearAeronaveSimilar();
                     
                     asignarViajesA(nuevaMatric);
@@ -77,7 +87,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
                     darDeBaja();
                     avisarBien("Aeronave inhabilitada exitosamente. Se creo dio de alta una aeronave del mismo modelo, fabricante, y tipo de servicio (de matricula = "+  nuevaMatric + " ).");
-                //}
+                }
             }
         }
 
@@ -164,13 +174,15 @@ namespace AerolineaFrba.Abm_Aeronave
             string modelo = qry3.ObtenerUnicoCampo().ToString();
 
             string sq = "INSERT INTO [DJML].[AERONAVES]([AERO_MATRICULA] , [AERO_MODELO] , [AERO_FABRICANTE] , [AERO_KILOS_DISPONIBLES] , [AERO_SERVICIO_ID] , [AERO_FECHA_ALTA] , [AERO_BAJA_FUERA_SERVICIO] , [AERO_BAJA_VIDA_UTIL]) " +
-                        " ( '" + nuevaMatricula + "' , '"+ modelo + "' , '" + ID_FABR + "' , " + KG_DISP + " , '" + ID_SERV + "' , '" + aux + "' , 0 , 0 ) ";
+                        " values ( '" + nuevaMatricula + "' , '"+ modelo + "' , '" + ID_FABR + "' , " + KG_DISP + " , '" + ID_SERV + "' , '" + aux + "' , 0 , 0 ) ";
             
             Query qry1 = new Query(sq);
             qry1.pComando = sq;
             qry1.Ejecutar();
 
             return nuevaMatricula;
+
+
 
         }
 
@@ -230,13 +242,31 @@ namespace AerolineaFrba.Abm_Aeronave
                 matricula = FormBajaFueraServicio.MATRICULASERVICIO;
             }
 
-            string sql = "SELECT AERO_SERVICIO_ID FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "'";
+
+            SqlConnection conexion = new SqlConnection();
+            conexion.ConnectionString = Settings.Default.CadenaDeConexion;
+            conexion.Open();
+
+            SqlCommand cmd = new SqlCommand("djml.Proc_Aeronaves", conexion);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter resultado = new SqlParameter("@resultado", SqlDbType.Int);
+            resultado.Direction = ParameterDirection.Output;
+            cmd.Parameters.AddWithValue("@idaeronave", matricula);
+            cmd.Parameters.Add(resultado);
+
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            /*
+            string sql = "exec djml.Proc_Aeronaves '" + matricula + "' , null";
             Query qr = new Query(sql);
-            object marc = qr.ObtenerUnicoCampo();
-            string id_servicio = marc.ToString();
+            object marc = qr.ObtenerUnicoCampo();*/
+            
+            conexion.Close();
 
 
-            string sql4 = " SELECT AERO_FABRICANTE FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "'";
+
+         /*   string sql4 = " SELECT AERO_FABRICANTE FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "'";
             Query qry4 = new Query(sql4);
             string id_fabricante = qry4.ObtenerUnicoCampo().ToString();
 
@@ -265,7 +295,8 @@ namespace AerolineaFrba.Abm_Aeronave
             return (obj != null);
 
 
-
+            */
+            return Convert.ToInt32(cmd.Parameters["@resultado"].Value) == 1;
         }
 
 
