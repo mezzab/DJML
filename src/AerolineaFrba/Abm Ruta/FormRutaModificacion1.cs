@@ -111,7 +111,7 @@ namespace AerolineaFrba.Abm_Ruta
                         " where co.CIUD_DETALLE like '%" + origen + "'" +
                         " and cd.CIUD_DETALLE like '%" + destino + "'" +
                         " and s.SERV_DESCRIPCION like '%" + servicio + "'" + 
-                        " r.RUTA_IS_ACTIVE = 1";
+                        " and r.RUTA_IS_ACTIVE = 1";
 
             var result = new Query(qry).ObtenerDataTable();
             if (result.Rows.Count != 0 && origen != string.Empty && destino != string.Empty && servicio != string.Empty)
