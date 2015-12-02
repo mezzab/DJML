@@ -204,14 +204,16 @@ namespace AerolineaFrba.Canje_Millas
            cantidad.Text = Regex.Replace(cantidad.Text, @"[^\d]", "");
         }
 
-        private void canjear(int cantidad, string id_cliente)
+        private bool canjear(int cantidad, string id_cliente)
         {
             int cantMillasEnPeriodo = obtenerMillasEnPeriodo(id_cliente);
             int millasRequeridas = millas * cantidad;
+            bool diego; 
 
             if (cantMillasEnPeriodo < millasRequeridas)
             {
                 MessageBox.Show("No posee las millas necesarias para realizar el canje");
+                diego = false;
             }
             else
             {
@@ -221,24 +223,30 @@ namespace AerolineaFrba.Canje_Millas
                {
                     int millasViejas = obtenerMillasViejas(id_cliente);
                 
-                    if(millasViejas < millasAux)
+                    if(millasViejas <= millasAux)
                     {
                         millasAux = millasAux - millasViejas;
                     
                         ponerEnCeroMillasViejas();
-                    }
-                    if(millasViejas > millasAux)
+                    }else
+
+                    //if(millasViejas > millasAux)
                     {
                         int millasQueLeQuedan =  millasViejas - millasAux;
-
+                        millasAux = 0;
                         restarMillasViejas(millasQueLeQuedan);
 
-                        millasAux = millasAux - millasViejas;
+                        //millasAux = millasAux - millasViejas;
 
                     }
+                   /*
+                    if (millasAux == 0)
+                        break;
+                    */
                }
-  
+               diego = true;
             }
+            return diego;
         }
 
         private int obtenerMillasViejas(string id_cliente)
@@ -309,25 +317,29 @@ namespace AerolineaFrba.Canje_Millas
                 }
                     else
                 {
-                    canjear(cant, IDC);
+                   if (canjear(cant, IDC))
+                   {
+                        string insert_canje = "INSERT INTO DJML.CANJES (CANJ_CLIE_ID, CANJ_PRODUCTO_ID, CANJ_CANTIDAD, CANJ_FECHA_CANJE, CANJ_MILLAS_USADAS)" +
+                                             " SELECT CLIE_ID, " + producto_id + ", " + cantidad.Text + ", GETDATE(), " + (millas * cant) +
+                                             " FROM DJML.CLIENTES" +
+                                             " JOIN DJML.TIPO_DOCUMENTO td on CLIE_TIPO_DOC = ID_TIPO_DOC" +
+                                             " WHERE CLIE_ID = '" + dni + "'" +
+                                             " AND td.DESCRIPCION = '" + tipo + "'";
+                        new Query(insert_canje).Ejecutar();
 
-                    string insert_canje = "INSERT INTO DJML.CANJES (CANJ_CLIE_ID, CANJ_PRODUCTO_ID, CANJ_CANTIDAD, CANJ_FECHA_CANJE, CANJ_MILLAS_USADAS)" +
-                                         " SELECT CLIE_ID, " + producto_id + ", " + cantidad.Text + ", GETDATE(), " + (millas * cant) +
-                                         " FROM DJML.CLIENTES" +
-                                         " JOIN DJML.TIPO_DOCUMENTO td on CLIE_TIPO_DOC = ID_TIPO_DOC" +
-                                         " WHERE CLIE_DNI = '" + dni + "'" +
-                                         " AND td.DESCRIPCION = '" + tipo + "'";
-                    new Query(insert_canje).Ejecutar();
+                        string update_productos = "UPDATE DJML.PRODUCTO SET PROD_STOCK = PROD_STOCK - " + cant + "WHERE PROD_ID = " + producto_id;
+                        new Query(update_productos).Ejecutar();
 
-                    string update_productos = "UPDATE DJML.PRODUCTO SET PROD_STOCK = PROD_STOCK - " + cant + "WHERE PROD_ID = " + producto_id;
-                    new Query(update_productos).Ejecutar();
-
-                    MessageBox.Show("Felicitaciones! Pase por la ventanilla de al lado para retirar sus productos", "Felicitaciones!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                        MessageBox.Show("Felicitaciones! Pase por la ventanilla de al lado para retirar sus productos", "Felicitaciones!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                     
                     FormInicioFuncionalidades FormInicioFuncionalidades = new FormInicioFuncionalidades();
                     this.Hide();
                     FormInicioFuncionalidades.ShowDialog();
                     FormInicioFuncionalidades = (FormInicioFuncionalidades)this.ActiveMdiChild;
+                   
+                   }
+                   
+
                 }
             }
         }
