@@ -55,10 +55,13 @@ namespace AerolineaFrba.Canje_Millas
             canje.Enabled = false;
            LlenarComboBoxTipoDocumento();
            tipoDeDocumento.DropDownStyle = ComboBoxStyle.DropDownList;
-           LlenarGridProductos();
+           //LlenarGridProductos();
+
+           groupBox1.Enabled = false;
 
            cantidad.Visible = false;
            cantidadLabel.Visible = false;
+
 
         }
 
@@ -115,25 +118,22 @@ namespace AerolineaFrba.Canje_Millas
 
             guardarIdCliente();
 
-
             dni = textBoxDNI.Text;
             tipo = tipoDeDocumento.Text;
             if (dni != string.Empty && tipo != string.Empty)
             {
+                int millasEnPeriodo = obtenerMillasEnPeriodo(IDC);
+
                 string qry = "SELECT PROD_ID as 'Codigo', PROD_NOMBRE as 'Producto', PROD_MILLAS_REQUERIDAS as 'Millas Requeridas', PROD_STOCK as 'Stock'" +
-                          " FROM DJML.PRODUCTO" +
-                          " WHERE PROD_MILLAS_REQUERIDAS < DJML.CALCULAR_MILLAS('" + dni + "', '" + tipo + "')";
+                     " FROM DJML.PRODUCTO WHERE PROD_MILLAS_REQUERIDAS <= " + millasEnPeriodo ;
 
                 var result = new Query(qry).ObtenerDataTable();
-                if (result.Rows.Count != 0)
-                {
-                    dataGridProductos.DataSource = result;
-                }
-                else
-                {
-                    MessageBox.Show("Usted no posee millas suficientes para ningun canje", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                
+                dataGridProductos.DataSource = result;
+                //ocultar id
+                dataGridProductos.Columns["Codigo"].Visible = false;
+
+                groupBox1.Enabled = true;
+
             }
             else
                 MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
