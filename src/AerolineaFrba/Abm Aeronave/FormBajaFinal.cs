@@ -259,10 +259,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
             SqlDataReader dr = cmd.ExecuteReader();
 
-            /*
-            string sql = "exec djml.Proc_Aeronaves '" + matricula + "' , null";
-            Query qr = new Query(sql);
-            object marc = qr.ObtenerUnicoCampo();*/
+          
             
             conexion.Close();
 

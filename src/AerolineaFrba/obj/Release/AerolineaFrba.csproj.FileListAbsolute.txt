@@ -94,3 +94,4 @@ C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\Ae
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Canje_Millas.canjeMillas.resources
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaFinal.resources
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.modification.resources
+C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.AeronaveListado.resources

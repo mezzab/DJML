@@ -102,7 +102,7 @@ namespace AerolineaFrba.Abm_Ruta
             destino = comboBox_destino.Text;
             servicio = comboBox_servicio.Text;
 
-            string qry = "select RUTA_CODIGO ruta_codigo, co.CIUD_DETALLE origen, cd.CIUD_DETALLE destino, s.SERV_DESCRIPCION servicio, r.RUTA_PRECIO_BASE_KILO precio_base_kilo, r.RUTA_PRECIO_BASE_PASAJE precio_base_pasaje" +
+            string qry = "select r.RUTA_CODIGO ruta_codigo, co.CIUD_DETALLE origen, cd.CIUD_DETALLE destino, s.SERV_DESCRIPCION servicio, r.RUTA_PRECIO_BASE_KILO precio_base_kilo, r.RUTA_PRECIO_BASE_PASAJE precio_base_pasaje" +
                         " from djml.RUTAS r" +
                         " join djml.TRAMOS t on r.RUTA_TRAMO = t.TRAMO_ID" +
                         " join djml.CIUDADES co on co.CIUD_ID = t.TRAMO_CIUDAD_ORIGEN" +

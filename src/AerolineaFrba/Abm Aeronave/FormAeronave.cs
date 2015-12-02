@@ -31,6 +31,7 @@ namespace AerolineaFrba.Abm_Aeronave
             this.bnBaja = new System.Windows.Forms.Button();
             this.bnModif = new System.Windows.Forms.Button();
             this.bnVolver = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bnAlta
@@ -73,10 +74,21 @@ namespace AerolineaFrba.Abm_Aeronave
             this.bnVolver.UseVisualStyleBackColor = true;
             this.bnVolver.Click += new System.EventHandler(this.bnVolver_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(101, 164);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Listado";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FormAeronave
             // 
             this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.bnVolver);
             this.Controls.Add(this.bnModif);
             this.Controls.Add(this.bnBaja);
@@ -131,6 +143,16 @@ namespace AerolineaFrba.Abm_Aeronave
             frm.ShowDialog();
             this.Visible = true;
         
+        }
+
+        private Button button1;
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            AeronaveListado frm = new AeronaveListado();
+            frm.ShowDialog();
+            this.Visible = true;
         }
         
     }
