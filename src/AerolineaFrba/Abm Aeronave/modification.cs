@@ -52,6 +52,16 @@ namespace AerolineaFrba.Abm_Aeronave
             f_alta.Format = DateTimePickerFormat.Custom;
             f_alta.CustomFormat = "yyyy-dd-MM";
 
+            f_fin.Format = DateTimePickerFormat.Custom;
+            f_fin.CustomFormat = "yyyy-dd-MM";
+
+            
+            f_inicio.Format = DateTimePickerFormat.Custom;
+            f_inicio.CustomFormat = "yyyy-dd-MM";
+
+            f_definitiva.Format = DateTimePickerFormat.Custom;
+            f_definitiva.CustomFormat = "yyyy-dd-MM";
+
             matricula.Enabled = false;
             cargarAeronaves();
             comboBoxAeronaves.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -76,7 +86,7 @@ namespace AerolineaFrba.Abm_Aeronave
             object marc11 = qr11.ObtenerUnicoCampo();
             BAJA_VIDA_UTIL = Convert.ToInt32(marc11);
 
-            if (BAJA_VIDA_UTIL == 1)
+            if (BAJA_FUERA_SERVICIO == 1)
             {
                 string sql6 = "SELECT AXP_ID_PERIODO FROM DJML.AERONAVES_POR_PERIODOS WHERE AXP_MATRI_AERONAVE = '" + matricula + "'";
                 Query qry6 = new Query(sql6);
@@ -86,27 +96,25 @@ namespace AerolineaFrba.Abm_Aeronave
                 Query qry61 = new Query(sql61);
                 FECHA_INI_PE = Convert.ToDateTime(qry61.ObtenerUnicoCampo());
 
-                string sql62 = "SELECT [PERI_FECHA_INICIO] FROM [DJML].[PERIODOS_DE_INACTIVIDAD] WHERE PERI_ID = '" + id_periodo + "'";
+                string sql62 = "SELECT [PERI_FECHA_FIN] FROM [DJML].[PERIODOS_DE_INACTIVIDAD] WHERE PERI_ID = '" + id_periodo + "'";
                 Query qry62 = new Query(sql62);
                 FECHA_FIN_PE = Convert.ToDateTime(qry62.ObtenerUnicoCampo());
 
             }
-            if (BAJA_VIDA_UTIL == 0)
+            if (BAJA_FUERA_SERVICIO == 0)
             {
                 FECHA_FIN_PE = Convert.ToDateTime("1777-7-7");
                 FECHA_INI_PE = Convert.ToDateTime("1777-7-7");
 
             }
 
-
-
-           
             string sql111 = "SELECT AERO_FECHA_BAJA_DEF FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + matricula + "'";
             Query qr111 = new Query(sql111);
-            object marc111 = qr111.ObtenerUnicoCampo();
-            if (marc111 == System.DBNull.Value)
-            { FECHA = Convert.ToDateTime("1777-7-7"); }
-            if (marc111 != System.DBNull.Value)
+            string marc111 = qr111.ObtenerUnicoCampo().ToString();
+
+            if (marc111 == null || marc111 == String.Empty)
+            { FECHA_BAJA_DEF = Convert.ToDateTime("1777-7-7"); }
+            if (marc111 != null && marc111 != String.Empty)
             {// if (marc111 == '1901') 
                 FECHA_BAJA_DEF = Convert.ToDateTime(marc111); }
              
@@ -227,7 +235,7 @@ namespace AerolineaFrba.Abm_Aeronave
         {
 
             if (c_butacas.Text != C_BUTA.ToString())
-            {
+            {/*
                 string borrar = "DELETE FROM [DJML].[BUTACA_AERO] WHERE BXA_AERO_MATRICULA = '" + matricula.Text + "'";
                 Query qry = new Query(borrar);
                 qry.pComando = borrar;
@@ -242,16 +250,89 @@ namespace AerolineaFrba.Abm_Aeronave
                     Query qry1 = new Query(sql1);
                     qry1.pComando = sql1;
                     qry1.Ejecutar();
-                }
+                }*/
 
+                modificarBajas();
                 modificarDatos2();
 
-            } 
+            }
             if (c_butacas.Text == C_BUTA.ToString())
             {
+                 modificarBajas();
                 modificarDatos2();
             }
+        }
 
+
+        private void modificarBajas()
+        {
+            if (BAJA_VIDA_UTIL == 1)
+            {
+                
+            string baja =  "UPDATE [DJML].[AERONAVES] " +
+                            "SET [AERO_BAJA_FUERA_SERVICIO] = '" +BAJA_FUERA_SERVICIO+ "'" + 
+                           ",[AERO_BAJA_VIDA_UTIL] = '" + BAJA_VIDA_UTIL + "'" + 
+                          " ,[AERO_FECHA_BAJA_DEF] ='" + FECHA_BAJA_DEF + "'" +
+                          " WHERE AERO_MATRICULA = '" + MATR + "'" ;
+                   Query qry1 = new Query(baja);
+                    qry1.pComando = baja;
+                    qry1.Ejecutar();
+
+            }
+             if (BAJA_VIDA_UTIL == 0)
+             {
+
+                 string baja = "UPDATE [DJML].[AERONAVES] " +
+                            "SET [AERO_BAJA_FUERA_SERVICIO] = '" + BAJA_FUERA_SERVICIO + "'" +
+                           ",[AERO_BAJA_VIDA_UTIL] = '" + BAJA_VIDA_UTIL + "'" +
+                          " ,[AERO_FECHA_BAJA_DEF] = null" +
+                          " WHERE AERO_MATRICULA = '" + MATR + "'";
+                 Query qry1 = new Query(baja);
+                 qry1.pComando = baja;
+                 qry1.Ejecutar();
+             }
+            /* if (BAJA_FUERA_SERVICIO == 0) REDUJE LOS IF, LO HACE EN LOS DOS DE ARRIBA
+             {
+                
+
+             }*/
+             if (BAJA_FUERA_SERVICIO == 1)
+             {
+                 if (FECHA_INI_PE.ToString("yyyy'-'MM'-'dd") != f_inicio.Text || FECHA_FIN_PE.ToString("yyyy'-'MM'-'dd") != f_fin.Text)
+                 {
+
+                     string baja = "UPDATE [DJML].[AERONAVES] " +
+                         "SET [AERO_BAJA_FUERA_SERVICIO] = '" + BAJA_FUERA_SERVICIO + "'" +
+                            " WHERE AERO_MATRICULA = '" + MATR + "'";
+                     Query qryQ = new Query(baja);
+                     qryQ.pComando = baja;
+                     qryQ.Ejecutar();
+
+                     string crearPeriodo = "INSERT INTO [DJML].[PERIODOS_DE_INACTIVIDAD]([PERI_FECHA_INICIO] ,[PERI_FECHA_FIN]) " +
+                                         " VALUES ('" + f_inicio.Text + "' , '" + f_fin.Text + "')";
+                     Query qry1 = new Query(crearPeriodo);
+                     qry1.pComando = crearPeriodo;
+                     qry1.Ejecutar();
+
+                     string buscarPeriodo = " SELECT PERI_ID FROM DJML.PERIODOS_DE_INACTIVIDAD WHERE PERI_FECHA_INICIO = '" + f_inicio.Text + "' AND PERI_FECHA_FIN = '" + f_fin.Text + "'";
+                     Query qry44 = new Query(buscarPeriodo);
+                     string id_periodo = qry44.ObtenerUnicoCampo().ToString();
+
+                     string delete = "DELETE FROM [DJML].[AERONAVES_POR_PERIODOS] WHERE AXP_MATRI_AERONAVE = '" + MATR + "'" ;
+                     Query qry = new Query(delete);
+                     qry.pComando = delete;
+                     qry.Ejecutar();
+
+                     string insert = "INSERT INTO [DJML].[AERONAVES_POR_PERIODOS]([AXP_MATRI_AERONAVE],[AXP_ID_PERIODO]) " +
+                                        " VALUES ('" + MATR + "' ,'" + id_periodo + "')";
+                     Query qry2 = new Query(insert);
+                     qry2.pComando = insert;
+                     qry2.Ejecutar();
+
+                 
+                 }
+                 
+             }
         }
 
         private void modificarDatos2()
@@ -296,7 +377,7 @@ namespace AerolineaFrba.Abm_Aeronave
                        " ,[AERO_FABRICANTE] = '" + id_fabricante + "'" +
                        " ,[AERO_KILOS_DISPONIBLES] = " + kg_disponibles.Text + 
                        " ,[AERO_SERVICIO_ID] = '" + id_servicio + "'" +
-                       " , [AERO_MODELO] ='" + modelo.Text + "'" +
+                      
                        " WHERE AERO_MATRICULA = '" + matricula.Text + "'";
             }
             Query qry1 = new Query(sq);
@@ -326,6 +407,8 @@ namespace AerolineaFrba.Abm_Aeronave
             if (BAJA_FUERA_SERVICIO == 1)
             {
                 comboServicio.Text = "Si";
+
+              
 
                 f_inicio.Text = FECHA_INI_PE.ToString();
                 f_fin.Text = FECHA_FIN_PE.ToString();
@@ -483,10 +566,14 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 periodo.Enabled = true;
                 comboVida.Text = "No";
+                BAJA_FUERA_SERVICIO = 1;
+
             }
             if (comboServicio.Text == "No")
             {
                 periodo.Enabled = false;
+                BAJA_FUERA_SERVICIO = 0;
+
             }
         }
 
@@ -496,10 +583,12 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 comboServicio.Text = "No";
                 f_definitiva.Enabled = true;
+                BAJA_VIDA_UTIL = 1;
             }
             if (comboVida.Text == "No")
             {
                 f_definitiva.Enabled = false;
+                BAJA_VIDA_UTIL = 0;
             }
 
         }
