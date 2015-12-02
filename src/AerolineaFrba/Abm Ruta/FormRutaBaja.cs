@@ -85,8 +85,8 @@ namespace AerolineaFrba.Abm_Ruta
         {   
             string qry = "SELECT 1 FROM DJML.VIAJES" +
                         " JOIN DJML.RUTAS ON VIAJE_RUTA_ID = RUTA_CODIGO" +
-                        " WHERE where r.RUTA_CODIGO = " + codigo +
-                        " AND GETDATE() BETWEEN VIAJE_FECHA_SALIDA AND v.VIAJE_FECHA_LLEGADA_ESTIMADA";
+                        " WHERE RUTA_CODIGO = " + codigo +
+                        " AND GETDATE() BETWEEN VIAJE_FECHA_SALIDA AND VIAJE_FECHA_LLEGADA_ESTIMADA";
 
             var result = new Query(qry).ObtenerDataTable();
             if (result.Rows.Count != 0)
@@ -182,7 +182,7 @@ namespace AerolineaFrba.Abm_Ruta
 
             //MODIFICO EL PRECIO DE COMPRA (LE RESTO EL PRECIO DE LOS PASAJES Y ENCOMIENDAS CANCELADAS)
             string precios = " UPDATE [DJML].[COMPRAS] SET [COMPRA_MONTO] = 0" +
-                             " WHERE COMPRA_ID IN (CANC_COMPRA_ID" +
+                             " WHERE COMPRA_ID IN (SELECT CANC_COMPRA_ID" +
                                  " FROM DJML.CANCELACIONES" +
                                  " JOIN DJML.COMPRAS ON COMPRA_ID = CANC_COMPRA_ID" +
                                  " JOIN DJML.VIAJES ON COMPRA_VIAJE_ID = VIAJE_ID" +
@@ -220,7 +220,7 @@ namespace AerolineaFrba.Abm_Ruta
             {
                 // ACTUALIZO KILOS DISPONIBLES
                 string kilos = " UPDATE [GD2C2015].[DJML].[AERONAVES] SET [AERO_KILOS_DISPONIBLES] = AERO_KILOS_DISPONIBLES + " + aeronaves.Rows[i][1].ToString() +
-                                 "WHERE AERO_MATRICULA = " + aeronaves.Rows[i][0].ToString();
+                                 " WHERE AERO_MATRICULA = '" + aeronaves.Rows[i][0].ToString() + "'";
                 Query qryKilos = new Query(kilos);
                 qryKilos.Ejecutar();
             }         
