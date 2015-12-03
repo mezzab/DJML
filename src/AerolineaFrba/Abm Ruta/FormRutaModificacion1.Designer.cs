@@ -162,7 +162,8 @@
             this.Controls.Add(this.button_volver);
             this.Controls.Add(this.groupBox1);
             this.Name = "FormRutaModificacion1";
-            this.Text = "ABM RUTA - Modificación";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "/";
             this.Load += new System.EventHandler(this.FormRutaModificacion1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

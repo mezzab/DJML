@@ -123,7 +123,7 @@ namespace AerolineaFrba.Abm_Ruta
                 bool b = double.TryParse(precio_encomienda, out output2);
                 if (false)
                 {
-                    error_message += "Los campos Precio deben ser numericos." + Environment.NewLine + Environment.NewLine;
+                 //   error_message += "Los campos Precio deben ser numericos." + Environment.NewLine + Environment.NewLine;
                 }
 
                 //Validate: origen y destino diferentes

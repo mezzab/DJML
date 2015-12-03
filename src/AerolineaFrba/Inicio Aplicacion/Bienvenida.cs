@@ -18,6 +18,8 @@ namespace AerolineaFrba
     public partial class Bienvenida : Form
     {
 
+        public static int IDVENDEDOR;
+
         public static string rol;
 
         public Bienvenida()
@@ -46,6 +48,8 @@ namespace AerolineaFrba
 
         private void button2_Click(object sender, EventArgs e)
         {
+            IDVENDEDOR = 0;
+
             rol = "Cliente";
             this.Visible = false;
             Form frm = new FormInicioFuncionalidades();

@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using AerolineaFrba.Properties;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using AerolineaFrba.Inicio_Aplicacion;
 
 
 
@@ -139,6 +140,12 @@ namespace AerolineaFrba.Abm_Aeronave
 
                         MessageBox.Show("Se ha cargado correctamente la nueva aeronave! ", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.None);
                         limpiar();
+
+
+                        FormInicioFuncionalidades aero = new FormInicioFuncionalidades();
+                        this.Hide();
+                        aero.ShowDialog();
+                        aero = (FormInicioFuncionalidades)this.ActiveMdiChild;
 
                     }
                 }

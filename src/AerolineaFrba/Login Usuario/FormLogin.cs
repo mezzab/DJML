@@ -177,6 +177,12 @@ namespace AerolineaFrba.Login_Usuario
             //MENSAJE INICIO SESION
             MessageBox.Show("Ha iniciado sesion con exito.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.None);
             //PONE EN 0 LOGIN FALLIDOS Y CONTINUA CON EL INGRESO
+
+
+            string sql1 = "select USUA_ID FROM DJML.USUARIOS WHERE USUA_USERNAME = '" + txtUsu.Text + "'";
+            Query qry11 = new Query(sql1);
+            Bienvenida.IDVENDEDOR = Convert.ToInt32(qry11.ObtenerUnicoCampo());
+
             new Query("UPDATE DJML.USUARIOS SET USUA_LOGIN_FALLIDOS = 0 WHERE USUA_ID = " + idUsuario).Ejecutar();
             FormInicioFuncionalidades func = new FormInicioFuncionalidades();
             this.Hide();

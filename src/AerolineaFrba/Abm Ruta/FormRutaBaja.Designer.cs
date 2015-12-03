@@ -156,6 +156,7 @@
             this.Controls.Add(this.button_volver);
             this.Controls.Add(this.groupBox1);
             this.Name = "FormRutaBaja";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM RUTA - BAJA";
             this.Load += new System.EventHandler(this.FormRutaBaja_Load);
             this.groupBox1.ResumeLayout(false);

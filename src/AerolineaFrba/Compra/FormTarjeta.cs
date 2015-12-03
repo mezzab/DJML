@@ -677,14 +677,29 @@ namespace AerolineaFrba.Compra
             string aux2 = aux1.Substring(0, aux1.Length - 1);
             string aux3 = precioTotal.ToString().Replace(",", ".");
 
-            
-            string sql = " INSERT INTO DJML.COMPRAS( COMPRA_VIAJE_ID , COMPRA_CLIE_ID , COMPRA_MEDIO_DE_PAGO , COMPRA_TARJETA_DE_CREDITO , COMPRA_MONTO , COMPRA_FECHA)" +
-                                        " VALUES ( '" + FormCompra1.viajeID + "' , '" + IDCliente + "' , '2' , '" + numTarjeta.Text + "' , '" + aux3 + "' , '" + aux + "')";
+        
 
-            
-            Query qry1 = new Query(sql);
-            qry1.pComando = sql;
-            qry1.Ejecutar();
+
+            if (Bienvenida.IDVENDEDOR == 0)
+            {
+
+                string sql = " INSERT INTO DJML.COMPRAS( COMPRA_VIAJE_ID , COMPRA_CLIE_ID , COMPRA_MEDIO_DE_PAGO , COMPRA_TARJETA_DE_CREDITO , COMPRA_MONTO , COMPRA_FECHA, COMPRA_VEND_ID )" +
+                             " VALUES ( '" + FormCompra1.viajeID + "' , '" + IDCliente + "' , '2' , '" + numTarjeta.Text + "' , '" + aux3 + "' , '" + aux + "', null)";
+                        Query qry1 = new Query(sql);
+                        qry1.pComando = sql;
+                        qry1.Ejecutar();
+
+            }
+            else
+            {
+                string sql = " INSERT INTO DJML.COMPRAS( COMPRA_VIAJE_ID , COMPRA_CLIE_ID , COMPRA_MEDIO_DE_PAGO , COMPRA_TARJETA_DE_CREDITO , COMPRA_MONTO , COMPRA_FECHA, COMPRA_VEND_ID )" +
+                             " VALUES ( '" + FormCompra1.viajeID + "' , '" + IDCliente + "' , '2' , '" + numTarjeta.Text + "' , '" + aux3 + "' , '" + aux + "' , '" + Bienvenida.IDVENDEDOR + "')";
+                            Query qry1 = new Query(sql);
+                            qry1.pComando = sql;
+                            qry1.Ejecutar();
+            }
+
+
 
             
             string sqlc = "SELECT COMPRA_CODIGO FROM DJML.COMPRAS " +

@@ -165,6 +165,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_volver);
             this.Name = "FormRutaListado";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM RUTA - LISTADO";
             this.Load += new System.EventHandler(this.FormRutaListado_Load);
             this.groupBox1.ResumeLayout(false);
