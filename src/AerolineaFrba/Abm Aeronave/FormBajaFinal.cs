@@ -26,7 +26,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void FormBajaFinal_Load(object sender, EventArgs e)
         {
-
+            
             comboBoxTipoBaja.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxTipoBaja.Items.Add("Cancelar todos los viajes.");
             comboBoxTipoBaja.Items.Add("Suplantar la aeronave por otra.");

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtUsu = new System.Windows.Forms.TextBox();
@@ -39,7 +40,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 20);
+            this.label1.Location = new System.Drawing.Point(41, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 0;
@@ -48,7 +49,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 56);
+            this.label2.Location = new System.Drawing.Point(41, 59);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 1;
@@ -57,7 +58,7 @@
             // 
             // txtUsu
             // 
-            this.txtUsu.Location = new System.Drawing.Point(92, 17);
+            this.txtUsu.Location = new System.Drawing.Point(103, 20);
             this.txtUsu.Name = "txtUsu";
             this.txtUsu.Size = new System.Drawing.Size(100, 20);
             this.txtUsu.TabIndex = 2;
@@ -65,7 +66,7 @@
             // 
             // txtPassw
             // 
-            this.txtPassw.Location = new System.Drawing.Point(92, 53);
+            this.txtPassw.Location = new System.Drawing.Point(103, 56);
             this.txtPassw.Name = "txtPassw";
             this.txtPassw.Size = new System.Drawing.Size(100, 20);
             this.txtPassw.TabIndex = 3;
@@ -73,7 +74,7 @@
             // 
             // bnSalir
             // 
-            this.bnSalir.Location = new System.Drawing.Point(25, 89);
+            this.bnSalir.Location = new System.Drawing.Point(44, 92);
             this.bnSalir.Name = "bnSalir";
             this.bnSalir.Size = new System.Drawing.Size(75, 33);
             this.bnSalir.TabIndex = 5;
@@ -83,7 +84,7 @@
             // 
             // bnAceptar
             // 
-            this.bnAceptar.Location = new System.Drawing.Point(117, 89);
+            this.bnAceptar.Location = new System.Drawing.Point(128, 92);
             this.bnAceptar.Name = "bnAceptar";
             this.bnAceptar.Size = new System.Drawing.Size(75, 33);
             this.bnAceptar.TabIndex = 6;
@@ -96,13 +97,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MintCream;
-            this.ClientSize = new System.Drawing.Size(221, 137);
+            this.ClientSize = new System.Drawing.Size(245, 137);
             this.Controls.Add(this.bnAceptar);
             this.Controls.Add(this.bnSalir);
             this.Controls.Add(this.txtPassw);
             this.Controls.Add(this.txtUsu);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormLogin";
             this.Text = "Inicie sesion";
             this.Load += new System.EventHandler(this.Form1_Load);

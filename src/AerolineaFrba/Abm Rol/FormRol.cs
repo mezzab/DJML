@@ -28,6 +28,7 @@ namespace AerolineaFrba.Abm_Rol
         
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRol));
             this.bnAlta = new System.Windows.Forms.Button();
             this.bnBaja = new System.Windows.Forms.Button();
             this.bnListado = new System.Windows.Forms.Button();
@@ -94,6 +95,7 @@ namespace AerolineaFrba.Abm_Rol
             this.Controls.Add(this.bnListado);
             this.Controls.Add(this.bnBaja);
             this.Controls.Add(this.bnAlta);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM Rol";

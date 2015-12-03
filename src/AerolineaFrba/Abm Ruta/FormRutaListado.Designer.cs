@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRutaListado));
             this.button_volver = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textOrigen = new System.Windows.Forms.TextBox();
@@ -164,6 +165,7 @@
             this.ClientSize = new System.Drawing.Size(632, 487);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_volver);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormRutaListado";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM RUTA - LISTADO";

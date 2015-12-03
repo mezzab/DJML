@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGenerarViaje));
             this.button2 = new System.Windows.Forms.Button();
             this.fechaSalida = new System.Windows.Forms.DateTimePicker();
             this.fechaLlegadaEstimada = new System.Windows.Forms.DateTimePicker();
@@ -188,6 +189,7 @@
             this.Controls.Add(this.fechaLlegadaEstimada);
             this.Controls.Add(this.fechaSalida);
             this.Controls.Add(this.button2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormGenerarViaje";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Generar Viaje";

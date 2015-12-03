@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PagoConTarjeta));
             this.ActualizarDatos = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tipoT = new System.Windows.Forms.ComboBox();
@@ -512,6 +513,7 @@
             this.Controls.Add(this.LimpiarTodo);
             this.Controls.Add(this.Comprar);
             this.Controls.Add(this.Volver);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PagoConTarjeta";
             this.Text = "Carga de datos para pago con tarjeta";
             this.Load += new System.EventHandler(this.FormEfectivo_Load);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PagoEfectivo));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.BuscarPorCliente = new System.Windows.Forms.Button();
             this.dniNum = new System.Windows.Forms.TextBox();
@@ -377,6 +378,7 @@
             this.Controls.Add(this.Volver);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PagoEfectivo";
             this.Text = "Carga de datos para pago en efectivo";
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRuta));
             this.button_alta = new System.Windows.Forms.Button();
             this.button_baja = new System.Windows.Forms.Button();
             this.button_listado = new System.Windows.Forms.Button();
@@ -96,6 +97,7 @@
             this.Controls.Add(this.button_listado);
             this.Controls.Add(this.button_baja);
             this.Controls.Add(this.button_alta);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormRuta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM RUTA";

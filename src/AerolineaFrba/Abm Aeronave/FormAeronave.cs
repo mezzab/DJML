@@ -27,6 +27,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAeronave));
             this.bnAlta = new System.Windows.Forms.Button();
             this.bnBaja = new System.Windows.Forms.Button();
             this.bnModif = new System.Windows.Forms.Button();
@@ -93,6 +94,7 @@ namespace AerolineaFrba.Abm_Aeronave
             this.Controls.Add(this.bnModif);
             this.Controls.Add(this.bnBaja);
             this.Controls.Add(this.bnAlta);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormAeronave";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM AERONAVE";

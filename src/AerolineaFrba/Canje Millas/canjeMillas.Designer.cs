@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(canjeMillas));
             this.tipoDeDocumento = new System.Windows.Forms.ComboBox();
             this.botonVolver = new System.Windows.Forms.Button();
             this.textBoxDNI = new System.Windows.Forms.TextBox();
@@ -187,6 +188,7 @@
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.textBoxDNI);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "canjeMillas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Canje Millas";

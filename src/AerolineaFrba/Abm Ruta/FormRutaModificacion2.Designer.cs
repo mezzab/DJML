@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRutaModificacion2));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_guardar = new System.Windows.Forms.Button();
             this.label_message = new System.Windows.Forms.Label();
@@ -190,6 +191,7 @@
             this.ClientSize = new System.Drawing.Size(334, 357);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_volver);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormRutaModificacion2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM RUTA - Modificación";

@@ -34,5 +34,10 @@ namespace AerolineaFrba.Abm_Ciudad
         {
 
         }
+
+        private void FormCiudades_Alta_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCiudades_Modi));
             this.volver = new System.Windows.Forms.Button();
             this.label = new System.Windows.Forms.Label();
             this.guardar = new System.Windows.Forms.Button();
@@ -81,9 +82,10 @@
             this.Controls.Add(this.label);
             this.Controls.Add(this.guardar);
             this.Controls.Add(this.volver);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormCiudades_Modi";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Modificion de Ciudad";
+            this.Text = "Modificacion Ciudades";
             this.Load += new System.EventHandler(this.FormCiudades_Modi_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

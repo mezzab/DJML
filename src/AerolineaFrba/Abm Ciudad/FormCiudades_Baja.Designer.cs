@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCiudades_Baja));
             this.volver = new System.Windows.Forms.Button();
             this.darBaja = new System.Windows.Forms.Button();
             this.BoxCiudades = new System.Windows.Forms.ComboBox();
@@ -82,6 +83,7 @@
             this.Controls.Add(this.BoxCiudades);
             this.Controls.Add(this.darBaja);
             this.Controls.Add(this.volver);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormCiudades_Baja";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Baja de ciudad:";

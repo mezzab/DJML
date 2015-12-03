@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Devolucion1));
             this.label1 = new System.Windows.Forms.Label();
             this.motivo = new System.Windows.Forms.RichTextBox();
             this.Siguiente = new System.Windows.Forms.Button();
@@ -87,6 +88,7 @@
             this.Controls.Add(this.Siguiente);
             this.Controls.Add(this.motivo);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Devolucion1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Devolución de pasaje/encomienda";

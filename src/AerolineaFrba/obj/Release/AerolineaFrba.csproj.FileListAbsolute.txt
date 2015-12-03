@@ -1,204 +1,53 @@
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\bin\Release\AerolineaFrba.exe.config
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\bin\Release\Abm Ciudad\FormCiudades_Baja.resx
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\bin\Release\Abm Ciudad\FormCiudades_Baja.cs
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\bin\Release\Abm Ciudad\FormCiudades_Baja.Designer.cs
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\bin\Release\AerolineaFrba.exe
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\bin\Release\AerolineaFrba.pdb
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormAeronave.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormAeronaveBaja.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaCompletoVidaUtil.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_Baja.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_Alta.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_Modi.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_List.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRol.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolAlta.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolBaja.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolConsulta.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolModificacion.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRuta.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaAlta.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaBaja.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaListado.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaModificacion1.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaModificacion2.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.CargaDatos.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.FormCompra1.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.PagoEfectivo.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.FormFormaDePago.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.PagoConTarjeta.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Consulta_Millas.ConsultarMillas.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Devolucion.Devolucion0.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Devolucion.Devolucion1.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Devolucion.Devolucion2.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Generacion_Viaje.FormGenerarViaje.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Bienvenida.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Inicio_Aplicacion.FormInicioFuncionalidades.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Listado_Estadistico.FormListadoEstadistico.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Properties.Resources.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Login_Usuario.FormLogin.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.csproj.GenerateResource.Cache
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.exe
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.pdb
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.csprojResolveAssemblyReference.cache
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.CompraExitosa.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Registro_Llegada_Destino.FormRegistroLlegada.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\bin\Release\Abm Ciudad\FormCiudades_Baja.resx
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\bin\Release\Abm Ciudad\FormCiudades_Baja.cs
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\bin\Release\Abm Ciudad\FormCiudades_Baja.Designer.cs
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\bin\Release\AerolineaFrba.exe.config
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\bin\Release\AerolineaFrba.exe
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\bin\Release\AerolineaFrba.pdb
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.csprojResolveAssemblyReference.cache
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormAeronave.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormAeronaveBaja.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaCompletoVidaUtil.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_Baja.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_Alta.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_Modi.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_List.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRol.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolAlta.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolBaja.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolConsulta.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolModificacion.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRuta.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaAlta.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaBaja.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaListado.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaModificacion1.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaModificacion2.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.CompraExitosa.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.CargaDatos.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.FormCompra1.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.PagoEfectivo.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.FormFormaDePago.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.PagoConTarjeta.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Consulta_Millas.ConsultarMillas.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Devolucion.Devolucion0.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Devolucion.Devolucion1.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Devolucion.Devolucion2.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Generacion_Viaje.FormGenerarViaje.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Bienvenida.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Inicio_Aplicacion.FormInicioFuncionalidades.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Listado_Estadistico.FormListadoEstadistico.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Properties.Resources.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Login_Usuario.FormLogin.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Registro_Llegada_Destino.FormRegistroLlegada.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.csproj.GenerateResource.Cache
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.exe
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.pdb
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Canje_Millas.canjeMillas.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Canje_Millas.canjeMillas.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaFinal.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.modification.resources
-C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.AeronaveListado.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.AeronaveListado.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaFinal.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.modification.resources
-C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaFueraServicio.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\bin\Release\AerolineaFrba.exe.config
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.pdb
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\bin\Release\Abm Ciudad\FormCiudades_Baja.resx
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\bin\Release\Abm Ciudad\FormCiudades_Baja.cs
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\bin\Release\Abm Ciudad\FormCiudades_Baja.Designer.cs
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\bin\Release\AerolineaFrba.exe
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\bin\Release\AerolineaFrba.pdb
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.csprojResolveAssemblyReference.cache
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.AeronaveListado.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormAeronave.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormAeronaveBaja.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaCompletoVidaUtil.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaFinal.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaFueraServicio.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.modification.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_Baja.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_Alta.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_Modi.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_List.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRol.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolAlta.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolBaja.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolConsulta.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolModificacion.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRuta.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaAlta.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaBaja.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaListado.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaModificacion1.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaModificacion2.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Canje_Millas.canjeMillas.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.CompraExitosa.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.CargaDatos.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.FormCompra1.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.PagoEfectivo.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.FormFormaDePago.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.PagoConTarjeta.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Consulta_Millas.ConsultarMillas.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Devolucion.Devolucion0.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Devolucion.Devolucion1.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Devolucion.Devolucion2.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Generacion_Viaje.FormGenerarViaje.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Bienvenida.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Inicio_Aplicacion.FormInicioFuncionalidades.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Listado_Estadistico.FormListadoEstadistico.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Properties.Resources.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Login_Usuario.FormLogin.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Registro_Llegada_Destino.FormRegistroLlegada.resources
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.csproj.GenerateResource.Cache
-C:\Users\Marc\Desktop\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.exe
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\bin\Release\AerolineaFrba.exe.config
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.pdb
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\bin\Release\Abm Ciudad\FormCiudades_Baja.resx
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\bin\Release\Abm Ciudad\FormCiudades_Baja.cs
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\bin\Release\Abm Ciudad\FormCiudades_Baja.Designer.cs
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\bin\Release\AerolineaFrba.exe
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\bin\Release\AerolineaFrba.pdb
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.csprojResolveAssemblyReference.cache
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.AeronaveListado.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormAeronave.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormAeronaveBaja.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaCompletoVidaUtil.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaFinal.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaFueraServicio.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.modification.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_Baja.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_Alta.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_Modi.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_List.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRol.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolAlta.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolBaja.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolConsulta.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolModificacion.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRuta.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaAlta.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaBaja.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaListado.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaModificacion1.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaModificacion2.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Canje_Millas.canjeMillas.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.CompraExitosa.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.CargaDatos.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.FormCompra1.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.PagoEfectivo.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.FormFormaDePago.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.PagoConTarjeta.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Consulta_Millas.ConsultarMillas.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Devolucion.Devolucion0.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Devolucion.Devolucion1.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Devolucion.Devolucion2.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Generacion_Viaje.FormGenerarViaje.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Bienvenida.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Inicio_Aplicacion.FormInicioFuncionalidades.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Listado_Estadistico.FormListadoEstadistico.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Properties.Resources.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Login_Usuario.FormLogin.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Registro_Llegada_Destino.FormRegistroLlegada.resources
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.csproj.GenerateResource.Cache
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.exe
-C:\Users\Marc\Desktop\mmmee\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.NuevaCarga.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\bin\Release\AerolineaFrba.exe.config
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\bin\Release\Abm Ciudad\FormCiudades_Baja.resx
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\bin\Release\Abm Ciudad\FormCiudades_Baja.cs
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\bin\Release\Abm Ciudad\FormCiudades_Baja.Designer.cs
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\bin\Release\AerolineaFrba.exe
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\bin\Release\AerolineaFrba.pdb
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.csprojResolveAssemblyReference.cache
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.AeronaveListado.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormAeronave.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormAeronaveBaja.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaCompletoVidaUtil.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaFinal.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaFueraServicio.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.modification.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_Baja.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_Alta.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_Modi.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ciudad.FormCiudades_List.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRol.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolAlta.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolBaja.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolConsulta.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Rol.FormRolModificacion.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRuta.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaAlta.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaBaja.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaListado.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaModificacion1.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Ruta.FormRutaModificacion2.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Canje_Millas.canjeMillas.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.CompraExitosa.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.CargaDatos.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.FormCompra1.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.PagoEfectivo.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.FormFormaDePago.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.PagoConTarjeta.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Compra.NuevaCarga.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Consulta_Millas.ConsultarMillas.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Devolucion.Devolucion0.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Devolucion.Devolucion1.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Devolucion.Devolucion2.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Generacion_Viaje.FormGenerarViaje.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Bienvenida.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Inicio_Aplicacion.FormInicioFuncionalidades.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Listado_Estadistico.FormListadoEstadistico.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Properties.Resources.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Login_Usuario.FormLogin.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Registro_Llegada_Destino.FormRegistroLlegada.resources
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.csproj.GenerateResource.Cache
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.exe
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.pdb
+C:\Users\Marc\Desktop\eeemm\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormAeronaveAlta.resources

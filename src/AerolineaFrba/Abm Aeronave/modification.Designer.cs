@@ -28,12 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(modification));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.f_definitiva = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
+            this.periodo = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.f_fin = new System.Windows.Forms.DateTimePicker();
+            this.f_inicio = new System.Windows.Forms.DateTimePicker();
+            this.label10 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.comboVida = new System.Windows.Forms.ComboBox();
             this.fabricantes = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.comboServicio = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -49,17 +61,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.comboServicio = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.comboVida = new System.Windows.Forms.ComboBox();
-            this.periodo = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.f_fin = new System.Windows.Forms.DateTimePicker();
-            this.f_inicio = new System.Windows.Forms.DateTimePicker();
-            this.f_definitiva = new System.Windows.Forms.DateTimePicker();
-            this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.periodo.SuspendLayout();
             this.SuspendLayout();
@@ -95,6 +96,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de aeronave";
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(331, 175);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(105, 13);
+            this.label13.TabIndex = 39;
+            this.label13.Text = "Fecha baja definitiva";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -104,6 +114,14 @@
             this.label1.Size = new System.Drawing.Size(62, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Matricula";
+            // 
+            // f_definitiva
+            // 
+            this.f_definitiva.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.f_definitiva.Location = new System.Drawing.Point(441, 171);
+            this.f_definitiva.Name = "f_definitiva";
+            this.f_definitiva.Size = new System.Drawing.Size(93, 20);
+            this.f_definitiva.TabIndex = 0;
             // 
             // label2
             // 
@@ -115,6 +133,64 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Kg Disponibles";
             // 
+            // periodo
+            // 
+            this.periodo.Controls.Add(this.label12);
+            this.periodo.Controls.Add(this.label11);
+            this.periodo.Controls.Add(this.f_fin);
+            this.periodo.Controls.Add(this.f_inicio);
+            this.periodo.Location = new System.Drawing.Point(326, 51);
+            this.periodo.Name = "periodo";
+            this.periodo.Size = new System.Drawing.Size(210, 89);
+            this.periodo.TabIndex = 38;
+            this.periodo.TabStop = false;
+            this.periodo.Text = "Periodo";
+            this.periodo.Enter += new System.EventHandler(this.periodo_Enter);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(49, 56);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(21, 13);
+            this.label12.TabIndex = 3;
+            this.label12.Text = "Fin";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(38, 25);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(32, 13);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Inicio";
+            // 
+            // f_fin
+            // 
+            this.f_fin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.f_fin.Location = new System.Drawing.Point(76, 55);
+            this.f_fin.Name = "f_fin";
+            this.f_fin.Size = new System.Drawing.Size(93, 20);
+            this.f_fin.TabIndex = 1;
+            // 
+            // f_inicio
+            // 
+            this.f_inicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.f_inicio.Location = new System.Drawing.Point(76, 25);
+            this.f_inicio.Name = "f_inicio";
+            this.f_inicio.Size = new System.Drawing.Size(93, 20);
+            this.f_inicio.TabIndex = 0;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(323, 147);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(160, 16);
+            this.label10.TabIndex = 37;
+            this.label10.Text = "Baja completo su vida util";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -125,6 +201,15 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Cantidad Butacas";
             // 
+            // comboVida
+            // 
+            this.comboVida.FormattingEnabled = true;
+            this.comboVida.Location = new System.Drawing.Point(489, 142);
+            this.comboVida.Name = "comboVida";
+            this.comboVida.Size = new System.Drawing.Size(46, 21);
+            this.comboVida.TabIndex = 36;
+            this.comboVida.SelectedIndexChanged += new System.EventHandler(this.comboVida_SelectedIndexChanged);
+            // 
             // fabricantes
             // 
             this.fabricantes.FormattingEnabled = true;
@@ -132,6 +217,16 @@
             this.fabricantes.Name = "fabricantes";
             this.fabricantes.Size = new System.Drawing.Size(121, 21);
             this.fabricantes.TabIndex = 23;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(323, 31);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(161, 16);
+            this.label8.TabIndex = 35;
+            this.label8.Text = "Baja por fuera de servicio";
             // 
             // label4
             // 
@@ -142,6 +237,15 @@
             this.label4.Size = new System.Drawing.Size(57, 16);
             this.label4.TabIndex = 3;
             this.label4.Text = "Servicio";
+            // 
+            // comboServicio
+            // 
+            this.comboServicio.FormattingEnabled = true;
+            this.comboServicio.Location = new System.Drawing.Point(490, 30);
+            this.comboServicio.Name = "comboServicio";
+            this.comboServicio.Size = new System.Drawing.Size(46, 21);
+            this.comboServicio.TabIndex = 34;
+            this.comboServicio.SelectedIndexChanged += new System.EventHandler(this.comboServicio_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -213,7 +317,7 @@
             this.c_butacas.Name = "c_butacas";
             this.c_butacas.Size = new System.Drawing.Size(121, 20);
             this.c_butacas.TabIndex = 14;
-           this.c_butacas.TextChanged += new System.EventHandler(this.c_butacas_TextChanged);
+            this.c_butacas.TextChanged += new System.EventHandler(this.c_butacas_TextChanged);
             // 
             // kg_disponibles
             // 
@@ -221,7 +325,7 @@
             this.kg_disponibles.Name = "kg_disponibles";
             this.kg_disponibles.Size = new System.Drawing.Size(121, 20);
             this.kg_disponibles.TabIndex = 16;
-           this.kg_disponibles.TextChanged += new System.EventHandler(this.kg_disponibles_TextChanged);
+            this.kg_disponibles.TextChanged += new System.EventHandler(this.kg_disponibles_TextChanged);
             // 
             // t_servicio
             // 
@@ -247,7 +351,7 @@
             this.comboBoxAeronaves.Name = "comboBoxAeronaves";
             this.comboBoxAeronaves.Size = new System.Drawing.Size(197, 21);
             this.comboBoxAeronaves.TabIndex = 29;
-           this.comboBoxAeronaves.SelectedIndexChanged += new System.EventHandler(this.comboBoxAeronaves_SelectedIndexChanged);
+            this.comboBoxAeronaves.SelectedIndexChanged += new System.EventHandler(this.comboBoxAeronaves_SelectedIndexChanged);
             // 
             // button3
             // 
@@ -279,109 +383,6 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // comboServicio
-            // 
-            this.comboServicio.FormattingEnabled = true;
-            this.comboServicio.Location = new System.Drawing.Point(490, 30);
-            this.comboServicio.Name = "comboServicio";
-            this.comboServicio.Size = new System.Drawing.Size(46, 21);
-            this.comboServicio.TabIndex = 34;
-            this.comboServicio.SelectedIndexChanged += new System.EventHandler(this.comboServicio_SelectedIndexChanged);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(323, 31);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(161, 16);
-            this.label8.TabIndex = 35;
-            this.label8.Text = "Baja por fuera de servicio";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(323, 147);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(160, 16);
-            this.label10.TabIndex = 37;
-            this.label10.Text = "Baja completo su vida util";
-            // 
-            // comboVida
-            // 
-            this.comboVida.FormattingEnabled = true;
-            this.comboVida.Location = new System.Drawing.Point(489, 142);
-            this.comboVida.Name = "comboVida";
-            this.comboVida.Size = new System.Drawing.Size(46, 21);
-            this.comboVida.TabIndex = 36;
-            this.comboVida.SelectedIndexChanged += new System.EventHandler(this.comboVida_SelectedIndexChanged);
-            // 
-            // periodo
-            // 
-            this.periodo.Controls.Add(this.label12);
-            this.periodo.Controls.Add(this.label11);
-            this.periodo.Controls.Add(this.f_fin);
-            this.periodo.Controls.Add(this.f_inicio);
-            this.periodo.Location = new System.Drawing.Point(326, 51);
-            this.periodo.Name = "periodo";
-            this.periodo.Size = new System.Drawing.Size(210, 89);
-            this.periodo.TabIndex = 38;
-            this.periodo.TabStop = false;
-            this.periodo.Text = "Periodo";
-            this.periodo.Enter += new System.EventHandler(this.periodo_Enter);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(49, 56);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(21, 13);
-            this.label12.TabIndex = 3;
-            this.label12.Text = "Fin";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(38, 25);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(32, 13);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "Inicio";
-            // 
-            // f_fin
-            // 
-            this.f_fin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.f_fin.Location = new System.Drawing.Point(76, 55);
-            this.f_fin.Name = "f_fin";
-            this.f_fin.Size = new System.Drawing.Size(93, 20);
-            this.f_fin.TabIndex = 1;
-            // 
-            // f_inicio
-            // 
-            this.f_inicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.f_inicio.Location = new System.Drawing.Point(76, 25);
-            this.f_inicio.Name = "f_inicio";
-            this.f_inicio.Size = new System.Drawing.Size(93, 20);
-            this.f_inicio.TabIndex = 0;
-            // 
-            // f_definitiva
-            // 
-            this.f_definitiva.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.f_definitiva.Location = new System.Drawing.Point(441, 171);
-            this.f_definitiva.Name = "f_definitiva";
-            this.f_definitiva.Size = new System.Drawing.Size(93, 20);
-            this.f_definitiva.TabIndex = 0;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(331, 175);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(105, 13);
-            this.label13.TabIndex = 39;
-            this.label13.Text = "Fecha baja definitiva";
-            // 
             // modification
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -394,6 +395,7 @@
             this.Controls.Add(this.comboBoxAeronaves);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "modification";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificacion de Aeronave";
