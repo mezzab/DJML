@@ -427,7 +427,7 @@ namespace AerolineaFrba.Compra
                             " and p.PASA_CLIE_ID =  c.CLIE_ID " +
                             " and c.clie_dni = '" + dniNum.Text + "' " +
                             " and c.clie_tipo_doc = '" + aux + "' " +
-                            " and p.cancelacion_id is null " +
+                            " and p.cancelacion_id = null " +
                             " and v.VIAJE_FECHA_SALIDA between '" + fechaSalida.ToString() + "' and '" + fechaMasUno.ToString() + "' ";
             Query qry11 = new Query(sql1);
             object tieneViaje = qry11.ObtenerUnicoCampo();
