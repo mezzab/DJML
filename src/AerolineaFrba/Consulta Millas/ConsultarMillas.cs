@@ -76,24 +76,50 @@ namespace AerolineaFrba.Consulta_Millas
             IDC = qry1.ObtenerUnicoCampo().ToString();
         }
 
+        private bool existeUsuario()
+        {
+            string sql = "SELECT CLIE_DNI FROM DJML.CLIENTES " +
+                         "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" +  tipoDeDocumento.Text + "') " +
+                         "AND CLIE_DNI = '" + textBoxDNI.Text + "'";
+            Query qry = new Query(sql);
+            object ndni = qry.ObtenerUnicoCampo();
+
+            return ndni != null;
+        }
 
         private void botonConsultar_Click(object sender, EventArgs e)
         {
-
-            guardarIdCliente();
-
-
-            if (textBoxDNI.Text != string.Empty && tipoDeDocumento.Text != string.Empty)
+            if (existeUsuario())
             {
-                totalMillas.Text = obtenerMillasEnPeriodo(IDC).ToString();
 
-                string sql1 = "SELECT MILLAS_PASA_ID ID_DE_PASAJE, MILLAS_ENCO_ID ID_DE_ENCOMIENDA, MILLAS_CANTIDAD CANTIDAD_DE_MILLAS, MILLAS_FECHA FECHA FROM DJML.MILLAS WHERE MILLAS_CLIE_ID = '" + IDC + "' AND MILLAS_FECHA BETWEEN DATEADD(yy,-1,GETDATE()) AND GETDATE() ";
+                guardarIdCliente();
 
-                dataGrid1.DataSource = new Query(sql1).ObtenerDataTable();
 
+                if (textBoxDNI.Text != string.Empty && tipoDeDocumento.Text != string.Empty)
+                {
+                    totalMillas.Text = obtenerMillasEnPeriodo(IDC).ToString();
+
+                    string sql1 = "SELECT MILLAS_PASA_ID ID_DE_PASAJE, MILLAS_ENCO_ID ID_DE_ENCOMIENDA, MILLAS_CANTIDAD CANTIDAD_DE_MILLAS, MILLAS_FECHA FECHA, MILLAS_INFORMACION INFORMACION FROM DJML.MILLAS WHERE MILLAS_CLIE_ID = '" + IDC + "' AND MILLAS_FECHA BETWEEN DATEADD(yy,-1,GETDATE()) AND GETDATE() ";
+
+                    dataGrid1.DataSource = new Query(sql1).ObtenerDataTable();
+                    DataGridViewColumn column2 = dataGrid1.Columns[0];
+                    column2.Width = 85;
+                    DataGridViewColumn column1 = dataGrid1.Columns[1];
+                    column1.Width = 85;
+                    DataGridViewColumn column3 = dataGrid1.Columns[2];
+                    column3.Width = 60;
+                    DataGridViewColumn column4 = dataGrid1.Columns[3];
+                    column4.Width = 85;
+                    DataGridViewColumn column5 = dataGrid1.Columns[4];
+                    column5.Width = 450;
+
+                }
+                else
+                    MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
-                MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                  MessageBox.Show("Inserte los datos de un usuario valido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
@@ -110,6 +136,11 @@ namespace AerolineaFrba.Consulta_Millas
         }
 
         private void labelDetalle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void totalMillas_TextChanged(object sender, EventArgs e)
         {
 
         }
