@@ -36,7 +36,7 @@
             // 
             // volver
             // 
-            this.volver.Location = new System.Drawing.Point(102, 116);
+            this.volver.Location = new System.Drawing.Point(103, 133);
             this.volver.Name = "volver";
             this.volver.Size = new System.Drawing.Size(75, 23);
             this.volver.TabIndex = 0;
@@ -82,6 +82,7 @@
             this.Controls.Add(this.guardar);
             this.Controls.Add(this.volver);
             this.Name = "FormCiudades_Modi";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificion de Ciudad";
             this.Load += new System.EventHandler(this.FormCiudades_Modi_Load);
             this.ResumeLayout(false);

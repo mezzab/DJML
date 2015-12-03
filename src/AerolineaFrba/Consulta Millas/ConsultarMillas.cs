@@ -16,16 +16,21 @@ namespace AerolineaFrba.Consulta_Millas
 {
     public partial class ConsultarMillas : Form
     {
+
+        public static string IDC;
+
+
         public ConsultarMillas()
         {
             InitializeComponent();
-            labelTotal.Text = "0";
+
         }
 
         private void ConsultarMillas_Load(object sender, EventArgs e)
         {
             LlenarComboBoxTipoDocumento();
             tipoDeDocumento.DropDownStyle = ComboBoxStyle.DropDownList;
+            dataGrid1.Enabled = false;
         }
 
         public void LlenarComboBoxTipoDocumento()
@@ -44,71 +49,48 @@ namespace AerolineaFrba.Consulta_Millas
 
         private void botonLimpiar_Click(object sender, EventArgs e)
         {
-            labelTotal.Text = "0";
             this.textBoxDNI.Clear();
-            dataGridConsultaMillas.DataSource = null;
-            dataGridConsultaCanjes.DataSource = null;
-
-            dataGridConsultaMillas.Visible = true;
-            emptyMillas.Visible = false;
-
-            dataGridConsultaCanjes.Visible = true;
-            emptyCanjes.Visible = false;
+            dataGrid1.DataSource = null;
+         
+            dataGrid1.Visible = true;
+         
         }
+
+        private int obtenerMillasEnPeriodo(string id_cliente)
+        {
+            string sql2 = "SELECT SUM(M.MILLAS_CANTIDAD)AS MILLAS_CANTIDAD FROM DJML.MILLAS M JOIN DJML.CLIENTES C ON M.MILLAS_CLIE_ID = C.CLIE_ID WHERE C.CLIE_ID = '" + id_cliente + "' AND MILLAS_FECHA BETWEEN DATEADD(yy,-1,GETDATE()) AND GETDATE() GROUP BY C.CLIE_ID ";
+            Query qry2 = new Query(sql2);
+            int millasViejas = Convert.ToInt32(qry2.ObtenerUnicoCampo());
+
+            return millasViejas;
+
+        }
+        
+        private void guardarIdCliente()
+        {
+
+            string sql = "SELECT CLIE_ID FROM DJML.CLIENTES " +
+            "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipoDeDocumento.Text + "')" +
+             " AND CLIE_DNI = '" + textBoxDNI.Text + "'";
+            Query qry1 = new Query(sql);
+            IDC = qry1.ObtenerUnicoCampo().ToString();
+        }
+
 
         private void botonConsultar_Click(object sender, EventArgs e)
         {
-            String dni = textBoxDNI.Text;
-            String tipo = tipoDeDocumento.Text;
-            if (dni != string.Empty && tipo != string.Empty)
+
+            guardarIdCliente();
+
+
+            if (textBoxDNI.Text != string.Empty && tipoDeDocumento.Text != string.Empty)
             {
-                //MILLAS CANT
-                string qryCant = "SELECT  DJML.CALCULAR_MILLAS('" + dni + "', '" + tipo + "')";
-                var resultCant = new Query(qryCant).ObtenerDataTable();
-                labelTotal.Text = resultCant.Rows[0][0].ToString();
+                totalMillas.Text = obtenerMillasEnPeriodo(IDC).ToString();
 
-                //MILLAS GRID
-                string qryMillas = "SELECT COMPRA_FECHA as 'Fecha', COMPRA_CODIGO as 'Compra', '$ ' + cast (COMPRA_MONTO as VARCHAR(100)) as 'Importe', CAST(FLOOR(COMPRA_MONTO / 10) AS int) AS 'Millas'" +
-                                   " FROM DJML.COMPRAS" +
-                                   " JOIN DJML.VIAJES on COMPRA_VIAJE_ID = VIAJE_ID" +
-                                   " JOIN DJML.CLIENTES on COMPRA_CLIE_ID = CLIE_ID" +
-                                   " JOIN DJML.TIPO_DOCUMENTO td on CLIE_TIPO_DOC = ID_TIPO_DOC" +
-                                   " WHERE CLIE_DNI = '" + dni + "'" +
-                                   " AND td.DESCRIPCION = '" + tipo + "'" +
-                                   " AND VIAJE_FECHA_SALIDA < GETDATE()" +
-                                   " ORDER BY 1 ASC;";
+                string sql1 = "SELECT MILLAS_COMPRA_ID ID_DE_COMPRA, MILLAS_CANTIDAD CANTIDAD_DE_MILLAS, MILLAS_FECHA FECHA FROM DJML.MILLAS WHERE MILLAS_CLIE_ID = '" + IDC + "'";
 
-                var resultMillas = new Query(qryMillas).ObtenerDataTable();
-                if (resultMillas.Rows.Count != 0)
-                {
-                    dataGridConsultaMillas.DataSource = resultMillas;
-                }
-                else
-                {
-                    dataGridConsultaMillas.Visible = false;
-                    emptyMillas.Visible = true;
-                }
+                dataGrid1.DataSource = new Query(sql1).ObtenerDataTable();
 
-                //CANJES GRID
-                string qryCanjes = "SELECT CANJ_FECHA_CANJE as 'Fecha', PROD_NOMBRE as 'Producto',	CANJ_CANTIDAD as 'Cantidad', CANJ_MILLAS_USADAS as 'Millas Gastadas'" +
-                                   " FROM DJML.CANJES" +
-                                   " JOIN DJML.PRODUCTO on CANJ_PRODUCTO_ID = PROD_ID" +
-                                   " JOIN DJML.CLIENTES on CANJ_CLIE_ID = CLIE_ID" +
-                                   " JOIN DJML.TIPO_DOCUMENTO td on CLIE_TIPO_DOC = ID_TIPO_DOC" +
-                                   " WHERE CLIE_DNI = '" + dni + "'" +
-                                   " AND td.DESCRIPCION = '" + tipo + "'" +
-                                   " ORDER BY 1 ASC;";
-
-                var resultCanjes = new Query(qryCanjes).ObtenerDataTable();
-                if (resultCanjes.Rows.Count != 0)
-                {
-                    dataGridConsultaCanjes.DataSource = resultCanjes;
-                }
-                else
-                {
-                    dataGridConsultaCanjes.Visible = false;
-                    emptyCanjes.Visible = true;
-                }
             }
             else
                 MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

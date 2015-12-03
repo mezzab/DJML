@@ -31,16 +31,16 @@
             this.components = new System.ComponentModel.Container();
             this.button_volver = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textOrigen = new System.Windows.Forms.TextBox();
+            this.textDestino = new System.Windows.Forms.TextBox();
+            this.button_limpiar = new System.Windows.Forms.Button();
             this.button_buscar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox_servicio = new System.Windows.Forms.ComboBox();
             this.datos = new System.Windows.Forms.DataGridView();
-            this.button_limpiar = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.textDestino = new System.Windows.Forms.TextBox();
-            this.textOrigen = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datos)).BeginInit();
             this.SuspendLayout();
@@ -72,6 +72,30 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rutas Aereas";
+            // 
+            // textOrigen
+            // 
+            this.textOrigen.Location = new System.Drawing.Point(90, 42);
+            this.textOrigen.Name = "textOrigen";
+            this.textOrigen.Size = new System.Drawing.Size(100, 20);
+            this.textOrigen.TabIndex = 24;
+            // 
+            // textDestino
+            // 
+            this.textDestino.Location = new System.Drawing.Point(302, 42);
+            this.textDestino.Name = "textDestino";
+            this.textDestino.Size = new System.Drawing.Size(100, 20);
+            this.textDestino.TabIndex = 23;
+            // 
+            // button_limpiar
+            // 
+            this.button_limpiar.Location = new System.Drawing.Point(348, 81);
+            this.button_limpiar.Name = "button_limpiar";
+            this.button_limpiar.Size = new System.Drawing.Size(75, 23);
+            this.button_limpiar.TabIndex = 22;
+            this.button_limpiar.Text = "Limpiar";
+            this.button_limpiar.UseVisualStyleBackColor = true;
+            this.button_limpiar.Click += new System.EventHandler(this.button_limpiar_Click);
             // 
             // button_buscar
             // 
@@ -126,40 +150,17 @@
             this.datos.Size = new System.Drawing.Size(595, 302);
             this.datos.TabIndex = 0;
             // 
-            // button_limpiar
-            // 
-            this.button_limpiar.Location = new System.Drawing.Point(348, 81);
-            this.button_limpiar.Name = "button_limpiar";
-            this.button_limpiar.Size = new System.Drawing.Size(75, 23);
-            this.button_limpiar.TabIndex = 22;
-            this.button_limpiar.Text = "Limpiar";
-            this.button_limpiar.UseVisualStyleBackColor = true;
-            this.button_limpiar.Click += new System.EventHandler(this.button_limpiar_Click);
-            // 
             // imageList1
             // 
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // textDestino
-            // 
-            this.textDestino.Location = new System.Drawing.Point(302, 42);
-            this.textDestino.Name = "textDestino";
-            this.textDestino.Size = new System.Drawing.Size(100, 20);
-            this.textDestino.TabIndex = 23;
-            // 
-            // textOrigen
-            // 
-            this.textOrigen.Location = new System.Drawing.Point(90, 42);
-            this.textOrigen.Name = "textOrigen";
-            this.textOrigen.Size = new System.Drawing.Size(100, 20);
-            this.textOrigen.TabIndex = 24;
-            // 
             // FormRutaListado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(632, 487);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_volver);

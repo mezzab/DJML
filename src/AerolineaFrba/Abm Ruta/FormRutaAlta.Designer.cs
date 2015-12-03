@@ -187,11 +187,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(334, 410);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_volver);
             this.Name = "FormRutaAlta";
             this.Padding = new System.Windows.Forms.Padding(10);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM RUTA - ALTA";
             this.Load += new System.EventHandler(this.FormRutaAlta_Load);
             this.groupBox1.ResumeLayout(false);

@@ -139,7 +139,9 @@
             this.Controls.Add(this.Filtros);
             this.Controls.Add(this.volver);
             this.Name = "FormCiudades_List";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado de Ciudades";
+            this.Load += new System.EventHandler(this.FormCiudades_List_Load);
             this.resultados.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.Filtros.ResumeLayout(false);

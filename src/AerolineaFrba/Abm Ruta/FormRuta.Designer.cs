@@ -37,7 +37,7 @@
             // 
             // button_alta
             // 
-            this.button_alta.Location = new System.Drawing.Point(34, 36);
+            this.button_alta.Location = new System.Drawing.Point(107, 35);
             this.button_alta.Name = "button_alta";
             this.button_alta.Size = new System.Drawing.Size(75, 23);
             this.button_alta.TabIndex = 0;
@@ -47,7 +47,7 @@
             // 
             // button_baja
             // 
-            this.button_baja.Location = new System.Drawing.Point(186, 35);
+            this.button_baja.Location = new System.Drawing.Point(107, 72);
             this.button_baja.Name = "button_baja";
             this.button_baja.Size = new System.Drawing.Size(75, 23);
             this.button_baja.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             // button_listado
             // 
-            this.button_listado.Location = new System.Drawing.Point(34, 138);
+            this.button_listado.Location = new System.Drawing.Point(107, 151);
             this.button_listado.Name = "button_listado";
             this.button_listado.Size = new System.Drawing.Size(75, 23);
             this.button_listado.TabIndex = 2;
@@ -67,7 +67,7 @@
             // 
             // button_modificacion
             // 
-            this.button_modificacion.Location = new System.Drawing.Point(186, 138);
+            this.button_modificacion.Location = new System.Drawing.Point(107, 111);
             this.button_modificacion.Name = "button_modificacion";
             this.button_modificacion.Size = new System.Drawing.Size(75, 23);
             this.button_modificacion.TabIndex = 3;
@@ -77,7 +77,7 @@
             // 
             // button_volver
             // 
-            this.button_volver.Location = new System.Drawing.Point(109, 197);
+            this.button_volver.Location = new System.Drawing.Point(107, 210);
             this.button_volver.Name = "button_volver";
             this.button_volver.Size = new System.Drawing.Size(75, 23);
             this.button_volver.TabIndex = 4;
@@ -89,6 +89,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Controls.Add(this.button_volver);
             this.Controls.Add(this.button_modificacion);
