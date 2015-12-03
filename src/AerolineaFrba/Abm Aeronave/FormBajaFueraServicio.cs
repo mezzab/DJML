@@ -78,18 +78,12 @@ namespace AerolineaFrba.Abm_Aeronave
         {
          if (comboBoxAeronaves.Text != "")
             {
+                if (finicio.Value >= ffin.Value)
+                   MessageBox.Show("La fecha inicio del periodo de fuera de servicio debe ser menor a la fecha final.");
+                else
+                    
                  inicio = finicio.Text + " 00:00:00.000";
                  fin = ffin.Text + " 00:00:00.000";
-
-                /*
-                TODO: FIJARSE SI LA AERONAVE TIENE RUTAS (O VIAJES, NOSE) PROGRAMADOS ENTRE LAS FECHAS (inicio y fin)
-                    * SI LOS TIENE, SUPLANTAR LA AERONAVE ACTUAL POR OTRA DE LA FLOTA ( DEL MISMO TIPO Y FABRICANTE)
-                        * SI SE DA EL CASO DE QUE NO EXISTE UNA AERONAVE ASI, SE DEBE DAR EL ALTA DE UNA AERONAVE ASI
-                
-                string qry2 = "UPDATE A VIAJES  " 
-                new Query(qry2).Ejecutar();
-                */
-
 
                 //doy la baja logica de fuera de servicio
                 string qry = " update DJML.AERONAVES " +
@@ -111,9 +105,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 string qry3 = " INSERT INTO [DJML].[AERONAVES_POR_PERIODOS] ([AXP_MATRI_AERONAVE],[AXP_ID_PERIODO]) " +
                                 " VALUES('" + MATRICULASERVICIO + "' , " + periodo_id + ")";
                 new Query(qry3).Ejecutar();
-
-
-
+             
 
                 this.Visible = false;
 
