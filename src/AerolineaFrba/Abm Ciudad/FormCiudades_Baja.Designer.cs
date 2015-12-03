@@ -83,6 +83,7 @@
             this.Controls.Add(this.darBaja);
             this.Controls.Add(this.volver);
             this.Name = "FormCiudades_Baja";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Baja de ciudad:";
             this.ResumeLayout(false);
             this.PerformLayout();

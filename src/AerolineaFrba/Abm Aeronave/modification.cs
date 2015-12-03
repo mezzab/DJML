@@ -635,9 +635,20 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 avisarBien("Deben estar todos los datos completados");
             }
+
             if (controlarQueEsteTodoCompleto())
             {
-                modificarDatos();
+                if (BAJA_FUERA_SERVICIO == 1)
+                {
+                    if (f_inicio.Value >= f_fin.Value)
+                        avisar("La fecha inicio del periodo de fuera de servicio debe ser menor a la fecha final.");
+                    else
+                        modificarDatos();
+                }
+                else
+                {
+                    modificarDatos();
+                }
             }
           
 

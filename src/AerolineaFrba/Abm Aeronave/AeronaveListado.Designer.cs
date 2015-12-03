@@ -113,9 +113,9 @@
             // 
             // bnVolver
             // 
-            this.bnVolver.Location = new System.Drawing.Point(140, 334);
+            this.bnVolver.Location = new System.Drawing.Point(32, 323);
             this.bnVolver.Name = "bnVolver";
-            this.bnVolver.Size = new System.Drawing.Size(75, 23);
+            this.bnVolver.Size = new System.Drawing.Size(84, 34);
             this.bnVolver.TabIndex = 8;
             this.bnVolver.Text = "Volver";
             this.bnVolver.UseVisualStyleBackColor = true;
@@ -123,9 +123,9 @@
             // 
             // bnFiltrar
             // 
-            this.bnFiltrar.Location = new System.Drawing.Point(299, 334);
+            this.bnFiltrar.Location = new System.Drawing.Point(424, 323);
             this.bnFiltrar.Name = "bnFiltrar";
-            this.bnFiltrar.Size = new System.Drawing.Size(75, 23);
+            this.bnFiltrar.Size = new System.Drawing.Size(89, 34);
             this.bnFiltrar.TabIndex = 9;
             this.bnFiltrar.Text = "Filtrar";
             this.bnFiltrar.UseVisualStyleBackColor = true;
@@ -151,7 +151,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(590, 369);
+            this.BackColor = System.Drawing.Color.MintCream;
+            this.ClientSize = new System.Drawing.Size(555, 369);
             this.Controls.Add(this.txtFabricante);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.bnFiltrar);
@@ -165,6 +166,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "AeronaveListado";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AeronaveListado";
             ((System.ComponentModel.ISupportInitialize)(this.datos)).EndInit();
             this.ResumeLayout(false);

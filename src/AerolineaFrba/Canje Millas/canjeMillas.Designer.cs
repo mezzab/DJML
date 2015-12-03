@@ -164,11 +164,12 @@
             // 
             // canje
             // 
+            this.canje.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.canje.Location = new System.Drawing.Point(457, 424);
             this.canje.Name = "canje";
             this.canje.Size = new System.Drawing.Size(125, 42);
             this.canje.TabIndex = 27;
-            this.canje.Text = "Canje";
+            this.canje.Text = "Canjear";
             this.canje.UseVisualStyleBackColor = true;
             this.canje.Click += new System.EventHandler(this.canje_Click);
             // 

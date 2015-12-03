@@ -52,16 +52,7 @@ namespace AerolineaFrba.Abm_Aeronave
             if (comboBoxAeronaves.Text != "")
             {
 
-                /*
-                TODO: FIJARSE SI LA AERONAVE TIENE RUTAS (O VIAJES, NOSE) PROGRAMADOS:
-                    * SI LOS TIENE, SUPLANTAR LA AERONAVE ACTUAL POR OTRA DE LA FLOTA ( DEL MISMO TIPO Y FABRICANTE)
-                        * SI SE DA EL CASO DE QUE NO EXISTE UNA AERONAVE ASI, SE DEBE DAR EL ALTA DE UNA AERONAVE ASI
-                
-                string qry2 = "UPDATE A VIAJES  " 
-                new Query(qry2).Ejecutar();
-                */
-
-                   // doy de baja la aeronave
+               // doy de baja la aeronave
                 string qry = " update DJML.AERONAVES " +
                                 " set AERO_BAJA_VIDA_UTIL = 1  " +
                                 " where AERO_MATRICULA = '" + comboBoxAeronaves.Text.ToString() + "'";

@@ -162,7 +162,7 @@ namespace AerolineaFrba.Abm_Aeronave
         private void darDeAltaButacasParaLaNuevaAeronave()
         {
             
-            for (int i = (Convert.ToInt32(txtC_but.Text)+1); i >= 1; i--) // lo hago hasta 1, por que los ids empiezan de 1
+            for (int i = Convert.ToInt32(txtC_but.Text); i >= 1; i--) // lo hago hasta 1, por que los ids empiezan de 1
             {
                 string sql1 = "INSERT INTO [DJML].[BUTACA_AERO] ([BXA_BUTA_ID],[BXA_AERO_MATRICULA] ,[BXA_ESTADO]) VALUES (" + i + ", '" + matricula.Text + "' , 1 ) " ;
               

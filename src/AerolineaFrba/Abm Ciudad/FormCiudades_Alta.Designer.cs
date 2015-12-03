@@ -82,6 +82,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.Volver);
             this.Name = "FormCiudades_Alta";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta de Ciudad";
             this.ResumeLayout(false);
             this.PerformLayout();

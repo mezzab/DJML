@@ -61,7 +61,6 @@
             this.txtUsu.Name = "txtUsu";
             this.txtUsu.Size = new System.Drawing.Size(100, 20);
             this.txtUsu.TabIndex = 2;
-            this.txtUsu.Text = "20000000";
             this.txtUsu.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // txtPassw
@@ -70,7 +69,6 @@
             this.txtPassw.Name = "txtPassw";
             this.txtPassw.Size = new System.Drawing.Size(100, 20);
             this.txtPassw.TabIndex = 3;
-            this.txtPassw.Text = "w23e";
             this.txtPassw.TextChanged += new System.EventHandler(this.txtPassw_TextChanged);
             // 
             // bnSalir

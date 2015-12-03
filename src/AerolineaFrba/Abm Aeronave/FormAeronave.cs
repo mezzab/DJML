@@ -36,7 +36,7 @@ namespace AerolineaFrba.Abm_Aeronave
             // 
             // bnAlta
             // 
-            this.bnAlta.Location = new System.Drawing.Point(101, 44);
+            this.bnAlta.Location = new System.Drawing.Point(101, 34);
             this.bnAlta.Name = "bnAlta";
             this.bnAlta.Size = new System.Drawing.Size(75, 23);
             this.bnAlta.TabIndex = 0;
@@ -46,7 +46,7 @@ namespace AerolineaFrba.Abm_Aeronave
             // 
             // bnBaja
             // 
-            this.bnBaja.Location = new System.Drawing.Point(101, 84);
+            this.bnBaja.Location = new System.Drawing.Point(101, 74);
             this.bnBaja.Name = "bnBaja";
             this.bnBaja.Size = new System.Drawing.Size(75, 23);
             this.bnBaja.TabIndex = 1;
@@ -56,7 +56,7 @@ namespace AerolineaFrba.Abm_Aeronave
             // 
             // bnModif
             // 
-            this.bnModif.Location = new System.Drawing.Point(101, 124);
+            this.bnModif.Location = new System.Drawing.Point(101, 114);
             this.bnModif.Name = "bnModif";
             this.bnModif.Size = new System.Drawing.Size(75, 23);
             this.bnModif.TabIndex = 2;
@@ -66,7 +66,7 @@ namespace AerolineaFrba.Abm_Aeronave
             // 
             // bnVolver
             // 
-            this.bnVolver.Location = new System.Drawing.Point(101, 217);
+            this.bnVolver.Location = new System.Drawing.Point(101, 227);
             this.bnVolver.Name = "bnVolver";
             this.bnVolver.Size = new System.Drawing.Size(75, 23);
             this.bnVolver.TabIndex = 3;
@@ -76,7 +76,7 @@ namespace AerolineaFrba.Abm_Aeronave
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(101, 164);
+            this.button1.Location = new System.Drawing.Point(101, 154);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;

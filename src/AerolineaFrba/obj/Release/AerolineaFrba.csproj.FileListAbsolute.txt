@@ -95,3 +95,7 @@ C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\Aerol
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaFinal.resources
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.modification.resources
 C:\Users\Diego\Documents\Gestion de Datos\Tp Frba Aerolineas\DJML\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.AeronaveListado.resources
+C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.AeronaveListado.resources
+C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaFinal.resources
+C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.modification.resources
+C:\Users\Marc\Desktop\UTN\Gestion de Datos\DJML\src\AerolineaFrba\obj\Release\AerolineaFrba.Abm_Aeronave.FormBajaFueraServicio.resources

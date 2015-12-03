@@ -16,6 +16,7 @@ namespace AerolineaFrba.Abm_Aeronave
     public partial class FormBajaFinal : Form
     {
         public static string matriculaSimilar;
+        public static int id_cancelacion;
 
         public FormBajaFinal()
         {
@@ -52,9 +53,11 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button2_Click(object sender, EventArgs e) //BOTON DAR DE BAJA
         {
-            if (comboBoxTipoBaja.Text == "Cancelar todos los viajes.")
+            if (comboBoxTipoBaja.Text == "Cancelar todos los viajes.")//*******************************************************
             {
                 darDeBaja();
+
+                cancelarPasajesYEncomiendas(); //CANCELA LOS PASAJES Y LIBERA SUS BUTACAS // CANCELA LAS ENCOMIENDAS Y LIBERA SU KG
 
                 MessageBox.Show("Aeronave inhabilitada exitosamente y se cancelaron todos los viajes de la aeronave", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -65,17 +68,12 @@ namespace AerolineaFrba.Abm_Aeronave
                 inicioF = (FormInicioFuncionalidades)this.ActiveMdiChild;
             }
 
-            if (comboBoxTipoBaja.Text == "Suplantar la aeronave por otra.")
+            if (comboBoxTipoBaja.Text == "Suplantar la aeronave por otra.")//******************************************************************
             {
-                //POR EL MOMENTO SUPLANTO SIEMPRE. 
-                if (existeAeronaveSimiliar())
+                if (existeAeronaveSimiliar()) //ACA HACE TODO EN SQL !!!!!
                 {
                     darDeBaja();
-                    avisarBien("Aeronave inhabilitada exitosamente. Se asignaros los viajes a una Aeronave de la misma flota.");
-                    FormInicioFuncionalidades aero = new FormInicioFuncionalidades();
-                    this.Hide();
-                    aero.ShowDialog();
-                    aero = (FormInicioFuncionalidades)this.ActiveMdiChild;
+                    avisarBien("Aeronave inhabilitada exitosamente. Se asignaros los viajes a una Aeronave de la misma flota.");   
                 }
                 
                 else
@@ -86,6 +84,7 @@ namespace AerolineaFrba.Abm_Aeronave
                     asignarButacasA(nuevaMatric);
 
                     darDeBaja();
+                    
                     avisarBien("Aeronave inhabilitada exitosamente. Se creo dio de alta una aeronave del mismo modelo, fabricante, y tipo de servicio (de matricula = "+  nuevaMatric + " ).");
                     FormInicioFuncionalidades aero = new FormInicioFuncionalidades();
                     this.Hide();
@@ -98,9 +97,188 @@ namespace AerolineaFrba.Abm_Aeronave
 
         #region Funciones Para Baja
 
+        public void insertarNuevaCancelacion(int id_compra)
+        {
+
+                DateTime fechaHoy = DateTime.Now;
+                string eugenia = fechaHoy.ToString("yyyy-dd-MM") + " 00:00:00.000";
+
+                string nuevoPasaje = " INSERT INTO [DJML].[CANCELACIONES] ([CANC_FECHA_DEVOLUCION] , [CANC_COMPRA_ID] , [CANC_MOTIVO])" +
+                                     " VALUES ('" + eugenia + "' , '" + id_compra + "' , 'Cancelado por baja de Aeronave' )";
+                Query qry = new Query(nuevoPasaje);
+                qry.pComando = nuevoPasaje;
+                qry.Ejecutar();
+
+                string sqlc = "select MAX(CANC_ID) from djml.CANCELACIONES";
+                Query qryc = new Query(sqlc);
+                id_cancelacion = Convert.ToInt32(qryc.ObtenerUnicoCampo());
+ 
+                //ACA ME IBA A GUARDAR EL ID DE CANCELACION EN UNA PUBLIC STATIC
+        }
+
+        public void cancelarEncomiendas(DataTable tablaDeIds)
+        {
+            int teta = 0;
+
+            foreach (DataRow dtRow in tablaDeIds.Rows)
+            {
+                int id_enco = Convert.ToInt32(dtRow["ID"]);
+                int id_compra_p = Convert.ToInt32(dtRow["IDC"]);
+
+
+                if (teta == 0 || teta != id_compra_p)
+                {
+                    insertarNuevaCancelacion(id_compra_p);
+                    devolverDinero(id_compra_p);
+
+                    teta = id_compra_p;
+                }
+
+                cancelarPasaje(id_enco);
+
+            }
+        }
+
+        public void cancelarPasajes(DataTable tablaDeIds)
+        {
+            int teta = 0;
+               
+            foreach (DataRow dtRow in tablaDeIds.Rows)
+            {
+                int id_pasa = Convert.ToInt32(dtRow["ID"]);
+                int id_compra_e = Convert.ToInt32(dtRow["IDC"]);
+
+
+                if (teta == 0 || teta != id_compra_e)
+                {   
+                    insertarNuevaCancelacion(id_compra_e);
+                    devolverDinero(id_compra_e);
+
+                    teta = id_compra_e;
+                }
+
+                cancelarPasaje(id_pasa);
+
+            }
+
+        }
+
+        private void liberarPesoAeronaveViaje()
+        {
+          
+
+        }
+
+        public void devolverDinero(int id)
+        {
+            string Q = " UPDATE [DJML].[COMPRAS] SET [COMPRA_MONTO] = 0 WHERE COMPRA_ID = '" + id + "'";
+            Query qry = new Query(Q);
+            qry.Ejecutar();
+        }
+
+        private void darBajaAltaButaca(string aeroButacaID, int bajaAlta)
+        {
+            //DAR DE BAJA BUTACA
+            // MessageBox.Show("se ha dado de baja la butaca de id= " + aeroButacaID);
+
+            string qry = " update DJML.BUTACA_AERO " +
+                        " set BXA_ESTADO = " + bajaAlta + "" +
+                        " where BXA_ID = '" + aeroButacaID + "'";
+            new Query(qry).Ejecutar();
+
+        }
+
+        public void cancelarPasaje(int id)
+        {
+            string Q = " UPDATE [DJML].[PASAJES] SET [CANCELACION_ID] = " + id_cancelacion + " WHERE PASA_ID = '" + id + "'";
+            Query qry = new Query(Q);
+            qry.Ejecutar();
+        
+        }
+
+        public void cancelarEncomienda(string id)
+        {
+            string Q = " UPDATE [DJML].[ENCOMIENDAS] SET [CANCELACION_ID] = " + id_cancelacion + " WHERE ENCO_ID = '" + id + "'";
+            Query qry = new Query(Q);
+            qry.Ejecutar();
+        }
+
+        public void cancelarPasajesYEncomiendas()
+        {
+            
+            if (FormAeronaveBaja.tipo == "VIDA")//**********************************************************
+            {
+
+                //PASAJES------------------------------------------------------------------------------------------
+
+                string qry = "select p.pasa_id as ID, c.compra_id as IDC from djml.pasajes p " +
+                            "join djml.viajes v on p.pasa_viaje_id = v.viaje_id " +
+                            "join djml.compras c on p.pasa_compra_id = c.compra_id " +
+                            "where v.viaje_aero_id = '" + FormBajaCompletoVidaUtil.MATRICULAVIDA+ "' " +
+                             "and p.pasa_compra_id is not null order by 2 ";
+                
+                
+                DataTable pasajesVida = new Query(qry).ObtenerDataTable();
+
+                cancelarPasajes(pasajesVida);
+
+
+                //ENCOMIENDAS----------------------------------------------------------------------------------
+
+                string qry2 = "select e.enco_id as ID, c.compra_id as IDC from djml.encomiendas e " +
+                                 "   join djml.viajes v on e.enco_viaje_id = v.viaje_id " +
+                                  "  join djml.compras c on e.enco_compra_id = c.compra_id " +
+                                   " where v.viaje_aero_id = '" + FormBajaCompletoVidaUtil.MATRICULAVIDA + "' " +
+                                   " and e.enco_compra_id is not null " +
+                                   " order by 2 "; 
+
+                DataTable encomiendasVida = new Query(qry2).ObtenerDataTable();
+
+                cancelarEncomiendas(encomiendasVida);
+               
+            }
+
+            if (FormAeronaveBaja.tipo == "SERVICIO")///***********************************************************
+            {
+                //PASAJES----------------------------------------------------------------------------------
+
+                string qry = "select p.pasa_id as ID, c.compra_id as IDC from djml.pasajes p " +
+                            "join djml.viajes v on p.pasa_viaje_id = v.viaje_id " +
+                            "join djml.compras c on p.pasa_compra_id = c.compra_id " +
+                            "where v.viaje_aero_id = '" + FormBajaFueraServicio.MATRICULASERVICIO + "' " +
+                            "and v.viaje_fecha_salida >= '" + FormBajaFueraServicio.inicio + "'" +
+                            "and v.viaje_fecha_salida <= '" + FormBajaFueraServicio.fin + "'" +
+                           // "and v.viaje_fecha_llegada_estimada <=  '" + FormBajaFueraServicio.inicio + "'" +
+                            "and p.pasa_compra_id is not null order by 2 ";
+
+                DataTable pasajesServicio = new Query(qry).ObtenerDataTable();
+
+                cancelarPasajes(pasajesServicio);
+
+
+                //ENCOMIENDAS----------------------------------------------------------------------------
+
+                string qry2 = "select e.enco_id as ID, c.compra_id as IDC from djml.encomiendas e " +
+                                 "   join djml.viajes v on e.enco_viaje_id = v.viaje_id " +
+                                  "  join djml.compras c on e.enco_compra_id = c.compra_id " +
+                                   " where v.viaje_aero_id = '" + FormBajaFueraServicio.MATRICULASERVICIO + "' " +
+                                   " and v.viaje_fecha_salida >= '" + FormBajaFueraServicio.inicio + "'" +
+                                   " and v.viaje_fecha_salida <= '" + FormBajaFueraServicio.fin + "'" +
+                           //      " and v.viaje_fecha_llegada_estimada <=  '" + FormBajaFueraServicio.inicio + "'" +
+                                   " and e.enco_compra_id is not null " +
+                                   " order by 2 "; 
+
+
+                DataTable encomiendasServicio = new Query(qry2).ObtenerDataTable();
+
+                cancelarEncomiendas(encomiendasServicio);
+
+            }
+        }
+
         public void darDeBaja()
         {
-             if (FormAeronaveBaja.tipo == "VIDA")
+             if (FormAeronaveBaja.tipo == "VIDA")//************************************************************
                 {
                     DateTime fechaHoy = DateTime.Now;
                     string aux = fechaHoy.ToString("yyyy-dd-MM") + " 00:00:00.000";
@@ -110,7 +288,7 @@ namespace AerolineaFrba.Abm_Aeronave
                     qry.Ejecutar();
                 }
                 
-                if (FormAeronaveBaja.tipo == "SERVICIO")
+                if (FormAeronaveBaja.tipo == "SERVICIO")//**********************************************************
                 {
                     string inse = "INSERT INTO [DJML].[PERIODOS_DE_INACTIVIDAD]([PERI_FECHA_INICIO],[PERI_FECHA_FIN]) " +
                                     " VALUES ('" + FormBajaFueraServicio.inicio + "' , '" + FormBajaFueraServicio.fin + "') ";

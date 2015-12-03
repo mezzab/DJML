@@ -314,6 +314,9 @@
     <EmbeddedResource Include="Abm Aeronave\FormBajaFinal.resx">
       <DependentUpon>FormBajaFinal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\FormBajaFueraServicio.resx">
+      <DependentUpon>FormBajaFueraServicio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Aeronave\modification.resx">
       <DependentUpon>modification.cs</DependentUpon>
     </EmbeddedResource>

@@ -161,6 +161,7 @@
             this.Controls.Add(this.fechaLlegada);
             this.Controls.Add(this.label1);
             this.Name = "FormRegistroLlegada";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro Llegada";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.datos)).EndInit();

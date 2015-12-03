@@ -424,9 +424,10 @@ namespace AerolineaFrba.Compra
 
             string sql1 = "select viaje_id from djml.pasajes p, djml.viajes v, djml.CLIENTES c " +
                             "where v.VIAJE_ID = p.PASA_VIAJE_ID " +
-                            "and p.PASA_CLIE_ID =  c.CLIE_ID " +
+                            " and p.PASA_CLIE_ID =  c.CLIE_ID " +
                             " and c.clie_dni = '" + dniNum.Text + "' " +
                             " and c.clie_tipo_doc = '" + aux + "' " +
+                            " AND p.cancelacion_id is null " +
                             " and v.VIAJE_FECHA_SALIDA between '" + fechaSalida.ToString() + "' and '" + fechaMasUno.ToString() + "' ";
             Query qry11 = new Query(sql1);
             object tieneViaje = qry11.ObtenerUnicoCampo();
@@ -445,7 +446,7 @@ namespace AerolineaFrba.Compra
 
             if (esNuevo)
             {
-                      
+                
                 cargarNuevoCliente(); //INSERT DE LOS CAMPOS
                 //  avisar("Se guardo el nuevo cliente.");
                   
@@ -615,9 +616,8 @@ namespace AerolineaFrba.Compra
 
         private void cargarNuevoCliente()
         {
-           
 
-
+                   
                 string aux = "1";
                 if (tipo.Text.ToString() == "DNI")
                 { aux = "1"; }
@@ -631,6 +631,9 @@ namespace AerolineaFrba.Compra
                 Query qry = new Query(sql);
                 //qry.pComando = sql;
                 qry.Ejecutar();
+
+                esNuevo = false;
+
 
             
             
@@ -904,6 +907,8 @@ namespace AerolineaFrba.Compra
             dniNum.Text = Regex.Replace(dniNum.Text, @"[^\d]", "");
             //OBLIGA A QUE INTRODUZCA NUMEROS
 
+            groupBox1.Enabled = false;
+
             numero.Text = dniNum.Text;
         }
 
@@ -951,7 +956,8 @@ namespace AerolineaFrba.Compra
         private void button1_Click(object sender, EventArgs e)
         {
                 //TODO: controlar que se haya cargado aunquesea un pasaje o una encomienda
-
+                FormCompra1.vuelve = false;
+              
                 FormFormaDePago siguiente = new FormFormaDePago();
                 siguiente.StartPosition = FormStartPosition.CenterScreen;
                 this.Hide();
@@ -1042,7 +1048,7 @@ namespace AerolineaFrba.Compra
                         {
                             //avisar("Todavia no anda el Insert para un cliente nuevo");
                             cargarNuevoCliente(); //INSERT DE LOS CAMPOS
-
+                           
                         }
                         else if(esNuevo==false)
                         {
@@ -1189,7 +1195,7 @@ namespace AerolineaFrba.Compra
 
             string sql = "SELECT CLIE_ID FROM DJML.CLIENTES " +
             "WHERE CLIE_TIPO_DOC = (SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO WHERE DESCRIPCION = '" + tipo.Text + "')" +
-             " AND CLIE_DNI = '" + numero.Text +"'";
+            " AND CLIE_DNI = '" + numero.Text +"'";
             Query qry1 = new Query(sql);
             IDC = qry1.ObtenerUnicoCampo().ToString();
 
