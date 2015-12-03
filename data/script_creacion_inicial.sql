@@ -793,12 +793,37 @@ CREATE TABLE DJML.PRODUCTO (
 END
 GO
 
+PRINT 'SPs CREADOS...'
+GO
 
+--============================================================
+						--EJECUTAR PROCEDURES
+--============================================================
+
+PRINT 'EJECUTAR SP DE CREACION...'
+GO
+
+EXEC DJML.CREAR_ROLES
+EXEC DJML.CREAR_FUNCIONALIDADES
+EXEC DJML.CREAR_USUARIOS
+EXEC DJML.CREAR_SERVICIOS
+EXEC DJML.CREAR_CIUDADES
+EXEC DJML.CREAR_RUTAS
+EXEC DJML.CREAR_AERONAVES
+EXEC DJML.CREAR_VIAJES
+EXEC DJML.CREAR_CLIENTES
+EXEC DJML.CREAR_COMPRAS
+EXEC DJML.CREAR_PASAJENCOMIENDA
+EXEC DJML.CREAR_CANJES
+
+PRINT 'LOS SP DE CREACION SE EJECUTARON CORRECTAMENTE'
+GO
 
 --============================================================
 			--VIEW
 --============================================================
-
+PRINT 'CREAR VISTA v_rutas ...'
+GO
 
 CREATE VIEW DJML.v_rutas
 	AS SELECT	c1.CIUD_DETALLE as 'Ciudad Origen'
@@ -816,32 +841,17 @@ CREATE VIEW DJML.v_rutas
 		JOIN DJML.CIUDADES c2 ON c2.CIUD_ID = t.TRAMO_CIUDAD_DESTINO
 		WHERE RUTA_IS_ACTIVE = 1
 
-GO	
-PRINT 'SE CREO LA VISTA v_rutas CORRECTAMENTE'
+GO
 
-create function DJML.CALCULAR_MILLAS(@dni int, @tipo varchar(10))
-returns int
-as
-begin
-	declare @millas_parcial int;
-	
-	SELECT @millas_parcial = CAST(ISNULL(SUM(FLOOR(COMPRA_MONTO / 10)),0) AS int)
-	FROM DJML.COMPRAS
-	JOIN DJML.VIAJES on COMPRA_VIAJE_ID = VIAJE_ID
-	JOIN DJML.CLIENTES on COMPRA_CLIE_ID = CLIE_ID
-	JOIN DJML.TIPO_DOCUMENTO td on CLIE_TIPO_DOC = ID_TIPO_DOC
-	WHERE CLIE_DNI = @dni
-	AND td.DESCRIPCION = @tipo
-	AND COMPRA_FECHA BETWEEN DATEADD(yy,-1,GETDATE()) AND GETDATE()
-	AND VIAJE_FECHA_SALIDA < GETDATE()	
-	
-	return @millas_parcial
-end 
+PRINT 'SE CREO LA VISTA v_rutas CORRECTAMENTE'
 GO
 
 --------------------------------------------			
 --Funcion para calcular diferencia de fechas
 --------------------------------------------
+PRINT 'CREAR FUNCION calculoFecha ...'
+GO
+
 create function  djml.calculoFecha(@fechaSalida smalldatetime, @fechaLlegadaEstimada smalldatetime)
 returns int 
 as
@@ -853,94 +863,106 @@ begin
 end
 GO
 
-
-
-
-
+PRINT 'SE CREO LA FUNCION calculoFecha CORRECTAMENTE'
+GO
 
 --------------------------------------------------------------------------
 --Procedimiento Buscar Aeronaves para remplazar similar a la dada de baja
 --------------------------------------------------------------------------
-
+PRINT 'CREAR PROCEDURE Proc_Aeronaves ...'
+GO
 
 create procedure djml.Proc_Aeronaves @idaeronave nvarchar(7), @resultado int output
 AS
+	BEGIN
 
-declare @viajeId int 
-declare @aeroModelo nvarchar(50)
-declare @aeroFabricante int
-declare @aeroServicioId int
-declare @idaeronavenueva nvarchar(7)
-declare @habemusaeronave int, @fecha_llegada_nueva as datetime, @fecha_salida_nueva as datetime
-declare @fecha_llegada_vieja as datetime , @fecha_salida_vieja as datetime
+		declare @viajeId int 
+		declare @aeroModelo nvarchar(50)
+		declare @aeroFabricante int
+		declare @aeroServicioId int
+		declare @idaeronavenueva nvarchar(7)
+		declare @habemusaeronave int, @fecha_llegada_nueva as datetime, @fecha_salida_nueva as datetime
+		declare @fecha_llegada_vieja as datetime , @fecha_salida_vieja as datetime
 
-select @aeromodelo = a1.aero_modelo, @aerofabricante = a1.aero_fabricante, 
-@aeroservicioid = a1.aero_servicio_id  from djml.aeronaves a1
-where a1.aero_matricula = @idaeronave
+		select @aeromodelo = a1.aero_modelo, @aerofabricante = a1.aero_fabricante, 
+		@aeroservicioid = a1.aero_servicio_id  from djml.aeronaves a1
+		where a1.aero_matricula = @idaeronave
 
-declare cAeroNaves cursor for 
-select a.aero_matricula from djml.aeronaves a
-where a.aero_modelo = @aeroModelo and a.aero_fabricante = @aeroFabricante 
-and a.aero_servicio_id = @aeroServicioId and a.AERO_BAJA_FUERA_SERVICIO = 0
-and a.AERO_BAJA_VIDA_UTIL = 0
-	open cAeroNaves
-	fetch cAeroNaves into @idaeronavenueva
-	
-	while(@@FETCH_STATUS = 0)
-	begin
-		set @habemusaeronave = 1
-		
-		declare cViajesAeroNaveNueva cursor for
-		select viaje_fecha_salida,viaje_fecha_llegada_estimada from djml.viajes where viaje_aero_id = @idaeronavenueva
-		
-		open cViajesAeroNaveNueva
-		fetch cViajesAeroNaveNueva into @fecha_salida_nueva,@fecha_llegada_nueva
-		
-		while(@@FETCH_STATUS = 0)
-		begin
-			declare cViajesAeroNaveVieja cursor for
-			select viaje_fecha_salida,viaje_fecha_llegada_estimada from djml.viajes where viaje_aero_id = @idaeronave
-			open cViajesAeroNaveVieja
-			fetch cViajesAeroNaveVieja into @fecha_salida_vieja,@fecha_llegada_vieja
+		declare cAeroNaves cursor for 
+			select a.aero_matricula from djml.aeronaves a
+			where a.aero_modelo = @aeroModelo and a.aero_fabricante = @aeroFabricante 
+			and a.aero_servicio_id = @aeroServicioId and a.AERO_BAJA_FUERA_SERVICIO = 0
+			and a.AERO_BAJA_VIDA_UTIL = 0
 			
-			while(@@FETCH_STATUS = 0)
+		open cAeroNaves
+		fetch cAeroNaves into @idaeronavenueva
+	
+		while(@@FETCH_STATUS = 0)
 			begin
-				if not (@fecha_salida_vieja < @fecha_salida_nueva and @fecha_salida_vieja > @fecha_llegada_nueva)
-					set @habemusaeronave = 0
-				fetch cViajesAeroNaveVieja into @fecha_salida_vieja,@fecha_llegada_vieja
+				set @habemusaeronave = 1
+				
+				declare cViajesAeroNaveNueva cursor for
+				select viaje_fecha_salida,viaje_fecha_llegada_estimada from djml.viajes where viaje_aero_id = @idaeronavenueva
+				
+				open cViajesAeroNaveNueva
+				fetch cViajesAeroNaveNueva into @fecha_salida_nueva,@fecha_llegada_nueva
+		
+				while(@@FETCH_STATUS = 0)
+					begin
+						declare cViajesAeroNaveVieja cursor for
+						select viaje_fecha_salida,viaje_fecha_llegada_estimada from djml.viajes where viaje_aero_id = @idaeronave
+						
+						open cViajesAeroNaveVieja
+						fetch cViajesAeroNaveVieja into @fecha_salida_vieja,@fecha_llegada_vieja
+			
+						while(@@FETCH_STATUS = 0)
+							begin
+								if not (@fecha_salida_vieja < @fecha_salida_nueva and @fecha_salida_vieja > @fecha_llegada_nueva)
+									set @habemusaeronave = 0
+								fetch cViajesAeroNaveVieja into @fecha_salida_vieja,@fecha_llegada_vieja
+							end
+			
+						close cViajesAeroNaveVieja
+						deallocate cViajesAeroNaveVieja
+			
+						fetch cViajesAeroNaveNueva into @fecha_salida_nueva,@fecha_llegada_nueva
+					end
+					
+				close cViajesAeroNaveNueva
+				deallocate cViajesAeroNaveNueva
+				
+				if @habemusaeronave = 0
+					fetch cAeroNaves into @idAeroNaveNueva
+				else
+					break
 			end
 			
-			close cViajesAeroNaveVieja
-			deallocate cViajesAeroNaveVieja
-			
-			fetch cViajesAeroNaveNueva into @fecha_salida_nueva,@fecha_llegada_nueva
-		end
-		close cViajesAeroNaveNueva
-		deallocate cViajesAeroNaveNueva
-		if @habemusaeronave = 0
-			fetch cAeroNaves into @idAeroNaveNueva
+		close cAeroNaves
+		deallocate cAeroNaves
+	
+		if @idaeronavenueva is not null and @habemusaeronave = 1
+			begin
+				update djml.viajes set VIAJE_AERO_ID = @idaeronavenueva where VIAJE_AERO_ID = @idaeronave
+				update djml.butaca_aero set BXA_AERO_MATRICULA = @idaeronavenueva where BXA_AERO_MATRICULA = @idaeronave
+				set @resultado = 1;
+			end 
 		else
-			break
-	end
-	close cAeroNaves
-	deallocate cAeroNaves
+			set @resultado = 0;
 	
-if @idaeronavenueva is not null and @habemusaeronave = 1
-begin
-	update djml.viajes set VIAJE_AERO_ID = @idaeronavenueva where VIAJE_AERO_ID = @idaeronave
-	update djml.butaca_aero set BXA_AERO_MATRICULA = @idaeronavenueva where BXA_AERO_MATRICULA = @idaeronave
-	set @resultado = 1;
-end 
-else
-	set @resultado = 0;
-	
-select @resultado
+		select @resultado
 
-end
+	END
+GO
+
+PRINT 'SE CREO EL PROCEDURE Proc_Aeronaves CORRECTAMENTE'
+GO
 
 ----------------------------------------------------------------------------
 --TRIGGER DE INSERCION DE MILLAS UNA VEZ REGISTRADA LA LLEGADA DEL VIAJE
 -----------------------------------------------------------------------------
+
+PRINT 'CREAR EL TRIGGER Insertar_Millas ...'
+GO
 
 create trigger Insertar_Millas
 on djml.Registro_destino 
@@ -965,30 +987,18 @@ begin
 	and e.ENCO_COMPRA_ID is not null
 end
 
+PRINT 'SE CREO EL TRIGGER Insertar_Millas CORRECTAMENTE'
+GO
 
---============================================================
-						--EJECUTAR PROCEDURES
---============================================================
-
-EXEC DJML.CREAR_ROLES
-EXEC DJML.CREAR_FUNCIONALIDADES
-EXEC DJML.CREAR_USUARIOS
-EXEC DJML.CREAR_SERVICIOS
-EXEC DJML.CREAR_CIUDADES
-EXEC DJML.CREAR_RUTAS
-EXEC DJML.CREAR_AERONAVES
-EXEC DJML.CREAR_VIAJES
-EXEC DJML.CREAR_CLIENTES
-EXEC DJML.CREAR_COMPRAS
-EXEC DJML.CREAR_PASAJENCOMIENDA
-EXEC DJML.CREAR_CANJES
-
+PRINT 'LA MIGRACION TERMINO SATISFACTORIAMENTE, GRACIAS POR ESPERAR'
+GO
 
 
 
 -----------------------------------------------------------
 ---DROPS 
 -----------------------------------------------------------
+/*
 DROP TABLE DJML.CANJES
 DROP TABLE DJML.PRODUCTO
 DROP TABLE DJML.MILLAS
@@ -1022,9 +1032,9 @@ DROP TABLE DJML.FUNCIONALIDAD
 DROP TABLE DJML.ROLES
 
 drop view DJML.v_rutas
-drop function DJML.CALCULAR_MILLAS
 drop function djml.calculoFecha
 drop trigger djml.Insertar_Millas
+drop procedure djml.Proc_Aeronaves
 
 
 DROP PROCEDURE DJML.CREAR_AERONAVES
@@ -1042,3 +1052,4 @@ DROP PROCEDURE DJML.CREAR_CANJES
 
 
 DROP SCHEMA DJML
+*/
