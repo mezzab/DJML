@@ -53,7 +53,7 @@ namespace AerolineaFrba.Abm_Aeronave
             string fabricante = txtFabricante.Text;
 
 
-            string qry = "SELECT * FROM djml.AERONAVES A JOIN DJML.FABRICANTES F on a.AERO_FABRICANTE = f.ID_FABRICANTE JOIN DJML.SERVICIOS S ON a.AERO_SERVICIO_ID = s.SERV_ID WHERE (a.AERO_MODELO like '" + txtModelo + "' OR '" + txtModelo + "' like '') AND (a.AERO_MATRICULA like '" + txtMatricula + "' OR '" + txtMatricula + "' like '') AND (f.DESCRIPCION like '" + txtFabricante + "' OR '" + txtFabricante + "' like '') AND (s.SERV_DESCRIPCION like '" + txtServicio + "' OR '" + txtServicio + "' like '')";
+            string qry = "SELECT a.aero_matricula, a.aero_modelo, f.descripcion, a.aero_kilos_disponibles,s.serv_descripcion, a.aero_baja_fuera_servicio, a.aero_baja_vida_util, a.aero_fecha_baja_def, a.aero_fecha_alta   FROM djml.AERONAVES A JOIN DJML.FABRICANTES F on a.AERO_FABRICANTE = f.ID_FABRICANTE JOIN DJML.SERVICIOS S ON a.AERO_SERVICIO_ID = s.SERV_ID WHERE (a.AERO_MODELO like '" + modelo + "' OR '" + modelo + "' like '') AND (a.AERO_MATRICULA like '" + matricula + "' OR '" + matricula + "' like '') AND (f.DESCRIPCION like '" + fabricante + "' OR '" + fabricante + "' like '') AND (s.SERV_DESCRIPCION like '" + servicio + "' OR '" + servicio + "' like '')";
 
             datos.DataSource = new Query(qry).ObtenerDataTable();
 
