@@ -83,11 +83,11 @@
             this.labelDetalle.AutoSize = true;
             this.labelDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold);
             this.labelDetalle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.labelDetalle.Location = new System.Drawing.Point(315, 341);
+            this.labelDetalle.Location = new System.Drawing.Point(182, 341);
             this.labelDetalle.Name = "labelDetalle";
-            this.labelDetalle.Size = new System.Drawing.Size(55, 17);
+            this.labelDetalle.Size = new System.Drawing.Size(245, 17);
             this.labelDetalle.TabIndex = 5;
-            this.labelDetalle.Text = "Total :";
+            this.labelDetalle.Text = "Total de millas en el ultimo año :";
             this.labelDetalle.Click += new System.EventHandler(this.labelDetalle_Click);
             // 
             // botonVolver
@@ -134,7 +134,7 @@
             this.totalMillas.BackColor = System.Drawing.Color.MintCream;
             this.totalMillas.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.totalMillas.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.totalMillas.Location = new System.Drawing.Point(376, 342);
+            this.totalMillas.Location = new System.Drawing.Point(433, 342);
             this.totalMillas.Name = "totalMillas";
             this.totalMillas.Size = new System.Drawing.Size(110, 16);
             this.totalMillas.TabIndex = 13;

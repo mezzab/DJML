@@ -738,12 +738,15 @@ BEGIN
 						--CREAR TABLA MILLAS
 --============================================================
 
+
 CREATE TABLE DJML.MILLAS(
 	MILLAS_ID INT IDENTITY(1,1) PRIMARY KEY,
 	MILLAS_CLIE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.CLIENTES(CLIE_ID),
     MILLAS_INFORMACION NVARCHAR(100),
-    MILLAS_COMPRA_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.COMPRAS(COMPRA_ID),
-    MILLAS_CANTIDAD INT NOT NULL,
+   -- MILLAS_COMPRA_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.COMPRAS(COMPRA_ID),
+     MILLAS_PASA_ID INT  FOREIGN KEY REFERENCES DJML.PASAJES(PASA_ID),
+    MILLAS_ENCO_ID INT  FOREIGN KEY REFERENCES DJML.ENCOMIENDAS(ENCO_ID),
+   	MILLAS_CANTIDAD INT NOT NULL,
     MILLAS_FECHA SMALLDATETIME NOT NULL)
 
 	PRINT 'SE CREO CORRECTAMENTE LA TABLA MILLAS'
@@ -970,22 +973,23 @@ on djml.Registro_destino
 after insert
 as
 
-if( select p.pasa_compra_id from djml.REGISTRO_DESTINO rd join djml.PASAJES p on rd.RD_VIAJE_ID = p.PASA_VIAJE_ID) <> NULL 
+--if( select p.pasa_compra_id from djml.REGISTRO_DESTINO rd join djml.PASAJES p on rd.RD_VIAJE_ID = p.PASA_VIAJE_ID) != NULL 
 begin
-	INSERT INTO DJML.MILLAS (millas_clie_id, millas_informacion, millas_compra_id, millas_cantidad, millas_fecha)
-	SELECT p.pasa_clie_id, null, p.pasa_compra_id,(round(p.pasa_precio /10,0)),rd.rd_fecha_llegada from djml.registro_destino rd
+	INSERT INTO DJML.MILLAS (millas_clie_id, millas_informacion, millas_enco_id, millas_pasa_id, millas_cantidad, millas_fecha)
+	SELECT p.pasa_clie_id, null, null, p.pasa_id,(round(p.pasa_precio /10,0)),rd.rd_fecha_llegada from djml.registro_destino rd
 	join djml.pasajes p on rd.rd_viaje_id = p.pasa_viaje_id
 	where p.cancelacion_id is null 
-	and p.PASA_COMPRA_ID is not null
+		and p.PASA_CLIE_ID in (select c.compra_clie_id from djml.COMPRAS c where COMPRA_VIAJE_ID = rd.RD_VIAJE_ID)
 end
 
-if(select e.ENCO_COMPRA_ID from djml.REGISTRO_DESTINO rd join djml.ENCOMIENDAS e on rd.RD_VIAJE_ID = e.enco_VIAJE_ID) <> NULL 
+--if((select e.ENCO_COMPRA_ID from djml.REGISTRO_DESTINO rd join djml.ENCOMIENDAS e on rd.RD_VIAJE_ID = e.enco_VIAJE_ID) != NULL )
 begin
-	INSERT INTO DJML.MILLAS (millas_clie_id, millas_informacion, millas_compra_id, millas_cantidad, millas_fecha)
-	SELECT e.enco_clie_id, null, e.enco_compra_id,(round(e.enco_precio /10,0)),rd.rd_fecha_llegada from djml.registro_destino rd
+	INSERT INTO DJML.MILLAS (millas_clie_id, millas_informacion, millas_enco_id, millas_pasa_id, millas_cantidad, millas_fecha)
+	SELECT e.enco_clie_id, null, e.enco_id, null,(round(e.enco_precio /10,0)),rd.rd_fecha_llegada from djml.registro_destino rd
 	join djml.encomiendas e on rd.rd_viaje_id = e.enco_viaje_id
 	where e.cancelacion_id is null
-	and e.ENCO_COMPRA_ID is not null
+	and e.ENCO_CLIE_ID in (select c.compra_clie_id from djml.COMPRAS c where COMPRA_VIAJE_ID = rd.RD_VIAJE_ID)
+
 end
 
 PRINT 'SE CREO EL TRIGGER Insertar_Millas CORRECTAMENTE'

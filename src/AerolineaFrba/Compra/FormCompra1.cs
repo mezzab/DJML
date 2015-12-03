@@ -128,8 +128,9 @@ namespace AerolineaFrba.Compra
         {   bool error1 = date.Value.Date < DateTime.Now.Date; 
             bool error2 = comboBox1.SelectedValue == comboBox2.SelectedValue;
             if (error1)
-                MessageBox.Show("Fecha incorrecta");
-            else if (error2)
+               MessageBox.Show("Fecha incorrecta");
+             else 
+                if (error2)
                 MessageBox.Show("Las ciudades origen y destino no pueden coincidir");
             else
             {
@@ -152,6 +153,7 @@ namespace AerolineaFrba.Compra
                             " and YEAR(v.VIAJE_FECHA_SALIDA) = YEAR('" + fecha_salida + "') " +
                             " AND MONTH(v.VIAJE_FECHA_SALIDA) = MONTH('" + fecha_salida + "') " +
                             " AND DAY(v.VIAJE_FECHA_SALIDA) = DAY('" + fecha_salida + "') " +
+                            " AND V.VIAJE_ID NOT IN (SELECT RD_VIAJE_ID FROM DJML.REGISTRO_DESTINO) " +
                             " group by v.viaje_id, s.SERV_DESCRIPCION, a.AERO_KILOS_DISPONIBLES ";
 
 

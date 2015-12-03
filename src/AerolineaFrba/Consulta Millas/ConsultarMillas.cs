@@ -58,7 +58,7 @@ namespace AerolineaFrba.Consulta_Millas
 
         private int obtenerMillasEnPeriodo(string id_cliente)
         {
-            string sql2 = "SELECT SUM(M.MILLAS_CANTIDAD)AS MILLAS_CANTIDAD FROM DJML.MILLAS M JOIN DJML.CLIENTES C ON M.MILLAS_CLIE_ID = C.CLIE_ID WHERE C.CLIE_ID = '" + id_cliente + "' AND MILLAS_FECHA BETWEEN DATEADD(yy,-1,GETDATE()) AND GETDATE() GROUP BY C.CLIE_ID ";
+            string sql2 = "SELECT SUM(M.MILLAS_CANTIDAD)AS CANTIDAD_DE_MILLAS FROM DJML.MILLAS M JOIN DJML.CLIENTES C ON M.MILLAS_CLIE_ID = C.CLIE_ID WHERE C.CLIE_ID = '" + id_cliente + "' AND MILLAS_FECHA BETWEEN DATEADD(yy,-1,GETDATE()) AND GETDATE() GROUP BY C.CLIE_ID ";
             Query qry2 = new Query(sql2);
             int millasViejas = Convert.ToInt32(qry2.ObtenerUnicoCampo());
 
@@ -87,7 +87,7 @@ namespace AerolineaFrba.Consulta_Millas
             {
                 totalMillas.Text = obtenerMillasEnPeriodo(IDC).ToString();
 
-                string sql1 = "SELECT MILLAS_COMPRA_ID ID_DE_COMPRA, MILLAS_CANTIDAD CANTIDAD_DE_MILLAS, MILLAS_FECHA FECHA FROM DJML.MILLAS WHERE MILLAS_CLIE_ID = '" + IDC + "'";
+                string sql1 = "SELECT MILLAS_PASA_ID ID_DE_PASAJE, MILLAS_ENCO_ID ID_DE_ENCOMIENDA, MILLAS_CANTIDAD CANTIDAD_DE_MILLAS, MILLAS_FECHA FECHA FROM DJML.MILLAS WHERE MILLAS_CLIE_ID = '" + IDC + "' AND MILLAS_FECHA BETWEEN DATEADD(yy,-1,GETDATE()) AND GETDATE() ";
 
                 dataGrid1.DataSource = new Query(sql1).ObtenerDataTable();
 

@@ -391,6 +391,8 @@ namespace AerolineaFrba.Compra
                 tipo.SelectedIndex = -1;
                 combo.SelectedIndex = -1;
 
+                button3.Enabled = false;
+
             }
 
             else if (controlarQueEsteTodoCompletado() == false)
@@ -723,6 +725,9 @@ namespace AerolineaFrba.Compra
 
             dniNum.Enabled = false;
             tipo.Enabled = false;
+            button3.Enabled = true;
+            BuscarPorCliente.Enabled = false;
+            
         }
 
         //AUXILIAR DE AUTOCOMPLETAR DATOS
@@ -798,7 +803,7 @@ namespace AerolineaFrba.Compra
 
         private void FormCompra3_Load(object sender, EventArgs e)
         {
-            
+            button3.Enabled = false;
             t.ForeColor = Color.Red;
             t1.ForeColor = Color.Red;
 
@@ -1013,6 +1018,10 @@ namespace AerolineaFrba.Compra
                 groupBox4.Enabled = false;
                 t.ForeColor = Color.Black;
                 t1.ForeColor = Color.Black;
+                dniNum.Enabled = true;
+                tipo.Enabled = true;
+                button3.Enabled = false;
+                BuscarPorCliente.Enabled = true;
 
             }
             if (TIPO == "Una Encomienda")
@@ -1023,6 +1032,11 @@ namespace AerolineaFrba.Compra
 
                 t.ForeColor = Color.Black;
                 t1.ForeColor = Color.Black;
+                dniNum.Enabled = true;
+                tipo.Enabled = true;
+                button3.Enabled = false;
+
+                BuscarPorCliente.Enabled = true;
             }
 
         }
@@ -1108,6 +1122,8 @@ namespace AerolineaFrba.Compra
 
                         groupBox3.Enabled = false;
                         esNuevo = false;
+
+                        button3.Enabled = false;
 
 
                         DataGridViewColumn column3 = verificacion2.Columns[1];
@@ -1271,10 +1287,13 @@ namespace AerolineaFrba.Compra
         {
             dniNum.Text = "";
             tipo.SelectedItem = null;
-
+            LimpiarCliente_Click(sender, e);
+            
             groupBox3.Enabled = false;
             dniNum.Enabled = true;
             tipo.Enabled = true;
+
+            BuscarPorCliente.Enabled = true;
         }
     }
 }
