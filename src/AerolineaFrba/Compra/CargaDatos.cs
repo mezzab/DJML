@@ -502,7 +502,7 @@ namespace AerolineaFrba.Compra
             {
                 string qry = "update DJML.CLIENTES " +
                           " set CLIE_NOMBRE = '" + nombre.Text + "'" +
-                          " where CLIE_DNI = " + DNI +
+                          " where CLIE_DNI = '" + DNI +"'"+
                           " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
 
                 new Query(qry).Ejecutar();
@@ -514,7 +514,7 @@ namespace AerolineaFrba.Compra
 
                 string qry = "update DJML.CLIENTES " +
                             " set CLIE_APELLIDO = '" + apellido.Text + "'" +
-                            " where CLIE_DNI = " + DNI +
+                            " where CLIE_DNI = '" + DNI + "'" +
                             " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
 
                 new Query(qry).Ejecutar();
@@ -524,7 +524,7 @@ namespace AerolineaFrba.Compra
             {
                 string qry = "update DJML.CLIENTES " +
                           " set CLIE_DIRECCION= '" + direccion.Text + "'" +
-                          " where CLIE_DNI = " + DNI +
+                          " where CLIE_DNI = '" + DNI + "'" +
                           " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
 
                 new Query(qry).Ejecutar();
@@ -535,7 +535,7 @@ namespace AerolineaFrba.Compra
             {
                 string qry = "update DJML.CLIENTES " +
                           " set CLIE_TELEFONO = '" + telefono.Text + "'" +
-                          " where CLIE_DNI = " + DNI +
+                          " where CLIE_DNI = '" + DNI + "'" +
                           " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
 
                 new Query(qry).Ejecutar();
@@ -545,7 +545,7 @@ namespace AerolineaFrba.Compra
             {
                 string qry = "update DJML.CLIENTES " +
                           " set CLIE_EMAIL = '" + mail.Text + "'" +
-                          " where CLIE_DNI = " + DNI +
+                          " where CLIE_DNI = '" + DNI + "'" +
                           " and CLIE_TIPO_DOC =(SELECT ID_TIPO_DOC FROM DJML.TIPO_DOCUMENTO where DESCRIPCION = '" + TipoDNI + "')";
 
                 new Query(qry).Ejecutar();
@@ -572,7 +572,7 @@ namespace AerolineaFrba.Compra
                 {
                     avisar("No se pudieron actualizar los nuevos datos ingresados. Ya hay un cliente con ese numero de dni y tipo.");
 
-                    tipo.Text = TipoDNI;
+                 //  tipo.Text = TipoDNI;  Problema
                   
                 
                 }
@@ -904,7 +904,7 @@ namespace AerolineaFrba.Compra
         private void dni_TextChanged(object sender, EventArgs e)
         {
             //  dniNum.TextChanged += dni_TextChanged;
-            dniNum.Text = Regex.Replace(dniNum.Text, @"[^\d]", "");
+         //   dniNum.Text = Regex.Replace(dniNum.Text, @"[^\d]", "");
             //OBLIGA A QUE INTRODUZCA NUMEROS
 
             groupBox3.Enabled = false;
@@ -1239,7 +1239,12 @@ namespace AerolineaFrba.Compra
         {
 
         }
-        
+
+
+        private void dniNum_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == (char)Keys.Space);
+        }
     }
 }
 
