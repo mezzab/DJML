@@ -51,10 +51,10 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button3_Click(object sender, EventArgs e)
         {
-            FormAeronave rol = new FormAeronave();
+            FormAeronave aeronave = new FormAeronave();
             this.Hide();
-            rol.ShowDialog();
-            rol = (FormAeronave)this.ActiveMdiChild;
+            aeronave.ShowDialog();
+            aeronave = (FormAeronave)this.ActiveMdiChild;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

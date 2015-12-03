@@ -796,29 +796,10 @@ GO
 
 
 --============================================================
-						--EJECUTAR PROCEDURES
---============================================================
-
-EXEC DJML.CREAR_ROLES
-EXEC DJML.CREAR_FUNCIONALIDADES
-EXEC DJML.CREAR_USUARIOS
-EXEC DJML.CREAR_SERVICIOS
-EXEC DJML.CREAR_CIUDADES
-EXEC DJML.CREAR_RUTAS
-EXEC DJML.CREAR_AERONAVES
-EXEC DJML.CREAR_VIAJES
-EXEC DJML.CREAR_CLIENTES
-EXEC DJML.CREAR_COMPRAS
-EXEC DJML.CREAR_PASAJENCOMIENDA
-EXEC DJML.CREAR_CANJES
-
-
-
---============================================================
 			--VIEW
 --============================================================
 
-GO
+
 CREATE VIEW DJML.v_rutas
 	AS SELECT	c1.CIUD_DETALLE as 'Ciudad Origen'
 			  , c1.CIUD_ID as 'OrigenID'
@@ -835,11 +816,8 @@ CREATE VIEW DJML.v_rutas
 		JOIN DJML.CIUDADES c2 ON c2.CIUD_ID = t.TRAMO_CIUDAD_DESTINO
 		WHERE RUTA_IS_ACTIVE = 1
 
-
-
 GO	
 PRINT 'SE CREO LA VISTA v_rutas CORRECTAMENTE'
-GO
 
 create function DJML.CALCULAR_MILLAS(@dni int, @tipo varchar(10))
 returns int
@@ -958,356 +936,59 @@ else
 	
 select @resultado
 
+end
+
+----------------------------------------------------------------------------
+--TRIGGER DE INSERCION DE MILLAS UNA VEZ REGISTRADA LA LLEGADA DEL VIAJE
+-----------------------------------------------------------------------------
+
+create trigger Insertar_Millas
+on djml.Registro_destino 
+after insert
+as
+
+if( select p.pasa_compra_id from djml.REGISTRO_DESTINO rd join djml.PASAJES p on rd.RD_VIAJE_ID = p.PASA_VIAJE_ID) <> NULL 
+begin
+	INSERT INTO DJML.MILLAS (millas_clie_id, millas_informacion, millas_compra_id, millas_cantidad, millas_fecha)
+	SELECT p.pasa_clie_id, null, p.pasa_compra_id,(round(p.pasa_precio /10,0)),rd.rd_fecha_llegada from djml.registro_destino rd
+	join djml.pasajes p on rd.rd_viaje_id = p.pasa_viaje_id
+	where p.cancelacion_id is null 
+	and p.PASA_COMPRA_ID is not null
+end
+
+if(select e.ENCO_COMPRA_ID from djml.REGISTRO_DESTINO rd join djml.ENCOMIENDAS e on rd.RD_VIAJE_ID = e.enco_VIAJE_ID) <> NULL 
+begin
+	INSERT INTO DJML.MILLAS (millas_clie_id, millas_informacion, millas_compra_id, millas_cantidad, millas_fecha)
+	SELECT e.enco_clie_id, null, e.enco_compra_id,(round(e.enco_precio /10,0)),rd.rd_fecha_llegada from djml.registro_destino rd
+	join djml.encomiendas e on rd.rd_viaje_id = e.enco_viaje_id
+	where e.cancelacion_id is null
+	and e.ENCO_COMPRA_ID is not null
+end
 
 
+--============================================================
+						--EJECUTAR PROCEDURES
+--============================================================
 
----------------------------------------------------
----------------------------------------------------
-		--CONSULTAS LISTADOS ESTADISTICOS
----------------------------------------------------
----------------------------------------------------
+EXEC DJML.CREAR_ROLES
+EXEC DJML.CREAR_FUNCIONALIDADES
+EXEC DJML.CREAR_USUARIOS
+EXEC DJML.CREAR_SERVICIOS
+EXEC DJML.CREAR_CIUDADES
+EXEC DJML.CREAR_RUTAS
+EXEC DJML.CREAR_AERONAVES
+EXEC DJML.CREAR_VIAJES
+EXEC DJML.CREAR_CLIENTES
+EXEC DJML.CREAR_COMPRAS
+EXEC DJML.CREAR_PASAJENCOMIENDA
+EXEC DJML.CREAR_CANJES
 
----------------------------------------------------
-			----PRIMER FILTRO----
---Top 5 de los destinos con más pasajes comprados.
----------------------------------------------------
-
---PRIMER TRIMESTRE
-select DISTINCT TOP 5 c.CIUD_DETALLE,COUNT(p.PASA_VIAJE_ID) AS CANTIDAD from djml.PASAJES p 
-join djml.VIAJES v on p.PASA_VIAJE_ID = v.VIAJE_ID 
-join djml.RUTAS r on v.VIAJE_RUTA_ID = r.RUTA_CODIGO 
-join djml.TRAMOS t on r.RUTA_TRAMO = t.TRAMO_ID 
-join djml.CIUDADES c on t.TRAMO_CIUDAD_DESTINO = c.CIUD_ID
- join djml.COMPRAS com on p.PASA_COMPRA_ID = com.COMPRA_ID 
- WHERE DAY(COM.COMPRA_FECHA) >= 01	
- AND MONTH(COM.COMPRA_FECHA) <= 03 
- AND YEAR(COM.COMPRA_FECHA ) = 2015
- AND COM.COMPRA_ID NOT IN (SELECT CANC_COMPRA_ID FROM DJML.CANCELACIONES)
- group by c.CIUD_DETALLE 
- ORDER BY 2 desc
-
-
---SEGUNDO TRIMESTRE
-select DISTINCT TOP 5  c.CIUD_DETALLE,COUNT(p.PASA_VIAJE_ID) AS CANTIDAD from djml.PASAJES p 
-join djml.VIAJES v on p.PASA_VIAJE_ID = v.VIAJE_ID 
-join djml.RUTAS r on v.VIAJE_RUTA_ID = r.RUTA_CODIGO 
-join djml.TRAMOS t on r.RUTA_TRAMO = t.TRAMO_ID 
-join djml.CIUDADES c on t.TRAMO_CIUDAD_DESTINO = c.CIUD_ID 
-join djml.COMPRAS com on p.PASA_COMPRA_ID = com.COMPRA_ID
-WHERE DAY(COM.COMPRA_FECHA) >= 01 
-AND MONTH(COM.COMPRA_FECHA) >= 04 
-AND MONTH(COM.COMPRA_FECHA) <= 06 
-AND YEAR(COM.COMPRA_FECHA ) = 2016 
-AND COM.COMPRA_ID NOT IN (SELECT CANC_COMPRA_ID FROM DJML.CANCELACIONES) 
-group by c.CIUD_DETALLE 
-ORDER BY 2 desc
-    
-                
---TERCER TRIMESTRE
-select DISTINCT TOP 5  c.CIUD_DETALLE,COUNT(p.PASA_VIAJE_ID) AS CANTIDAD from djml.PASAJES p 
-join djml.VIAJES v on p.PASA_VIAJE_ID = v.VIAJE_ID 
-join djml.RUTAS r on v.VIAJE_RUTA_ID = r.RUTA_CODIGO 
-join djml.TRAMOS t on r.RUTA_TRAMO = t.TRAMO_ID 
-join djml.CIUDADES c on t.TRAMO_CIUDAD_DESTINO = c.CIUD_ID 
-join djml.COMPRAS com on p.PASA_COMPRA_ID = com.COMPRA_ID 
-WHERE DAY(COM.COMPRA_FECHA) >= 01 
-AND MONTH(COM.COMPRA_FECHA) >= 07 
-AND MONTH(COM.COMPRA_FECHA) <= 09
-AND YEAR(COM.COMPRA_FECHA ) = 2016
-AND COM.COMPRA_ID NOT IN (SELECT CANC_COMPRA_ID FROM DJML.CANCELACIONES) 
-group by c.CIUD_DETALLE ORDER BY 2 desc                    
-           
-           
-                
---CUARTO TRIMESTRE
-select DISTINCT TOP 5  c.CIUD_DETALLE,COUNT(p.PASA_VIAJE_ID) AS CANTIDAD from djml.PASAJES p 
-join djml.VIAJES v on p.PASA_VIAJE_ID = v.VIAJE_ID 
-join djml.RUTAS r on v.VIAJE_RUTA_ID = r.RUTA_CODIGO
-join djml.TRAMOS t on r.RUTA_TRAMO = t.TRAMO_ID 
-join djml.CIUDADES c on t.TRAMO_CIUDAD_DESTINO = c.CIUD_ID 
-join djml.COMPRAS com on p.PASA_COMPRA_ID = com.COMPRA_ID 
-WHERE DAY(COM.COMPRA_FECHA) >= 01 
-AND MONTH(COM.COMPRA_FECHA) >= 10 
-AND MONTH(COM.COMPRA_FECHA) <= 12
-AND YEAR(COM.COMPRA_FECHA ) =  2016 
-AND COM.COMPRA_ID NOT IN (SELECT CANC_COMPRA_ID FROM DJML.CANCELACIONES) 
-group by c.CIUD_DETALLE ORDER BY 2 desc     
-
-
-
-
----------------------------------------------------
-			----SEGUNDO FILTRO----
--- Top 5 de los destinos con aeronaves más vacías--
----------------------------------------------------
-
---PRIMER TRIMESTRE
-SELECT TOP 5 C.CIUD_DETALLE, A.AERO_MATRICULA, V.VIAJE_ID,COUNT(BA.BXA_BUTA_ID) CANTIDAD FROM DJML.AERONAVES A
-JOIN DJML.VIAJES V ON A.AERO_MATRICULA = V.VIAJE_AERO_ID
-JOIN DJML.RUTAS R ON R.RUTA_CODIGO = V.VIAJE_RUTA_ID
-JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID
-JOIN DJML.CIUDADES C ON T.TRAMO_CIUDAD_DESTINO = C.CIUD_ID
-JOIN DJML.BUTACA_AERO BA ON A.AERO_MATRICULA = BA.BXA_AERO_MATRICULA
-WHERE A.AERO_BAJA_VIDA_UTIL = 0 
-AND  DAY(V.VIAJE_FECHA_SALIDA) >= 01	
-AND MONTH(V.VIAJE_FECHA_SALIDA) <= 03 
-AND YEAR(V.VIAJE_FECHA_SALIDA) = 2016
-GROUP BY C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID
-ORDER BY 4 ASC
-
---SEGUNDO TRIMESTRE
-SELECT TOP 5 C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID ,COUNT(BA.BXA_BUTA_ID) CANTIDAD FROM DJML.AERONAVES A
-JOIN DJML.VIAJES V ON A.AERO_MATRICULA = V.VIAJE_AERO_ID
-JOIN DJML.RUTAS R ON R.RUTA_CODIGO = V.VIAJE_RUTA_ID
-JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID
-JOIN DJML.CIUDADES C ON T.TRAMO_CIUDAD_DESTINO = C.CIUD_ID
-JOIN DJML.BUTACA_AERO BA ON A.AERO_MATRICULA = BA.BXA_AERO_MATRICULA
-WHERE A.AERO_BAJA_VIDA_UTIL = 0 
-AND  DAY(V.VIAJE_FECHA_SALIDA) >= 01
-AND MONTH(V.VIAJE_FECHA_SALIDA) >= 04	
- AND MONTH(V.VIAJE_FECHA_SALIDA) <= 06 
- AND YEAR(V.VIAJE_FECHA_SALIDA) =  2016 
-GROUP BY C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID
-ORDER BY 4 ASC
-
---TERCER TRIMESTRE
-SELECT TOP 5 C.CIUD_DETALLE, A.AERO_MATRICULA,v.VIAJE_ID, COUNT(BA.BXA_BUTA_ID) CANTIDAD FROM DJML.AERONAVES A
-JOIN DJML.VIAJES V ON A.AERO_MATRICULA = V.VIAJE_AERO_ID
-JOIN DJML.RUTAS R ON R.RUTA_CODIGO = V.VIAJE_RUTA_ID
-JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID
-JOIN DJML.CIUDADES C ON T.TRAMO_CIUDAD_DESTINO = C.CIUD_ID
-JOIN DJML.BUTACA_AERO BA ON A.AERO_MATRICULA = BA.BXA_AERO_MATRICULA
-WHERE A.AERO_BAJA_VIDA_UTIL = 0 
-AND  DAY(V.VIAJE_FECHA_SALIDA) >= 01
- AND MONTH(V.VIAJE_FECHA_SALIDA) >= 07	
- AND MONTH(V.VIAJE_FECHA_SALIDA) <= 09 
- AND YEAR(V.VIAJE_FECHA_SALIDA) =  2016
-GROUP BY C.CIUD_DETALLE, A.AERO_MATRICULA,v.VIAJE_ID
-ORDER BY 4 ASC
-
---CUARTO TRIMESTRE
-SELECT  TOP 5 C.CIUD_DETALLE, A.AERO_MATRICULA, V.VIAJE_ID, COUNT(BA.BXA_BUTA_ID) AS CANTIDAD FROM DJML.AERONAVES A
-JOIN DJML.VIAJES V ON A.AERO_MATRICULA = V.VIAJE_AERO_ID
-JOIN DJML.RUTAS R ON R.RUTA_CODIGO = V.VIAJE_RUTA_ID
-JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID
-JOIN DJML.CIUDADES C ON T.TRAMO_CIUDAD_DESTINO = C.CIUD_ID
-JOIN DJML.BUTACA_AERO BA ON A.AERO_MATRICULA = BA.BXA_AERO_MATRICULA
-WHERE A.AERO_BAJA_VIDA_UTIL = 0 
-AND  DAY(V.VIAJE_FECHA_SALIDA) >= 01	
- AND MONTH(V.VIAJE_FECHA_SALIDA) >= 10
- AND MONTH(V.VIAJE_FECHA_SALIDA) <= 12
- AND YEAR(V.VIAJE_FECHA_SALIDA) =  2016
-GROUP BY C.CIUD_DETALLE, A.AERO_MATRICULA,V.VIAJE_ID
-ORDER BY 4 ASC
-
-
-----------------------------------------------------------------
-			----TERCER FILTRO----
----Top 5 de los Clientes con más puntos acumulados a la fecha---
-----------------------------------------------------------------
-
---PRIMER TRIMESTRE
-SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD) AS CANTIDAD_MILLAS FROM DJML.MILLAS M 
-JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID 
-JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC 
-WHERE DAY(M.MILLAS_FECHA) >= 01	 
-AND MONTH(M.MILLAS_FECHA) >= 01
-AND MONTH(M.MILLAS_FECHA) <= 03 
-AND YEAR(M.MILLAS_FECHA) = 2015
-GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE
-ORDER BY 5 DESC 
-
---SEGUNDO TRIMESTRE
-SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD) AS CANTIDAD_MILLAS FROM DJML.MILLAS M 
-JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID 
-JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC 
-WHERE DAY(M.MILLAS_FECHA) >= 01
-AND MONTH(M.MILLAS_FECHA) >= 01 
-AND MONTH(M.MILLAS_FECHA) >= 04 
-AND MONTH(M.MILLAS_FECHA) <= 06 
-AND YEAR(M.MILLAS_FECHA) = 2015 
-GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE 
-ORDER BY 5 desc
-
---TERCER TRIMESTRE
-SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD)AS CANTIDAD_MILLAS FROM DJML.MILLAS M 
-JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID 
-JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC 
-WHERE DAY(M.MILLAS_FECHA) >= 01 
-AND MONTH(M.MILLAS_FECHA) >= 01 
-AND MONTH(M.MILLAS_FECHA) >= 07 
-AND MONTH(M.MILLAS_FECHA) <= 09 
-AND YEAR(M.MILLAS_FECHA) = 2015 
-GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE 
-order by 5 desc
-
---CUARTO TRIMESTRE
-SELECT TOP 5 C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE, COUNT(M.MILLAS_CANTIDAD) as CANTIDAD_MILLAS FROM DJML.MILLAS M  
-JOIN DJML.CLIENTES C ON C.CLIE_ID = M.MILLAS_CLIE_ID 
-JOIN DJML.TIPO_DOCUMENTO TD ON TD.ID_TIPO_DOC = C.CLIE_TIPO_DOC 
-WHERE DAY(M.MILLAS_FECHA) >= 01 
-AND MONTH(M.MILLAS_FECHA) >= 01 
-AND MONTH(M.MILLAS_FECHA) >= 10 
-AND MONTH(M.MILLAS_FECHA) <= 12 
-AND YEAR(M.MILLAS_FECHA) = 2015 
-GROUP BY C.CLIE_NOMBRE, C.CLIE_APELLIDO, TD.DESCRIPCION, C.CLIE_NOMBRE 
-order by 5 desc
-
-
----------------------------------------------------
-			----CUARTO FILTRO----
----Top 5 de los destinos con pasajes cancelados---
----------------------------------------------------
-
---PRIMER TRIMESTRE
-SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN
-JOIN DJML.COMPRAS COM ON CAN.CANC_COMPRA_ID = COM.COMPRA_ID
-JOIN DJML.VIAJES V ON COM.COMPRA_VIAJE_ID = V.VIAJE_ID
-JOIN DJML.RUTAS R ON V.VIAJE_ID = R.RUTA_CODIGO
-JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID
-JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID
-WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 
-AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 03 
-AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= 2016
-GROUP BY C1.CIUD_DETALLE 
-ORDER BY 2 DESC
-
---SEGUNDO TRIMESTRE
-SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN
-JOIN DJML.COMPRAS COM ON CAN.CANC_COMPRA_ID = COM.COMPRA_ID
-JOIN DJML.VIAJES V ON COM.COMPRA_VIAJE_ID = V.VIAJE_ID
-JOIN DJML.RUTAS R ON V.VIAJE_ID = R.RUTA_CODIGO
-JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID
-JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID
-WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 
-AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 04
-AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 06 
-AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= 2016
-GROUP BY C1.CIUD_DETALLE 
-ORDER BY 2 DESC
-
-
---TERCER TRIMESTRE
-SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN
-JOIN DJML.COMPRAS COM ON CAN.CANC_COMPRA_ID = COM.COMPRA_ID
-JOIN DJML.VIAJES V ON COM.COMPRA_VIAJE_ID = V.VIAJE_ID
-JOIN DJML.RUTAS R ON V.VIAJE_ID = R.RUTA_CODIGO
-JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID
-JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID
-WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 
-AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 07
-AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 09 
-AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= 2016
-GROUP BY C1.CIUD_DETALLE 
-ORDER BY 2 DESC
-
-
---CUATRO TRIMESTRE
-SELECT TOP 5 C1.CIUD_DETALLE, COUNT(CAN.CANC_ID) AS CANTIDAD FROM DJML.CANCELACIONES CAN
-JOIN DJML.COMPRAS COM ON CAN.CANC_COMPRA_ID = COM.COMPRA_ID
-JOIN DJML.VIAJES V ON COM.COMPRA_VIAJE_ID = V.VIAJE_ID
-JOIN DJML.RUTAS R ON V.VIAJE_ID = R.RUTA_CODIGO
-JOIN DJML.TRAMOS T ON R.RUTA_TRAMO = T.TRAMO_ID
-JOIN DJML.CIUDADES C1 ON T.TRAMO_CIUDAD_DESTINO = C1.CIUD_ID
-WHERE DAY(CAN.CANC_FECHA_DEVOLUCION) >= 1 
-AND MONTH(CAN.CANC_FECHA_DEVOLUCION) >= 10
-AND MONTH(CAN.CANC_FECHA_DEVOLUCION) <= 12 
-AND YEAR(CAN.CANC_FECHA_DEVOLUCION)= 2015
-GROUP BY C1.CIUD_DETALLE 
-ORDER BY 2 DESC
-
-
----------------------------------------------------
-			----QUINTO FILTRO----
----Top 5 de las aeronaves con mayor cantidad de días fuera de servicio---
----------------------------------------------------
-
---PRIMER TRIMESTRE
-select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva 
-from djml.aeronaves_por_periodos ap 
-join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula 
-join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id 
-where a.aero_baja_fuera_servicio = 1 
-AND DAY(pdi.peri_fecha_inicio) >= 1 
-AND MONTH(pdi.peri_fecha_inicio) >= 1 
-AND MONTH(pdi.peri_fecha_inicio) <= 3 
-AND YEAR(pdi.peri_fecha_inicio) = 2016 
-group by ap.axp_matri_aeronave order by 2 desc
-
-
---SEGUNDO TRIMESTRE
-select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva 
-from djml.aeronaves_por_periodos ap 
-join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula 
-join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id 
-where a.aero_baja_fuera_servicio = 1 
-AND DAY(pdi.peri_fecha_inicio) >= 1 
-AND MONTH(pdi.peri_fecha_inicio) >= 4 
-AND MONTH(pdi.peri_fecha_inicio) <= 6 
-AND YEAR(pdi.peri_fecha_inicio) = 2016 
-group by ap.axp_matri_aeronave order by 2 desc
-
-
---TERCER TRIMESTRE
-select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva 
-from djml.aeronaves_por_periodos ap 
-join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula 
-join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id 
-where a.aero_baja_fuera_servicio = 1 
-AND DAY(pdi.peri_fecha_inicio) >= 1 
-AND MONTH(pdi.peri_fecha_inicio) >= 7 
-AND MONTH(pdi.peri_fecha_inicio) <= 9 
-AND YEAR(pdi.peri_fecha_inicio) = 2016 
-group by ap.axp_matri_aeronave order by 2 desc
-
-
---CUARTO TRIMESTRE
-select top 5 ap.axp_matri_aeronave as Matricula, SUM(datediff(day,pdi.peri_fecha_inicio,pdi.peri_fecha_fin)) as Dias_Inactiva 
-from djml.aeronaves_por_periodos ap 
-join djml.aeronaves a on ap.axp_matri_aeronave = a.aero_matricula 
-join DJML.periodos_de_inactividad pdi on ap.axp_id_periodo = pdi.peri_id 
-where a.aero_baja_fuera_servicio = 1 
-AND DAY(pdi.peri_fecha_inicio) >= 1  
-AND MONTH(pdi.peri_fecha_inicio) >= 10 
-AND MONTH(pdi.peri_fecha_inicio) <=12  
-AND YEAR(pdi.peri_fecha_inicio) = 2015
-group by ap.axp_matri_aeronave order by 2 desc
-
-----------------------------------------------
---FIN CONSULTAS ESTADISTICAS 
-----------------------------------------------
-
-
-
-
-
---CONSULTA MILLAS PARA MARQUITOS
-SELECT SUM(M.MILLAS_CANTIDAD)AS CANTIDAD_MILLAS FROM DJML.MILLAS M 
-JOIN DJML.CLIENTES C ON M.MILLAS_CLIE_ID = C.CLIE_ID 
-WHERE C.CLIE_ID = '+ id_cliente+' AND MILLAS_FECHA 
-BETWEEN DATEADD(yy,-1,GETDATE()) AND GETDATE() GROUP BY C.CLIE_ID	
-
---CONSULTA OBTENER MILLAS VIEJAS
-SELECT TOP 1 M.MILLAS_CANTIDAD FROM DJML.MILLAS M JOIN DJML.CLIENTES C ON M.MILLAS_CLIE_ID = C.CLIE_ID WHERE C.CLIE_ID = '+ id_cliente+' AND M.MILLAS_FECHA BETWEEN DATEADD(yy,-1,GETDATE()) AND GETDATE() AND M.MILLAS_CANTIDAD > 0 ORDER BY M.MILLAS_FECHA DESC
-
-
-SELECT TOP 1 M.MILLAS_CANTIDAD FROM DJML.MILLAS M 
-JOIN DJML.CLIENTES C ON M.MILLAS_CLIE_ID = C.CLIE_ID 
-WHERE C.CLIE_ID = '+ id_cliente+' 
-AND M.MILLAS_FECHA BETWEEN DATEADD(yy,-1,GETDATE()) AND GETDATE() 
-AND M.MILLAS_CANTIDAD > 0 
-ORDER BY M.MILLAS_FECHA DESC
-  
 
 
 
 -----------------------------------------------------------
 ---DROPS 
 -----------------------------------------------------------
-USE [GD2C2015]
-GO
-
-
 DROP TABLE DJML.CANJES
 DROP TABLE DJML.PRODUCTO
 DROP TABLE DJML.MILLAS
@@ -1342,8 +1023,9 @@ DROP TABLE DJML.ROLES
 
 drop view DJML.v_rutas
 drop function DJML.CALCULAR_MILLAS
-
 drop function djml.calculoFecha
+drop trigger djml.Insertar_Millas
+
 
 DROP PROCEDURE DJML.CREAR_AERONAVES
 DROP PROCEDURE DJML.CREAR_CIUDADES
@@ -1360,7 +1042,3 @@ DROP PROCEDURE DJML.CREAR_CANJES
 
 
 DROP SCHEMA DJML
-
-
-
-

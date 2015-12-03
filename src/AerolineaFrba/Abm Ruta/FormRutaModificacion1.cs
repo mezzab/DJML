@@ -102,7 +102,7 @@ namespace AerolineaFrba.Abm_Ruta
             destino = comboBox_destino.Text;
             servicio = comboBox_servicio.Text;
 
-            string qry = "select RUTA_CODIGO ruta_codigo, co.CIUD_DETALLE origen, cd.CIUD_DETALLE destino, s.SERV_DESCRIPCION servicio, r.RUTA_PRECIO_BASE_KILO precio_base_kilo, r.RUTA_PRECIO_BASE_PASAJE precio_base_pasaje" +
+            string qry = "select r.RUTA_CODIGO ruta_codigo, co.CIUD_DETALLE origen, cd.CIUD_DETALLE destino, s.SERV_DESCRIPCION servicio, r.RUTA_PRECIO_BASE_KILO precio_base_kilo, r.RUTA_PRECIO_BASE_PASAJE precio_base_pasaje" +
                         " from djml.RUTAS r" +
                         " join djml.TRAMOS t on r.RUTA_TRAMO = t.TRAMO_ID" +
                         " join djml.CIUDADES co on co.CIUD_ID = t.TRAMO_CIUDAD_ORIGEN" +
@@ -111,7 +111,7 @@ namespace AerolineaFrba.Abm_Ruta
                         " where co.CIUD_DETALLE like '%" + origen + "'" +
                         " and cd.CIUD_DETALLE like '%" + destino + "'" +
                         " and s.SERV_DESCRIPCION like '%" + servicio + "'" + 
-                        " r.RUTA_IS_ACTIVE = 1";
+                        " and r.RUTA_IS_ACTIVE = 1";
 
             var result = new Query(qry).ObtenerDataTable();
             if (result.Rows.Count != 0 && origen != string.Empty && destino != string.Empty && servicio != string.Empty)
