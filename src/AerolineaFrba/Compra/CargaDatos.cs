@@ -55,6 +55,8 @@ namespace AerolineaFrba.Compra
 
         public static string IDC;
 
+        public static bool trucho = false;
+
 
 
         
@@ -299,13 +301,13 @@ namespace AerolineaFrba.Compra
                             avisar("Ya existe cliente con ese tipo y numero de documento. Preciona el boton buscar");
 
                         }  
-                        if (elClienteYaTieneAsignadoUnViajeEseDia() == true)
+                        if (elClienteYaTieneAsignadoUnViajeEseDia() )
                         {
                             avisar("El cliente tiene un viaje asignado ese dia");
                             //LimpiarCliente_Click(sender, e);
                         }
                     
-                        if (elClienteYaTieneAsignadoUnViajeEseDia() == false)
+                        else
                         {  // avisar("no tiene asignado viaje"); //borrar
 
                             if (primerP) // si es el primero entonces crea las columnas
@@ -460,7 +462,8 @@ namespace AerolineaFrba.Compra
                 }
                 
             }
-            if (esNuevo == false) 
+            else
+        //    if (esNuevo == false) 
             {   
                 actualizarDatos(); // SI EL USUARIO CAMBIO UN DATO ACTUALIZA LOS DATOS DEL CLIENTE 
                 guardarIdCliente();
@@ -489,6 +492,23 @@ namespace AerolineaFrba.Compra
         //FALTA HACER LOS UPDATES
         private void actualizarDatos()
         {
+
+            string aux5 = fechaNacimiento.Text + " 00:00:00.000";
+
+            string qry = "UPDATE [DJML].[CLIENTES] SET" +
+                          " [CLIE_NOMBRE] = '" + nombre.Text + "'" +
+                          " ,[CLIE_APELLIDO] =  '" + apellido.Text + "'" +
+                          " ,[CLIE_DIRECCION] =  '" + direccion.Text + "'" +
+                          " ,[CLIE_EMAIL] =  '" + mail.Text + "'" +
+                          " ,[CLIE_TELEFONO] = " + telefono.Text +
+                          " ,[CLIE_FECHA_NACIMIENTO] = '" + aux5 + "'" +
+                         "WHERE CLIE_ID = '" + IDC + "'" ;
+            new Query(qry).Ejecutar();
+
+        }
+
+
+            /*
             bool seCambioAlgo = false;
             string aux = "1";
             if (tipo.Text.ToString() == "DNI")
@@ -610,9 +630,8 @@ namespace AerolineaFrba.Compra
             {
                 string cambio = "Se han guardado los nuevos datos del cliente.";
                 avisarBien(cambio);
-            }
+            }*/
 
-        }
 
         private void cargarNuevoCliente()
         {
@@ -634,7 +653,7 @@ namespace AerolineaFrba.Compra
 
                 esNuevo = false;
 
-
+         
             
             
         }
@@ -702,6 +721,8 @@ namespace AerolineaFrba.Compra
             }
 
 
+            dniNum.Enabled = false;
+            tipo.Enabled = false;
         }
 
         //AUXILIAR DE AUTOCOMPLETAR DATOS
@@ -1244,6 +1265,16 @@ namespace AerolineaFrba.Compra
         private void dniNum_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == (char)Keys.Space);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            dniNum.Text = "";
+            tipo.SelectedItem = null;
+
+            groupBox3.Enabled = false;
+            dniNum.Enabled = true;
+            tipo.Enabled = true;
         }
     }
 }

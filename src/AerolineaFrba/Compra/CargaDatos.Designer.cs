@@ -71,6 +71,7 @@
             this.verificacion2 = new System.Windows.Forms.DataGridView();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -84,6 +85,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.BuscarPorCliente);
             this.groupBox1.Controls.Add(this.dniNum);
             this.groupBox1.Controls.Add(this.tipo);
@@ -506,6 +508,16 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "LISTA DE ENCOMIENDAS A COMPRAR";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(152, 18);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(103, 37);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "Buscar otra persona";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // CargaDatos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -590,5 +602,6 @@
         private System.Windows.Forms.DataGridView verificacion2;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Button button3;
     }
 }
