@@ -95,7 +95,7 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 if (controlarNumeroDeButacasIngresado() == false)
                 {
-                    MessageBox.Show("El existen aeronaves con mas de 100 butacas.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Se deben ingresar menos de 100 butacas.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     // todo: agregar esto a la estrategia?
                 }
 
