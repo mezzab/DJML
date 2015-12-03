@@ -129,7 +129,7 @@ namespace AerolineaFrba.Compra
             bool error2 = comboBox1.SelectedValue == comboBox2.SelectedValue;
             if (error1)
                MessageBox.Show("Fecha incorrecta");
-             else 
+            else 
                 if (error2)
                 MessageBox.Show("Las ciudades origen y destino no pueden coincidir");
             else

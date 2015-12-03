@@ -274,7 +274,7 @@ namespace AerolineaFrba.Canje_Millas
             Query qry2 = new Query(query);
             int idMillasViejas = Convert.ToInt32(qry2.ObtenerUnicoCampo());
 
-            string que = "UPDATE [DJML].[MILLAS] SET MILLAS_CANTIDAD = 0 WHERE MILLAS_ID = '" + idMillasViejas + "' ";
+            string que = "UPDATE [DJML].[MILLAS] SET MILLAS_CANTIDAD = 0 ,[MILLAS_INFORMACION] = 'Las millas de este pasaje/encomienda ya fueron usadas para realizar un canje.' WHERE MILLAS_ID = '" + idMillasViejas + "' ";
 
             new Query(que).Ejecutar();
 
