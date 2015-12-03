@@ -39,14 +39,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.totalMillas = new System.Windows.Forms.TextBox();
+            this.datos = new System.Windows.Forms.DataGridView();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datos)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label1.Location = new System.Drawing.Point(352, 51);
+            this.label1.Location = new System.Drawing.Point(213, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(154, 17);
             this.label1.TabIndex = 0;
@@ -55,7 +58,7 @@
             // textBoxDNI
             // 
             this.textBoxDNI.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.textBoxDNI.Location = new System.Drawing.Point(355, 71);
+            this.textBoxDNI.Location = new System.Drawing.Point(216, 29);
             this.textBoxDNI.Name = "textBoxDNI";
             this.textBoxDNI.Size = new System.Drawing.Size(132, 23);
             this.textBoxDNI.TabIndex = 1;
@@ -63,7 +66,7 @@
             // botonConsultar
             // 
             this.botonConsultar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.botonConsultar.Location = new System.Drawing.Point(554, 54);
+            this.botonConsultar.Location = new System.Drawing.Point(415, 12);
             this.botonConsultar.Name = "botonConsultar";
             this.botonConsultar.Size = new System.Drawing.Size(132, 40);
             this.botonConsultar.TabIndex = 3;
@@ -74,9 +77,9 @@
             // dataGrid1
             // 
             this.dataGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGrid1.Location = new System.Drawing.Point(15, 141);
+            this.dataGrid1.Location = new System.Drawing.Point(12, 78);
             this.dataGrid1.Name = "dataGrid1";
-            this.dataGrid1.Size = new System.Drawing.Size(792, 165);
+            this.dataGrid1.Size = new System.Drawing.Size(792, 132);
             this.dataGrid1.TabIndex = 4;
             // 
             // labelDetalle
@@ -84,7 +87,7 @@
             this.labelDetalle.AutoSize = true;
             this.labelDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold);
             this.labelDetalle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.labelDetalle.Location = new System.Drawing.Point(283, 342);
+            this.labelDetalle.Location = new System.Drawing.Point(284, 409);
             this.labelDetalle.Name = "labelDetalle";
             this.labelDetalle.Size = new System.Drawing.Size(245, 17);
             this.labelDetalle.TabIndex = 5;
@@ -93,7 +96,7 @@
             // 
             // botonVolver
             // 
-            this.botonVolver.Location = new System.Drawing.Point(15, 330);
+            this.botonVolver.Location = new System.Drawing.Point(16, 397);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(92, 43);
             this.botonVolver.TabIndex = 7;
@@ -104,7 +107,7 @@
             // tipoDeDocumento
             // 
             this.tipoDeDocumento.FormattingEnabled = true;
-            this.tipoDeDocumento.Location = new System.Drawing.Point(154, 71);
+            this.tipoDeDocumento.Location = new System.Drawing.Point(15, 29);
             this.tipoDeDocumento.Name = "tipoDeDocumento";
             this.tipoDeDocumento.Size = new System.Drawing.Size(132, 21);
             this.tipoDeDocumento.TabIndex = 8;
@@ -113,7 +116,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label3.Location = new System.Drawing.Point(151, 51);
+            this.label3.Location = new System.Drawing.Point(12, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(132, 17);
             this.label3.TabIndex = 9;
@@ -124,7 +127,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(12, 121);
+            this.label2.Location = new System.Drawing.Point(9, 58);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 17);
             this.label2.TabIndex = 12;
@@ -135,18 +138,39 @@
             this.totalMillas.BackColor = System.Drawing.Color.MintCream;
             this.totalMillas.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.totalMillas.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.totalMillas.Location = new System.Drawing.Point(534, 343);
+            this.totalMillas.Location = new System.Drawing.Point(535, 410);
             this.totalMillas.Name = "totalMillas";
             this.totalMillas.Size = new System.Drawing.Size(153, 16);
             this.totalMillas.TabIndex = 13;
             this.totalMillas.TextChanged += new System.EventHandler(this.totalMillas_TextChanged);
+            // 
+            // datos
+            // 
+            this.datos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datos.Location = new System.Drawing.Point(16, 241);
+            this.datos.Name = "datos";
+            this.datos.Size = new System.Drawing.Size(785, 150);
+            this.datos.TabIndex = 14;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(16, 222);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(109, 17);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Millas Historicas";
             // 
             // ConsultarMillas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MintCream;
-            this.ClientSize = new System.Drawing.Size(813, 397);
+            this.ClientSize = new System.Drawing.Size(813, 453);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.datos);
             this.Controls.Add(this.totalMillas);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
@@ -163,6 +187,7 @@
             this.Text = "Consulte Millas";
             this.Load += new System.EventHandler(this.ConsultarMillas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,5 +205,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox totalMillas;
+        private System.Windows.Forms.DataGridView datos;
+        private System.Windows.Forms.Label label4;
     }
 }

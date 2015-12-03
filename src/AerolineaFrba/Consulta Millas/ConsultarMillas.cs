@@ -112,6 +112,10 @@ namespace AerolineaFrba.Consulta_Millas
                     column4.Width = 85;
                     DataGridViewColumn column5 = dataGrid1.Columns[4];
                     column5.Width = 450;
+                    
+
+                    //carga el historial del grid con sus millas historicas
+                    millasHistoricas();
 
                 }
                 else
@@ -143,6 +147,18 @@ namespace AerolineaFrba.Consulta_Millas
         private void totalMillas_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+
+        private void millasHistoricas() 
+        {
+
+            string sql1 = "SELECT MILLAS_PASA_ID ID_DE_PASAJE, MILLAS_ENCO_ID ID_DE_ENCOMIENDA, MILLAS_CANTIDAD_HISTORICA CANTIDAD_DE_MILLAS_HISTORICAS, MILLAS_FECHA FECHA, MILLAS_INFORMACION INFORMACION FROM DJML.MILLAS WHERE MILLAS_CLIE_ID = '" + IDC + "'"; 
+
+            datos.DataSource = new Query(sql1).ObtenerDataTable();
+        
+        
+        
         }
     }
 }

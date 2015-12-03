@@ -747,6 +747,7 @@ CREATE TABLE DJML.MILLAS(
      MILLAS_PASA_ID INT  FOREIGN KEY REFERENCES DJML.PASAJES(PASA_ID),
     MILLAS_ENCO_ID INT  FOREIGN KEY REFERENCES DJML.ENCOMIENDAS(ENCO_ID),
    	MILLAS_CANTIDAD INT NOT NULL,
+	MILLAS_CANTIDAD_HISTORICA INT NOT NULL,
     MILLAS_FECHA SMALLDATETIME NOT NULL)
 
 	PRINT 'SE CREO CORRECTAMENTE LA TABLA MILLAS'
@@ -975,8 +976,8 @@ as
 
 --if( select p.pasa_compra_id from djml.REGISTRO_DESTINO rd join djml.PASAJES p on rd.RD_VIAJE_ID = p.PASA_VIAJE_ID) != NULL 
 begin
-	INSERT INTO DJML.MILLAS (millas_clie_id, millas_informacion, millas_enco_id, millas_pasa_id, millas_cantidad, millas_fecha)
-	SELECT p.pasa_clie_id, null, null, p.pasa_id,(round(p.pasa_precio /10,0)),rd.rd_fecha_llegada from djml.registro_destino rd
+	INSERT INTO DJML.MILLAS (millas_clie_id, millas_informacion, millas_enco_id, millas_pasa_id, millas_cantidad,millas_cantidad_historica, millas_fecha)
+	SELECT p.pasa_clie_id, null, null, p.pasa_id,(round(p.pasa_precio /10,0)),(round(p.PASA_PRECIO /10,0)),rd.rd_fecha_llegada from djml.registro_destino rd
 	join djml.pasajes p on rd.rd_viaje_id = p.pasa_viaje_id
 	where p.cancelacion_id is null 
 		and p.PASA_CLIE_ID in (select c.compra_clie_id from djml.COMPRAS c where COMPRA_VIAJE_ID = rd.RD_VIAJE_ID)
@@ -984,8 +985,8 @@ end
 
 --if((select e.ENCO_COMPRA_ID from djml.REGISTRO_DESTINO rd join djml.ENCOMIENDAS e on rd.RD_VIAJE_ID = e.enco_VIAJE_ID) != NULL )
 begin
-	INSERT INTO DJML.MILLAS (millas_clie_id, millas_informacion, millas_enco_id, millas_pasa_id, millas_cantidad, millas_fecha)
-	SELECT e.enco_clie_id, null, e.enco_id, null,(round(e.enco_precio /10,0)),rd.rd_fecha_llegada from djml.registro_destino rd
+	INSERT INTO DJML.MILLAS (millas_clie_id, millas_informacion, millas_enco_id, millas_pasa_id, millas_cantidad, millas_cantidad_historica, millas_fecha)
+	SELECT e.enco_clie_id, null, e.enco_id, null,(round(e.enco_precio /10,0)),(round(e.enco_precio /10,0)),rd.rd_fecha_llegada from djml.registro_destino rd
 	join djml.encomiendas e on rd.rd_viaje_id = e.enco_viaje_id
 	where e.cancelacion_id is null
 	and e.ENCO_CLIE_ID in (select c.compra_clie_id from djml.COMPRAS c where COMPRA_VIAJE_ID = rd.RD_VIAJE_ID)
@@ -1057,3 +1058,6 @@ DROP PROCEDURE DJML.CREAR_CANJES
 
 DROP SCHEMA DJML
 */
+
+
+
