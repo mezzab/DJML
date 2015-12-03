@@ -99,7 +99,7 @@ namespace AerolineaFrba.Consulta_Millas
                 {
                     totalMillas.Text = obtenerMillasEnPeriodo(IDC).ToString();
 
-                    string sql1 = "SELECT MILLAS_PASA_ID ID_DE_PASAJE, MILLAS_ENCO_ID ID_DE_ENCOMIENDA, MILLAS_CANTIDAD CANTIDAD_DE_MILLAS, MILLAS_FECHA FECHA, MILLAS_INFORMACION INFORMACION FROM DJML.MILLAS WHERE MILLAS_CLIE_ID = '" + IDC + "' AND MILLAS_FECHA BETWEEN DATEADD(yy,-1,GETDATE()) AND GETDATE() ";
+                    string sql1 = "SELECT MILLAS_PASA_ID ID_DE_PASAJE, MILLAS_ENCO_ID ID_DE_ENCOMIENDA, MILLAS_CANTIDAD CANTIDAD_DE_MILLAS, MILLAS_FECHA FECHA FROM DJML.MILLAS WHERE MILLAS_CLIE_ID = '" + IDC + "' AND MILLAS_FECHA BETWEEN DATEADD(yy,-1,GETDATE()) AND GETDATE() ";
 
                     dataGrid1.DataSource = new Query(sql1).ObtenerDataTable();
                     DataGridViewColumn column2 = dataGrid1.Columns[0];
