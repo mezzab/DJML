@@ -336,7 +336,7 @@ BEGIN
 	AERO_MATRICULA NVARCHAR(7) NOT NULL PRIMARY KEY,
 	AERO_MODELO NVARCHAR(50) NOT NULL,
 	AERO_FABRICANTE INT NOT NULL FOREIGN KEY REFERENCES DJML.FABRICANTES(ID_FABRICANTE), -- agregue la fk de fabricantes (nueva tabla maestra)
-	AERO_KILOS_DISPONIBLES INT NOT NULL, -- KILOS MAXIMOS, NO DISPONIBLES
+	AERO_KILOS_DISPONIBLES INT NOT NULL, -- estos seria el peso maximo que puede llevar una aeronave, no se como se migraria esto. pero es necesario para cuando hacen un alta de una aeronave. 
 	AERO_SERVICIO_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.SERVICIOS(SERV_ID),
 	AERO_BAJA_FUERA_SERVICIO BIT NOT NULL,
 	AERO_BAJA_VIDA_UTIL BIT NOT NULL,
@@ -406,7 +406,7 @@ CREATE TABLE DJML.AERONAVES_POR_PERIODOS (
 	BXA_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	BXA_BUTA_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.BUTACAS(BUTA_ID),
 	BXA_AERO_MATRICULA NVARCHAR(7) NOT NULL FOREIGN KEY REFERENCES DJML.AERONAVES(AERO_MATRICULA),
-	BXA_ESTADO BIT NOT NULL
+	BXA_ESTADO BIT NOT NULL -- este estado hay que dejarlo para hacer bajas logicas cuando modifican el numero de butacas de aeronave. 
 	)
 	
 	PRINT 'SE CREO LA TABLA BUTACA_AERO CORRECTAMENTE'
@@ -656,8 +656,10 @@ BEGIN
 	BAV_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
 	BAV_BXA_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.BUTACA_AERO(BXA_ID),
 	BAV_VIAJE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.VIAJES(VIAJE_ID),
-	BAV_ESTADO BIT NOT NULL
+	BAV_ESTADO BIT NOT NULL  -- este es el verdadero estado, primero hay que insertar las mismas que BXA todas libres a todos los viajes y a medida que se migran los pasajes, ir dandolas de baja. 
 	)
+
+
 --=======================================================================
                             -- TABLA ENCOMIENDA_AERO_VIAJE
 --=======================================================================
@@ -666,7 +668,7 @@ BEGIN
 	EAV_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
 	EAV_AERO_ID NVARCHAR(7) NOT NULL FOREIGN KEY REFERENCES DJML.AERONAVES(AERO_MATRICULA),
 	EAV_VIAJE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.VIAJES(VIAJE_ID),
-	EAV_KILOS_DISPONIBLES INT NOT NULL
+	EAV_KILOS_DISPONIBLES INT NOT NULL -- estos son los kilos disponibles de la aeronave en un viaje, primero se inserta el mismo numero que la de la aeronave y luego se van restando a medida que se migra la tabla encomiendas.
 	)
 
 
@@ -1028,7 +1030,6 @@ GO
 
 PRINT 'LA MIGRACION TERMINO SATISFACTORIAMENTE, GRACIAS POR ESPERAR'
 GO
-
 
 
 -----------------------------------------------------------
