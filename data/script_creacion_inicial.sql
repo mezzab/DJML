@@ -423,6 +423,8 @@ CREATE TABLE DJML.AERONAVES_POR_PERIODOS (
 	where m.Pasaje_Codigo <> 0
 	or m.Paquete_Codigo <> 0
 	
+
+	
 END
 GO
 
@@ -478,6 +480,42 @@ BEGIN
 
 	---MIRAGRACION DATOS TABLA REGISTRO_DESTINO---
 	--HACER: NO SE MIGRA!!
+	
+	
+	
+	CREATE TABLE djml.BUTACA_AERO_VIAJE(
+	BAV_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	BAV_BUTA_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.BUTACAS(BUTA_ID),
+	BAV_AERO_MATRICULA NVARCHAR(7) NOT NULL FOREIGN KEY REFERENCES DJML.AERONAVES(AERO_MATRICULA),
+	BAV_VIAJE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.VIAJES(VIAJE_ID),
+	BAV_ESTADO BIT NOT NULL
+	)
+	
+	PRINT 'SE CREO LA TABLA BUTACA_AERO_VIAJE CORRECTAMENTE'
+	
+	
+	
+	insert into djml.BUTACA_AERO_VIAJE(BAV_BUTA_ID,BAV_AERO_MATRICULA,BAV_VIAJE_ID,BAV_ESTADO)
+	select distinct b.BUTA_ID, a.aero_matricula,v.viaje_id ,1 from gd_esquema.Maestra m
+	join djml.AERONAVES a on m.Aeronave_Matricula = a.AERO_MATRICULA
+	join djml.TIPO_BUTACA tb on m.Butaca_Tipo = tb.DESCRIPCION 
+	join djml.BUTACAS b on tb.TIPO_BUTACA_ID = b.BUTA_TIPO_ID 
+	and b.BUTA_NRO = m.Butaca_Nro 
+	and b.BUTA_PISO = m.Butaca_Piso 
+	join djml.VIAJES v on m.FechaSalida = v.VIAJE_FECHA_SALIDA
+	and m.Fecha_LLegada_Estimada = v.VIAJE_FECHA_LLEGADA_ESTIMADA 
+	and m.FechaLLegada = v.VIAJE_FECHA_LLEGADA 
+	join djml.RUTAS_LEGACY rl on m.Ruta_Codigo = rl.RL_CODIGO
+	join djml.RUTAS r on rl.RL_CODIGO = r.RUTA_CODIGO   
+	and r.RUTA_CODIGO = v.VIAJE_RUTA_ID
+	where m.Pasaje_Codigo <> 0
+	or m.Paquete_Codigo <> 0
+	and m.FechaSalida is not null
+	and m.FechaLLegada is not null
+
+	
+	
+	
 END 
 GO
 
@@ -1000,7 +1038,6 @@ PRINT 'LA MIGRACION TERMINO SATISFACTORIAMENTE, GRACIAS POR ESPERAR'
 GO
 
 
-
 -----------------------------------------------------------
 ---DROPS 
 -----------------------------------------------------------
@@ -1019,6 +1056,7 @@ DROP TABLE DJML.PASAJES
 DROP TABLE DJML.CLIENTES
 DROP TABLE DJML.TIPO_DOCUMENTO
 DROP TABLE DJML.REGISTRO_DESTINO
+DROP TABLE DJML.BUTACA_AERO_VIAJE
 DROP TABLE DJML.VIAJES
 DROP TABLE DJML.BUTACA_AERO
 DROP TABLE DJML.BUTACAS
@@ -1058,6 +1096,5 @@ DROP PROCEDURE DJML.CREAR_CANJES
 
 DROP SCHEMA DJML
 */
-
 
 
