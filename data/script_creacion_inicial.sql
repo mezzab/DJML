@@ -486,35 +486,39 @@ BEGIN
 	CREATE TABLE djml.BUTACA_AERO_VIAJE(
 	BAV_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	BAV_BUTA_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.BUTACAS(BUTA_ID),
-	BAV_AERO_MATRICULA NVARCHAR(7) NOT NULL FOREIGN KEY REFERENCES DJML.AERONAVES(AERO_MATRICULA),
 	BAV_VIAJE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.VIAJES(VIAJE_ID),
 	BAV_ESTADO BIT NOT NULL
 	)
+	-- BAV_ESTADO: 1 => Ocupado; 0 => Libre
 	
-	PRINT 'SE CREO LA TABLA BUTACA_AERO_VIAJE CORRECTAMENTE'
+	PRINT 'SE CREO LA TABLA BUTACA_AERO_VIAJE CORRECTAMENTE'	
 	
-	
-	
-	insert into djml.BUTACA_AERO_VIAJE(BAV_BUTA_ID,BAV_AERO_MATRICULA,BAV_VIAJE_ID,BAV_ESTADO)
-	select distinct b.BUTA_ID, a.aero_matricula,v.viaje_id ,1 from gd_esquema.Maestra m
-	join djml.AERONAVES a on m.Aeronave_Matricula = a.AERO_MATRICULA
-	join djml.TIPO_BUTACA tb on m.Butaca_Tipo = tb.DESCRIPCION 
-	join djml.BUTACAS b on tb.TIPO_BUTACA_ID = b.BUTA_TIPO_ID 
-	and b.BUTA_NRO = m.Butaca_Nro 
-	and b.BUTA_PISO = m.Butaca_Piso 
-	join djml.VIAJES v on m.FechaSalida = v.VIAJE_FECHA_SALIDA
-	and m.Fecha_LLegada_Estimada = v.VIAJE_FECHA_LLEGADA_ESTIMADA 
-	and m.FechaLLegada = v.VIAJE_FECHA_LLEGADA 
-	join djml.RUTAS_LEGACY rl on m.Ruta_Codigo = rl.RL_CODIGO
-	join djml.RUTAS r on rl.RL_CODIGO = r.RUTA_CODIGO   
-	and r.RUTA_CODIGO = v.VIAJE_RUTA_ID
-	where m.Pasaje_Codigo <> 0
-	or m.Paquete_Codigo <> 0
-	and m.FechaSalida is not null
-	and m.FechaLLegada is not null
-
-	
-	
+	insert into djml.BUTACA_AERO_VIAJE(BAV_BUTA_ID,BAV_VIAJE_ID,BAV_ESTADO)
+	select 
+		(
+			select BXA_ID
+			from DJML.BUTACA_AERO
+			join DJML.BUTACAS on BXA_BUTA_ID = BUTA_ID
+			join DJML.TIPO_BUTACA on BUTA_TIPO_ID = TIPO_BUTACA_ID
+			where BXA_AERO_MATRICULA = Aeronave_Matricula 
+			and BUTA_NRO = Butaca_Nro
+			and BUTA_PISO = Butaca_Piso
+			and TIPO_BUTACA.DESCRIPCION = Butaca_Tipo
+		),
+		(
+			select VIAJE_ID
+			from DJML.VIAJES
+			join DJML.RUTAS on VIAJE_RUTA_ID = RUTA_CODIGO
+			join DJML.TRAMOS on RUTA_TRAMO = TRAMO_ID
+			where VIAJE_AERO_ID = Aeronave_Matricula
+			and VIAJE_FECHA_SALIDA = FechaSalida
+			and VIAJE_FECHA_LLEGADA = FechaLLegada
+			and TRAMO_CIUDAD_ORIGEN = (select CIUD_ID from DJML.CIUDADES where CIUD_DETALLE = Ruta_Ciudad_Origen)
+			and TRAMO_CIUDAD_DESTINO = (select CIUD_ID from DJML.CIUDADES where CIUD_DETALLE = Ruta_Ciudad_Destino)
+			
+		), 1
+	from gd_esquema.Maestra
+	where Pasaje_Codigo <> 0
 	
 END 
 GO
