@@ -662,25 +662,13 @@ BEGIN
 	BAV_VIAJE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.VIAJES(VIAJE_ID),
 	BAV_ESTADO BIT NOT NULL  -- este es el verdadero estado, primero hay que insertar las mismas que BXA todas libres a todos los viajes y a medida que se migran los pasajes, ir dandolas de baja. 
 	)	
-	
-	/*
-	-----------------------------
-	--migracion de master lucas
-	-----------------------------
-	
-	
-	
-	CREATE TABLE djml.BUTACA_AERO_VIAJE(
-	BAV_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	BAV_BUTA_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.BUTACAS(BUTA_ID),
-	BAV_VIAJE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.VIAJES(VIAJE_ID),
-	BAV_ESTADO BIT NOT NULL
-	)
 	-- BAV_ESTADO: 1 => Ocupado; 0 => Libre
-	
+
+	select * from djml.BUTACA_AERO
+	select * from djml.BUTACAS
 	PRINT 'SE CREO LA TABLA BUTACA_AERO_VIAJE CORRECTAMENTE'	
 	
-	insert into djml.BUTACA_AERO_VIAJE(BAV_BUTA_ID,BAV_VIAJE_ID,BAV_ESTADO)
+	insert into djml.BUTACA_AERO_VIAJE(BAV_BXA_ID,BAV_VIAJE_ID,BAV_ESTADO)
 	select 
 		(
 			select BXA_ID
@@ -707,7 +695,6 @@ BEGIN
 	from gd_esquema.Maestra
 	where Pasaje_Codigo <> 0
 	
-*/
 
 
 --=======================================================================
@@ -722,6 +709,36 @@ BEGIN
 	)
 
 
+	/*
+
+	insert into djml.ENCOMIENDA_AERO_VIAJE(EAV_AERO_ID,EAV_VIAJE_ID,EAV_KILOS_DISPONIBLES)
+	select 
+		(
+			select BXA_ID
+			from DJML.BUTACA_AERO
+			join DJML.BUTACAS on BXA_BUTA_ID = BUTA_ID
+			join DJML.TIPO_BUTACA on BUTA_TIPO_ID = TIPO_BUTACA_ID
+			where BXA_AERO_MATRICULA = Aeronave_Matricula 
+			and BUTA_NRO = Butaca_Nro
+			and BUTA_PISO = Butaca_Piso
+			and TIPO_BUTACA.DESCRIPCION = Butaca_Tipo
+		),
+		(
+			select VIAJE_ID
+			from DJML.VIAJES
+			join DJML.RUTAS on VIAJE_RUTA_ID = RUTA_CODIGO
+			join DJML.TRAMOS on RUTA_TRAMO = TRAMO_ID
+			where VIAJE_AERO_ID = Aeronave_Matricula
+			and VIAJE_FECHA_SALIDA = FechaSalida
+			and VIAJE_FECHA_LLEGADA = FechaLLegada
+			and TRAMO_CIUDAD_ORIGEN = (select CIUD_ID from DJML.CIUDADES where CIUD_DETALLE = Ruta_Ciudad_Origen)
+			and TRAMO_CIUDAD_DESTINO = (select CIUD_ID from DJML.CIUDADES where CIUD_DETALLE = Ruta_Ciudad_Destino)
+			
+		), 1
+	from gd_esquema.Maestra
+	where Pasaje_Codigo <> 0
+
+	*/
 END 
 GO
 
