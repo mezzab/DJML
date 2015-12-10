@@ -356,6 +356,7 @@ BEGIN
 	join djml.FABRICANTES f on f.DESCRIPCION = m.Aeronave_Fabricante
 	ORDER BY 1 
 	
+
 --==========================================================================
 						--TABLA PERIODOS DE FUERA DE SERVICIO AERONAVES
 --==========================================================================
@@ -706,14 +707,18 @@ BEGIN
 	EAV_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
 	EAV_AERO_ID NVARCHAR(7) NOT NULL FOREIGN KEY REFERENCES DJML.AERONAVES(AERO_MATRICULA),
 	EAV_VIAJE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.VIAJES(VIAJE_ID),
-	EAV_KILOS_DISPONIBLES INT NOT NULL -- estos son los kilos disponibles de la aeronave en un viaje, primero se inserta el mismo numero que la de la aeronave y luego se van restando a medida que se migra la tabla encomiendas.
+	EAV_KILOS_VENDIDOS INT NOT NULL,
+	EAV_KILOS_DISPONIBLES INT NOT NULL  
 	)
 	
+		SELECT * FROM DJML.AERONAVES
 		
-		
-	insert into djml.ENCOMIENDA_AERO_VIAJE(EAV_AERO_ID,EAV_VIAJE_ID,EAV_KILOS_DISPONIBLES)
-	select v.VIAJE_AERO_ID, e.ENCO_VIAJE_ID, e.ENCO_KG from djml.ENCOMIENDAS e
+	insert into djml.ENCOMIENDA_AERO_VIAJE(EAV_AERO_ID,EAV_VIAJE_ID,EAV_KILOS_VENDIDOS,EAV_KILOS_DISPONIBLES)
+	select v.VIAJE_AERO_ID, e.ENCO_VIAJE_ID, SUM(e.ENCO_KG) Cantidad_Kilos_Vendidos, ((a.AERO_KILOS_DISPONIBLES) - (SUM(E.ENCO_Kg))) from djml.ENCOMIENDAS e
 	join djml.VIAJES v on e.ENCO_VIAJE_ID = v.VIAJE_ID
+	JOIN DJML.AERONAVES a ON v.VIAJE_AERO_ID = a.aero_matricula
+	group by v.VIAJE_AERO_ID, e.ENCO_VIAJE_ID
+	
 	
 	
 END 
