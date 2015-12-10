@@ -663,9 +663,9 @@ BEGIN
 	BAV_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
 	BAV_BXA_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.BUTACA_AERO(BXA_ID),
 	BAV_VIAJE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.VIAJES(VIAJE_ID),
-	BAV_ESTADO BIT NOT NULL  -- este es el verdadero estado, primero hay que insertar las mismas que BXA todas libres a todos los viajes y a medida que se migran los pasajes, ir dandolas de baja. 
+	BAV_ESTADO BIT NOT NULL  
 	)	
-	-- BAV_ESTADO: 1 => Ocupado; 0 => Libre
+	-- en esta tabla van los pasajes vendidos de cada viaje
 
 	PRINT 'SE CREO LA TABLA BUTACA_AERO_VIAJE CORRECTAMENTE'	
 	
@@ -711,13 +711,14 @@ BEGIN
 	EAV_KILOS_DISPONIBLES INT NOT NULL  
 	)
 	
-		SELECT * FROM DJML.AERONAVES
 		
 	insert into djml.ENCOMIENDA_AERO_VIAJE(EAV_AERO_ID,EAV_VIAJE_ID,EAV_KILOS_VENDIDOS,EAV_KILOS_DISPONIBLES)
 	select v.VIAJE_AERO_ID, e.ENCO_VIAJE_ID, SUM(e.ENCO_KG) Cantidad_Kilos_Vendidos, ((a.AERO_KILOS_DISPONIBLES) - (SUM(E.ENCO_Kg))) from djml.ENCOMIENDAS e
 	join djml.VIAJES v on e.ENCO_VIAJE_ID = v.VIAJE_ID
 	JOIN DJML.AERONAVES a ON v.VIAJE_AERO_ID = a.aero_matricula
-	group by v.VIAJE_AERO_ID, e.ENCO_VIAJE_ID
+	group by v.VIAJE_AERO_ID, e.ENCO_VIAJE_ID, a.AERO_KILOS_DISPONIBLES
+
+	-- select * from djml.encomienda_aero_viaje
 	
 	
 	
@@ -1079,6 +1080,7 @@ GO
 
 PRINT 'LA MIGRACION TERMINO SATISFACTORIAMENTE, GRACIAS POR ESPERAR'
 GO
+ 
 
 
 -----------------------------------------------------------
