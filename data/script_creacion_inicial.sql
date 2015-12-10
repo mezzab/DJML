@@ -648,6 +648,8 @@ BEGIN
 END
 GO
 
+
+
 CREATE PROCEDURE DJML.BUTACAS_ENCOMIENDAS_AERONAVES_VIAJES
 AS 
 BEGIN
@@ -664,9 +666,8 @@ BEGIN
 	)	
 	-- BAV_ESTADO: 1 => Ocupado; 0 => Libre
 
-	select * from djml.BUTACA_AERO
-	select * from djml.BUTACAS
 	PRINT 'SE CREO LA TABLA BUTACA_AERO_VIAJE CORRECTAMENTE'	
+	
 	
 	insert into djml.BUTACA_AERO_VIAJE(BAV_BXA_ID,BAV_VIAJE_ID,BAV_ESTADO)
 	select 
@@ -707,38 +708,14 @@ BEGIN
 	EAV_VIAJE_ID INT NOT NULL FOREIGN KEY REFERENCES DJML.VIAJES(VIAJE_ID),
 	EAV_KILOS_DISPONIBLES INT NOT NULL -- estos son los kilos disponibles de la aeronave en un viaje, primero se inserta el mismo numero que la de la aeronave y luego se van restando a medida que se migra la tabla encomiendas.
 	)
-
-
-	/*
-
+	
+		
+		
 	insert into djml.ENCOMIENDA_AERO_VIAJE(EAV_AERO_ID,EAV_VIAJE_ID,EAV_KILOS_DISPONIBLES)
-	select 
-		(
-			select BXA_ID
-			from DJML.BUTACA_AERO
-			join DJML.BUTACAS on BXA_BUTA_ID = BUTA_ID
-			join DJML.TIPO_BUTACA on BUTA_TIPO_ID = TIPO_BUTACA_ID
-			where BXA_AERO_MATRICULA = Aeronave_Matricula 
-			and BUTA_NRO = Butaca_Nro
-			and BUTA_PISO = Butaca_Piso
-			and TIPO_BUTACA.DESCRIPCION = Butaca_Tipo
-		),
-		(
-			select VIAJE_ID
-			from DJML.VIAJES
-			join DJML.RUTAS on VIAJE_RUTA_ID = RUTA_CODIGO
-			join DJML.TRAMOS on RUTA_TRAMO = TRAMO_ID
-			where VIAJE_AERO_ID = Aeronave_Matricula
-			and VIAJE_FECHA_SALIDA = FechaSalida
-			and VIAJE_FECHA_LLEGADA = FechaLLegada
-			and TRAMO_CIUDAD_ORIGEN = (select CIUD_ID from DJML.CIUDADES where CIUD_DETALLE = Ruta_Ciudad_Origen)
-			and TRAMO_CIUDAD_DESTINO = (select CIUD_ID from DJML.CIUDADES where CIUD_DETALLE = Ruta_Ciudad_Destino)
-			
-		), 1
-	from gd_esquema.Maestra
-	where Pasaje_Codigo <> 0
-
-	*/
+	select v.VIAJE_AERO_ID, e.ENCO_VIAJE_ID, e.ENCO_KG from djml.ENCOMIENDAS e
+	join djml.VIAJES v on e.ENCO_VIAJE_ID = v.VIAJE_ID
+	
+	
 END 
 GO
 
@@ -1111,8 +1088,8 @@ DROP TABLE DJML.COMPRAS
 DROP TABLE DJML.TARJETAS_DE_CREDITO
 DROP TABLE DJML.TIPOS_DE_TARJETA
 DROP TABLE DJML.MEDIOS_DE_PAGO
-DROP TABLE DJML.ENCOMIENDA_AERO_VIAJES
-DROP TABLE DJML.BUTACA_AERO_VIAJES
+DROP TABLE DJML.ENCOMIENDA_AERO_VIAJE
+
 DROP TABLE DJML.CLAVES
 DROP TABLE DJML.ENCOMIENDAS
 DROP TABLE DJML.PASAJES
@@ -1165,4 +1142,18 @@ DROP PROCEDURE DJML.CREAR_CANJES
 DROP SCHEMA DJML
 */
 
-SELECT * FROM DJML.BUTACA_AERO_VIAJE
+
+
+
+--ESTO MOSTRAR EN COMPRAS(SERIAN LAS BUTACAS NO VENDIDAS DE UN VIAJE EN ESPECIAL)
+
+select  ba.BXA_ID ,b.BUTA_NRO,b.BUTA_PISO, b.BUTA_TIPO_ID from djml.BUTACA_AERO ba
+join djml.BUTACAS b on ba.BXA_BUTA_ID = b.BUTA_ID
+where BXA_AERO_MATRICULA = 'ASQ-169'
+and ba.bxa_id not in (select bxa.BXA_ID from djml.BUTACA_AERO_VIAJE bav
+						join djml.butaca_aero bxa on bav.bav_bxa_id = bxa.BXA_ID
+						where bav.bav_viaje_id = 2521
+							and bxa.BXA_AERO_MATRICULA = 'ASQ-169') 
+
+
+
