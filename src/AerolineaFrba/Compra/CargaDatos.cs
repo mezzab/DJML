@@ -87,6 +87,8 @@ namespace AerolineaFrba.Compra
 
             //MessageBox.Show(qryButacas);
 
+            // NEW: 
+
             dataGridView1.DataSource = new Query(qryButacas).ObtenerDataTable();
 
             dataGridView1.Columns["aeroButacaID"].Visible = false;
@@ -114,6 +116,9 @@ namespace AerolineaFrba.Compra
                  //avisar("Se da alta de butaca: " + butacasCargadas[i].ToString());
 
                  darBajaAltaButaca(FormCompra1.butacasCargadas[i].ToString(), 1);
+
+                 // NEW: sacar boton atras. o guardar los ids de las butacas bajadas y desps dropearlas
+
              }
 
            // llenarButacas();
@@ -319,7 +324,9 @@ namespace AerolineaFrba.Compra
                             //agrego los datos del pasajero
 
                             FormCompra1.butacasCargadas.Add(Convert.ToInt32(aeroButacaID));
-                             
+                            // NEW: ver si lo puedo reutilizar
+
+
                             cargarDatosATabla();
                            
                             darBajaAltaButaca(aeroButacaID, 0);
@@ -670,6 +677,8 @@ namespace AerolineaFrba.Compra
                             " set BXA_ESTADO = "+bajaAlta+ "" +
                             " where BXA_ID = '" + aeroButacaID + "'";
 
+            // NEW: 
+
             new Query(qry).Ejecutar();
         }
 
@@ -978,7 +987,6 @@ namespace AerolineaFrba.Compra
 
        
 
-   
         private void button1_Click(object sender, EventArgs e)
         {
                 //TODO: controlar que se haya cargado aunquesea un pasaje o una encomienda
@@ -1161,6 +1169,8 @@ namespace AerolineaFrba.Compra
 
         private void modificarKilosAeronave(string kilosIngresados, string operacion)
         {
+
+            // NEW: hacer desde cero
                        
             string aux = "+ 0";
 
@@ -1201,11 +1211,10 @@ namespace AerolineaFrba.Compra
         }
 
        
-            
-       
-        
         private bool sePasa(string kilosDisponibles)
         {
+
+            // NEW:  hacer desde cero
             Query qry101 = new Query("SELECT AERO_KILOS_DISPONIBLES FROM DJML.AERONAVES WHERE AERO_MATRICULA=" + "'" + FormCompra1.aeroID + "'");
             int A = Convert.ToInt32(qry101.ObtenerUnicoCampo());
 

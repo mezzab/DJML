@@ -156,6 +156,8 @@ namespace AerolineaFrba.Compra
                             " AND V.VIAJE_ID NOT IN (SELECT RD_VIAJE_ID FROM DJML.REGISTRO_DESTINO) " +
                             " group by v.viaje_id, s.SERV_DESCRIPCION, a.AERO_KILOS_DISPONIBLES ";
 
+                
+                    // NEW: hacer el select de nuevo
 
                 dataGridView1.DataSource = new Query(qry).ObtenerDataTable();
                 //OCULTO LA COLUMNA
