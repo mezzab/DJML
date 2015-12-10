@@ -141,7 +141,24 @@ namespace AerolineaFrba.Generacion_Viaje
                 Query qry = new Query(sql1);
                 qry.pComando = sql1;
                 qry.Ejecutar();
-                
+
+                //Obtener viaje recien ingresado
+                string sql3 = "SELECT MAX(VIAJE_ID) FROM DJML.VIAJES";
+                Query qry2 = new Query(sql3);
+                string idViaje = qry2.ObtenerUnicoCampo().ToString();
+
+                //Obtener viaje recien ingresado
+                string sql4 = "SELECT AERO_KILOS_DISPONIBLES FROM DJML.AERONAVES WHERE AERO_MATRICULA = '" + comboBoxAeronaves.SelectedValue.ToString() + "'";
+                Query qry5 = new Query(sql4);
+                string kgAeronave = qry5.ObtenerUnicoCampo().ToString();
+
+
+                string sql2 = "INSERT INTO DJML.ENCOMIENDA_AERO_VIAJE (EAV_AERO_ID, EAV_VIAJE_ID, EAV_KILOS_VENDIDOS, EAV_KILOS_DISPONIBLES)"
+                                + "values ('" + comboBoxAeronaves.SelectedValue + "', '" + idViaje + "', 0,'" + kgAeronave + "' )";
+                Query qry1 = new Query(sql2);
+                qry1.pComando = sql2;
+                qry1.Ejecutar();
+
                 MessageBox.Show("Viaje Generado Correctamente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 
                 //Lo envia a form Funcionalidades
